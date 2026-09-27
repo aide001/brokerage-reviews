@@ -11,10 +11,15 @@
  *   commission  Round-turn commission in USD per standard lot (100k units).
  *   leverage    Maximum leverage offered to retail clients by any group entity.
  *   ratings     Editorial scores out of 5.
+ *   domain      Official website, used by scripts/fetch-logos.sh.
+ *
+ * Logos: put a square logo at assets/logos/<id>.svg or assets/logos/<id>.png.
+ * If neither file exists, the broker's initials are shown instead.
  */
 window.BROKERS = [
   {
     id: "ic-markets",
+    domain: "icmarkets.com",
     name: "IC Markets",
     color: "#1b75bb",
     founded: 2007,
@@ -44,6 +49,7 @@ window.BROKERS = [
   },
   {
     id: "pepperstone",
+    domain: "pepperstone.com",
     name: "Pepperstone",
     color: "#0f2a4a",
     founded: 2010,
@@ -73,6 +79,7 @@ window.BROKERS = [
   },
   {
     id: "oanda",
+    domain: "oanda.com",
     name: "OANDA",
     color: "#1a1a1a",
     founded: 1996,
@@ -102,6 +109,7 @@ window.BROKERS = [
   },
   {
     id: "forex-com",
+    domain: "forex.com",
     name: "FOREX.com",
     color: "#00a651",
     founded: 2001,
@@ -131,6 +139,7 @@ window.BROKERS = [
   },
   {
     id: "ig",
+    domain: "ig.com",
     name: "IG",
     color: "#e2001a",
     founded: 1974,
@@ -160,6 +169,7 @@ window.BROKERS = [
   },
   {
     id: "xtb",
+    domain: "xtb.com",
     name: "XTB",
     color: "#d71920",
     founded: 2002,
@@ -189,6 +199,7 @@ window.BROKERS = [
   },
   {
     id: "etoro",
+    domain: "etoro.com",
     name: "eToro",
     color: "#13c636",
     founded: 2007,
@@ -218,6 +229,7 @@ window.BROKERS = [
   },
   {
     id: "interactive-brokers",
+    domain: "interactivebrokers.com",
     name: "Interactive Brokers",
     color: "#d81222",
     founded: 1978,
@@ -247,6 +259,7 @@ window.BROKERS = [
   },
   {
     id: "saxo",
+    domain: "home.saxo",
     name: "Saxo",
     color: "#0038a8",
     founded: 1992,
@@ -276,6 +289,7 @@ window.BROKERS = [
   },
   {
     id: "cmc-markets",
+    domain: "cmcmarkets.com",
     name: "CMC Markets",
     color: "#0f6e84",
     founded: 1989,
@@ -305,6 +319,7 @@ window.BROKERS = [
   },
   {
     id: "exness",
+    domain: "exness.com",
     name: "Exness",
     color: "#f5c400",
     founded: 2008,
@@ -334,6 +349,7 @@ window.BROKERS = [
   },
   {
     id: "avatrade",
+    domain: "avatrade.com",
     name: "AvaTrade",
     color: "#2a3b8f",
     founded: 2006,

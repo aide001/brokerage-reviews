@@ -60,10 +60,43 @@
     var r = parseInt(c.substr(0, 2), 16), g = parseInt(c.substr(2, 2), 16), b = parseInt(c.substr(4, 2), 16);
     return (r * 299 + g * 587 + b * 114) / 1000 > 160 ? "#111" : "#fff";
   }
+  // Logo files are looked up as assets/logos/<id>.svg, then .png. Brokers
+  // without a file (or whose file fails to load) fall back to initials.
+  var LOGO_EXTS = ["svg", "png"];
+  var logoMissing = {};
   function logo(b, size) {
-    return '<span class="broker-logo' + (size ? " broker-logo-" + size : "") + '" style="background:' +
-      b.color + ";color:" + textOn(b.color) + '" aria-hidden="true">' + esc(initials(b.name)) + "</span>";
+    var cls = "broker-logo" + (size ? " broker-logo-" + size : "");
+    var initialsHtml = '<span class="broker-logo-text">' + esc(initials(b.name)) + "</span>";
+    if (logoMissing[b.id]) {
+      return '<span class="' + cls + '" style="background:' + b.color + ";color:" + textOn(b.color) +
+        '" aria-hidden="true">' + initialsHtml + "</span>";
+    }
+    var ext = b.logoExt || LOGO_EXTS[0];
+    return '<span class="' + cls + ' has-img" data-color="' + b.color + '" aria-hidden="true">' +
+      '<img src="assets/logos/' + b.id + "." + ext + '" alt="" data-logo="' + b.id + '" />' +
+      initialsHtml + "</span>";
   }
+  function onLogoError(img) {
+    var b = byId[img.dataset.logo];
+    var current = img.getAttribute("src").split(".").pop();
+    var next = LOGO_EXTS[LOGO_EXTS.indexOf(current) + 1];
+    if (next) {
+      b.logoExt = next;
+      img.src = "assets/logos/" + b.id + "." + next;
+      return;
+    }
+    logoMissing[b.id] = true;
+    document.querySelectorAll('img[data-logo="' + b.id + '"]').forEach(function (el) {
+      var box = el.parentNode;
+      box.classList.remove("has-img");
+      box.style.background = b.color;
+      box.style.color = textOn(b.color);
+      el.remove();
+    });
+  }
+  document.addEventListener("error", function (e) {
+    if (e.target.tagName === "IMG" && e.target.dataset.logo) onLogoError(e.target);
+  }, true);
   function stars(score) {
     var pct = (score / 5) * 100;
     return '<span class="stars" role="img" aria-label="' + score.toFixed(1) + ' out of 5">' +

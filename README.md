@@ -34,6 +34,18 @@ All broker data is in [`js/data.js`](js/data.js). Each broker has a spread, comm
 
 > ⚠️ The included figures are approximate sample values. Spreads, deposits, leverage and product availability change often and vary by country and by legal entity. **Check every value against each broker's official website before publishing.**
 
+## Broker logos
+
+Each broker's logo is loaded from `assets/logos/<id>.svg`, or `assets/logos/<id>.png` if there's no SVG. The `<id>` is the broker's `id` in `js/data.js`, for example `pepperstone.png`. Brokers without a logo file show their initials instead. Square logos (app-icon style) look best.
+
+To download logos automatically, run this on a machine with internet access:
+
+```bash
+python3 scripts/fetch_logos.py          # add --force to replace existing files
+```
+
+For each broker it tries the official site's `apple-touch-icon.png` first, then Google's favicon service. Any logo it can't find can be added by hand. Logos are trademarks of their owners, so check each broker's brand or affiliate guidelines before publishing.
+
 ## Project structure
 
 ```
@@ -42,4 +54,6 @@ css/styles.css      Styles (theme tokens, layout, responsive rules)
 js/data.js          Broker dataset
 js/app.js           Rendering, filters, compare, modal, calculator
 assets/favicon.svg  Logo / favicon
+assets/logos/       Broker logos (<id>.svg or <id>.png)
+scripts/            fetch_logos.py downloads broker logos
 ```
