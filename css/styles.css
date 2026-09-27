@@ -368,6 +368,7 @@ button, input, select { font: inherit; color: inherit; }
 .footer-links a { color: var(--muted); text-decoration: none; font-size: .9rem; }
 .footer-links a:hover { color: var(--text); }
 .disclaimer { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); font-size: .8rem; color: var(--muted); }
+.site-footer > .disclaimer:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
 
 /* ---------- Compare tray ---------- */
 .compare-tray {
@@ -439,6 +440,56 @@ button, input, select { font: inherit; color: inherit; }
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 body.has-tray .toast { bottom: 100px; }
+
+/* ---------- Blog ---------- */
+.main-nav a[aria-current="page"] { color: var(--primary); background: var(--primary-soft); }
+.blog-hero h1 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 800; text-wrap: balance; }
+.post-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+.post-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow); transition: transform .15s, box-shadow .15s;
+}
+.post-card:hover { transform: translateY(-2px); box-shadow: var(--shadow), 0 0 0 1px var(--primary); }
+.post-card-link { display: flex; flex-direction: column; height: 100%; color: inherit; text-decoration: none; }
+.post-card-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: var(--surface-2); border-bottom: 1px solid var(--border); }
+.post-card-body { display: flex; flex-direction: column; gap: 8px; padding: 18px 20px 20px; flex: 1; }
+.post-card h2 { font-size: 1.15rem; margin: 0; text-wrap: balance; }
+.post-excerpt { margin: 0; color: var(--muted); font-size: .92rem; flex: 1; }
+.post-meta { margin: 0; color: var(--muted); font-size: .85rem; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.post-byline { margin: 0; font-size: .8rem; font-weight: 600; color: var(--muted); }
+
+.post .breadcrumb { font-size: .85rem; color: var(--muted); margin: 0 0 12px; }
+.post .breadcrumb a { color: var(--primary); text-decoration: none; }
+.post-title { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; text-wrap: balance; margin-bottom: 12px; }
+.post > .container > .post-meta { margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.post-body { font-size: 1.06rem; line-height: 1.75; }
+.post-body > * { margin: 0 0 1.2em; }
+.post-body h2, .post-body h3 { margin-top: 1.6em; line-height: 1.3; }
+.post-body h2 { font-size: 1.45rem; }
+.post-body h3 { font-size: 1.2rem; }
+.post-body ul { padding-left: 1.3em; }
+.post-body li { margin-bottom: .4em; }
+.post-body figure { margin: 1.6em 0; }
+.post-body figure img { width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--border); background: #fff; }
+.post-body .table-scroll { overflow-x: auto; }
+.post-body table { border-collapse: collapse; font-size: .92rem; font-variant-numeric: tabular-nums; }
+.post-body td { border: 1px solid var(--border); padding: 8px 12px; vertical-align: top; }
+.post-source {
+  margin: 40px 0 24px; padding: 16px 20px; border-radius: var(--radius-sm);
+  background: var(--surface-2); color: var(--muted); font-size: .9rem;
+}
+.post-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+.post-nav-link {
+  display: flex; flex-direction: column; gap: 2px; padding: 14px 16px; border: 1px solid var(--border);
+  border-radius: var(--radius-sm); background: var(--surface); color: var(--text); text-decoration: none; font-weight: 600;
+}
+.post-nav-link small { color: var(--muted); font-weight: 500; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; }
+.post-nav-link:hover { border-color: var(--primary); }
+.post-nav-next { grid-column: 2; text-align: right; }
+@media (max-width: 640px) {
+  .post-nav { grid-template-columns: 1fr; }
+  .post-nav-next { grid-column: auto; text-align: left; }
+}
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1024px) {
