@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brokerage Reviews — Compare the Best Forex Brokers</title>
+  <meta name="description" content="Brokerage Reviews compares forex brokers side by side: spreads, commissions, regulation, platforms and minimum deposits, with independent ratings." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script>
+    // Apply saved theme before paint to avoid a flash.
+    try {
+      var t = localStorage.getItem("br-theme");
+      if (t) document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <div class="risk-banner" role="note">
+    <strong>Risk warning:</strong> CFDs and leveraged forex are complex instruments and carry a high risk of losing money rapidly. Most retail investor accounts lose money when trading CFDs. Consider whether you can afford to take that risk.
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="logo" aria-label="Brokerage Reviews home">
+        <img src="assets/favicon.svg" alt="" width="32" height="32" />
+        <span>Brokerage<b>Reviews</b></span>
+      </a>
+      <nav class="main-nav" id="main-nav">
+        <a href="#top-picks">Top Picks</a>
+        <a href="#compare">Compare</a>
+        <a href="#calculator">Cost Calculator</a>
+        <a href="#methodology">How We Rate</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Updated September 2026</p>
+          <h1>Find the right forex broker, <span>without the guesswork.</span></h1>
+          <p class="lead">We compare spreads, commissions, regulation and platforms across leading forex brokers so you can choose with confidence.</p>
+          <form class="hero-search" id="hero-search" role="search">
+            <input type="search" id="hero-search-input" placeholder="Search a broker, e.g. Pepperstone" aria-label="Search brokers" />
+            <button type="submit" class="btn btn-primary">Compare</button>
+          </form>
+          <ul class="hero-stats">
+            <li><strong id="stat-brokers">0</strong><span>Brokers reviewed</span></li>
+            <li><strong>40+</strong><span>Data points each</span></li>
+            <li><strong id="stat-regulators">0</strong><span>Regulators tracked</span></li>
+          </ul>
+        </div>
+        <div class="hero-card" aria-hidden="true">
+          <div class="ticker">
+            <div class="ticker-row"><span>EUR/USD</span><b>1.0842</b><em class="up">+0.12%</em></div>
+            <div class="ticker-row"><span>GBP/USD</span><b>1.2715</b><em class="down">-0.08%</em></div>
+            <div class="ticker-row"><span>USD/JPY</span><b>148.36</b><em class="up">+0.21%</em></div>
+            <div class="ticker-row"><span>AUD/USD</span><b>0.6621</b><em class="down">-0.15%</em></div>
+          </div>
+          <p class="hero-card-note">Illustrative prices</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="top-picks" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Top-rated forex brokers</h2>
+          <p>Our highest-scoring brokers this month, based on fees, platforms, trust, support and education.</p>
+        </div>
+        <div class="picks" id="top-picks-grid"></div>
+      </div>
+    </section>
+
+    <section id="compare" class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Compare forex brokers</h2>
+          <p>Filter and sort brokers, then tick up to three to compare them side by side.</p>
+        </div>
+
+        <div class="filters" id="filters">
+          <label class="field field-grow">
+            <span>Search</span>
+            <input type="search" id="f-search" placeholder="Broker name" />
+          </label>
+          <label class="field">
+            <span>Regulator</span>
+            <select id="f-regulator"><option value="">Any</option></select>
+          </label>
+          <label class="field">
+            <span>Platform</span>
+            <select id="f-platform"><option value="">Any</option></select>
+          </label>
+          <label class="field">
+            <span>Max. min deposit: <output id="f-deposit-out">Any</output></span>
+            <input type="range" id="f-deposit" min="0" max="200" step="10" value="200" />
+          </label>
+          <label class="field">
+            <span>Sort by</span>
+            <select id="f-sort">
+              <option value="rating">Highest rating</option>
+              <option value="cost">Lowest EUR/USD cost</option>
+              <option value="deposit">Lowest min deposit</option>
+              <option value="instruments">Most instruments</option>
+              <option value="name">Name (A–Z)</option>
+            </select>
+          </label>
+          <label class="check">
+            <input type="checkbox" id="f-tier1" />
+            <span>Tier-1 regulated only</span>
+          </label>
+          <button class="btn btn-ghost" id="f-reset" type="button">Reset</button>
+        </div>
+
+        <p class="result-count" id="result-count" aria-live="polite"></p>
+
+        <div class="table-wrap">
+          <table class="broker-table" id="broker-table">
+            <thead>
+              <tr>
+                <th scope="col"><span class="sr-only">Compare</span></th>
+                <th scope="col">Broker</th>
+                <th scope="col">Rating</th>
+                <th scope="col" title="Typical EUR/USD spread in pips">EUR/USD spread</th>
+                <th scope="col" title="Round-turn commission per standard lot">Commission</th>
+                <th scope="col" title="Spread + commission per standard lot round-turn">All-in cost</th>
+                <th scope="col">Min deposit</th>
+                <th scope="col">Regulators</th>
+                <th scope="col">Platforms</th>
+                <th scope="col"><span class="sr-only">Actions</span></th>
+              </tr>
+            </thead>
+            <tbody id="broker-tbody"></tbody>
+          </table>
+        </div>
+        <p class="empty" id="empty-state" hidden>No brokers match those filters. <button class="link-btn" id="empty-reset" type="button">Reset filters</button></p>
+      </div>
+    </section>
+
+    <section id="calculator" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Trading cost calculator</h2>
+          <p>Estimate what you'd pay each month trading EUR/USD, based on each broker's typical spread and commission.</p>
+        </div>
+        <div class="calc">
+          <form class="calc-form" id="calc-form">
+            <label class="field">
+              <span>Trades per month</span>
+              <input type="number" id="c-trades" min="1" max="10000" value="40" />
+            </label>
+            <label class="field">
+              <span>Average trade size (lots)</span>
+              <input type="number" id="c-lots" min="0.01" max="100" step="0.01" value="1" />
+            </label>
+            <p class="calc-note">1 standard lot = 100,000 units. 1 pip on EUR/USD ≈ $10 per lot.</p>
+          </form>
+          <ol class="calc-results" id="calc-results"></ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="methodology" class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>How we rate brokers</h2>
+          <p>Every broker is scored from 1 to 5 across five weighted categories.</p>
+        </div>
+        <div class="method-grid" id="method-grid"></div>
+      </div>
+    </section>
+
+    <section id="faq" class="section">
+      <div class="container narrow">
+        <div class="section-head">
+          <h2>Frequently asked questions</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>What is a forex broker?</summary>
+            <p>A forex broker gives you access to the foreign exchange market so you can buy and sell currency pairs such as EUR/USD. Retail brokers typically offer trading through CFDs or spot FX with leverage.</p>
+          </details>
+          <details>
+            <summary>What does "spread" mean?</summary>
+            <p>The spread is the difference between the buy (ask) and sell (bid) price. It's the main trading cost on commission-free accounts. Raw or ECN accounts offer very tight spreads but charge a separate commission.</p>
+          </details>
+          <details>
+            <summary>How do I know if a broker is safe?</summary>
+            <p>Check that the broker is authorised by a reputable regulator, such as the FCA (UK), ASIC (Australia), CFTC/NFA (US) or BaFin (Germany). Verify the licence number directly on the regulator's register, and confirm which legal entity your account will be opened with.</p>
+          </details>
+          <details>
+            <summary>Why does leverage differ between brokers?</summary>
+            <p>Regulators cap retail leverage. In the UK, EU and Australia the cap is 1:30 on major pairs, and in the US it's 1:50. Higher leverage is usually only available through offshore entities with weaker investor protections.</p>
+          </details>
+          <details>
+            <summary>How is "all-in cost" calculated?</summary>
+            <p>All-in cost = (typical EUR/USD spread in pips × $10) + round-turn commission, per standard lot. It's a quick way to compare commission-free and raw-spread accounts on equal terms. It does not include swap or overnight financing charges.</p>
+          </details>
+          <details>
+            <summary>Are these brokers paying for their ratings?</summary>
+            <p>No. Our scores are based on our methodology. Some links may be affiliate links, but this never affects a broker's rating or position in the comparison.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <a href="#" class="logo logo-footer">
+          <img src="assets/favicon.svg" alt="" width="28" height="28" />
+          <span>Brokerage<b>Reviews</b></span>
+        </a>
+        <p class="muted">Independent forex broker comparisons and reviews.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#top-picks">Top Picks</a>
+        <a href="#compare">Compare</a>
+        <a href="#calculator">Cost Calculator</a>
+        <a href="#methodology">How We Rate</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+    <div class="container disclaimer">
+      <p><strong>Disclaimer:</strong> Information on this site is for general information only and is not financial advice. Broker fees, spreads, leverage and availability vary by country and change frequently; always confirm details on the broker's own website before opening an account. Trading forex and CFDs on margin carries a high level of risk and may not be suitable for all investors.</p>
+      <p class="muted">&copy; <span id="year"></span> Brokerage Reviews. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Compare tray -->
+  <div class="compare-tray" id="compare-tray" hidden>
+    <div class="container tray-inner">
+      <div class="tray-items" id="tray-items"></div>
+      <div class="tray-actions">
+        <button class="btn btn-ghost" id="tray-clear" type="button">Clear</button>
+        <button class="btn btn-primary" id="tray-compare" type="button">Compare</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal (broker detail + side-by-side compare) -->
+  <dialog class="modal" id="modal" aria-labelledby="modal-title">
+    <button class="icon-btn modal-close" id="modal-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div class="modal-body" id="modal-body"></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
