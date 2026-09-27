@@ -376,6 +376,276 @@ window.BROKERS = [
     ],
     summary:
       "AvaTrade offers predictable fixed spreads and useful risk-management features, backed by regulation across multiple jurisdictions."
+  },
+  {
+    id: "ironfx",
+    domain: "ironfx.com",
+    name: "IronFX",
+    color: "#0d3b78",
+    founded: 2010,
+    hq: "Limassol, Cyprus",
+    regulators: ["FCA", "CySEC", "ASIC", "FSCA"],
+    minDeposit: 50,
+    account: "Standard (floating)",
+    spread: 1.2,
+    commission: 0,
+    leverage: 1000,
+    platforms: ["MT4", "MT5", "WebTrader"],
+    instruments: 300,
+    bestFor: "Bonuses and account variety",
+    ratings: { fees: 4.0, platforms: 4.0, trust: 3.9, support: 4.1, education: 4.0 },
+    pros: [
+      "Licensed by FCA, CySEC and ASIC",
+      "Wide choice of fixed, floating and zero-spread accounts",
+      "Low $50 minimum deposit"
+    ],
+    cons: [
+      "Mixed reputation from past client complaints",
+      "Standard spreads wider than raw-pricing brokers",
+      "High leverage only through offshore entities"
+    ],
+    summary:
+      "IronFX offers a broad menu of account types and MetaTrader platforms under several regulators, but its standard pricing is not the cheapest and its reputation is mixed."
+  },
+  {
+    id: "pu-prime",
+    domain: "puprime.com",
+    name: "PU Prime",
+    color: "#0b2447",
+    founded: 2015,
+    hq: "Victoria, Seychelles",
+    regulators: ["ASIC", "FSCA", "FSC (MU)", "FSA (SC)"],
+    minDeposit: 50,
+    account: "Standard",
+    spread: 1.3,
+    commission: 0,
+    leverage: 1000,
+    platforms: ["MT4", "MT5", "PU Prime App", "WebTrader"],
+    instruments: 1000,
+    bestFor: "High leverage and copy trading",
+    ratings: { fees: 4.0, platforms: 4.2, trust: 3.6, support: 4.3, education: 3.8 },
+    pros: [
+      "Low $50 minimum deposit ($20 on Cent)",
+      "Copy trading and a capable mobile app",
+      "Up to 1:1000 leverage offshore"
+    ],
+    cons: [
+      "Most international clients onboarded via Seychelles entity",
+      "FCA has issued a warning about the Seychelles entity",
+      "Prime and ECN accounts need large deposits"
+    ],
+    summary:
+      "PU Prime (formerly Pacific Union) targets active traders with high leverage and copy trading, though most clients are served by its lightly regulated offshore entity."
+  },
+  {
+    id: "xm",
+    domain: "xm.com",
+    name: "XM",
+    color: "#d51820",
+    founded: 2009,
+    hq: "Limassol, Cyprus",
+    regulators: ["CySEC", "ASIC", "DFSA", "FSC (BZ)"],
+    minDeposit: 5,
+    account: "Standard",
+    spread: 1.6,
+    commission: 0,
+    leverage: 1000,
+    platforms: ["MT4", "MT5", "XM App"],
+    instruments: 1400,
+    bestFor: "Very small starting deposits",
+    ratings: { fees: 3.9, platforms: 4.3, trust: 4.2, support: 4.5, education: 4.6 },
+    pros: [
+      "$5 minimum deposit",
+      "Strong free education and webinars",
+      "Multilingual 24/5 support"
+    ],
+    cons: [
+      "Standard account spreads are wide",
+      "High leverage only via Belize entity",
+      "Not available in the US"
+    ],
+    summary:
+      "XM is a beginner-friendly broker with a tiny minimum deposit and excellent educational content, offset by relatively wide spreads on its standard account."
+  },
+  {
+    id: "vantage",
+    domain: "vantagemarkets.com",
+    name: "Vantage",
+    color: "#0b1a33",
+    founded: 2009,
+    hq: "Sydney, Australia",
+    regulators: ["ASIC", "FCA", "CIMA", "VFSC"],
+    minDeposit: 50,
+    account: "Raw ECN",
+    spread: 0.1,
+    commission: 6,
+    leverage: 500,
+    platforms: ["MT4", "MT5", "TradingView", "ProTrader"],
+    instruments: 1000,
+    bestFor: "Low-cost raw pricing",
+    ratings: { fees: 4.6, platforms: 4.5, trust: 4.1, support: 4.3, education: 4.0 },
+    pros: [
+      "Raw spreads with a $6 round-turn commission",
+      "TradingView and copy trading integration",
+      "Low $50 minimum deposit"
+    ],
+    cons: [
+      "Most clients served by offshore entities",
+      "Limited research output",
+      "Product range varies by region"
+    ],
+    summary:
+      "Vantage combines tight raw pricing and modern platform choices with a low entry point, making it a solid option for cost-conscious traders."
+  },
+  {
+    id: "fp-markets",
+    domain: "fpmarkets.com",
+    name: "FP Markets",
+    color: "#1a2f5a",
+    founded: 2005,
+    hq: "Sydney, Australia",
+    regulators: ["ASIC", "CySEC", "FSCA", "FSA (SC)"],
+    minDeposit: 100,
+    account: "Raw",
+    spread: 0.1,
+    commission: 6,
+    leverage: 500,
+    platforms: ["MT4", "MT5", "cTrader", "TradingView"],
+    instruments: 10000,
+    bestFor: "Raw spreads on every major platform",
+    ratings: { fees: 4.7, platforms: 4.6, trust: 4.4, support: 4.5, education: 4.1 },
+    pros: [
+      "Very low raw-account costs",
+      "MT4, MT5, cTrader and TradingView",
+      "Large range including share CFDs"
+    ],
+    cons: [
+      "Share CFD range limited on MT4",
+      "No proprietary platform",
+      "Higher leverage via offshore entity only"
+    ],
+    summary:
+      "FP Markets is a long-running Australian broker offering some of the lowest raw trading costs across all the popular third-party platforms."
+  },
+  {
+    id: "tickmill",
+    domain: "tickmill.com",
+    name: "Tickmill",
+    color: "#0e2a47",
+    founded: 2014,
+    hq: "London, UK",
+    regulators: ["FCA", "CySEC", "FSCA", "DFSA", "FSA (SC)"],
+    minDeposit: 100,
+    account: "Raw",
+    spread: 0.1,
+    commission: 6,
+    leverage: 500,
+    platforms: ["MT4", "MT5", "TradingView"],
+    instruments: 600,
+    bestFor: "Scalpers and algo traders",
+    ratings: { fees: 4.8, platforms: 4.3, trust: 4.4, support: 4.2, education: 4.0 },
+    pros: [
+      "Among the lowest raw commissions",
+      "FCA and CySEC regulated",
+      "Fast execution, EA-friendly"
+    ],
+    cons: [
+      "Smaller product range",
+      "No proprietary platform",
+      "Research is fairly basic"
+    ],
+    summary:
+      "Tickmill is built for cost-sensitive active traders, with very low raw commissions and fast execution under solid regulation."
+  },
+  {
+    id: "hfm",
+    domain: "hfm.com",
+    name: "HFM",
+    color: "#d0121b",
+    founded: 2010,
+    hq: "Limassol, Cyprus",
+    regulators: ["CySEC", "FCA", "FSCA", "DFSA", "FSA (SC)", "CMA"],
+    minDeposit: 0,
+    account: "Premium",
+    spread: 1.4,
+    commission: 0,
+    leverage: 2000,
+    platforms: ["MT4", "MT5", "HFM App"],
+    instruments: 1000,
+    bestFor: "Account flexibility and promotions",
+    ratings: { fees: 4.0, platforms: 4.3, trust: 4.2, support: 4.4, education: 4.3 },
+    pros: [
+      "No minimum deposit on Premium account",
+      "Wide range of account types",
+      "Good education and market analysis"
+    ],
+    cons: [
+      "Premium spreads are wide",
+      "Very high leverage only offshore",
+      "Website and account types can be confusing"
+    ],
+    summary:
+      "HFM (formerly HotForex) offers lots of account options and trading tools across many jurisdictions, though its standard pricing is on the high side."
+  },
+  {
+    id: "fxtm",
+    domain: "forextime.com",
+    name: "FXTM",
+    color: "#c4d600",
+    founded: 2011,
+    hq: "Limassol, Cyprus",
+    regulators: ["CySEC", "FCA", "FSC (MU)", "CMA"],
+    minDeposit: 200,
+    account: "Advantage",
+    spread: 0.1,
+    commission: 8,
+    leverage: 2000,
+    platforms: ["MT4", "MT5", "FXTM Trader"],
+    instruments: 1000,
+    bestFor: "Emerging-market traders",
+    ratings: { fees: 4.3, platforms: 4.2, trust: 4.1, support: 4.2, education: 4.4 },
+    pros: [
+      "Advantage account offers raw spreads",
+      "Strong presence in Africa and Asia",
+      "Good educational resources"
+    ],
+    cons: [
+      "Commission higher than the cheapest ECN brokers",
+      "Most clients served by Mauritius entity",
+      "Limited non-FX range"
+    ],
+    summary:
+      "FXTM (ForexTime) has a strong following in emerging markets, pairing raw-spread accounts with helpful education and local support."
+  },
+  {
+    id: "axi",
+    domain: "axi.com",
+    name: "Axi",
+    color: "#e3002b",
+    founded: 2007,
+    hq: "Sydney, Australia",
+    regulators: ["ASIC", "FCA", "DFSA", "FMA"],
+    minDeposit: 0,
+    account: "Pro",
+    spread: 0.1,
+    commission: 7,
+    leverage: 500,
+    platforms: ["MT4", "Axi Copy"],
+    instruments: 140,
+    bestFor: "MT4 traders wanting strong regulation",
+    ratings: { fees: 4.5, platforms: 4.0, trust: 4.6, support: 4.4, education: 4.1 },
+    pros: [
+      "No minimum deposit",
+      "Raw-spread Pro account",
+      "Regulated in the UK, Australia and New Zealand"
+    ],
+    cons: [
+      "MT4 only, no MT5",
+      "Smaller instrument range",
+      "Limited research"
+    ],
+    summary:
+      "Axi is a well-regulated, no-frills MetaTrader 4 broker with competitive raw pricing and no minimum deposit."
   }
 ];
 
