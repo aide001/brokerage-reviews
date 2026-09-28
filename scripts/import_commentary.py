@@ -109,10 +109,15 @@ class DocxConverter:
         figures = "".join(images)
         if not text:
             return ("raw", figures) if figures else (None, "")
+        # Typed bullets ("•    text") are list items too.
+        text, bullets = re.subn(r"^((?:<[^>]+>)*)[•·▪]+[\s\xa0]*", r"\1", text)
+        is_list = is_list or bool(bullets)
         low = style.lower()
-        if low in ("title", "heading1", "heading 1"):
+        # Some documents use heading styles for whole paragraphs; real headings are short.
+        long_text = len(strip_tags(text)) > 120
+        if low in ("title", "heading1", "heading 1") and not long_text:
             kind = "h2"
-        elif low.startswith("heading"):
+        elif low.startswith("heading") and not long_text:
             kind = "h3"
         else:
             kind = "li" if is_list else "p"
@@ -183,6 +188,85 @@ def strip_tags(s):
     return html.unescape(re.sub(r"<[^>]+>", "", s))
 
 
+CAPTION_RE = re.compile(r"^Fig(?:ure)?\.?\s*(\d+)\.?\s*(.+)$", re.I | re.S)
+TICKERS_RE = re.compile(r"^[A-Za-z0-9$_.&/-]+(?:\s*,\s*[A-Za-z0-9$_.&/-]+)+$")
+# Shorthand FxPro uses in chart file names, spelt out as the captions write it.
+ALIASES = {
+    "btc": "bitcoin", "eth": "ethereum", "cryptocap": "crypto market capitalisation",
+    "nfp": "nonfarm payrolls", "boj": "bank japan", "cpi": "consumer inflation",
+    "usdx": "dollar index", "xau": "gold",
+}
+STOPWORDS = {"vs", "the", "and", "of", "a", "an", "in", "on", "at", "to", "is", "its", "has", "us", "fig", "png", "jpg", "jpeg"}
+
+
+def plain_lines(block):
+    return [l.strip() for l in strip_tags(re.sub(r"<br\s*/?>", "\n", block)).split("\n") if l.strip()]
+
+
+def extract_extras(blocks):
+    """Pull figure captions, the "Summary:" line and the trailing ticker list out of the body."""
+    captions, summary, kept = {}, None, []
+    for i, b in enumerate(blocks):
+        if b.startswith("<p>"):
+            lines = [part.strip() for l in plain_lines(b) for part in re.split(r"(?=Fig(?:ure)?\.\s*\d+\.)", l) if part.strip()]
+            matches = [CAPTION_RE.match(l) for l in lines]
+            if lines and all(matches):
+                for m in matches:
+                    captions[int(m.group(1))] = m.group(2).strip()
+                continue
+            text = " ".join(lines)
+            if re.match(r"^Summary\s*:", text, re.I):
+                summary = re.sub(r"^Summary\s*:\s*", "", text, flags=re.I)
+                continue
+            if i == len(blocks) - 1 and TICKERS_RE.match(text):
+                continue
+        kept.append(b)
+    return kept, captions, summary
+
+
+def words(text):
+    return {w for w in re.findall(r"[a-z]+", text.lower()) if len(w) > 1 and w not in STOPWORDS}
+
+
+def camel_words(name):
+    stem = os.path.splitext(name)[0]
+    letters = re.sub(r"[^a-z]", "", stem.lower())
+    extra = " ".join(v for k, v in ALIASES.items() if k in letters)
+    return words(" ".join(re.findall(r"[A-Z]+(?![a-z])|[A-Z]?[a-z]+", stem)) + " " + extra)
+
+
+def match_captions(labels, captions):
+    """Map caption number -> figure index. Chart names are matched to caption
+    wording first, since documents sometimes number figures out of order;
+    anything left over is paired by number."""
+    scores = sorted(((len(camel_words(lbl) & words(cap)), n, i)
+                     for n, cap in captions.items() for i, lbl in enumerate(labels) if lbl), reverse=True)
+    assigned, used = {}, set()
+    for score, n, i in scores:
+        if score and n not in assigned and i not in used:
+            assigned[n] = i
+            used.add(i)
+    for n in sorted(captions):
+        if n not in assigned:
+            free = [i for i in range(len(labels)) if i not in used]
+            if not free:
+                break
+            i = n - 1 if n - 1 in free else free[0]
+            assigned[n] = i
+            used.add(i)
+    return assigned
+
+
+def figure_html(src, caption, alt):
+    cap = "<figcaption>%s</figcaption>" % html.escape(caption) if caption else ""
+    return '<figure><img src="%s" alt="%s" loading="lazy">%s</figure>' % (src, html.escape(caption or alt), cap)
+
+
+def number_prefix(name):
+    m = re.match(r"^(\d+)[_ -]", name)
+    return int(m.group(1)) if m else None
+
+
 def pick_docx(files):
     docs = [f for f in files if f.lower().endswith(".docx") and not f.startswith("~$")]
     eng = [f for f in docs if re.search(r"eng", f, re.I)]
@@ -222,18 +306,42 @@ def import_folder(folder, force=False):
         if blocks and slugify(strip_tags(blocks[0])) == slugify(meta["title"]):
             blocks = blocks[1:]
 
-    # Attached charts are added when the document doesn't embed its own images.
+    blocks, captions, doc_summary = extract_extras(blocks)
+    # Order attached charts by their number prefix ("1_Fed-ECB.png"), else by name.
+    attached_images.sort(key=lambda f: (number_prefix(f) is None, number_prefix(f) or 0, f))
+
     figures = []
-    if not doc_images:
+    if doc_images:
+        # Embedded images have no useful names; borrow the numbered attachment names for matching.
+        by_number = {number_prefix(f): f for f in attached_images if number_prefix(f)}
+        labels = [by_number.get(i + 1, "") for i in range(len(doc_images))]
+        order = match_captions(labels, captions)
+        caption_for = {i: captions[n] for n, i in order.items()}
+        body = "\n".join(blocks)
+        for i, name in enumerate(doc_images):
+            old_fig = '<figure><img src="%s%s" alt="" loading="lazy"></figure>' % (image_url, name)
+            body = body.replace(old_fig, figure_html(image_url + name, caption_for.get(i), meta["title"]))
+        blocks = body.split("\n")
+    else:
+        # Attached charts are added when the document doesn't embed its own images.
         os.makedirs(image_dir, exist_ok=True)
+        dests = []
         for name in attached_images:
             dest = re.sub(r"[^A-Za-z0-9._-]+", "-", name)
             shutil.copyfile(os.path.join(folder, name), os.path.join(image_dir, dest))
-            figures.append(dest)
-            blocks.append('<figure><img src="%s%s" alt="" loading="lazy"></figure>' % (image_url, dest))
+            dests.append(dest)
+        order = match_captions(attached_images, captions)
+        ranked = sorted(range(len(dests)), key=lambda i: min([n for n, j in order.items() if j == i] or [999 + i]))
+        caption_for = {i: captions[n] for n, i in order.items()}
+        figures = [dests[i] for i in ranked]
+        fig_blocks = [figure_html(image_url + dests[i], caption_for.get(i), meta["title"]) for i in ranked]
+        # Charts illustrate the opening overview, so they go before the second section heading.
+        headings = [k for k, b in enumerate(blocks) if b.startswith(("<h2>", "<h3>"))]
+        at = headings[1] if len(headings) > 1 else len(blocks)
+        blocks[at:at] = fig_blocks
 
     paragraphs = [strip_tags(b) for b in blocks if b.startswith("<p>")]
-    summary = meta.get("summary") or (paragraphs[0] if paragraphs else "")
+    summary = meta.get("summary") or doc_summary or (paragraphs[0] if paragraphs else "")
     if len(summary) > 220:
         summary = summary[:217].rsplit(" ", 1)[0] + "…"
 
