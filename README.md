@@ -58,12 +58,27 @@ The blog at `blog/` publishes the market commentary FxPro emails from e.kalman@f
 
 Each post records the original Gmail message ID and a `linkSentAt` field, ready for emailing the published link back to FxPro.
 
-**One-time Gmail setup for the fetch step**
+**One-time Gmail setup for the fetch step (Google Apps Script, about 5 minutes)**
 
-1. In [Google Cloud Console](https://console.cloud.google.com/), create a project, enable the **Gmail API**, and create an **OAuth client ID** of type **Desktop app**.
+1. Go to [script.google.com](https://script.google.com/), signed in as the Gmail account that receives the emails, and click **New project**.
+2. Delete the example code, paste in the contents of [`apps-script/Code.gs`](apps-script/Code.gs), and click **Save**.
+3. In the function menu at the top, choose **setup** and click **Run**. Approve the permissions when asked. Google may show "Google hasn't verified this app": click **Advanced**, then **Go to (project name)**. The script is yours and runs only in your account.
+4. Open **Execution log** and copy the key it prints.
+5. Click **Deploy → New deployment**, choose the type **Web app**, set **Execute as: Me** and **Who has access: Anyone**, and click **Deploy**. Copy the **Web app URL**.
+6. In the Claude environment settings, add two environment variables: `FXPRO_SCRIPT_URL` (the URL) and `FXPRO_SCRIPT_KEY` (the key). Don't put them in the website's code.
+
+The web app only returns emails from e.kalman@fxpro.com, and only to requests carrying the key. To cut off access, run `rotateKey` in the script (this makes a new key) or delete the deployment.
+
+<details>
+<summary>Alternative: Gmail API with a Google Cloud OAuth client</summary>
+
+1. In [Google Cloud Console](https://console.cloud.google.com/), create a project, enable the **Gmail API**, and create an **OAuth client ID** of type **Desktop app**. Set the app's publishing status to **In production**, or tokens expire after 7 days.
 2. Set `GMAIL_CLIENT_ID` and `GMAIL_CLIENT_SECRET` to the client's values.
-3. Run `python3 scripts/fetch_fxpro_emails.py --authorize`, sign in with the Gmail account that receives the emails, and allow read-only access.
-4. Save the refresh token it prints as `GMAIL_REFRESH_TOKEN`. Keep it secret: it gives read access to that mailbox.
+3. Run `python3 scripts/fetch_fxpro_emails.py --authorize`, sign in, and allow read-only access.
+4. Save the refresh token it prints as `GMAIL_REFRESH_TOKEN`.
+
+The fetch script uses Apps Script when `FXPRO_SCRIPT_URL` is set, otherwise the Gmail API.
+</details>
 
 ## Project structure
 
@@ -79,6 +94,7 @@ blog-inbox/         FxPro emails waiting to be imported
 content/posts/      Blog posts as JSON
 assets/blog/        Images used in blog posts
 js/site.js          Theme toggle and menu for the blog pages
+apps-script/Code.gs Google Apps Script that serves the FxPro emails
 scripts/            fetch_logos.py (broker logos), fetch_fxpro_emails.py,
                     import_commentary.py and build_blog.py (blog)
 ```

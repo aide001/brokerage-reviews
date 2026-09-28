@@ -5,12 +5,14 @@ Each new email is saved to blog-inbox/<slug>/ (email.json + attachments),
 ready for import_commentary.py. Emails already in blog-inbox/ or already
 published are skipped. Uses the Gmail API directly; standard library only.
 
-One-time setup (see README "Market News"):
-  1. Create a Google Cloud OAuth client of type "Desktop app" with the Gmail API enabled.
-  2. export GMAIL_CLIENT_ID=... GMAIL_CLIENT_SECRET=...
-  3. python3 scripts/fetch_fxpro_emails.py --authorize
-     Sign in in the browser; the script prints a refresh token.
-  4. export GMAIL_REFRESH_TOKEN=<that token>
+Two ways to connect (see README "Market News"):
+
+  Easiest: Google Apps Script. Deploy apps-script/Code.gs as a web app in
+  your Google account, then set FXPRO_SCRIPT_URL and FXPRO_SCRIPT_KEY.
+
+  Or: Gmail API. Create a Google Cloud OAuth client with the Gmail API
+  enabled, set GMAIL_CLIENT_ID and GMAIL_CLIENT_SECRET, run this script with
+  --authorize, and set GMAIL_REFRESH_TOKEN to the token it prints.
 
 Then:
   python3 scripts/fetch_fxpro_emails.py [--limit 5] [--sender e.kalman@fxpro.com]
@@ -161,64 +163,110 @@ def known_messages():
     return known
 
 
-def save_message(token, msg, folder=None):
-    headers = {h["name"].lower(): h["value"] for h in msg["payload"].get("headers", [])}
-    subject = headers.get("subject", "(no subject)")
-    date = datetime.fromtimestamp(int(msg["internalDate"]) / 1000, tz=timezone.utc)
+def write_email(email, files, folder=None):
+    """Save one email's attachments and details to blog-inbox/.
+
+    email: dict with id, threadId, subject, from, date (datetime), body.
+    files: list of (filename, bytes). folder: a slot prepared earlier, if any.
+    """
+    date = email["date"]
     iso = date.strftime("%Y-%m-%dT%H:%M:%SZ")
-    title, kind, author = describe(subject, plain_text(msg["payload"]), date)
+    title, kind, author = describe(email["subject"], email["body"], date)
     slug = os.path.basename(folder) if folder else iso[:10] + "-" + slugify(title)
     folder = folder or os.path.join(INBOX, slug)
     os.makedirs(folder, exist_ok=True)
 
     saved = []
-    for part in walk(msg["payload"]):
-        name = part.get("filename")
-        body = part.get("body", {})
-        if not name or not (body.get("attachmentId") or body.get("data")):
-            continue
-        if body.get("attachmentId"):
-            data = api(token, "/messages/%s/attachments/%s" % (msg["id"], body["attachmentId"]))["data"]
-        else:
-            data = body["data"]
-        safe = os.path.basename(name).replace("/", "-")
+    for name, data in files:
+        safe = os.path.basename(name.replace("\\", "/")) or "attachment"
         with open(os.path.join(folder, safe), "wb") as fh:
-            fh.write(b64(data))
+            fh.write(data)
         saved.append(safe)
 
     meta_path = os.path.join(folder, "email.json")
     if os.path.exists(meta_path):  # a slot prepared earlier: keep its details
         meta = json.load(open(meta_path, encoding="utf-8"))
         meta["expectedAttachments"] = saved
-        with open(meta_path, "w", encoding="utf-8") as fh:
-            json.dump(meta, fh, indent=2, ensure_ascii=False)
-            fh.write("\n")
-        return slug, saved
-    meta = {
-        "slug": slug, "title": title, "date": iso, "type": kind,
-        "author": author, "authorRole": "Senior Market Analyst",
-        "from": headers.get("from"), "subject": subject,
-        "gmailMessageId": msg["id"], "gmailThreadId": msg["threadId"], "receivedAt": iso,
-        "expectedAttachments": saved, "includeImages": None,
-    }
-    with open(os.path.join(folder, "email.json"), "w", encoding="utf-8") as fh:
+    else:
+        meta = {
+            "slug": slug, "title": title, "date": iso, "type": kind,
+            "author": author, "authorRole": "Senior Market Analyst",
+            "from": email["from"], "subject": email["subject"],
+            "gmailMessageId": email["id"], "gmailThreadId": email["threadId"], "receivedAt": iso,
+            "expectedAttachments": saved, "includeImages": None,
+        }
+    with open(meta_path, "w", encoding="utf-8") as fh:
         json.dump(meta, fh, indent=2, ensure_ascii=False)
         fh.write("\n")
     return slug, saved
 
 
-def fetch(limit, sender):
+# ---------- Source 1: Gmail API (Google Cloud OAuth client) ----------
+
+def gmail_api_emails(limit, sender):
     token = access_token()
     listing = api(token, "/messages", q="from:%s has:attachment" % sender, maxResults=limit)
+    for ref in listing.get("messages", []):
+        yield ref["id"], lambda ref=ref: gmail_api_message(token, ref["id"])
+
+
+def gmail_api_message(token, msg_id):
+    msg = api(token, "/messages/%s" % msg_id, format="full")
+    headers = {h["name"].lower(): h["value"] for h in msg["payload"].get("headers", [])}
+    files = []
+    for part in walk(msg["payload"]):
+        name, body = part.get("filename"), part.get("body", {})
+        if not name or not (body.get("attachmentId") or body.get("data")):
+            continue
+        data = body.get("data") or api(token, "/messages/%s/attachments/%s" % (msg_id, body["attachmentId"]))["data"]
+        files.append((name, b64(data)))
+    email = {
+        "id": msg["id"], "threadId": msg["threadId"], "from": headers.get("from"),
+        "subject": headers.get("subject", "(no subject)"), "body": plain_text(msg["payload"]),
+        "date": datetime.fromtimestamp(int(msg["internalDate"]) / 1000, tz=timezone.utc),
+    }
+    return email, files
+
+
+# ---------- Source 2: Google Apps Script web app (apps-script/Code.gs) ----------
+
+def script_call(**params):
+    params["key"] = env("FXPRO_SCRIPT_KEY")
+    url = env("FXPRO_SCRIPT_URL") + "?" + urllib.parse.urlencode(params)
+    with urllib.request.urlopen(url, timeout=120) as res:
+        data = json.load(res)
+    if data.get("error"):
+        sys.exit("Apps Script returned an error: %s" % data["error"])
+    return data
+
+
+def apps_script_emails(limit, sender):
+    for m in script_call(action="list", limit=limit)["messages"]:
+        if sender.lower() in (m.get("from") or "").lower():
+            yield m["id"], lambda m=m: apps_script_message(m["id"])
+
+
+def apps_script_message(msg_id):
+    m = script_call(action="message", id=msg_id)["message"]
+    email = {
+        "id": m["id"], "threadId": m["threadId"], "from": m["from"], "subject": m["subject"],
+        "body": m["body"], "date": datetime.fromisoformat(m["date"].replace("Z", "+00:00")),
+    }
+    files = [(a["name"], base64.b64decode(a["data"])) for a in m["attachments"]]
+    return email, files
+
+
+def fetch(limit, sender):
+    source = apps_script_emails if os.environ.get("FXPRO_SCRIPT_URL") else gmail_api_emails
     known = known_messages()
     new = 0
-    for ref in listing.get("messages", []):
-        if ref["id"] in known and known[ref["id"]] is None:
-            print("skip   %s (already downloaded)" % ref["id"])
+    for msg_id, load in source(limit, sender):
+        if msg_id in known and known[msg_id] is None:
+            print("skip   %s (already downloaded)" % msg_id)
             continue
-        msg = api(token, "/messages/%s" % ref["id"], format="full")
-        slug, files = save_message(token, msg, known.get(ref["id"]))
-        print("saved  %s (%d attachment(s))" % (slug, len(files)))
+        email, files = load()
+        slug, saved = write_email(email, files, known.get(msg_id))
+        print("saved  %s (%d attachment(s))" % (slug, len(saved)))
         new += 1
     print("\n%d new email(s). Next: python3 scripts/import_commentary.py" % new)
 
