@@ -287,7 +287,7 @@ def import_folder(folder, force=False):
     docx = pick_docx(files)
     attached_images = [f for f in files if f.lower().endswith(IMAGE_EXTS)]
     if meta.get("includeImages") is not None:
-        attached_images = [f for f in attached_images if f in meta["includeImages"]]
+        attached_images = [f for f in meta["includeImages"] if f in attached_images]
     if not docx and not attached_images:
         expected = ", ".join(meta.get("expectedAttachments", [])) or "a .docx or images"
         return "wait", "waiting for attachments (" + expected + ")"
@@ -307,8 +307,12 @@ def import_folder(folder, force=False):
             blocks = blocks[1:]
 
     blocks, captions, doc_summary = extract_extras(blocks)
-    # Order attached charts by their number prefix ("1_Fed-ECB.png"), else by name.
-    attached_images.sort(key=lambda f: (number_prefix(f) is None, number_prefix(f) or 0, f))
+    # Order attached charts by their number prefix ("1_Fed-ECB.png"), else by name,
+    # unless includeImages gives the order explicitly.
+    if meta.get("includeImages") is None:
+        attached_images.sort(key=lambda f: (number_prefix(f) is None, number_prefix(f) or 0, f))
+    # Captions for images that don't have a "Fig. N" line, keyed by file name.
+    image_captions = meta.get("imageCaptions") or {}
 
     figures = []
     if doc_images:
@@ -333,6 +337,8 @@ def import_folder(folder, force=False):
         order = match_captions(attached_images, captions)
         ranked = sorted(range(len(dests)), key=lambda i: min([n for n, j in order.items() if j == i] or [999 + i]))
         caption_for = {i: captions[n] for n, i in order.items()}
+        for i, name in enumerate(attached_images):
+            caption_for.setdefault(i, image_captions.get(name))
         figures = [dests[i] for i in ranked]
         fig_blocks = [figure_html(image_url + dests[i], caption_for.get(i), meta["title"]) for i in ranked]
         # Charts illustrate the opening overview, so they go before the second section heading.
