@@ -21,6 +21,7 @@ SETTINGS = load_json("content", "site.json")
 SITE = SETTINGS.get("siteName") or "Brokerage Reviews"
 SITE_URL = (SETTINGS.get("siteUrl") or "").rstrip("/")
 DATA_VERIFIED = bool(SETTINGS.get("dataVerified"))
+FCA_ONLY = bool(SETTINGS.get("guidesFcaOnly"))
 YEAR = datetime.now(timezone.utc).year
 
 # Site menu, paths from the site root. "key" marks the page shown as current.

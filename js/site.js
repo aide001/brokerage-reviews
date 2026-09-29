@@ -42,6 +42,24 @@
     });
   });
 
+  // Start new visits at the top. Normally browsers already do this, but when the site is
+  // shown inside a frame that grows to fit the page (e.g. iOS Safari previews), the outer
+  // page keeps its scroll position and the new page opens part-way down. Skipped for Back/
+  // Forward and reloads (so the browser can restore the position) and for #section links.
+  try {
+    var nav = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
+    if (!location.hash && (!nav || nav.type === "navigate")) {
+      window.scrollTo(0, 0);
+      var root = document.documentElement;
+      if (window.top !== window && root.scrollIntoView) {
+        // scroll-padding (kept for #section links under the sticky header) would stop 80px short.
+        root.style.scrollPaddingTop = "0px";
+        root.scrollIntoView({ block: "start", behavior: "instant" });
+        root.style.scrollPaddingTop = "";
+      }
+    }
+  } catch (e) {}
+
   var year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 })();

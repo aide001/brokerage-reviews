@@ -4,7 +4,10 @@
   var BROKERS = window.BROKERS || [];
   var TIER1 = window.TIER1_REGULATORS || [];
   var MAX_COMPARE = 3;
-  var PIP_VALUE = 10; // USD per pip per standard lot on EUR/USD
+  var DEPOSIT_ANY = 200; // top of the "Max. min deposit" slider in index.html
+  // Costs are in GBP: one pip on a standard lot of EUR/USD is US$10, converted at the rate in js/data.js.
+  var FX = window.SITE_FX || { GBPUSD: 1.3247 };
+  var PIP_VALUE = FX.pipValueGBP || 10 / FX.GBPUSD;
 
   var AFFILIATE = window.AFFILIATE_LINKS || {};
   // Rating categories come from content/brokers.json via js/data.js; this list is a fallback.
@@ -43,11 +46,16 @@
   function round1(n) { return Math.round(n * 10) / 10; }
   function round2(n) { return Math.round(n * 100) / 100; }
   function money(n, digits) {
-    return "$" + n.toLocaleString("en-US", {
+    return "£" + n.toLocaleString("en-GB", {
       minimumFractionDigits: digits || 0,
       maximumFractionDigits: digits || 0
     });
   }
+  // "~" marks figures converted from US$ (see content/brokers.json "approx").
+  function approx(b, field, text) { return (b.approx || []).indexOf(field) !== -1 ? "~" + text : text; }
+  var SPREAD_KIND = { average: " average", from: " (from)", typical: " typical", example: " (broker's example)", unverified: " (not verified)" };
+  function spreadText(b) { return b.spread.toFixed(1) + " pips" + (SPREAD_KIND[b.spreadType] || ""); }
+  var UK_STATUS = { fca: "FCA-authorised", "not-fca": "Not FCA-authorised", "not-available": "Not available to UK residents" };
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (ch) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch];
@@ -108,7 +116,7 @@
     return n >= 1000000 ? (n / 1000000) + "M+" : n.toLocaleString("en-US") + "+";
   }
   function fmtCommission(b) {
-    return b.commission ? money(b.commission, 2) : '<span class="tag tag-good">None</span>';
+    return b.commission ? approx(b, "commission", money(b.commission, 2)) : '<span class="tag tag-good">None</span>';
   }
   function uniq(arr) {
     return arr.filter(function (v, i) { return arr.indexOf(v) === i; });
@@ -128,6 +136,10 @@
   function reviewUrl(b) { return "brokers/" + encodeURIComponent(b.id) + ".html"; }
   // Button to the broker: the affiliate link when set, otherwise the official site (no tracking).
   function brokerCta(b) {
+    // For a UK audience we don't link to brokers the FCA hasn't authorised (same rule as the review pages).
+    if (window.SITE_FCA_ONLY && b.ukStatus !== "fca") {
+      return '<p class="cta-blocked">' + esc(b.name) + (b.ukStatus === "not-available" ? " does not accept UK residents" : " is not authorised by the UK's FCA") + ", so we don't link to it.</p>";
+    }
     var aff = AFFILIATE[b.id];
     return aff
       ? '<a class="btn btn-primary" href="' + esc(aff) + '" target="_blank" rel="sponsored nofollow noopener">Open account<span class="sr-only"> with ' + esc(b.name) + "</span></a>"
@@ -136,7 +148,8 @@
 
   // ---------- Top picks ----------
   function renderTopPicks() {
-    var top = BROKERS.slice().sort(byRating).slice(0, 3);
+    var top = BROKERS.filter(function (b) { return !window.SITE_FCA_ONLY || b.ukStatus === "fca"; })
+      .sort(byRating).slice(0, 3);
     var medals = ["Best overall", "Runner-up", "Also great"];
     $("#top-picks-grid").innerHTML = top.map(function (b, i) {
       return '<article class="pick-card">' +
@@ -146,8 +159,8 @@
           '<p class="muted">' + esc(b.bestFor) + "</p></div></div>" +
         '<div class="pick-score"><strong>' + b.overall.toFixed(1) + "</strong>" + stars(b.overall) + "</div>" +
         '<dl class="pick-facts">' +
-          "<div><dt>EUR/USD cost</dt><dd>" + money(b.cost, 2) + "/lot</dd></div>" +
-          "<div><dt>Min deposit</dt><dd>" + money(b.minDeposit) + "</dd></div>" +
+          "<div><dt>EUR/USD cost</dt><dd>" + approx(b, "commission", money(b.cost, 2)) + "/lot</dd></div>" +
+          "<div><dt>Min deposit</dt><dd>" + approx(b, "minDeposit", money(b.minDeposit)) + "</dd></div>" +
           "<div><dt>Regulators</dt><dd>" + b.regulators.length + "</dd></div>" +
         "</dl>" +
         '<ul class="pick-pros">' + b.pros.slice(0, 2).map(function (p) { return "<li>" + esc(p) + "</li>"; }).join("") + "</ul>" +
@@ -176,7 +189,8 @@
       if (q && b.name.toLowerCase().indexOf(q) === -1) return false;
       if (state.regulator && b.regulators.indexOf(state.regulator) === -1) return false;
       if (state.platform && b.platforms.indexOf(state.platform) === -1) return false;
-      if (b.minDeposit > state.maxDeposit) return false;
+      // The slider's top value means "Any", so brokers above it (e.g. a £500 minimum) still show.
+      if (state.maxDeposit < DEPOSIT_ANY && b.minDeposit > state.maxDeposit) return false;
       if (state.tier1 && !b.tier1) return false;
       return true;
     });
@@ -209,9 +223,9 @@
         '<td data-label="Rating"><div class="cell-rating"><strong>' + b.overall.toFixed(1) + "</strong>" + stars(b.overall) + "</div></td>" +
         '<td data-label="EUR/USD spread">' + b.spread.toFixed(1) + ' pips<small class="muted">' + esc(b.account) + "</small></td>" +
         '<td data-label="Commission">' + fmtCommission(b) + "</td>" +
-        '<td data-label="All-in cost"><strong>' + money(b.cost, 2) + "</strong>" +
+        '<td data-label="All-in cost"><strong>' + approx(b, "commission", money(b.cost, 2)) + "</strong>" +
           (b.cost === cheapest ? ' <span class="tag tag-good">Lowest</span>' : "") + "</td>" +
-        '<td data-label="Min deposit">' + (b.minDeposit === 0 ? '<span class="tag tag-good">$0</span>' : money(b.minDeposit)) + "</td>" +
+        '<td data-label="Min deposit">' + (b.minDeposit === 0 ? '<span class="tag tag-good">£0</span>' : approx(b, "minDeposit", money(b.minDeposit))) + "</td>" +
         '<td data-label="Regulators"><div class="chips">' + b.regulators.slice(0, 3).map(function (r) {
             return '<span class="chip' + (TIER1.indexOf(r) !== -1 ? " chip-tier1" : "") + '">' + esc(r) + "</span>";
           }).join("") + (b.regulators.length > 3 ? '<span class="chip chip-more">+' + (b.regulators.length - 3) + "</span>" : "") +
@@ -359,11 +373,12 @@
           }).join("") +
         "</ul></section>" +
         '<section><h3>Key facts</h3><dl class="facts">' +
-          "<div><dt>EUR/USD spread</dt><dd>" + b.spread.toFixed(1) + " pips (" + esc(b.account) + ")</dd></div>" +
-          "<div><dt>Commission</dt><dd>" + (b.commission ? money(b.commission, 2) + " per lot round-turn" : "None") + "</dd></div>" +
-          "<div><dt>All-in cost</dt><dd>" + money(b.cost, 2) + " per standard lot</dd></div>" +
-          "<div><dt>Min deposit</dt><dd>" + money(b.minDeposit) + "</dd></div>" +
-          "<div><dt>Max leverage</dt><dd>1:" + b.leverage + " <small class=\"muted\">(varies by entity)</small></dd></div>" +
+          "<div><dt>UK status</dt><dd>" + (UK_STATUS[b.ukStatus] || UK_STATUS["not-fca"]) + (b.fcaFrn ? ' <small class="muted">(FRN ' + esc(b.fcaFrn) + ")</small>" : "") + "</dd></div>" +
+          "<div><dt>EUR/USD spread</dt><dd>" + spreadText(b) + " (" + esc(b.account) + ")</dd></div>" +
+          "<div><dt>Commission</dt><dd>" + (b.commission ? approx(b, "commission", money(b.commission, 2)) + " per lot round-turn" : "None") + "</dd></div>" +
+          "<div><dt>All-in cost</dt><dd>" + approx(b, "commission", money(b.cost, 2)) + " per standard lot</dd></div>" +
+          "<div><dt>Min deposit</dt><dd>" + approx(b, "minDeposit", money(b.minDeposit)) + "</dd></div>" +
+          "<div><dt>Max leverage</dt><dd>1:" + b.leverage + ' <small class="muted">(' + (b.ukStatus === "fca" ? "UK retail limit" : "offshore entity") + ")</small></dd></div>" +
           "<div><dt>Instruments</dt><dd>" + fmtInstruments(b.instruments) + "</dd></div>" +
         "</dl></section>" +
       "</div>" +
@@ -386,7 +401,8 @@
         '<button class="btn btn-ghost" data-share="' + b.id + '">Copy link</button>' +
       "</footer>" +
       '<p class="muted small">Data is indicative and may vary by country. Always verify on the broker\'s website. ' +
-      "Most retail CFD accounts lose money. We may earn a commission if you open an account through our links.</p>";
+      (b.lossPct != null ? b.lossPct + "% of retail investor accounts lose money when trading CFDs with this provider. " : "Most retail CFD accounts lose money. ") +
+      "We may earn a commission if you open an account through our links.</p>";
     openModal(html);
     if (location.hash !== "#broker/" + id) history.replaceState(null, "", "#broker/" + id);
   }
@@ -507,7 +523,24 @@
     if (m && byId[m[1]]) openReview(m[1]);
   }
 
+  // Start new visits at the top even when shown inside a frame that grows to fit the page
+  // (e.g. iOS Safari previews); same as js/site.js. Not for Back/Forward, reloads or #links.
+  function startAtTop() {
+    try {
+      var nav = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
+      if (location.hash || (nav && nav.type !== "navigate")) return;
+      window.scrollTo(0, 0);
+      var root = document.documentElement;
+      if (window.top !== window && root.scrollIntoView) {
+        root.style.scrollPaddingTop = "0px";
+        root.scrollIntoView({ block: "start", behavior: "instant" });
+        root.style.scrollPaddingTop = "";
+      }
+    } catch (e) {}
+  }
+
   // ---------- Init ----------
+  startAtTop();
   populateFilters();
   renderTopPicks();
   renderTable();

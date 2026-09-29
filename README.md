@@ -56,7 +56,9 @@ For each broker it tries the official site's `apple-touch-icon.png` first, then 
 
 It writes a review page per broker (`brokers/<id>.html`), ranked "best" guides (`best/<slug>.html`, e.g. best low spread, beginners, MT4), a hub (`best/index.html`), the homepage's static top picks and guides hub, `robots.txt`, and `sitemap.xml` once `siteUrl` is set. Each guide ranks only on data every broker has and states how it ranks.
 
-**Before going live:** check every figure in `brokers.json` against each broker's own website, then set `dataVerified` to `true`. Until then broker pages and the homepage show a sample-data notice and carry `noindex`, so unverified ratings are never indexed. Then set `siteUrl`, rebuild, and submit `sitemap.xml` in Google Search Console.
+**Currency and UK audience:** money is shown in GBP. Each broker's figures come from its UK site where it has an FCA-authorised entity; US$ figures are converted at the ECB reference rate stored in `content/brokers.json` (`fx`) and shown with "~". Costs are for a GBP account (1 pip on EUR/USD = US$10 ≈ £7.55 per lot). With `guidesFcaOnly` on in `content/site.json`, the guides and top picks only rank FCA-authorised brokers, and brokers without FCA authorisation (or that don't accept UK residents) get a status notice instead of a sign-up link.
+
+**Keeping data accurate:** each broker in `content/brokers.json` lists its `sources`, the date `checked`, `dataNotes`, its FCA firm number and its published retail loss percentage (shown next to its sign-up button). Re-check the figures regularly; brokers change them often. Brokers marked `"verified": false` get a notice and `noindex` on their review page. To publish: set `siteUrl` in `content/site.json`, rebuild, and submit `sitemap.xml` in Google Search Console.
 
 ## Market News (FxPro commentary)
 

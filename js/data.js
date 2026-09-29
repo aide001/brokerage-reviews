@@ -16,10 +16,10 @@ window.BROKERS = [
       "CySEC",
       "FSA (SC)"
     ],
-    "minDeposit": 200,
+    "minDeposit": 151,
     "account": "Raw Spread",
     "spread": 0.1,
-    "commission": 7,
+    "commission": 5.28,
     "leverage": 500,
     "platforms": [
       "MT4",
@@ -47,6 +47,19 @@ window.BROKERS = [
       "Education section is basic"
     ],
     "summary": "IC Markets is a popular choice for active and algorithmic traders thanks to raw pricing, deep liquidity and a strong line-up of third-party platforms.",
+    "ukStatus": "not-fca",
+    "spreadType": "average",
+    "verified": true,
+    "approx": [
+      "minDeposit",
+      "commission"
+    ],
+    "sources": [
+      "https://www.icmarkets.com/global/en/trading-accounts/overview",
+      "https://www.icmarkets.com/global/en/trading-accounts/raw-spread-account"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "Raw Spread: average EUR/USD 0.1 pips, $3.50 per lot per side. Min deposit US$200. No FCA-authorised entity; UK not on its restricted list.",
     "logoExt": "png"
   },
   {
@@ -68,15 +81,15 @@ window.BROKERS = [
     "minDeposit": 0,
     "account": "Razor",
     "spread": 0.1,
-    "commission": 7,
-    "leverage": 200,
+    "commission": 4.5,
+    "leverage": 30,
     "platforms": [
       "MT4",
       "MT5",
       "cTrader",
       "TradingView"
     ],
-    "instruments": 1300,
+    "instruments": 1444,
     "bestFor": "Active traders wanting top-tier regulation",
     "ratings": {
       "fees": 4.8,
@@ -96,6 +109,18 @@ window.BROKERS = [
       "No guaranteed stop-loss in most regions"
     ],
     "summary": "Pepperstone combines low trading costs with some of the broadest regulatory coverage in the industry, making it a well-rounded choice for most forex traders.",
+    "ukStatus": "fca",
+    "fcaFrn": "684312",
+    "lossPct": 72.9,
+    "spreadType": "average",
+    "verified": true,
+    "sources": [
+      "https://www.pepperstone.com/en-gb/trading/trading-accounts/",
+      "https://pepperstone.com/en-gb/markets/forex/pairs-and-spreads",
+      "https://pepperstone.com/en-gb/help-and-support/opening-an-account/whats-the-minimum-deposit-for-a-live-account/"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "No minimum deposit for bank transfer (card minimum £10). Razor EUR/USD avg 0.1; commission £2.25/side.",
     "logoExt": "png"
   },
   {
@@ -113,10 +138,10 @@ window.BROKERS = [
       "MAS"
     ],
     "minDeposit": 0,
-    "account": "Standard",
-    "spread": 1.2,
+    "account": "Standard (spread only)",
+    "spread": 0.6,
     "commission": 0,
-    "leverage": 200,
+    "leverage": 30,
     "platforms": [
       "OANDA Trade",
       "MT4",
@@ -138,10 +163,21 @@ window.BROKERS = [
     ],
     "cons": [
       "Standard spreads higher than ECN brokers",
-      "Smaller range of non-FX instruments",
-      "US leverage limited to 1:50"
+      "Smaller range of non-FX instruments"
     ],
     "summary": "OANDA is one of the most established forex brokers, trusted for transparent pricing and available to US residents, with solid tools for newer traders.",
+    "ukStatus": "fca",
+    "fcaFrn": "542574",
+    "lossPct": 76.6,
+    "spreadType": "from",
+    "verified": true,
+    "sources": [
+      "https://www.oanda.com/uk-en/trading/our-pricing/",
+      "https://www.oanda.com/uk-en/trading/spreads-margin/",
+      "https://help.oanda.com/uk/en/faqs/minimum-deposit-requirement.htm"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "No minimum deposit. EUR/USD from 0.6 pips; core pricing option: 0.0 spread + USD 0.70 per 10k units per side.",
     "logoExt": "png"
   },
   {
@@ -160,9 +196,9 @@ window.BROKERS = [
     ],
     "minDeposit": 100,
     "account": "Standard",
-    "spread": 1.2,
+    "spread": 0.7,
     "commission": 0,
-    "leverage": 50,
+    "leverage": 30,
     "platforms": [
       "FOREX.com Web",
       "MT4",
@@ -189,6 +225,17 @@ window.BROKERS = [
       "Account types vary by region"
     ],
     "summary": "FOREX.com offers one of the widest selections of FX pairs, US availability and strong corporate backing, with a capable proprietary platform.",
+    "ukStatus": "fca",
+    "fcaFrn": "190864",
+    "lossPct": 74,
+    "spreadType": "from",
+    "verified": true,
+    "sources": [
+      "https://www.forex.com/en-uk/trading-accounts/standard-trading-account/",
+      "https://www.forex.com/en-uk/help-and-support/faqs/accounts/"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "forex.com blocks automated fetches (403); figures taken from forex.com pages as indexed by search: EUR/USD from 0.7 pts, min initial deposit £100, 74% retail lose. FCA FRN not confirmed from page.",
     "logoExt": "png"
   },
   {
@@ -207,10 +254,10 @@ window.BROKERS = [
       "FINMA"
     ],
     "minDeposit": 0,
-    "account": "CFD Standard",
-    "spread": 0.85,
+    "account": "CFD / spread bet",
+    "spread": 0.6,
     "commission": 0,
-    "leverage": 200,
+    "leverage": 30,
     "platforms": [
       "IG Platform",
       "MT4",
@@ -237,6 +284,18 @@ window.BROKERS = [
       "Inactivity fee after two years"
     ],
     "summary": "IG is a global heavyweight offering an enormous range of markets, excellent tools and research, and exceptional regulatory standing.",
+    "ukStatus": "fca",
+    "fcaFrn": "195355",
+    "lossPct": 69,
+    "spreadType": "from",
+    "verified": true,
+    "sources": [
+      "https://www.ig.com/uk/our-charges",
+      "https://www.ig.com/uk/forex/markets-forex",
+      "https://www.ig.com/uk/help-and-support/articles/685866-what-s-the-minimum-and-maximum-amount-i-can-deposit"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "No minimum by bank transfer; card minimum £250. EUR/USD minimum spread 0.6, no commission on FX.",
     "logoExt": "png"
   },
   {
@@ -254,13 +313,13 @@ window.BROKERS = [
     ],
     "minDeposit": 0,
     "account": "Standard",
-    "spread": 0.9,
+    "spread": 0.8,
     "commission": 0,
-    "leverage": 500,
+    "leverage": 30,
     "platforms": [
       "xStation 5"
     ],
-    "instruments": 7000,
+    "instruments": 11800,
     "bestFor": "Beginners wanting a great app",
     "ratings": {
       "fees": 4.4,
@@ -280,6 +339,17 @@ window.BROKERS = [
       "Not available in the US"
     ],
     "summary": "XTB is a user-friendly broker built around its excellent xStation platform, with commission-free standard pricing and very good educational content.",
+    "ukStatus": "fca",
+    "fcaFrn": "522157",
+    "lossPct": 74,
+    "spreadType": "from",
+    "verified": true,
+    "sources": [
+      "https://www.xtb.com/en/account-and-fees",
+      "https://www.xtb.com/en/forex"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "No minimum deposit; 0% CFD commission; EURUSD minimum spread 0.8 (XTB comparison table dated 13 Jan 2026); 60+ FX pairs.",
     "logoExt": "png"
   },
   {
@@ -295,9 +365,9 @@ window.BROKERS = [
       "ASIC",
       "FSAS"
     ],
-    "minDeposit": 50,
-    "account": "Standard",
-    "spread": 1,
+    "minDeposit": 8,
+    "account": "eToro CFD",
+    "spread": 0.6,
     "commission": 0,
     "leverage": 30,
     "platforms": [
@@ -323,6 +393,20 @@ window.BROKERS = [
       "No MetaTrader support"
     ],
     "summary": "eToro is the go-to platform for social and copy trading, trading off slightly higher FX costs for simplicity and community features.",
+    "ukStatus": "fca",
+    "fcaFrn": "583263",
+    "lossPct": 51,
+    "spreadType": "typical",
+    "verified": true,
+    "approx": [
+      "minDeposit"
+    ],
+    "sources": [
+      "https://www.etoro.com/trading/fees/cfd-spreads/",
+      "https://help.etoro.com/s/article/What-s-the-deposit-minimum?language=en_GB"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "EUR/USD spread 0.005% per trade (~0.57 pips at EURUSD 1.1355). UK first deposit US$10.",
     "logoExt": "png"
   },
   {
@@ -341,10 +425,10 @@ window.BROKERS = [
       "MAS"
     ],
     "minDeposit": 0,
-    "account": "IBKR Pro",
-    "spread": 0.2,
-    "commission": 4,
-    "leverage": 50,
+    "account": "IBKR Pro (spot FX)",
+    "spread": 0.1,
+    "commission": 3.43,
+    "leverage": 30,
     "platforms": [
       "Trader Workstation",
       "IBKR Desktop",
@@ -370,6 +454,21 @@ window.BROKERS = [
       "Customer support can be slow"
     ],
     "summary": "Interactive Brokers delivers institutional-grade pricing and market access, best suited to experienced traders comfortable with advanced tools.",
+    "ukStatus": "fca",
+    "fcaFrn": "208159",
+    "lossPct": 57.9,
+    "spreadType": "from",
+    "verified": true,
+    "approx": [
+      "commission"
+    ],
+    "sources": [
+      "https://www.interactivebrokers.co.uk/en/pricing/commissions-spot-currencies.php",
+      "https://www.interactivebrokers.co.uk/en/pricing/commissions-cfd-forex.php",
+      "https://www.interactivebrokers.co.uk/en/trading/products-spot-currencies.php"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "Commission 0.2 bps x trade value, min USD 2 per order (Tier I). No account minimum.",
     "logoExt": "png"
   },
   {
@@ -388,7 +487,7 @@ window.BROKERS = [
     ],
     "minDeposit": 0,
     "account": "Classic",
-    "spread": 0.9,
+    "spread": 0.7,
     "commission": 0,
     "leverage": 30,
     "platforms": [
@@ -416,6 +515,18 @@ window.BROKERS = [
       "Custody fees on some holdings"
     ],
     "summary": "Saxo is a Danish bank offering premium trading platforms and one of the largest product line-ups available to retail traders.",
+    "ukStatus": "fca",
+    "fcaFrn": "551422",
+    "lossPct": 60,
+    "spreadType": "from",
+    "verified": true,
+    "sources": [
+      "https://www.home.saxo/en-gb/products/forex",
+      "https://www.home.saxo/en-gb/accounts",
+      "https://www.home.saxo/en-gb/rates-and-conditions/forex/spreads-and-commissions"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "No minimum funding. EURUSD minimum spread 0.7 pips (Classic); fixed USD 3 commission on trades under 50,000 units. 185+ FX pairs.",
     "logoExt": "png"
   },
   {
@@ -433,8 +544,8 @@ window.BROKERS = [
       "BaFin"
     ],
     "minDeposit": 0,
-    "account": "CFD Standard",
-    "spread": 0.7,
+    "account": "CFD / spread bet",
+    "spread": 0.6,
     "commission": 0,
     "leverage": 30,
     "platforms": [
@@ -442,7 +553,7 @@ window.BROKERS = [
       "MT4",
       "TradingView"
     ],
-    "instruments": 12000,
+    "instruments": 21000,
     "bestFor": "Charting and technical analysis",
     "ratings": {
       "fees": 4.5,
@@ -462,6 +573,18 @@ window.BROKERS = [
       "Not available in the US"
     ],
     "summary": "CMC Markets pairs competitive pricing with a feature-rich Next Generation platform that technical traders will appreciate.",
+    "ukStatus": "fca",
+    "fcaFrn": "173730",
+    "lossPct": 68,
+    "spreadType": "from",
+    "verified": true,
+    "sources": [
+      "https://www.cmcmarkets.com/en-gb/forex",
+      "https://www.cmcmarkets.com/en-gb/compare-trading-accounts",
+      "https://www.cmcmarkets.com/en-gb/forex/how-much-do-you-need-to-start-trading-forex"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "No minimum deposit. EUR/USD min spread 0.6 (indicative table). FX Active account: 0.0 spread + 0.0025% commission per transaction.",
     "logoExt": "png"
   },
   {
@@ -473,14 +596,13 @@ window.BROKERS = [
     "hq": "Limassol, Cyprus",
     "regulators": [
       "CySEC",
-      "FCA",
       "FSCA",
       "FSA (SC)"
     ],
-    "minDeposit": 10,
+    "minDeposit": 8,
     "account": "Standard",
-    "spread": 1,
-    "commission": 0,
+    "spread": 0.3,
+    "commission": 0.0,
     "leverage": 2000,
     "platforms": [
       "MT4",
@@ -497,7 +619,7 @@ window.BROKERS = [
       "education": 3.6
     },
     "pros": [
-      "Very low $10 minimum deposit",
+      "Very low minimum deposit (about £8 / US$10)",
       "Fast, often instant withdrawals",
       "Wide range of account types"
     ],
@@ -507,6 +629,18 @@ window.BROKERS = [
       "Smaller product range"
     ],
     "summary": "Exness appeals to traders starting small, with a low minimum deposit, flexible accounts and a reputation for fast withdrawals.",
+    "ukStatus": "not-available",
+    "spreadType": "average",
+    "verified": true,
+    "approx": [
+      "minDeposit"
+    ],
+    "sources": [
+      "https://www.exness.com/standard-accounts/",
+      "https://www.exness.com/regulation/"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "Does not serve UK residents. Standard: avg EURUSD 0.3 pips, commission-free, min deposit ~US$10 (from exness.com pages via search).",
     "logoExt": "png"
   },
   {
@@ -524,9 +658,9 @@ window.BROKERS = [
       "ADGM"
     ],
     "minDeposit": 100,
-    "account": "Standard (fixed)",
+    "account": "Standard",
     "spread": 0.9,
-    "commission": 0,
+    "commission": 0.0,
     "leverage": 400,
     "platforms": [
       "MT4",
@@ -554,6 +688,15 @@ window.BROKERS = [
       "Research is fairly basic"
     ],
     "summary": "AvaTrade offers predictable fixed spreads and useful risk-management features, backed by regulation across multiple jurisdictions.",
+    "ukStatus": "not-available",
+    "spreadType": "from",
+    "verified": true,
+    "sources": [
+      "https://www.avatrade.com/trading-info/financial-instruments-index/forex",
+      "https://support.avatrade.com/hc/en-us/articles/360017588538-Does-AvaTrade-accept-traders-worldwide"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "Does not accept UK residents. EUR/USD from 0.9 pips; min deposit 100 in account currency.",
     "logoExt": "png"
   },
   {
@@ -564,15 +707,14 @@ window.BROKERS = [
     "founded": 2010,
     "hq": "Limassol, Cyprus",
     "regulators": [
-      "FCA",
       "CySEC",
       "ASIC",
       "FSCA"
     ],
-    "minDeposit": 50,
+    "minDeposit": 38,
     "account": "Standard (floating)",
     "spread": 1.2,
-    "commission": 0,
+    "commission": 0.0,
     "leverage": 1000,
     "platforms": [
       "MT4",
@@ -591,7 +733,7 @@ window.BROKERS = [
     "pros": [
       "Licensed by FCA, CySEC and ASIC",
       "Wide choice of fixed, floating and zero-spread accounts",
-      "Low $50 minimum deposit"
+      "Low minimum deposit"
     ],
     "cons": [
       "Mixed reputation from past client complaints",
@@ -599,6 +741,18 @@ window.BROKERS = [
       "High leverage only through offshore entities"
     ],
     "summary": "IronFX offers a broad menu of account types and MetaTrader platforms under several regulators, but its standard pricing is not the cheapest and its reputation is mixed.",
+    "ukStatus": "not-available",
+    "spreadType": "unverified",
+    "verified": false,
+    "approx": [
+      "minDeposit",
+      "commission"
+    ],
+    "sources": [
+      "https://www.ironfx.com/en/faq-page/"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "IronFX states its site is not directed at UK residents. ironfx.com could not be read from this environment (connection refused at proxy); spread/deposit figures not verified.",
     "logoExt": "png"
   },
   {
@@ -614,10 +768,10 @@ window.BROKERS = [
       "FSC (MU)",
       "FSA (SC)"
     ],
-    "minDeposit": 50,
+    "minDeposit": 38,
     "account": "Standard",
     "spread": 1.3,
-    "commission": 0,
+    "commission": 0.0,
     "leverage": 1000,
     "platforms": [
       "MT4",
@@ -635,7 +789,7 @@ window.BROKERS = [
       "education": 3.8
     },
     "pros": [
-      "Low $50 minimum deposit ($20 on Cent)",
+      "Low minimum deposit (about £38 / US$50) on Standard",
       "Copy trading and a capable mobile app",
       "Up to 1:1000 leverage offshore"
     ],
@@ -645,6 +799,18 @@ window.BROKERS = [
       "Prime and ECN accounts need large deposits"
     ],
     "summary": "PU Prime (formerly Pacific Union) targets active traders with high leverage and copy trading, though most clients are served by its lightly regulated offshore entity.",
+    "ukStatus": "not-fca",
+    "spreadType": "from",
+    "verified": true,
+    "approx": [
+      "minDeposit"
+    ],
+    "sources": [
+      "https://www.puprime.com/account-types/",
+      "https://helpcenter.puprime.com/hc/en-001/articles/360004364635-What-is-the-difference-between-Standard-and-Prime-account"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "Standard: min deposit $50, no commission, spreads from 1.3; Prime: $1,000 min, $3.5/side. Regulated offshore (FSC Mauritius, SVG FSA); no FCA entity.",
     "logoExt": "png"
   },
   {
@@ -660,10 +826,10 @@ window.BROKERS = [
       "DFSA",
       "FSC (BZ)"
     ],
-    "minDeposit": 5,
+    "minDeposit": 4,
     "account": "Standard",
     "spread": 1.6,
-    "commission": 0,
+    "commission": 0.0,
     "leverage": 1000,
     "platforms": [
       "MT4",
@@ -680,7 +846,7 @@ window.BROKERS = [
       "education": 4.6
     },
     "pros": [
-      "$5 minimum deposit",
+      "Tiny minimum deposit (about £4 / US$5)",
       "Strong free education and webinars",
       "Multilingual 24/5 support"
     ],
@@ -690,6 +856,17 @@ window.BROKERS = [
       "Not available in the US"
     ],
     "summary": "XM is a beginner-friendly broker with a tiny minimum deposit and excellent educational content, offset by relatively wide spreads on its standard account.",
+    "ukStatus": "not-fca",
+    "spreadType": "unverified",
+    "verified": false,
+    "approx": [
+      "minDeposit"
+    ],
+    "sources": [
+      "https://www.xm.com/account-types"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "Min deposit US$5 (Standard). EUR/USD Standard spread not confirmed (site blocks automated reads). No FCA-authorised entity.",
     "logoExt": "png"
   },
   {
@@ -706,10 +883,10 @@ window.BROKERS = [
       "VFSC"
     ],
     "minDeposit": 50,
-    "account": "Raw ECN",
+    "account": "RAW ECN",
     "spread": 0.1,
-    "commission": 6,
-    "leverage": 500,
+    "commission": 2,
+    "leverage": 30,
     "platforms": [
       "MT4",
       "MT5",
@@ -726,9 +903,9 @@ window.BROKERS = [
       "education": 4
     },
     "pros": [
-      "Raw spreads with a $6 round-turn commission",
+      "Raw spreads with a £2 round-turn commission on GBP accounts",
       "TradingView and copy trading integration",
-      "Low $50 minimum deposit"
+      "Low £50 minimum deposit"
     ],
     "cons": [
       "Most clients served by offshore entities",
@@ -736,6 +913,17 @@ window.BROKERS = [
       "Product range varies by region"
     ],
     "summary": "Vantage combines tight raw pricing and modern platform choices with a low entry point, making it a solid option for cost-conscious traders.",
+    "ukStatus": "fca",
+    "fcaFrn": "590299",
+    "lossPct": 70.98,
+    "spreadType": "from",
+    "verified": true,
+    "sources": [
+      "https://www.vantagemarkets.co.uk/trading/fees/commission/",
+      "https://helpcenter.vantagemarkets.co.uk/hc/en-gb/articles/11933274655247-What-is-a-RAW-ECN-account"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "RAW ECN GBP account: £1 per lot per side (£2 round turn) from UK commission page. Min deposit 50 units of account currency and EURUSD min 0.1 pip from Vantage help centre (page blocks automated reads).",
     "logoExt": "png"
   },
   {
@@ -751,10 +939,10 @@ window.BROKERS = [
       "FSCA",
       "FSA (SC)"
     ],
-    "minDeposit": 100,
+    "minDeposit": 75,
     "account": "Raw",
-    "spread": 0.1,
-    "commission": 6,
+    "spread": 0.0,
+    "commission": 4.53,
     "leverage": 500,
     "platforms": [
       "MT4",
@@ -782,6 +970,19 @@ window.BROKERS = [
       "Higher leverage via offshore entity only"
     ],
     "summary": "FP Markets is a long-running Australian broker offering some of the lowest raw trading costs across all the popular third-party platforms.",
+    "ukStatus": "not-fca",
+    "spreadType": "from",
+    "verified": true,
+    "approx": [
+      "minDeposit",
+      "commission"
+    ],
+    "sources": [
+      "https://www.fpmarkets.com/account-types/forex-account-types/",
+      "https://www.fpmarkets.com/mt4-5-fees-charges/"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "From fpmarkets.com pages as indexed by search (site blocks automated reads): Raw from 0.0 pips, US$3 per lot per side, min deposit ~US$100. Regulated by ASIC/CySEC; no FCA entity found.",
     "logoExt": "png"
   },
   {
@@ -798,11 +999,11 @@ window.BROKERS = [
       "DFSA",
       "FSA (SC)"
     ],
-    "minDeposit": 100,
+    "minDeposit": 75,
     "account": "Raw",
-    "spread": 0.1,
-    "commission": 6,
-    "leverage": 500,
+    "spread": 0.2,
+    "commission": 4.53,
+    "leverage": 30,
     "platforms": [
       "MT4",
       "MT5",
@@ -818,7 +1019,7 @@ window.BROKERS = [
       "education": 4
     },
     "pros": [
-      "Among the lowest raw commissions",
+      "Low raw-account commission ($3 per lot per side)",
       "FCA and CySEC regulated",
       "Fast execution, EA-friendly"
     ],
@@ -827,7 +1028,22 @@ window.BROKERS = [
       "No proprietary platform",
       "Research is fairly basic"
     ],
-    "summary": "Tickmill is built for cost-sensitive active traders, with very low raw commissions and fast execution under solid regulation.",
+    "summary": "Tickmill is built for cost-sensitive active traders, with low raw-account commissions and fast execution under solid regulation.",
+    "ukStatus": "fca",
+    "fcaFrn": "717270",
+    "lossPct": 69,
+    "spreadType": "example",
+    "verified": true,
+    "approx": [
+      "minDeposit",
+      "commission"
+    ],
+    "sources": [
+      "https://www.tickmill.com/uk/conditions/trading-costs-fees",
+      "https://www.tickmill.com/uk/about/faq/what-is-the-minimum-deposit"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "Raw: from 0.0 pips, $3 per lot per side; EURUSD 0.2 pips used in Tickmill's own worked example. Starting deposit $100 (varies by base currency).",
     "logoExt": "png"
   },
   {
@@ -845,11 +1061,11 @@ window.BROKERS = [
       "FSA (SC)",
       "CMA"
     ],
-    "minDeposit": 0,
-    "account": "Premium",
-    "spread": 1.4,
-    "commission": 0,
-    "leverage": 2000,
+    "minDeposit": 19,
+    "account": "Zero",
+    "spread": 0.0,
+    "commission": 4.53,
+    "leverage": 30,
     "platforms": [
       "MT4",
       "MT5",
@@ -875,6 +1091,21 @@ window.BROKERS = [
       "Website and account types can be confusing"
     ],
     "summary": "HFM (formerly HotForex) offers lots of account options and trading tools across many jurisdictions, though its standard pricing is on the high side.",
+    "ukStatus": "fca",
+    "fcaFrn": "801701",
+    "lossPct": 71.46,
+    "spreadType": "from",
+    "verified": true,
+    "approx": [
+      "minDeposit",
+      "commission"
+    ],
+    "sources": [
+      "https://hfmarkets.co.uk/uk/en/account-types/zero-spread-account.html",
+      "https://www.hfmarkets.co.uk/en/help/faqs"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "From hfmarkets.co.uk pages as indexed by search (site blocks automated reads): Zero account min deposit $25, commission from $3 per lot (per side assumed), 71.46% of retail lose money.",
     "logoExt": "png"
   },
   {
@@ -890,11 +1121,11 @@ window.BROKERS = [
       "FSC (MU)",
       "CMA"
     ],
-    "minDeposit": 200,
+    "minDeposit": 500,
     "account": "Advantage",
-    "spread": 0.1,
-    "commission": 8,
-    "leverage": 2000,
+    "spread": 0.0,
+    "commission": 5.28,
+    "leverage": 30,
     "platforms": [
       "MT4",
       "MT5",
@@ -920,6 +1151,19 @@ window.BROKERS = [
       "Limited non-FX range"
     ],
     "summary": "FXTM (ForexTime) has a strong following in emerging markets, pairing raw-spread accounts with helpful education and local support.",
+    "ukStatus": "fca",
+    "fcaFrn": "777911",
+    "spreadType": "from",
+    "verified": true,
+    "approx": [
+      "commission"
+    ],
+    "sources": [
+      "https://www.forextime.com/uk/trading-accounts/account-types",
+      "https://www.forextime.com/uk/trading-accounts/commissions"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "UK Advantage account: spreads from 0.0, min deposit 500 USD/EUR/GBP; commission $3.5 per lot per side (FXTM commissions page via search). Loss % not captured.",
     "logoExt": ""
   },
   {
@@ -937,9 +1181,9 @@ window.BROKERS = [
     ],
     "minDeposit": 0,
     "account": "Pro",
-    "spread": 0.1,
-    "commission": 7,
-    "leverage": 500,
+    "spread": 0.0,
+    "commission": 3.4,
+    "leverage": 30,
     "platforms": [
       "MT4",
       "Axi Copy"
@@ -964,6 +1208,20 @@ window.BROKERS = [
       "Limited research"
     ],
     "summary": "Axi is a well-regulated, no-frills MetaTrader 4 broker with competitive raw pricing and no minimum deposit.",
+    "ukStatus": "fca",
+    "fcaFrn": "509746",
+    "lossPct": 66.36,
+    "spreadType": "from",
+    "verified": true,
+    "approx": [
+      "commission"
+    ],
+    "sources": [
+      "https://www.axi.com/uk/trading-accounts",
+      "https://www.axi.com/uk/faqs/deposit-and-withdrawal/what-is-the-minimum-i-can-deposit"
+    ],
+    "checked": "2026-09-29",
+    "dataNotes": "Pro: EURUSD from 0 pips, commission $4.5 round trip (charged in account currency equivalent); Standard: from 0.68 pips, no commission. No minimum deposit (recommended $100).",
     "logoExt": "png"
   }
 ];
@@ -1004,3 +1262,8 @@ window.RATING_CATEGORIES = [
 ];
 
 window.AFFILIATE_LINKS = {};
+
+window.SITE_FX = {"date": "2026-09-29", "source": "European Central Bank reference rates", "EURUSD": 1.1355, "EURGBP": 0.85718, "GBPUSD": 1.3247, "pipValueGBP": 7.5489};
+
+// Top picks only rank FCA-authorised brokers when true (content/site.json guidesFcaOnly).
+window.SITE_FCA_ONLY = true;

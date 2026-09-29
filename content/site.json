@@ -1,6 +1,7 @@
 {
-  "_note": "siteUrl: the live address, e.g. https://www.example.com (used for the sitemap and canonical links; leave empty until the domain is live). dataVerified: set to true only after every broker figure has been checked against the broker's own website; until then broker and guide pages carry a sample-data notice and a noindex tag.",
+  "_note": "siteUrl: the live address, e.g. https://www.example.com (used for the sitemap and canonical links; leave empty until the domain is live). dataVerified: true once broker figures in content/brokers.json have been checked against each broker's website (they were on 2026-09-29; see each broker's sources). Brokers whose own 'verified' flag is false still get a notice and noindex on their review page. guidesFcaOnly: when true, the 'best' guides and homepage top picks only rank FCA-authorised brokers (right for a UK audience); set false to rank every broker.",
   "siteName": "Brokerage Reviews",
   "siteUrl": "",
-  "dataVerified": false
+  "dataVerified": true,
+  "guidesFcaOnly": true
 }

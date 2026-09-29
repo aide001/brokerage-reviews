@@ -29,10 +29,17 @@ import sys
 from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from site_common import (DATA_VERIFIED, ROOT, SITE, SITE_URL, YEAR, abs_url, breadcrumbs, e, load_json,  # noqa: E402
+from site_common import (DATA_VERIFIED, FCA_ONLY, ROOT, SITE, SITE_URL, YEAR, abs_url, breadcrumbs, e, load_json,  # noqa: E402
                          page)
 
-PIP_VALUE = 10  # USD per pip per standard lot on EUR/USD
+FX = load_json("content", "brokers.json")["fx"]
+# One pip on a standard lot of EUR/USD is US$10; costs are shown for a GBP account.
+PIP_VALUE = 10 / FX["GBPUSD"]
+UK_STATUS = {
+    "fca": "FCA-authorised",
+    "not-fca": "Not FCA-authorised",
+    "not-available": "Not available to UK residents",
+}
 MONTH = datetime.now(timezone.utc).strftime("%B %Y")
 
 DATA = load_json("content", "brokers.json")
@@ -40,6 +47,13 @@ CATEGORIES = DATA["categories"]
 TIER1 = DATA["tier1"]
 AFFILIATE = {k: v.strip() for k, v in load_json("content", "affiliate-links.json").items()
              if not k.startswith("_") and isinstance(v, str)}
+
+
+def nice_date(iso):
+    if not iso:
+        return "an unknown date"
+    d = datetime.strptime(iso[:10], "%Y-%m-%d")
+    return "%d %s %d" % (d.day, d.strftime("%B"), d.year)
 
 
 def round_half_up(x, places):
@@ -61,7 +75,31 @@ BY_RATING = sorted(BROKERS, key=lambda b: (-b["overall"], b["name"]))
 # ---------- Formatting ----------
 
 def money(n, digits=0):
-    return "$" + ("{:,.%df}" % digits).format(n)
+    return "£" + ("{:,.%df}" % digits).format(n)
+
+
+def approx(b, field, text):
+    """Mark figures converted from US$ with "~"."""
+    return ("~" + text) if field in (b.get("approx") or []) else text
+
+
+def spread_text(b):
+    kind = {"average": " average", "from": " (from)", "typical": " typical", "example": " (broker's example)",
+            "unverified": " (not verified)"}.get(b.get("spreadType"), "")
+    return "%.1f pips%s" % (b["spread"], kind)
+
+
+def uk_status(b):
+    text = UK_STATUS[b.get("ukStatus", "not-fca")]
+    if b.get("fcaFrn"):
+        text += ' <small class="muted">(FRN %s)</small>' % e(b["fcaFrn"])
+    return text
+
+
+def uk_chip(b):
+    cls = {"fca": "tag-good", "not-available": "tag-bad"}.get(b.get("ukStatus"), "tag-warn")
+    label = {"fca": "FCA-authorised", "not-available": "Not for UK residents"}.get(b.get("ukStatus"), "Not FCA-authorised")
+    return '<span class="tag %s">%s</span>' % (cls, label)
 
 
 def stars(score):
@@ -90,8 +128,17 @@ def chips(items, tier1=False):
         '<span class="chip%s">%s</span>' % (" chip-tier1" if tier1 and r in TIER1 else "", e(r)) for r in items)
 
 
+def linkable(b):
+    """For a UK audience we don't send visitors to brokers the FCA hasn't authorised."""
+    return b.get("ukStatus") == "fca" or not FCA_ONLY
+
+
 def cta(b, prefix="../", small=False):
     """Button to the broker: the affiliate link if set, otherwise its official site."""
+    if not linkable(b):
+        why = ("does not accept UK residents" if b.get("ukStatus") == "not-available"
+               else "is not authorised by the UK's Financial Conduct Authority")
+        return '<p class="cta-blocked">%s %s, so we don\'t link to it.</p>' % (e(b["name"]), why)
     aff = AFFILIATE.get(b["id"])
     cls = "btn btn-primary" + (" btn-small-cta" if small else "")
     if aff:
@@ -101,11 +148,17 @@ def cta(b, prefix="../", small=False):
             % (cls, e(b["domain"]), e(b["name"])))
 
 
-CTA_NOTE = '<p class="cta-note">Your capital is at risk. We may earn a commission if you open an account.</p>'
+def cta_note(b):
+    """UK-style risk line: the broker's own published loss figure when we have it."""
+    if not linkable(b):
+        return ""
+    loss = b.get("lossPct")
+    risk = ("%s%% of retail investor accounts lose money when trading CFDs with this provider."
+            % ("{:g}".format(loss)) if loss is not None else "Your capital is at risk.")
+    return '<p class="cta-note">%s We may earn a commission if you open an account.</p>' % risk
 
-DATA_NOTICE = ('<p class="data-notice" role="note"><strong>Sample data.</strong> Broker figures and ratings on this '
-               'page are placeholder data that have not been verified yet. Check every detail on the broker\'s '
-               'own website.</p>')
+UNVERIFIED_NOTICE = ('<p class="data-notice" role="note"><strong>Some figures not verified.</strong> We could not '
+                     'confirm all of this broker\'s figures from its own website. Check them with the broker directly.</p>')
 
 NOT_ADVICE = ('<p class="advice-notice" role="note"><strong>Not financial advice.</strong> Our rankings and reviews '
               'are for general information only and are not a recommendation to open an account or to trade. '
@@ -137,14 +190,16 @@ GUIDES = [
      "short": "Best Low Spread Brokers",
      "intro": "Brokers with the lowest typical cost to trade EUR/USD, counting both the spread and any commission, "
               "so raw-spread and commission-free accounts are compared on equal terms.",
-     "how": "Ranked by all-in cost per standard lot of EUR/USD (typical spread in pips × $10 + round-turn "
-            "commission), cheapest first; ties go to the higher overall score.",
+     "how": "Ranked by all-in cost per standard lot of EUR/USD for a GBP account: the broker's published spread "
+            "in pips × £%.2f per pip, plus round-turn commission, cheapest first; ties go to the higher overall score. "
+            "Brokers publish average, typical or minimum (\"from\") spreads, so treat close results as similar."
+            % (10 / load_json("content", "brokers.json")["fx"]["GBPUSD"]),
      "keep": lambda b: True, "sort": lambda b: (b["cost"], -b["overall"]), "facts": ["cost", "spread", "commission"]},
     {"slug": "best-forex-brokers-for-beginners", "title": "Best Forex Brokers for Beginners in {year}",
      "short": "Best Brokers for Beginners",
      "intro": "Brokers that suit people new to forex: a tier-1 regulator, a low minimum deposit and strong "
               "education to learn from.",
-     "how": "Only brokers with at least one tier-1 regulator and a minimum deposit of $100 or less, ranked by "
+     "how": "Only brokers with at least one tier-1 regulator and a minimum deposit of £100 or less, ranked by "
             "research and education (40%), trust (30%) and fees (30%).",
      "keep": lambda b: b["tier1"] and b["minDeposit"] <= 100,
      "sort": lambda b: (-(b["ratings"]["education"] * .4 + b["ratings"]["trust"] * .3 + b["ratings"]["fees"] * .3),
@@ -182,18 +237,24 @@ GUIDES = [
      "facts": ["cost", "platforms", "deposit"]},
 ]
 MAX_LIST = 10
+MIN_LIST = 3  # a guide needs at least this many brokers to be published
+
+
+def rankable(b):
+    """For a UK audience, only brokers authorised by the FCA are ranked (content/site.json guidesFcaOnly)."""
+    return b.get("ukStatus") == "fca" or not FCA_ONLY
 
 
 def guide_list(g):
-    return sorted([b for b in BROKERS if g["keep"](b)], key=g["sort"])[:MAX_LIST]
+    return sorted([b for b in BROKERS if rankable(b) and g["keep"](b)], key=g["sort"])[:MAX_LIST]
 
 
 def fact(b, key):
     return {
-        "cost": ("EUR/USD cost", money(b["cost"], 2) + " /lot"),
-        "spread": ("EUR/USD spread", "%.1f pips" % b["spread"]),
-        "commission": ("Commission", money(b["commission"], 2) if b["commission"] else "None"),
-        "deposit": ("Min deposit", money(b["minDeposit"])),
+        "cost": ("EUR/USD cost", approx(b, "commission", money(b["cost"], 2)) + " /lot"),
+        "spread": ("EUR/USD spread", spread_text(b)),
+        "commission": ("Commission", approx(b, "commission", money(b["commission"], 2)) if b["commission"] else "None"),
+        "deposit": ("Min deposit", approx(b, "minDeposit", money(b["minDeposit"]))),
         "regulators": ("Regulators", "%d%s" % (len(b["regulators"]), " incl. tier-1" if b["tier1"] else "")),
         "education": ("Education score", "%.1f / 5" % b["ratings"]["education"]),
         "trust": ("Trust score", "%.1f / 5" % b["ratings"]["trust"]),
@@ -202,8 +263,8 @@ def fact(b, key):
     }[key]
 
 
-def notices():
-    return ("" if DATA_VERIFIED else DATA_NOTICE) + NOT_ADVICE
+def notices(b=None):
+    return (UNVERIFIED_NOTICE if b is not None and not b.get("verified", True) else "") + NOT_ADVICE
 
 
 def build_guide(g):
@@ -217,7 +278,7 @@ def build_guide(g):
           <div class="rank-num" aria-hidden="true">{n}</div>
           <div class="rank-main">
             <div class="rank-head">{logo}
-              <div><h2><a href="../brokers/{id}.html">{name}</a></h2><p class="muted">{best_for}</p></div>
+              <div><h2><a href="../brokers/{id}.html">{name}</a></h2><p class="muted">{best_for}</p><p class="rank-uk">{uk}</p></div>
               <div class="rank-score"><strong>{score:.1f}</strong>{stars}</div>
             </div>
             <dl class="rank-facts">{facts}</dl>
@@ -228,13 +289,13 @@ def build_guide(g):
             </div>
             {note}
           </div>
-        </article>""".format(id=e(b["id"]), n=i + 1, logo=logo(b), name=e(b["name"]), best_for=e(b["bestFor"]),
-                             score=b["overall"], stars=stars(b["overall"]), facts=facts, cta=cta(b), note=CTA_NOTE,
+        </article>""".format(uk=uk_chip(b), id=e(b["id"]), n=i + 1, logo=logo(b), name=e(b["name"]), best_for=e(b["bestFor"]),
+                             score=b["overall"], stars=stars(b["overall"]), facts=facts, cta=cta(b), note=cta_note(b),
                              pros="".join("<li>%s</li>" % e(p) for p in b["pros"][:2])))
     toc = "".join('<li><a href="#%s">%s</a> <span class="muted">%.1f</span></li>' % (e(b["id"]), e(b["name"]), b["overall"])
                   for b in ranked)
     others = "".join('<li><a href="%s.html">%s</a></li>' % (o["slug"], e(o["title"].format(year=YEAR)))
-                     for o in GUIDES if o is not g)
+                     for o in active_guides() if o is not g)
     body = """    <article class="section guide">
       <div class="container narrow">
         <p class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Best brokers</a></p>
@@ -242,7 +303,7 @@ def build_guide(g):
         <p class="post-meta">Updated {month} · {count} brokers ranked</p>
         {notices}
         <p class="lead-text">{intro}</p>
-        <div class="how-box"><strong>How we ranked them:</strong> {how} <a href="../index.html#methodology">Our methodology</a>.</div>
+        <div class="how-box"><strong>How we ranked them:</strong> {fca}{how} <a href="../index.html#methodology">Our methodology</a>.</div>
         <nav class="toc" aria-label="Ranking"><h2>The list</h2><ol>{toc}</ol></nav>
 {cards}
         {disclosure}
@@ -251,7 +312,8 @@ def build_guide(g):
           <ul>{others}</ul>
         </section>
       </div>
-    </article>""".format(title=e(title), month=MONTH, count=len(ranked), notices=notices(), intro=e(g["intro"]),
+    </article>""".format(fca="We only rank brokers authorised by the UK's Financial Conduct Authority (FCA). " if FCA_ONLY else "",
+                         title=e(title), month=MONTH, count=len(ranked), notices=notices(), intro=e(g["intro"]),
                          how=e(g["how"]), toc=toc, cards="\n".join(cards), disclosure=DISCLOSURE, others=others)
     item_list = {"@context": "https://schema.org", "@type": "ItemList", "name": title,
                  "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": b["name"],
@@ -265,9 +327,14 @@ def build_guide(g):
 
 # ---------- Reviews ----------
 
+def active_guides():
+    """Guides that are published: enough brokers qualify under the current settings."""
+    return [g for g in GUIDES if len(guide_list(g)) >= MIN_LIST]
+
+
 def guides_featuring(b):
     out = []
-    for g in GUIDES:
+    for g in active_guides():
         ranked = guide_list(g)
         if b in ranked:
             out.append((g, ranked.index(b) + 1))
@@ -280,11 +347,15 @@ def build_review(b):
     bars = "".join('<li><span>%s</span><span class="bar"><span style="width:%s%%"></span></span><b>%.1f</b></li>'
                    % (e(c["label"]), round(b["ratings"][c["key"]] / 5 * 100, 1), b["ratings"][c["key"]])
                    for c in CATEGORIES)
-    facts = [("EUR/USD spread", "%.1f pips (%s account)" % (b["spread"], e(b["account"]))),
-             ("Commission", money(b["commission"], 2) + " per lot round-turn" if b["commission"] else "None"),
-             ("All-in cost", money(b["cost"], 2) + " per standard lot"),
-             ("Minimum deposit", money(b["minDeposit"])),
-             ("Max leverage", '1:%d <small class="muted">(varies by entity and country)</small>' % b["leverage"]),
+    facts = [("UK status", uk_status(b)),
+             ("EUR/USD spread", "%s <small class=\"muted\">(%s account)</small>" % (spread_text(b), e(b["account"]))),
+             ("Commission", approx(b, "commission", money(b["commission"], 2)) + " per lot round-turn"
+              if b["commission"] else "None"),
+             ("All-in cost", approx(b, "commission", money(b["cost"], 2)) + " per standard lot"),
+             ("Minimum deposit", approx(b, "minDeposit", money(b["minDeposit"]))),
+             ("Max leverage", ('1:%d <small class="muted">(UK retail limit)</small>' % b["leverage"])
+              if b.get("ukStatus") == "fca" else
+              ('1:%d <small class="muted">(offshore entity)</small>' % b["leverage"])),
              ("Instruments", "{:,}+".format(b["instruments"])),
              ("Founded", str(b["founded"])), ("Headquarters", e(b["hq"]))]
     featured = guides_featuring(b)
@@ -299,7 +370,7 @@ def build_review(b):
         <p class="breadcrumb"><a href="../index.html">Home</a> / <a href="../best/index.html">Broker reviews</a></p>
         <header class="review-head">{logo}
           <div><h1 class="post-title">{name} Review</h1>
-          <p class="muted">{best_for} · Founded {founded} · {hq}</p></div>
+          <p class="muted">{best_for} · Founded {founded} · {hq}</p><p class="rank-uk">{uk}</p></div>
           <div class="review-score"><strong>{score:.1f}</strong>{stars}<small>Overall</small></div>
         </header>
         {notices}
@@ -323,6 +394,12 @@ def build_review(b):
           <section><h2>Platforms</h2>{plats}</section>
         </div>
         {featured_block}
+        <section class="data-sources" aria-labelledby="sources-title">
+          <h2 id="sources-title">Where these figures come from</h2>
+          <p>Checked on {checked} against {name}'s own website{uk_site}. {fx_note}Spreads, fees and deposits change
+            often, so confirm them with {name} before opening an account.</p>
+          <ul>{source_links}</ul>
+        </section>
         <div class="cta-box">
           <div><strong>Ready to compare?</strong><span class="muted">See how {name} stacks up in our
             <a href="../index.html#compare">comparison table</a>.</span></div>
@@ -334,9 +411,10 @@ def build_review(b):
           <ul>{others}</ul>
         </section>
       </div>
-    </article>""".format(logo=logo(b, "lg"), name=e(b["name"]), best_for=e(b["bestFor"]), founded=b["founded"],
-                         hq=e(b["hq"]), score=b["overall"], stars=stars(b["overall"]), notices=notices(),
-                         deposit=money(b["minDeposit"]), cost=money(b["cost"], 2), cta=cta(b), note=CTA_NOTE,
+    </article>""".format(uk=uk_chip(b), logo=logo(b, "lg"), name=e(b["name"]), best_for=e(b["bestFor"]), founded=b["founded"],
+                         hq=e(b["hq"]), score=b["overall"], stars=stars(b["overall"]), notices=notices(b),
+                         deposit=approx(b, "minDeposit", money(b["minDeposit"])),
+                         cost=approx(b, "commission", money(b["cost"], 2)), cta=cta(b), note=cta_note(b),
                          summary=e(b["summary"]), bars=bars,
                          facts="".join("<div><dt>%s</dt><dd>%s</dd></div>" % f for f in facts),
                          pros="".join("<li>%s</li>" % e(p) for p in b["pros"]),
@@ -344,15 +422,22 @@ def build_review(b):
                          regs=chips(b["regulators"], tier1=True), plats=chips(b["platforms"]),
                          featured_block=('<section class="more-guides"><h2>Featured in our guides</h2><ul>%s</ul></section>'
                                          % featured_html) if featured else "",
-                         disclosure=DISCLOSURE, others=others_html)
-    desc = ("%s review: %s. EUR/USD from %.1f pips, minimum deposit %s, regulated by %s. Overall score %.1f/5."
-            % (b["name"], b["bestFor"].rstrip("."), b["spread"], money(b["minDeposit"]),
+                         disclosure=DISCLOSURE, others=others_html,
+                         checked=nice_date(b.get("checked")), uk_site=" (UK site where available)" if b.get("fcaFrn") else "",
+                         fx_note=("Figures marked ~ are converted from US$ at £1 = $%.4f (ECB reference rate, %s). "
+                                  % (FX["GBPUSD"], nice_date(FX["date"]))) if b.get("approx") else "",
+                         source_links="".join('<li><a href="%s" rel="nofollow noopener" target="_blank">%s</a></li>'
+                                              % (e(u), e(re.sub(r"^https?://(www\.)?", "", u).rstrip("/")))
+                                              for u in b.get("sources", [])))
+    desc = ("%s review: %s. EUR/USD %s, minimum deposit %s, regulated by %s. Overall score %.1f/5."
+            % (b["name"], b["bestFor"].rstrip("."), spread_text(b), approx(b, "minDeposit", money(b["minDeposit"])),
                ", ".join(b["regulators"][:3]), b["overall"]))
     crumbs = breadcrumbs([("Home", ""), ("Broker reviews", "best/index.html"), ("%s review" % b["name"], path)])
     logo_file = next((p for p in ("assets/logos/%s.svg" % b["id"], "assets/logos/%s.png" % b["id"])
                       if os.path.exists(os.path.join(ROOT, p))), None)
     return path, page("%s — %s" % (title, SITE), desc, body, path, current="best",
-                      jsonld=[x for x in [crumbs] if x], noindex=not DATA_VERIFIED, image=logo_file)
+                      jsonld=[x for x in [crumbs] if x], noindex=not DATA_VERIFIED or not b.get("verified", True),
+                      image=logo_file)
 
 
 # ---------- Hubs ----------
@@ -365,7 +450,7 @@ AWARD_ICON = ('<svg viewBox="0 0 24 24" width="26" height="26" fill="none" strok
 def hub_lists(prefix):
     """Guide and review link cards; prefix is the path from the page to the site root."""
     guides = "\n".join('          <li><a class="hub-card" href="%sbest/%s.html">%s<span class="hub-label">%s</span></a></li>'
-                       % (prefix, g["slug"], AWARD_ICON, e(g["title"].format(year=YEAR))) for g in GUIDES)
+                       % (prefix, g["slug"], AWARD_ICON, e(g["title"].format(year=YEAR))) for g in active_guides())
     reviews = "\n".join('          <li><a class="hub-card" href="%sbrokers/%s.html">%s<span class="hub-label">%s Review</span>'
                         '<b class="hub-score">%.1f</b></a></li>'
                         % (prefix, b["id"], logo(b, "sm", prefix=prefix), e(b["name"]), b["overall"]) for b in BY_RATING)
@@ -415,7 +500,7 @@ def home_top_picks():
     """Static copy of the top picks the homepage script renders, so they're in the HTML."""
     medals = ["Best overall", "Runner-up", "Also great"]
     cards = []
-    for i, b in enumerate(BY_RATING[:3]):
+    for i, b in enumerate([x for x in BY_RATING if rankable(x)][:3]):
         cards.append(
             '<article class="pick-card"><span class="pick-badge">%s</span>'
             '<div class="pick-head">%s<div><h3>%s</h3><p class="muted">%s</p></div></div>'
@@ -425,7 +510,8 @@ def home_top_picks():
             '<ul class="pick-pros">%s</ul>'
             '<a class="btn btn-primary btn-block" href="brokers/%s.html">Read review</a></article>'
             % (medals[i], logo(b, "lg", prefix=""), e(b["name"]), e(b["bestFor"]), b["overall"], stars(b["overall"]),
-               money(b["cost"], 2), money(b["minDeposit"]), len(b["regulators"]),
+               approx(b, "commission", money(b["cost"], 2)), approx(b, "minDeposit", money(b["minDeposit"])),
+               len(b["regulators"]),
                "".join("<li>%s</li>" % e(p) for p in b["pros"][:2]), e(b["id"])))
     return "".join(cards)
 
@@ -495,9 +581,13 @@ def write_data_js():
            " * content/brokers.json and content/affiliate-links.json; edit those files, not this one.\n"
            " * Figures are approximate sample data until content/site.json says dataVerified: true.\n */\n"
            "window.BROKERS = %s;\n\nwindow.TIER1_REGULATORS = %s;\n\nwindow.RATING_CATEGORIES = %s;\n\n"
-           "window.AFFILIATE_LINKS = %s;\n") % (json.dumps(brokers, indent=2, ensure_ascii=False),
+           "window.AFFILIATE_LINKS = %s;\n\nwindow.SITE_FX = %s;\n\n"
+           "// Top picks only rank FCA-authorised brokers when true (content/site.json guidesFcaOnly).\n"
+           "window.SITE_FCA_ONLY = %s;\n") % (json.dumps(brokers, indent=2, ensure_ascii=False),
                                                 json.dumps(TIER1), json.dumps(CATEGORIES, indent=2, ensure_ascii=False),
-                                                json.dumps({k: v for k, v in AFFILIATE.items() if v}, indent=2))
+                                                json.dumps({k: v for k, v in AFFILIATE.items() if v}, indent=2),
+                                                json.dumps(dict(FX, pipValueGBP=round(PIP_VALUE, 4))),
+                                                json.dumps(FCA_ONLY))
     open(os.path.join(ROOT, "js", "data.js"), "w", encoding="utf-8").write(out)
 
 
@@ -546,8 +636,8 @@ def main():
         write(path, text)
         keep["brokers"].add(os.path.basename(path))
     for g in GUIDES:
-        if len(guide_list(g)) < 3:
-            print("skip   %s (fewer than 3 brokers qualify)" % g["slug"])
+        if g not in active_guides():
+            print("skip   %s (fewer than %d brokers qualify)" % (g["slug"], MIN_LIST))
             continue
         path, text = build_guide(g)
         write(path, text)
