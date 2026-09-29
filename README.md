@@ -58,6 +58,8 @@ The blog at `blog/` publishes the market commentary FxPro emails from e.kalman@f
 
 Each post records the original Gmail message ID and a `linkSentAt` field, ready for emailing the published link back to FxPro.
 
+**Automatic publishing:** a scheduled Claude Code Routine runs every 2 hours. It fetches with `--new-only` (only emails newer than the latest post, so older emails are never published by accident), imports and checks the new posts, pushes them to this branch and updates the preview. Runs that find no new email change nothing.
+
 **One-time Gmail setup for the fetch step (Google Apps Script, about 5 minutes)**
 
 1. Go to [script.google.com](https://script.google.com/), signed in as the Gmail account that receives the emails, and click **New project**.

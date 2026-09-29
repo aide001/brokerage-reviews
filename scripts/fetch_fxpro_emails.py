@@ -15,7 +15,10 @@ Two ways to connect (see README "Market News"):
   --authorize, and set GMAIL_REFRESH_TOKEN to the token it prints.
 
 Then:
-  python3 scripts/fetch_fxpro_emails.py [--limit 5] [--sender e.kalman@fxpro.com]
+  python3 scripts/fetch_fxpro_emails.py [--limit 5] [--sender e.kalman@fxpro.com] [--new-only]
+
+--new-only skips anything received before the newest email already in the
+blog, so a scheduled run never publishes the back-catalogue.
 """
 import argparse
 import base64
@@ -203,9 +206,23 @@ def write_email(email, files, folder=None):
 
 # ---------- Source 1: Gmail API (Google Cloud OAuth client) ----------
 
-def gmail_api_emails(limit, sender):
+def latest_known_date():
+    """Receive time of the newest email already published or in blog-inbox/."""
+    dates = []
+    for path in glob.glob(os.path.join(POSTS, "*.json")) + glob.glob(os.path.join(INBOX, "*", "email.json")):
+        data = json.load(open(path, encoding="utf-8"))
+        stamp = (data.get("source") or {}).get("receivedAt") or data.get("receivedAt") or data.get("date")
+        if stamp:
+            dates.append(datetime.fromisoformat(stamp.replace("Z", "+00:00")))
+    return max(dates) if dates else None
+
+
+def gmail_api_emails(limit, sender, after=None):
     token = access_token()
-    listing = api(token, "/messages", q="from:%s has:attachment" % sender, maxResults=limit)
+    query = "from:%s has:attachment" % sender
+    if after:
+        query += " after:%d" % int(after.timestamp())
+    listing = api(token, "/messages", q=query, maxResults=limit)
     for ref in listing.get("messages", []):
         yield ref["id"], lambda ref=ref: gmail_api_message(token, ref["id"])
 
@@ -240,7 +257,7 @@ def script_call(**params):
     return data
 
 
-def apps_script_emails(limit, sender):
+def apps_script_emails(limit, sender, after=None):
     for m in script_call(action="list", limit=limit)["messages"]:
         if sender.lower() in (m.get("from") or "").lower():
             yield m["id"], lambda m=m: apps_script_message(m["id"])
@@ -256,15 +273,21 @@ def apps_script_message(msg_id):
     return email, files
 
 
-def fetch(limit, sender):
+def fetch(limit, sender, new_only=False):
     source = apps_script_emails if os.environ.get("FXPRO_SCRIPT_URL") else gmail_api_emails
     known = known_messages()
+    after = latest_known_date() if new_only else None
+    if after:
+        print("only   emails received after %s" % after.isoformat())
     new = 0
-    for msg_id, load in source(limit, sender):
+    for msg_id, load in source(limit, sender, after):
         if msg_id in known and known[msg_id] is None:
             print("skip   %s (already downloaded)" % msg_id)
             continue
         email, files = load()
+        if after and email["date"] <= after and msg_id not in known:
+            print("skip   %s (older than the newest post)" % msg_id)
+            continue
         slug, saved = write_email(email, files, known.get(msg_id))
         print("saved  %s (%d attachment(s))" % (slug, len(saved)))
         new += 1
@@ -276,11 +299,12 @@ def main():
     parser.add_argument("--authorize", action="store_true", help="get a refresh token (one-time setup)")
     parser.add_argument("--limit", type=int, default=5, help="how many recent emails to check (default 5)")
     parser.add_argument("--sender", default=DEFAULT_SENDER, help="sender address (default %s)" % DEFAULT_SENDER)
+    parser.add_argument("--new-only", action="store_true", help="skip emails older than the newest one already in the blog")
     args = parser.parse_args()
     if args.authorize:
         authorize()
     else:
-        fetch(args.limit, args.sender)
+        fetch(args.limit, args.sender, args.new_only)
 
 
 if __name__ == "__main__":
