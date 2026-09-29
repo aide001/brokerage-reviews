@@ -114,6 +114,20 @@ def post_card(p):
                           author=e(p["author"]), provider=e(p["provider"]))
 
 
+def related_card(p):
+    thumb = ('<img class="post-card-img" src="%s" alt="" loading="lazy" />' % e(p["image"])) if p.get("image") else ""
+    return """          <article class="post-card related-card">
+            <a class="post-card-link" href="{slug}.html">
+              {thumb}
+              <div class="post-card-body">
+                <p class="post-meta"><span class="chip">{type}</span> <time datetime="{date}">{nice}</time></p>
+                <h3>{title}</h3>
+              </div>
+            </a>
+          </article>""".format(slug=e(p["slug"]), thumb=thumb, type=e(p["type"]), date=e(p["date"]),
+                               nice=nice_date(p["date"]), title=e(p["title"]))
+
+
 def build_index(posts):
     if posts:
         items = "\n".join(post_card(p) for p in posts)
@@ -133,12 +147,16 @@ def build_index(posts):
     return page("Market News — " + SITE, "Daily forex, commodities and crypto market commentary.", body)
 
 
-def build_post(p, newer, older):
-    nav = []
-    if older:
-        nav.append('<a class="post-nav-link" href="%s.html"><small>Older</small>%s</a>' % (e(older["slug"]), e(older["title"])))
-    if newer:
-        nav.append('<a class="post-nav-link post-nav-next" href="%s.html"><small>Newer</small>%s</a>' % (e(newer["slug"]), e(newer["title"])))
+def build_post(p, related):
+    more = ""
+    if related:
+        more = """
+        <section class="related" aria-labelledby="related-title">
+          <h2 id="related-title">More market news</h2>
+          <div class="related-grid">
+%s
+          </div>
+        </section>""" % "\n".join(related_card(r) for r in related)
     body = """    <article class="section post">
       <div class="container narrow">
         <p class="breadcrumb"><a href="index.html">Market News</a> / {type}</p>
@@ -150,12 +168,12 @@ def build_post(p, newer, older):
         <aside class="post-source">
           <strong>Source:</strong> This commentary was written by {author}, {role} at {provider}, and is republished with permission. It is for information only and is not investment advice.
         </aside>
-        <nav class="post-nav" aria-label="More commentary">{nav}</nav>
-        <p><a href="index.html">&larr; All market news</a></p>
+{more}
+        <p class="related-all"><a class="btn btn-ghost" href="index.html">See all market news</a></p>
       </div>
     </article>""".format(type=e(p["type"]), title=e(p["title"]), date=e(p["date"]), nice=nice_date(p["date"]),
                          author=e(p["author"]), role=e(p["authorRole"]), provider=e(p["provider"]),
-                         content=p["bodyHtml"], nav="".join(nav))
+                         content=p["bodyHtml"], more=more)
     return page(p["title"] + " — " + SITE, p["summary"] or p["title"], body)
 
 
@@ -169,11 +187,11 @@ def main():
             os.remove(os.path.join(OUT, f))
     with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as fh:
         fh.write(build_index(posts))
-    for i, p in enumerate(posts):
-        newer = posts[i - 1] if i > 0 else None
-        older = posts[i + 1] if i + 1 < len(posts) else None
+    for p in posts:
+        # The three most recent other posts, newest first.
+        related = [r for r in posts if r["slug"] != p["slug"]][:3]
         with open(os.path.join(OUT, p["slug"] + ".html"), "w", encoding="utf-8") as fh:
-            fh.write(build_post(p, newer, older))
+            fh.write(build_post(p, related))
     print("Built blog: %d post(s)." % len(posts))
 
 
