@@ -88,6 +88,10 @@ The fetch script uses Apps Script when `FXPRO_SCRIPT_URL` is set, otherwise the 
 
 The homepage's "Latest market news" strip (between the `latest-news` markers in `index.html`) is refreshed by `build_blog.py` every time the blog is rebuilt.
 
+## Latest headlines
+
+`python3 scripts/fetch_headlines.py` collects headlines (title, link and publisher only; no article text) from BBC News Business, the European Central Bank, the Reserve Bank of Australia (CC BY 4.0) and the Federal Reserve into `content/headlines.json`, then rebuilds the blog. They appear on `blog/headlines.html`, in a panel on the Market News page and on the homepage. Each source's terms were checked for commercial use; sources that only allow personal or non-commercial use (e.g. the Guardian, the Bank of England, investingLive) are excluded. Check the terms before adding a source.
+
 ## Project structure
 
 ```
