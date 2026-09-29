@@ -10,6 +10,7 @@ import glob
 import html
 import json
 import os
+import re
 from datetime import datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -97,54 +98,146 @@ def page(title, description, body):
 """.format(title=e(title), description=e(description), body=body)
 
 
+# Small line icons for release cards that have no chart image.
+TOPIC_ICONS = {
+    "Interest rates": '<path d="M5 19L19 5M7 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm10 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>',
+    "Jobs": '<path d="M4 20v-1a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v1M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>',
+    "Inflation": '<path d="M3 17l6-6 4 4 8-8M15 7h6v6"/>',
+    "Growth": '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+    "Trade": '<path d="M4 8h14l-4-4M20 16H6l4 4"/>',
+}
+
+
+def kind(p):
+    return "official" if p.get("official") else "analysis"
+
+
+def thumb(p, from_root=False):
+    """Card image: the post's first chart, or a topic panel for data releases.
+    Image paths are stored relative to blog/; from_root adjusts them for the homepage."""
+    if p.get("image"):
+        src = re.sub(r"^\.\./", "", p["image"]) if from_root else p["image"]
+        return '<img class="post-card-img" src="%s" alt="" loading="lazy" />' % e(src)
+    topic = p.get("topic") or p["type"]
+    icon = TOPIC_ICONS.get(topic, TOPIC_ICONS["Growth"])
+    return ('<div class="post-card-img post-card-panel topic-%s" aria-hidden="true">'
+            '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" '
+            'stroke-linecap="round" stroke-linejoin="round">%s</svg>'
+            '<strong>%s</strong><span>%s</span></div>') % (
+        e(re.sub(r"[^a-z]+", "-", topic.lower())), icon, e(topic), e(p["provider"]))
+
+
+def byline(p):
+    return e(p["provider"]) if p.get("official") else "%s · %s" % (e(p["author"]), e(p["provider"]))
+
+
 def post_card(p):
-    thumb = ('<img class="post-card-img" src="%s" alt="" loading="lazy" />' % e(p["image"])) if p.get("image") else ""
-    return """      <article class="post-card">
+    return """      <article class="post-card" data-kind="{kind}">
         <a class="post-card-link" href="{slug}.html">
           {thumb}
           <div class="post-card-body">
             <p class="post-meta"><span class="chip">{type}</span> <time datetime="{date}">{nice}</time></p>
             <h2>{title}</h2>
             <p class="post-excerpt">{summary}</p>
-            <p class="post-byline">{author} · {provider}</p>
+            <p class="post-byline">{byline}</p>
           </div>
         </a>
-      </article>""".format(slug=e(p["slug"]), thumb=thumb, type=e(p["type"]), date=e(p["date"]),
+      </article>""".format(slug=e(p["slug"]), thumb=thumb(p), type=e(p["type"]), date=e(p["date"]),
                           nice=nice_date(p["date"]), title=e(p["title"]), summary=e(p["summary"]),
-                          author=e(p["author"]), provider=e(p["provider"]))
+                          byline=byline(p), kind=kind(p))
 
 
-def related_card(p):
-    thumb = ('<img class="post-card-img" src="%s" alt="" loading="lazy" />' % e(p["image"])) if p.get("image") else ""
+def related_card(p, prefix=""):
+    """Compact card; prefix is the path from the page to blog/ ("" on post pages)."""
     return """          <article class="post-card related-card">
-            <a class="post-card-link" href="{slug}.html">
+            <a class="post-card-link" href="{prefix}{slug}.html">
               {thumb}
               <div class="post-card-body">
                 <p class="post-meta"><span class="chip">{type}</span> <time datetime="{date}">{nice}</time></p>
                 <h3>{title}</h3>
               </div>
             </a>
-          </article>""".format(slug=e(p["slug"]), thumb=thumb, type=e(p["type"]), date=e(p["date"]),
-                               nice=nice_date(p["date"]), title=e(p["title"]))
+          </article>""".format(slug=e(p["slug"]), thumb=thumb(p, from_root=bool(prefix)), type=e(p["type"]),
+                               date=e(p["date"]), nice=nice_date(p["date"]), title=e(p["title"]), prefix=prefix)
 
 
 def build_index(posts):
     if posts:
         items = "\n".join(post_card(p) for p in posts)
-        listing = '    <div class="post-grid">\n%s\n    </div>' % items
+        filters = """        <div class="news-filters" role="group" aria-label="Show">
+          <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="filter-btn" data-filter="analysis" aria-pressed="false">Analysis</button>
+          <button type="button" class="filter-btn" data-filter="official" aria-pressed="false">Official data</button>
+        </div>
+"""
+        listing = filters + '    <div class="post-grid" id="post-grid">\n%s\n    </div>' % items
     else:
         listing = '    <p class="empty">No commentary has been published yet. Check back soon.</p>'
     body = """    <section class="section blog-hero">
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">Market News</p>
-          <h1>Daily market commentary</h1>
-          <p>Analysis of currencies, commodities and crypto from professional market analysts, published as it arrives.</p>
+          <h1>Market news and analysis</h1>
+          <p>Commentary on currencies, commodities and crypto from professional market analysts, plus the latest official US economic data, published as it arrives.</p>
         </div>
 {listing}
       </div>
     </section>""".format(listing=listing)
-    return page("Market News — " + SITE, "Daily forex, commodities and crypto market commentary.", body)
+    return page("Market News — " + SITE, "Forex, commodities and crypto market commentary and official US economic data.", body)
+
+
+def post_byline(p):
+    if p.get("official"):
+        return "Official release · %s" % e(p["provider"])
+    return "%s, %s, %s" % (e(p["author"]), e(p["authorRole"]), e(p["provider"]))
+
+
+def source_note(p):
+    if p.get("official"):
+        url = (p.get("source") or {}).get("url") or ""
+        host = re.sub(r"^www\.", "", url.split("/")[2]) if url.count("/") >= 2 else ""
+        link = ' <a href="%s" rel="noopener">Read the full release on %s</a>.' % (e(url), e(host)) if url else ""
+        return ("<strong>Source:</strong> Official release from the %s, a US government agency, republished "
+                "from its public website.%s It is for information only and is not investment advice.") % (e(p["provider"]), link)
+    return ("<strong>Source:</strong> This commentary was written by %s, %s at %s, and is republished with "
+            "permission. It is for information only and is not investment advice.") % (
+        e(p["author"]), e(p["authorRole"]), e(p["provider"]))
+
+
+HOME = os.path.join(ROOT, "index.html")
+HOME_START, HOME_END = "<!-- latest-news:start -->", "<!-- latest-news:end -->"
+
+
+def update_home(posts):
+    """Refresh the "Latest market news" strip between the markers in index.html."""
+    if not os.path.exists(HOME):
+        return
+    page_html = open(HOME, encoding="utf-8").read()
+    if HOME_START not in page_html or HOME_END not in page_html:
+        return
+    cards = "\n".join(related_card(p, prefix="blog/") for p in posts[:4])
+    section = """{start}
+    <section id="latest-news" class="section section-alt latest-news">
+      <div class="container">
+        <div class="section-head section-head-row">
+          <div>
+            <h2>Latest market news</h2>
+            <p>Analyst commentary and official economic data, updated through the day.</p>
+          </div>
+          <a class="btn btn-ghost" href="blog/index.html">All market news</a>
+        </div>
+        <div class="related-grid latest-grid">
+{cards}
+        </div>
+      </div>
+    </section>
+    {end}""".format(start=HOME_START, end=HOME_END, cards=cards)
+    before, rest = page_html.split(HOME_START, 1)
+    after = rest.split(HOME_END, 1)[1]
+    new = before + section + after
+    if new != page_html:
+        with open(HOME, "w", encoding="utf-8") as fh:
+            fh.write(new)
 
 
 def build_post(p, related):
@@ -161,19 +254,18 @@ def build_post(p, related):
       <div class="container narrow">
         <p class="breadcrumb"><a href="index.html">Market News</a> / {type}</p>
         <h1 class="post-title">{title}</h1>
-        <p class="post-meta"><time datetime="{date}">{nice}</time> · {author}, {role}, {provider}</p>
+        <p class="post-meta"><time datetime="{date}">{nice}</time> <span class="post-meta-by">{byline}</span></p>
         <div class="post-body">
 {content}
         </div>
         <aside class="post-source">
-          <strong>Source:</strong> This commentary was written by {author}, {role} at {provider}, and is republished with permission. It is for information only and is not investment advice.
+          {source}
         </aside>
 {more}
         <p class="related-all"><a class="btn btn-ghost" href="index.html">See all market news</a></p>
       </div>
     </article>""".format(type=e(p["type"]), title=e(p["title"]), date=e(p["date"]), nice=nice_date(p["date"]),
-                         author=e(p["author"]), role=e(p["authorRole"]), provider=e(p["provider"]),
-                         content=p["bodyHtml"], more=more)
+                         byline=post_byline(p), source=source_note(p), content=p["bodyHtml"], more=more)
     return page(p["title"] + " — " + SITE, p["summary"] or p["title"], body)
 
 
@@ -192,6 +284,7 @@ def main():
         related = [r for r in posts if r["slug"] != p["slug"]][:3]
         with open(os.path.join(OUT, p["slug"] + ".html"), "w", encoding="utf-8") as fh:
             fh.write(build_post(p, related))
+    update_home(posts)
     print("Built blog: %d post(s)." % len(posts))
 
 

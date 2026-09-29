@@ -82,6 +82,12 @@ The web app only returns emails from e.kalman@fxpro.com, and only to requests ca
 The fetch script uses Apps Script when `FXPRO_SCRIPT_URL` is set, otherwise the Gmail API.
 </details>
 
+## Official US economic releases
+
+`python3 scripts/fetch_official_releases.py` adds recent official releases to Market News: Federal Reserve policy statements (federalreserve.gov), the monthly jobs report and CPI inflation (bls.gov), and GDP, personal income and outlays (PCE) and trade (bea.gov). It reads each agency's public RSS feed, skips anything older than 45 days or already published, and rebuilds the blog. Works of the US federal government are in the public domain; each post names its agency and links to the original release. The scheduled Routine runs it alongside the FxPro fetch.
+
+The homepage's "Latest market news" strip (between the `latest-news` markers in `index.html`) is refreshed by `build_blog.py` every time the blog is rebuilt.
+
 ## Project structure
 
 ```
@@ -98,5 +104,6 @@ assets/blog/        Images used in blog posts
 js/site.js          Theme toggle and menu for the blog pages
 apps-script/Code.gs Google Apps Script that serves the FxPro emails
 scripts/            fetch_logos.py (broker logos), fetch_fxpro_emails.py,
-                    import_commentary.py and build_blog.py (blog)
+                    fetch_official_releases.py, import_commentary.py
+                    and build_blog.py (blog)
 ```

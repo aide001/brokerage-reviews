@@ -211,6 +211,8 @@ def latest_known_date():
     dates = []
     for path in glob.glob(os.path.join(POSTS, "*.json")) + glob.glob(os.path.join(INBOX, "*", "email.json")):
         data = json.load(open(path, encoding="utf-8"))
+        if not ((data.get("source") or {}).get("gmailMessageId") or data.get("gmailMessageId")):
+            continue  # official data releases etc. are not emails
         stamp = (data.get("source") or {}).get("receivedAt") or data.get("receivedAt") or data.get("date")
         if stamp:
             dates.append(datetime.fromisoformat(stamp.replace("Z", "+00:00")))

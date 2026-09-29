@@ -28,6 +28,20 @@
     });
   }
 
+  // Market News filters: All / Analysis / Official data.
+  var filterBtns = document.querySelectorAll(".filter-btn");
+  Array.prototype.forEach.call(filterBtns, function (btn) {
+    btn.addEventListener("click", function () {
+      var want = btn.getAttribute("data-filter");
+      Array.prototype.forEach.call(filterBtns, function (b) {
+        b.setAttribute("aria-pressed", String(b === btn));
+      });
+      Array.prototype.forEach.call(document.querySelectorAll("#post-grid .post-card"), function (card) {
+        card.hidden = want !== "all" && card.getAttribute("data-kind") !== want;
+      });
+    });
+  });
+
   var year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 })();
