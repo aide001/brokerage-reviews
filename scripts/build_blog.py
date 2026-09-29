@@ -32,6 +32,23 @@ def nice_date(iso):
     return "%d %s %d" % (d.day, d.strftime("%B"), d.year)
 
 
+# Site menu, in the same order as the homepage (index.html). Paths are from blog/.
+NAV = [
+    ("../index.html#top-picks", "Top Picks", None),
+    ("../index.html#compare", "Compare", None),
+    ("../index.html#calculator", "Cost Calculator", None),
+    ("../index.html#methodology", "How We Rate", None),
+    ("index.html", "Market News", "news"),
+    ("headlines.html", "Headlines", "headlines"),
+    ("../index.html#faq", "FAQ", None),
+]
+
+
+def nav_links(current, indent):
+    return "\n".join('%s<a href="%s"%s>%s</a>' % (indent, href, ' aria-current="page"' if key and key == current else "", label)
+                     for href, label, key in NAV)
+
+
 def page(title, description, body, current="news"):
     return """<!doctype html>
 <html lang="en">
@@ -64,12 +81,7 @@ def page(title, description, body, current="news"):
         <span>Brokerage<b>Reviews</b></span>
       </a>
       <nav class="main-nav" id="main-nav">
-        <a href="../index.html#top-picks">Top Picks</a>
-        <a href="../index.html#compare">Compare</a>
-        <a href="../index.html#calculator">Cost Calculator</a>
-        <a href="index.html"{news_current}>Market News</a>
-        <a href="headlines.html"{headlines_current}>Headlines</a>
-        <a href="../index.html#faq">FAQ</a>
+{nav}
       </nav>
       <div class="header-actions">
         <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
@@ -88,6 +100,18 @@ def page(title, description, body, current="news"):
   </main>
 
   <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <a href="../index.html" class="logo logo-footer">
+          <img src="../assets/favicon.svg" alt="" width="28" height="28" />
+          <span>Brokerage<b>Reviews</b></span>
+        </a>
+        <p class="muted">Independent forex broker comparisons and reviews.</p>
+      </div>
+      <div class="footer-links">
+{footer_links}
+      </div>
+    </div>
     <div class="container disclaimer">
       <p><strong>Disclaimer:</strong> Market commentary is provided by third parties for general information only and is not investment advice or a recommendation to trade. Past performance is not a reliable indicator of future results. Trading forex and CFDs on margin carries a high level of risk and may not be suitable for all investors.</p>
       <p class="muted">&copy; <span id="year"></span> Brokerage Reviews. All rights reserved.</p>
@@ -98,8 +122,7 @@ def page(title, description, body, current="news"):
 </body>
 </html>
 """.format(title=e(title), description=e(description), body=body,
-           news_current=' aria-current="page"' if current == "news" else "",
-           headlines_current=' aria-current="page"' if current == "headlines" else "")
+           nav=nav_links(current, " " * 8), footer_links=nav_links(None, " " * 8))
 
 
 # Small line icons for release cards that have no chart image.
