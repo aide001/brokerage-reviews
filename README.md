@@ -46,6 +46,18 @@ python3 scripts/fetch_logos.py          # add --force to replace existing files
 
 For each broker it tries the official site's `apple-touch-icon.png` first, then Google's favicon service. Any logo it can't find can be added by hand. Logos are trademarks of their owners, so check each broker's brand or affiliate guidelines before publishing.
 
+## Broker reviews, guides and SEO
+
+`python3 scripts/build_site.py` builds the pages search engines index, from three files in `content/`:
+
+- `brokers.json`: the broker data and rating weights (the single source; `js/data.js` is generated from it).
+- `affiliate-links.json`: paste each broker's affiliate link here. Brokers without one get a plain "Visit" link to their official site. Affiliate links are marked `rel="sponsored"`, as Google requires, and every page carries an affiliate disclosure.
+- `site.json`: `siteUrl` (the live address, for the sitemap and canonical links) and `dataVerified`.
+
+It writes a review page per broker (`brokers/<id>.html`), ranked "best" guides (`best/<slug>.html`, e.g. best low spread, beginners, MT4), a hub (`best/index.html`), the homepage's static top picks and guides hub, `robots.txt`, and `sitemap.xml` once `siteUrl` is set. Each guide ranks only on data every broker has and states how it ranks.
+
+**Before going live:** check every figure in `brokers.json` against each broker's own website, then set `dataVerified` to `true`. Until then broker pages and the homepage show a sample-data notice and carry `noindex`, so unverified ratings are never indexed. Then set `siteUrl`, rebuild, and submit `sitemap.xml` in Google Search Console.
+
 ## Market News (FxPro commentary)
 
 The blog at `blog/` publishes the market commentary FxPro emails from e.kalman@fxpro.com. Each email's content comes in its attachments: a Word document plus chart images.
@@ -107,7 +119,10 @@ content/posts/      Blog posts as JSON
 assets/blog/        Images used in blog posts
 js/site.js          Theme toggle and menu for the blog pages
 apps-script/Code.gs Google Apps Script that serves the FxPro emails
-scripts/            fetch_logos.py (broker logos), fetch_fxpro_emails.py,
+brokers/, best/      Generated broker reviews and "best" guides (don't edit by hand)
+content/brokers.json Broker data (edit this, not js/data.js)
+scripts/            build_site.py (reviews, guides, sitemap), site_common.py (page template),
+                    fetch_logos.py (broker logos), fetch_fxpro_emails.py,
                     fetch_official_releases.py, import_commentary.py
                     and build_blog.py (blog)
 ```

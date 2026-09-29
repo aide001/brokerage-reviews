@@ -6,7 +6,9 @@
   var MAX_COMPARE = 3;
   var PIP_VALUE = 10; // USD per pip per standard lot on EUR/USD
 
-  var CATEGORIES = [
+  var AFFILIATE = window.AFFILIATE_LINKS || {};
+  // Rating categories come from content/brokers.json via js/data.js; this list is a fallback.
+  var CATEGORIES = window.RATING_CATEGORIES || [
     { key: "fees", label: "Fees & costs", weight: 0.3, desc: "Spreads, commissions, swaps and non-trading fees such as inactivity and withdrawal charges." },
     { key: "trust", label: "Trust & regulation", weight: 0.25, desc: "Number and quality of licences, track record, listed status and client-fund protections." },
     { key: "platforms", label: "Platforms & tools", weight: 0.2, desc: "Platform choice, charting, execution quality, mobile apps and automated trading support." },
@@ -67,7 +69,7 @@
   function logo(b, size) {
     var cls = "broker-logo" + (size ? " broker-logo-" + size : "");
     var initialsHtml = '<span class="broker-logo-text">' + esc(initials(b.name)) + "</span>";
-    if (logoMissing[b.id]) {
+    if (logoMissing[b.id] || b.logoExt === "") {
       return '<span class="' + cls + '" style="background:' + b.color + ";color:" + textOn(b.color) +
         '" aria-hidden="true">' + initialsHtml + "</span>";
     }
@@ -121,9 +123,20 @@
     toastTimer = setTimeout(function () { el.classList.remove("show"); }, 2400);
   }
 
+  // Highest score first; ties by name, the same order as the generated pages.
+  function byRating(a, b) { return b.overall - a.overall || a.name.localeCompare(b.name); }
+  function reviewUrl(b) { return "brokers/" + encodeURIComponent(b.id) + ".html"; }
+  // Button to the broker: the affiliate link when set, otherwise the official site (no tracking).
+  function brokerCta(b) {
+    var aff = AFFILIATE[b.id];
+    return aff
+      ? '<a class="btn btn-primary" href="' + esc(aff) + '" target="_blank" rel="sponsored nofollow noopener">Open account<span class="sr-only"> with ' + esc(b.name) + "</span></a>"
+      : '<a class="btn btn-primary" href="https://' + esc(b.domain) + '" target="_blank" rel="nofollow noopener">Visit ' + esc(b.name) + "</a>";
+  }
+
   // ---------- Top picks ----------
   function renderTopPicks() {
-    var top = BROKERS.slice().sort(function (a, b) { return b.overall - a.overall; }).slice(0, 3);
+    var top = BROKERS.slice().sort(byRating).slice(0, 3);
     var medals = ["Best overall", "Runner-up", "Also great"];
     $("#top-picks-grid").innerHTML = top.map(function (b, i) {
       return '<article class="pick-card">' +
@@ -138,7 +151,7 @@
           "<div><dt>Regulators</dt><dd>" + b.regulators.length + "</dd></div>" +
         "</dl>" +
         '<ul class="pick-pros">' + b.pros.slice(0, 2).map(function (p) { return "<li>" + esc(p) + "</li>"; }).join("") + "</ul>" +
-        '<button class="btn btn-primary btn-block" data-review="' + b.id + '">Read review</button>' +
+        '<a class="btn btn-primary btn-block" href="' + reviewUrl(b) + '">Read review</a>' +
       "</article>";
     }).join("");
   }
@@ -168,7 +181,7 @@
       return true;
     });
     var sorters = {
-      rating: function (a, b) { return b.overall - a.overall; },
+      rating: byRating,
       cost: function (a, b) { return a.cost - b.cost; },
       deposit: function (a, b) { return a.minDeposit - b.minDeposit || b.overall - a.overall; },
       instruments: function (a, b) { return b.instruments - a.instruments; },
@@ -367,11 +380,13 @@
         }).join("") + "</div></section>" +
       "</div>" +
       '<footer class="review-actions">' +
+        brokerCta(b) +
+        '<a class="btn btn-ghost" href="' + reviewUrl(b) + '">Read full review</a>' +
         '<button class="btn btn-ghost" data-toggle-compare="' + b.id + '">' + (inCompare ? "Remove from compare" : "Add to compare") + "</button>" +
         '<button class="btn btn-ghost" data-share="' + b.id + '">Copy link</button>' +
       "</footer>" +
       '<p class="muted small">Data is indicative and may vary by country. Always verify on the broker\'s website. ' +
-      "Most retail CFD accounts lose money.</p>";
+      "Most retail CFD accounts lose money. We may earn a commission if you open an account through our links.</p>";
     openModal(html);
     if (location.hash !== "#broker/" + id) history.replaceState(null, "", "#broker/" + id);
   }

@@ -1,0 +1,6 @@
+{
+  "_note": "siteUrl: the live address, e.g. https://www.example.com (used for the sitemap and canonical links; leave empty until the domain is live). dataVerified: set to true only after every broker figure has been checked against the broker's own website; until then broker and guide pages carry a sample-data notice and a noindex tag.",
+  "siteName": "Brokerage Reviews",
+  "siteUrl": "",
+  "dataVerified": false
+}

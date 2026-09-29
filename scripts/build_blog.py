@@ -13,12 +13,12 @@ import os
 import re
 from datetime import datetime
 
+from site_common import SITE, abs_url, breadcrumbs, page
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS = os.path.join(ROOT, "content", "posts")
 HEADLINES = os.path.join(ROOT, "content", "headlines.json")
 OUT = os.path.join(ROOT, "blog")
-SITE = "Brokerage Reviews"
-
 e = html.escape
 
 
@@ -30,99 +30,6 @@ def load_posts():
 def nice_date(iso):
     d = datetime.fromisoformat(iso.replace("Z", "+00:00"))
     return "%d %s %d" % (d.day, d.strftime("%B"), d.year)
-
-
-# Site menu, in the same order as the homepage (index.html). Paths are from blog/.
-NAV = [
-    ("../index.html#top-picks", "Top Picks", None),
-    ("../index.html#compare", "Compare", None),
-    ("../index.html#calculator", "Cost Calculator", None),
-    ("../index.html#methodology", "How We Rate", None),
-    ("index.html", "Market News", "news"),
-    ("headlines.html", "Headlines", "headlines"),
-    ("../index.html#faq", "FAQ", None),
-]
-
-
-def nav_links(current, indent):
-    return "\n".join('%s<a href="%s"%s>%s</a>' % (indent, href, ' aria-current="page"' if key and key == current else "", label)
-                     for href, label, key in NAV)
-
-
-def page(title, description, body, current="news"):
-    return """<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>{title}</title>
-  <meta name="description" content="{description}" />
-  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/styles.css" />
-  <script>
-    try {{
-      var t = localStorage.getItem("br-theme");
-      if (t) document.documentElement.setAttribute("data-theme", t);
-    }} catch (e) {{}}
-  </script>
-</head>
-<body>
-  <div class="risk-banner" role="note">
-    <strong>Risk warning:</strong> CFDs and leveraged forex are complex instruments and carry a high risk of losing money rapidly. Most retail investor accounts lose money when trading CFDs. Consider whether you can afford to take that risk.
-  </div>
-
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="../index.html" class="logo" aria-label="Brokerage Reviews home">
-        <img src="../assets/favicon.svg" alt="" width="32" height="32" />
-        <span>Brokerage<b>Reviews</b></span>
-      </a>
-      <nav class="main-nav" id="main-nav">
-{nav}
-      </nav>
-      <div class="header-actions">
-        <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
-          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
-          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main>
-{body}
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div>
-        <a href="../index.html" class="logo logo-footer">
-          <img src="../assets/favicon.svg" alt="" width="28" height="28" />
-          <span>Brokerage<b>Reviews</b></span>
-        </a>
-        <p class="muted">Independent forex broker comparisons and reviews.</p>
-      </div>
-      <div class="footer-links">
-{footer_links}
-      </div>
-    </div>
-    <div class="container disclaimer">
-      <p><strong>Disclaimer:</strong> Market commentary is provided by third parties for general information only and is not investment advice or a recommendation to trade. Past performance is not a reliable indicator of future results. Trading forex and CFDs on margin carries a high level of risk and may not be suitable for all investors.</p>
-      <p class="muted">&copy; <span id="year"></span> Brokerage Reviews. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script src="../js/site.js"></script>
-</body>
-</html>
-""".format(title=e(title), description=e(description), body=body,
-           nav=nav_links(current, " " * 8), footer_links=nav_links(None, " " * 8))
 
 
 # Small line icons for release cards that have no chart image.
@@ -253,8 +160,11 @@ def build_headlines(headlines):
         <p class="related-all"><a class="btn btn-ghost" href="index.html">Back to market news</a></p>
       </div>
     </section>""".format(listing=listing, credits=e(HEADLINE_CREDITS), notice=advice_notice())
-    return page("Latest headlines — " + SITE, "Finance and central bank headlines from BBC News, the ECB, the Federal Reserve, the Bank of Canada and the RBA.",
-                body, current="headlines")
+    return page("Latest finance headlines — " + SITE,
+                "Finance and central bank headlines from BBC News, the ECB, the Federal Reserve, the Bank of Canada and the RBA.",
+                body, "blog/headlines.html", current="headlines",
+                jsonld=[x for x in [breadcrumbs([("Home", ""), ("Market News", "blog/index.html"),
+                                                  ("Headlines", "blog/headlines.html")])] if x])
 
 
 def build_index(posts, headlines=()):
@@ -279,7 +189,10 @@ def build_index(posts, headlines=()):
 {notice}{panel}{listing}
       </div>
     </section>""".format(listing=listing, panel=headlines_panel(list(headlines)), notice=advice_notice())
-    return page("Market News — " + SITE, "Forex, commodities and crypto market commentary and official US economic data.", body)
+    return page("Forex market news and analysis — " + SITE,
+                "Forex, commodities and crypto market commentary and official US economic data.",
+                body, "blog/index.html", current="news",
+                jsonld=[x for x in [breadcrumbs([("Home", ""), ("Market News", "blog/index.html")])] if x])
 
 
 def post_byline(p):
@@ -386,7 +299,19 @@ def build_post(p, related):
     </article>""".format(type=e(p["type"]), title=e(p["title"]), date=e(p["date"]), nice=nice_date(p["date"]),
                          byline=post_byline(p), source=source_note(p), content=p["bodyHtml"], more=more,
                          notice=advice_notice())
-    return page(p["title"] + " — " + SITE, p["summary"] or p["title"], body)
+    path = "blog/%s.html" % p["slug"]
+    article = {"@context": "https://schema.org", "@type": "NewsArticle" if p.get("official") else "Article",
+               "headline": p["title"][:110], "datePublished": p["date"],
+               "author": {"@type": "Organization" if p.get("official") else "Person", "name": p["author"]},
+               "publisher": {"@type": "Organization", "name": SITE}}
+    if abs_url(path):
+        article["mainEntityOfPage"] = abs_url(path)
+    if p.get("image") and abs_url(""):
+        article["image"] = abs_url(re.sub(r"^\.\./", "", p["image"]))
+    crumbs = breadcrumbs([("Home", ""), ("Market News", "blog/index.html"), (p["title"], path)])
+    return page(p["title"] + " — " + SITE, p["summary"] or p["title"], body, path, current="news",
+                jsonld=[x for x in [article, crumbs] if x], og_type="article",
+                image=re.sub(r"^\.\./", "", p["image"]) if p.get("image") else None)
 
 
 def main():
@@ -409,6 +334,8 @@ def main():
             fh.write(build_post(p, related))
     update_home(posts, headlines)
     print("Built blog: %d post(s)." % len(posts))
+    import build_site  # the sitemap lists news posts too
+    build_site.write_sitemap()
 
 
 if __name__ == "__main__":
