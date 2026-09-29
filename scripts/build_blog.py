@@ -183,9 +183,9 @@ def headline_item(h):
                           date=e(h["date"]), when=headline_time(h["date"]))
 
 
-HEADLINE_CREDITS = ("Headlines and links from BBC News, the European Central Bank, the Reserve Bank of Australia "
-                    "(CC BY 4.0) and the Federal Reserve. Articles open on the publisher's website; we don't copy "
-                    "their content.")
+HEADLINE_CREDITS = ("Finance headlines and links from BBC News, the European Central Bank, the Federal Reserve, "
+                    "the Bank of Canada and the Reserve Bank of Australia (CC BY 4.0). Articles open on the "
+                    "publisher's website; we don't copy their content.")
 
 
 def headlines_panel(headlines, href="headlines.html", count=6):
@@ -223,14 +223,14 @@ def build_headlines(headlines):
         <div class="section-head">
           <p class="eyebrow">Market News</p>
           <h1>Latest headlines</h1>
-          <p>Business and central bank headlines from around the web, updated through the day. Each link opens the full story on the publisher's site.</p>
+          <p>Finance and central bank headlines from around the web, updated through the day. Each link opens the full story on the publisher's site.</p>
         </div>
 {listing}
         <p class="headline-credits">{credits}</p>
         <p class="related-all"><a class="btn btn-ghost" href="index.html">Back to market news</a></p>
       </div>
     </section>""".format(listing=listing, credits=e(HEADLINE_CREDITS))
-    return page("Latest headlines — " + SITE, "Business and central bank headlines from BBC News, the ECB, the RBA and the Federal Reserve.",
+    return page("Latest headlines — " + SITE, "Finance and central bank headlines from BBC News, the ECB, the Federal Reserve, the Bank of Canada and the RBA.",
                 body, current="headlines")
 
 

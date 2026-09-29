@@ -11,6 +11,7 @@ display its headlines on a commercial website:
                        cited; links must open the full page (not in a frame).
   Reserve Bank of Australia  Creative Commons Attribution 4.0, credited.
   Federal Reserve      US government work, public domain.
+  Bank of Canada       Free use with attribution, not implying endorsement.
 
 Sources that only allow personal or non-commercial use (e.g. the Guardian,
 the Bank of England, investingLive) are deliberately left out. Check a new
@@ -18,7 +19,7 @@ source's terms before adding it here.
 
 Writes content/headlines.json (newest first), then rebuilds the blog.
 
-    python3 scripts/fetch_headlines.py [--days 14] [--max 40]
+    python3 scripts/fetch_headlines.py [--days 30] [--max 40]
 """
 import argparse
 import html
@@ -36,14 +37,35 @@ OUT = os.path.join(ROOT, "content", "headlines.json")
 USER_AGENT = "Mozilla/5.0 (compatible; BrokerageReviewsBot/1.0)"
 
 SOURCES = [
-    # BBC publishes far more than the others; "limit" keeps it from crowding them out.
-    {"name": "BBC News", "url": "https://feeds.bbci.co.uk/news/business/rss.xml", "limit": 10},
+    # BBC Business mixes market news with consumer and lifestyle stories, so its
+    # headlines must match a finance term ("only") and not read as personal-finance
+    # or human-interest pieces ("skip"). "limit" keeps it from crowding out the rest.
+    {"name": "BBC News", "url": "https://feeds.bbci.co.uk/news/business/rss.xml", "limit": 10,
+     "only": r"\b(markets?|shares|stocks?|FTSE|Dow Jones|Nasdaq|S&P 500|investors?|interest rates?|inflation"
+             r"|Bank of England|Federal Reserve|Fed|ECB|central banks?|pound|sterling|dollar|euro|yen|yuan"
+             r"|currenc(y|ies)|oil prices?|crude|diesel|petrol|fuel prices|gas prices|energy prices|gold|silver|copper"
+             r"|commodit(y|ies)|bitcoin|crypto\w*|bonds?|gilts?|yields?|borrowing costs|debt|tariffs?"
+             r"|trade (war|deal|deficit|talks)|export ban|GDP|economy|economic|recession|unemployment"
+             r"|wage growth|earnings|profits?|IPO|takeover|merger|banks?|banking|lenders?|mortgage rates"
+             r"|Treasury|IMF|OPEC)\b",
+     "skip": r"^(I|My|We|We're|Would|Should|How much|What's the smallest|Could an?)\b|\byou\b|\byour\b"
+             r"|here's (why|how)|Business Daily"},
     {"name": "European Central Bank", "url": "https://www.ecb.europa.eu/rss/press.html"},
     {"name": "Reserve Bank of Australia", "url": "https://www.rba.gov.au/rss/rss-cb-media-releases.xml"},
     {"name": "Federal Reserve", "url": "https://www.federalreserve.gov/feeds/press_all.xml",
      # Routine bank-supervision notices aren't market news.
      "skip": r"approval of application|enforcement action|termination of enforcement|applications? (for|by)"},
+    {"name": "Federal Reserve", "url": "https://www.federalreserve.gov/feeds/speeches.xml",
+     # Titles read "Cook, An Update on ..."; shown as "Fed's Cook: An Update on ...".
+     "retitle": (r"^([A-Z][\w'-]+), (.+)$", r"Fed's \1: \2")},
+    {"name": "Bank of Canada", "url": "https://www.bankofcanada.ca/content_type/press-releases/feed/"},
 ]
+
+
+def wanted(source, title):
+    if source.get("only") and not re.search(source["only"], title, re.I):
+        return False
+    return not (source.get("skip") and re.search(source["skip"], title, re.I))
 
 NS = {
     "rss1": "http://purl.org/rss/1.0/",
@@ -91,7 +113,7 @@ def entries(source):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--days", type=int, default=14, help="drop headlines older than this (default 14)")
+    parser.add_argument("--days", type=int, default=30, help="drop headlines older than this (default 30)")
     parser.add_argument("--max", type=int, default=40, help="keep at most this many (default 40)")
     args = parser.parse_args()
 
@@ -111,7 +133,9 @@ def main():
             title, url = clean(title), clean_url(link)
             if not title or not url or not date:
                 continue
-            if source.get("skip") and re.search(source["skip"], title, re.I):
+            if source.get("retitle"):
+                title = re.sub(source["retitle"][0], source["retitle"][1], title)
+            if not wanted(source, title):
                 continue
             when = parse_date(date)
             if url not in by_url:
@@ -120,6 +144,12 @@ def main():
                            "date": when.strftime("%Y-%m-%dT%H:%M:%SZ")}
         print("ok     %s: %d item(s), %d new" % (source["name"], len(found), added))
 
+    # Re-check saved headlines too, so tightened rules also clear older entries.
+    rules = {}
+    for src in SOURCES:
+        rules.setdefault(src["name"], []).append(src)
+    by_url = {u: h for u, h in by_url.items()
+              if any(wanted(src, h["title"]) for src in rules.get(h["source"], []))}
     limits = {src["name"]: src.get("limit") for src in SOURCES}
     counts, headlines = {}, []
     for h in sorted(by_url.values(), key=lambda h: h["date"], reverse=True):

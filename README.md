@@ -90,7 +90,7 @@ The homepage's "Latest market news" strip (between the `latest-news` markers in 
 
 ## Latest headlines
 
-`python3 scripts/fetch_headlines.py` collects headlines (title, link and publisher only; no article text) from BBC News Business, the European Central Bank, the Reserve Bank of Australia (CC BY 4.0) and the Federal Reserve into `content/headlines.json`, then rebuilds the blog. They appear on `blog/headlines.html`, in a panel on the Market News page and on the homepage. Each source's terms were checked for commercial use; sources that only allow personal or non-commercial use (e.g. the Guardian, the Bank of England, investingLive) are excluded. Check the terms before adding a source.
+`python3 scripts/fetch_headlines.py` collects finance headlines (title, link and publisher only; no article text) from BBC News Business (filtered to market and economy stories), the European Central Bank, the Federal Reserve (press releases and speeches), the Bank of Canada and the Reserve Bank of Australia (CC BY 4.0) into `content/headlines.json`, then rebuilds the blog. They appear on `blog/headlines.html`, in a panel on the Market News page and on the homepage. Each source's terms were checked for commercial use; sources that only allow personal or non-commercial use (e.g. the Guardian, the Bank of England, investingLive) are excluded. Check the terms before adding a source.
 
 ## Project structure
 

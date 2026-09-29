@@ -1,29 +1,5 @@
 [
   {
-    "title": "More free nursery hours proposed in budget",
-    "url": "https://www.bbc.co.uk/news/articles/c699dz2v752lo",
-    "source": "BBC News",
-    "date": "2026-09-29T10:50:22Z"
-  },
-  {
-    "title": "Warning more homes will be uninsurable due to flood risk",
-    "url": "https://www.bbc.co.uk/news/articles/c60qxk288e57o",
-    "source": "BBC News",
-    "date": "2026-09-29T09:42:48Z"
-  },
-  {
-    "title": "What is the triple lock and why are people talking about it?",
-    "url": "https://www.bbc.co.uk/news/articles/cq6m03ld7nvo",
-    "source": "BBC News",
-    "date": "2026-09-29T09:42:10Z"
-  },
-  {
-    "title": "OpenAI scraps rollout of new model over safety concerns",
-    "url": "https://www.bbc.co.uk/news/articles/cm5y5nynl75ko",
-    "source": "BBC News",
-    "date": "2026-09-29T09:14:13Z"
-  },
-  {
     "title": "ECB amends monetary policy implementation guidelines as part of regular review",
     "url": "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260929~050089e922.en.html",
     "source": "European Central Bank",
@@ -36,30 +12,6 @@
     "date": "2026-09-29T07:19:04Z"
   },
   {
-    "title": "I paid £30,000 for an 'influencer' degree. Here's why",
-    "url": "https://www.bbc.co.uk/news/articles/c61mvy1emr2zo",
-    "source": "BBC News",
-    "date": "2026-09-29T07:02:07Z"
-  },
-  {
-    "title": "Burnham to unveil public body to invest in electricity grid",
-    "url": "https://www.bbc.co.uk/news/articles/cqn4k9nypxjro",
-    "source": "BBC News",
-    "date": "2026-09-29T06:54:10Z"
-  },
-  {
-    "title": "Food waste charity gets grant for rising costs",
-    "url": "https://www.bbc.co.uk/news/articles/cqg7kk95zxylo",
-    "source": "BBC News",
-    "date": "2026-09-29T05:26:50Z"
-  },
-  {
-    "title": "Apprentice star tells PM why pie shop is closing",
-    "url": "https://www.bbc.co.uk/news/articles/crwyzdjj7ze5o",
-    "source": "BBC News",
-    "date": "2026-09-29T05:10:53Z"
-  },
-  {
     "title": "Statement by the Monetary Policy Board: Monetary Policy Decision",
     "url": "https://www.rba.gov.au/media-releases/2026/mr-26-27.html",
     "source": "Reserve Bank of Australia",
@@ -70,6 +22,24 @@
     "url": "https://www.bbc.co.uk/news/articles/cm1j43y146d2o",
     "source": "BBC News",
     "date": "2026-09-29T04:10:33Z"
+  },
+  {
+    "title": "Why UK diesel prices have hit an all-time high",
+    "url": "https://www.bbc.co.uk/news/articles/c20zgjzz0e4o",
+    "source": "BBC News",
+    "date": "2026-09-28T20:43:52Z"
+  },
+  {
+    "title": "UK diesel price hits all-time high, the RAC says",
+    "url": "https://www.bbc.co.uk/news/articles/c6n4k987k981o",
+    "source": "BBC News",
+    "date": "2026-09-28T20:42:56Z"
+  },
+  {
+    "title": "Fed's Cook: An Update on AI and the Economy",
+    "url": "https://www.federalreserve.gov/newsevents/speech/cook20260928a.htm",
+    "source": "Federal Reserve",
+    "date": "2026-09-28T17:25:00Z"
   },
   {
     "title": "Christine Lagarde: Hearing of the Committee on Economic and Monetary Affairs of the European Parliament",
@@ -108,10 +78,22 @@
     "date": "2026-09-23T16:00:00Z"
   },
   {
+    "title": "Fed's Barr: A Long-Term View on the Costs of Shelter",
+    "url": "https://www.federalreserve.gov/newsevents/speech/barr20260923a.htm",
+    "source": "Federal Reserve",
+    "date": "2026-09-23T14:05:00Z"
+  },
+  {
     "title": "Almost ten million people took part in ECB survey on new euro banknotes",
     "url": "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260923~6ebddaf01e.en.html",
     "source": "European Central Bank",
     "date": "2026-09-23T09:00:00Z"
+  },
+  {
+    "title": "Fed's Jefferson: Discount Window Modernization and Treasury Market Functioning",
+    "url": "https://www.federalreserve.gov/newsevents/speech/jefferson20260922a.htm",
+    "source": "Federal Reserve",
+    "date": "2026-09-22T14:20:00Z"
   },
   {
     "title": "Philip R. Lane: Interview with Le Temps",
@@ -130,6 +112,18 @@
     "url": "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260921~e754847a7b.en.html",
     "source": "European Central Bank",
     "date": "2026-09-21T10:00:00Z"
+  },
+  {
+    "title": "Fed's Bowman: Initial Findings from Independent Review of Silicon Valley Bank",
+    "url": "https://www.federalreserve.gov/newsevents/speech/bowman20260918b.htm",
+    "source": "Federal Reserve",
+    "date": "2026-09-18T13:30:00Z"
+  },
+  {
+    "title": "Fed's Bowman: The Final Chapter on Modernizing Bank Regulatory Stress Testing",
+    "url": "https://www.federalreserve.gov/newsevents/speech/bowman20260918a.htm",
+    "source": "Federal Reserve",
+    "date": "2026-09-18T13:30:00Z"
   },
   {
     "title": "ECB Consumer Expectations Survey results – August 2026",
@@ -160,5 +154,59 @@
     "url": "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260916~7bc58ebef4.en.html",
     "source": "European Central Bank",
     "date": "2026-09-16T08:00:00Z"
+  },
+  {
+    "title": "Christine Lagarde: A new age of capital: growth, sovereignty and AI",
+    "url": "https://www.ecb.europa.eu/press/key/date/2026/html/ecb.sp260914_2~a3f0efbee4.en.html",
+    "source": "European Central Bank",
+    "date": "2026-09-14T15:15:00Z"
+  },
+  {
+    "title": "Piero Cipollone: The future of euro cash: trusted today, designed for tomorrow",
+    "url": "https://www.ecb.europa.eu/press/key/date/2026/html/ecb.sp260914_1~91d3436449.en.html",
+    "source": "European Central Bank",
+    "date": "2026-09-14T13:00:00Z"
+  },
+  {
+    "title": "Agencies seek comment on proposed third-party risk management guidance and issue statement on community bank engagement with core service providers",
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260911a.htm",
+    "source": "Federal Reserve",
+    "date": "2026-09-11T14:00:00Z"
+  },
+  {
+    "title": "Agencies reduce regulatory burden for community banks, increase eligibility for 18-month exam cycle",
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260910a.htm",
+    "source": "Federal Reserve",
+    "date": "2026-09-10T20:00:00Z"
+  },
+  {
+    "title": "Bank of Canada Board launches process to fill external Deputy Governor position",
+    "url": "https://www.bankofcanada.ca/2026/09/bank-canada-board-launches-process-fill-external-deputy-governor-position/",
+    "source": "Bank of Canada",
+    "date": "2026-09-10T11:00:09Z"
+  },
+  {
+    "title": "Bank of Canada unveils new vertical $20 bank note",
+    "url": "https://www.bankofcanada.ca/2026/09/bank-canada-unveils-new-vertical-20-bank-note/",
+    "source": "Bank of Canada",
+    "date": "2026-09-03T13:20:16Z"
+  },
+  {
+    "title": "Fed's Waller: The Economic Outlook and Some Comments on My Policy Communication",
+    "url": "https://www.federalreserve.gov/newsevents/speech/waller20260903a.htm",
+    "source": "Federal Reserve",
+    "date": "2026-09-03T12:30:00Z"
+  },
+  {
+    "title": "Bank of Canada maintains the policy rate at 2¼%",
+    "url": "https://www.bankofcanada.ca/2026/09/fad-press-release-2026-09-02/",
+    "source": "Bank of Canada",
+    "date": "2026-09-02T09:47:53Z"
+  },
+  {
+    "title": "Fed's Barr: Unlocking Opportunities for Workers and Entrepreneurs with a Criminal Record",
+    "url": "https://www.federalreserve.gov/newsevents/speech/barr20260901a.htm",
+    "source": "Federal Reserve",
+    "date": "2026-09-01T13:05:00Z"
   }
 ]
