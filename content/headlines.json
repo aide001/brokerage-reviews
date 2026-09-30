@@ -1,5 +1,11 @@
 [
   {
+    "title": "Fed's Cook: The Dual Mandate in Rural America",
+    "url": "https://www.federalreserve.gov/newsevents/speech/cook20260930a.htm",
+    "source": "Federal Reserve",
+    "date": "2026-09-30T19:25:00Z"
+  },
+  {
     "title": "Christine Lagarde: Interview with La Croix",
     "url": "https://www.ecb.europa.eu/press/inter/date/2026/html/ecb.in260930~10084a5f3d.en.html",
     "source": "European Central Bank",
@@ -232,11 +238,5 @@
     "url": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260910a.htm",
     "source": "Federal Reserve",
     "date": "2026-09-10T20:00:00Z"
-  },
-  {
-    "title": "Bank of Canada Board launches process to fill external Deputy Governor position",
-    "url": "https://www.bankofcanada.ca/2026/09/bank-canada-board-launches-process-fill-external-deputy-governor-position/",
-    "source": "Bank of Canada",
-    "date": "2026-09-10T11:00:09Z"
   }
 ]
