@@ -148,6 +148,10 @@ def build_post(feed, item, topic):
         summary = body[0] if body else title
         if re.fullmatch(r"Federal Reserve issues FOMC statement", title, re.I):
             title = "Fed policy statement: %d %s" % (item["date"].day, item["date"].strftime("%B %Y"))
+    m = re.match(r"^GDP,? \(?(Advance|Second|Third) Estimate\)?.*?\b([1-4])(?:st|nd|rd|th) Quarter (\d{4})", title, re.I)
+    if m:
+        # BEA's GDP titles list every table in the release; keep the headline.
+        title = "US GDP (%s estimate): Q%s %s" % (m.group(1).lower(), m.group(2), m.group(3))
     if not body:
         body = [summary or title]
     if len(summary) > 220:

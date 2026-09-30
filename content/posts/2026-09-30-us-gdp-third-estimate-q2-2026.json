@@ -1,0 +1,19 @@
+{
+  "slug": "2026-09-30-us-gdp-third-estimate-q2-2026",
+  "title": "US GDP (third estimate): Q2 2026",
+  "date": "2026-09-30T12:30:00Z",
+  "type": "Official Release",
+  "topic": "Growth",
+  "author": "US Bureau of Economic Analysis",
+  "authorRole": "",
+  "provider": "US Bureau of Economic Analysis",
+  "official": true,
+  "summary": "Real gross domestic product (GDP) increased at an annual rate of 2.2 percent in the second quarter of 2026 (April, May, and June), according to the third estimate released today by the U.S. Bureau of Economic…",
+  "image": null,
+  "bodyHtml": "<p>Real gross domestic product (GDP) increased at an annual rate of 2.2 percent in the second quarter of 2026 (April, May, and June), according to the third estimate released today by the U.S. Bureau of Economic Analysis (BEA). In the first quarter, real GDP increased 2.5 percent (revised). The contributors to the increase in real GDP in the second quarter were consumer spending, investment, and exports. Imports, which are a subtraction in the calculation of GDP, increased.</p>\n<p>At the state level, real GDP ranged from a 4.0 percent increase in New York to a 2.3 percent decrease in West Virginia.</p>",
+  "source": {
+    "agency": "US Bureau of Economic Analysis",
+    "url": "https://www.bea.gov/news/2026/gdp-third-estimate-industries-corporate-profits-state-gdp-and-state-personal-income-2nd",
+    "feed": "https://apps.bea.gov/rss/rss.xml"
+  }
+}
