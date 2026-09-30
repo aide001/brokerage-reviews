@@ -756,5 +756,7 @@ body.has-tray .toast { bottom: 100px; }
 .faq-list details p { margin: 10px 0 0; }
 @media (max-width: 640px) {
   .review-toc ol { columns: 1; }
+  .data-table { font-size: .82rem; }
+  .data-table th, .data-table td { padding: 8px 8px; overflow-wrap: anywhere; }
   .data-table td:first-child { white-space: normal; }
 }

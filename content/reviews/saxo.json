@@ -1,0 +1,91 @@
+{
+  "_note": "Long-form review content for brokers/saxo.html. Facts checked on Saxo's UK website on 30 September 2026; see sources.",
+  "checked": "2026-09-30",
+  "verdict": [
+    "Saxo has been in business since 1992 and serves UK clients through Saxo Capital Markets UK Ltd, which is authorised by the FCA (FRN 551422). It is a multi-asset platform first and a forex broker second: from one account you can trade forex, CFDs, futures and options, and invest in stocks, ETFs, bonds and funds, including through an ISA or SIPP.",
+    "Forex pricing is competitive for a full-service broker, with minimum spreads of 0.7 pips on EUR/USD and 0.8 on GBP/USD on the Classic tier, and 185+ currency pairs. Watch the small print: a fixed US$3 commission applies to forex trades under 50,000 units, so Saxo suits larger trades better than micro-lots. Prices improve if you qualify for the Platinum (£200,000+) or VIP (£1 million+) tiers.",
+    "Saxo's own platforms are its biggest strength. SaxoTrader is packed with professional tools, and TradingView can be linked for free. Saxo doesn't offer MetaTrader or spread betting, so traders who rely on Expert Advisors or want tax-free spread bets should look elsewhere."
+  ],
+  "whoFor": [
+    "Investors and traders who want forex, CFDs, shares, bonds and funds in one account",
+    "Traders who want professional-grade platforms and research",
+    "UK investors who also want an ISA or SIPP with the same provider",
+    "Larger accounts that can qualify for Platinum or VIP pricing"
+  ],
+  "notFor": [
+    "Traders who need MT4 or MT5",
+    "UK traders who want spread betting (Saxo offers CFDs, not spread bets)",
+    "Micro-lot forex traders (US$3 fixed commission on trades under 50,000 units)"
+  ],
+  "fees": {
+    "intro": "Saxo builds most forex, index and commodity costs into the spread. Prices are tiered, so Platinum and VIP clients pay less. The figures below are Saxo's indicative minimum spreads for the Classic tier.",
+    "spreadsHead": ["Market", "Minimum spread (Classic)"],
+    "spreads": [
+      ["EUR/USD", "0.7 pips"],
+      ["GBP/USD", "0.8 pips"],
+      ["USD/JPY", "0.9 pips"],
+      ["US 500 CFD", "0.70"],
+      ["US Tech 100 CFD", "1"],
+      ["Germany 40 CFD", "1.50"],
+      ["Gold CFD", "0.60"],
+      ["US Crude CFD", "0.05"]
+    ],
+    "spreadsNote": "Indicative minimum spreads from Saxo's UK forex and CFD pages; they vary by country of residence and market conditions.",
+    "other": [
+      ["Small forex trades", "US$3 fixed commission on trades under 50,000 units of base currency"],
+      ["Share CFDs", "UK shares 0.1% (min £8); US shares US$0.02 per share (min US$10)"],
+      ["UK stocks & ETFs (investing)", "0.08% Classic, 0.05% Platinum, 0.03% VIP (from £3 minimum)"],
+      ["Overnight forex rollover", "Tom/next swap points with a ±0.75% mark-up on the Classic tier"],
+      ["Currency conversion", "0.25% (cut from higher levels in January 2024)"],
+      ["Custody & platform fees", "Removed for UK clients in January 2024"]
+    ]
+  },
+  "accounts": [
+    ["Saxo account (Classic)", "The standard individual account, with access to every asset class and no minimum deposit."],
+    ["Platinum and VIP tiers", "Lower prices and priority support once you fund with £200,000+ (Platinum) or £1,000,000+ (VIP), or reach set trading volumes."],
+    ["ISA and SIPP", "Tax-efficient Stocks and Shares ISA and self-invested pension accounts."],
+    ["Joint, corporate and trust accounts", "For couples, companies and trusts."],
+    ["Professional account", "For clients who qualify as elective professional clients."],
+    ["Demo account", "Free demo to try the platform."]
+  ],
+  "funding": {
+    "rows": [
+      ["Minimum deposit", "None to open an account"],
+      ["Tier upgrades", "Platinum from £200,000; VIP from £1,000,000"],
+      ["Account opening", "Most individual accounts approved digitally within minutes; otherwise within 2 working days"],
+      ["Portfolio transfers", "Transfer existing investments in from within the platform"]
+    ]
+  },
+  "safety": [
+    "Saxo Capital Markets UK Ltd is authorised and regulated by the Financial Conduct Authority (FRN 551422).",
+    "Client money is held in trust in segregated bank accounts, and client assets in segregated custodian accounts, separate from Saxo's own money.",
+    "Saxo files a monthly Client Money & Assets Return with the FCA, and its client money arrangements are audited every year by an independent auditor.",
+    "Eligible investments are protected by the FSCS up to £85,000 per person if Saxo were to fail.",
+    "Retail forex and CFD accounts have negative balance protection."
+  ],
+  "platforms": [
+    ["SaxoTrader", "Saxo's advanced platform: 85+ technical indicators, drawing tools, trading from charts, algo orders, smart order routing, trade signals and margin alerts."],
+    ["SaxoInvestor", "A simpler app focused on stocks, ETFs, funds and bonds."],
+    ["TradingView", "Link your Saxo account to TradingView and other third-party tools such as MultiCharts, at no extra cost."],
+    ["APIs", "OpenAPI connectivity for developers and automated trading."]
+  ],
+  "research": "Saxo's in-house strategists (SaxoStrats) publish daily analysis, a daily Market Call podcast, videos, webinars and the annual 'Outrageous Predictions' report.",
+  "support": "Human and online account support is available to all clients, with priority support on Platinum and VIP tiers, plus a detailed online support centre.",
+  "faq": [
+    ["Is Saxo safe?", "Saxo Capital Markets UK Ltd is authorised and regulated by the FCA (FRN 551422). Client money is held in trust in segregated accounts, audited annually, and eligible investments are covered by the FSCS up to £85,000."],
+    ["What is Saxo's minimum deposit?", "There is no minimum deposit to open a Saxo account. Higher tiers need £200,000 (Platinum) or £1 million (VIP)."],
+    ["What are Saxo's forex spreads?", "On the Classic tier, Saxo's indicative minimum spreads are 0.7 pips on EUR/USD, 0.8 on GBP/USD and 0.9 on USD/JPY. A US$3 commission applies to trades under 50,000 units."],
+    ["Does Saxo offer MetaTrader?", "No. Saxo uses its own SaxoTrader and SaxoInvestor platforms, and supports TradingView and other third-party tools."],
+    ["Does Saxo offer spread betting?", "No. Saxo offers forex and CFDs for leveraged trading, but not spread betting."],
+    ["Can I open an ISA or SIPP with Saxo?", "Yes. Saxo UK offers a Stocks and Shares ISA and a SIPP."]
+  ],
+  "sources": [
+    "https://www.home.saxo/en-gb/products/forex",
+    "https://www.home.saxo/en-gb/products/cfds",
+    "https://www.home.saxo/en-gb/accounts",
+    "https://www.home.saxo/en-gb/rates-and-conditions/forex/spreads-and-commissions",
+    "https://www.home.saxo/en-gb/content/commentaries/pr/press-release/saxo-significantly-cuts-fees-across-markets-15012024",
+    "https://www.home.saxo/en-gb/legal/client-money-protection/client-money-protection",
+    "https://www.home.saxo/en-gb/platforms/saxotrader"
+  ]
+}

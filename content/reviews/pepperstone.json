@@ -1,0 +1,94 @@
+{
+  "_note": "Long-form review content for brokers/pepperstone.html. Facts checked on Pepperstone's UK website on 30 September 2026; see sources.",
+  "checked": "2026-09-30",
+  "verdict": [
+    "Pepperstone was founded in Melbourne in 2010 and serves UK clients through an FCA-authorised company (FRN 684312). It has become one of the most popular brokers for active traders, and says it has more than 900,000 accounts across its group.",
+    "Its big draw is price. On the Razor account, EUR/USD has averaged 0.1 pips (August 2026 data) with a fixed commission of £2.25 per lot per side for GBP accounts on MT4/MT5. If you prefer no commission, the Standard account and the spread betting account build costs into the spread instead. There are no account or inactivity fees, and deposits and withdrawals are free except international bank-wire withdrawals.",
+    "Platform choice is excellent: TradingView, MT4, MT5, cTrader and Pepperstone's own web platform and app. What you don't get is share dealing, ISAs or pensions. Pepperstone is a pure spread betting and CFD provider, so long-term investors will need a second account elsewhere."
+  ],
+  "whoFor": [
+    "Active and high-volume traders who want raw spreads plus a low, fixed commission",
+    "Traders who want TradingView, MT4, MT5 or cTrader with one FCA-authorised broker",
+    "UK traders who want a spread betting account alongside CFDs",
+    "Algorithmic traders using Expert Advisors or cTrader bots"
+  ],
+  "notFor": [
+    "Investors who want to buy and own shares, or use an ISA or SIPP",
+    "Complete beginners who want lots of structured courses (education is lighter than at IG or CMC)",
+    "Anyone who regularly withdraws to an international bank account (£15 fee)"
+  ],
+  "fees": {
+    "intro": "Pepperstone offers three UK accounts. The Razor CFD account has raw spreads plus commission on forex and spot gold. The Standard CFD account and the spread betting account have no commission, with costs built into the spread. The table shows Pepperstone's published minimum spreads for each account.",
+    "spreadsHead": ["Market", "Razor", "Standard", "Spread bet"],
+    "spreads": [
+      ["EUR/USD", "0.0", "1.0", "0.5"],
+      ["GBP/USD", "0.0", "1.0", "0.8"],
+      ["USD/JPY", "0.0", "1.0", "0.7"],
+      ["AUD/USD", "0.0", "1.0", "0.6"],
+      ["US 500", "0.4", "0.6", "0.4"],
+      ["US Tech 100", "1.0", "1.2", "1.0"],
+      ["Wall Street 30", "2.0", "2.3", "2.0"]
+    ],
+    "spreadsNote": "Minimum spreads in pips for forex and points for indices, from Pepperstone's UK site. Average EUR/USD spreads for August 2026 were 0.1 (Razor), 1.1 (Standard) and 0.5 (spread bet). Spot gold on Razor starts from 0.08.",
+    "other": [
+      ["Razor forex & gold commission", "£2.25 per lot per side on GBP accounts (MT4/MT5); $3.50 per side on the Pepperstone platform; $6–7 round turn on cTrader and TradingView, converted to your account currency"],
+      ["Share CFD commission", "0.10% per side on UK shares; 2¢ per share on US shares and ETFs"],
+      ["Overnight funding", "Swap charged or credited on positions held past 5pm New York time; rates shown in the platform"],
+      ["Account & inactivity fees", "None (accounts with under 10 units of currency and no trades for three months may be archived)"],
+      ["Deposits", "Free"],
+      ["Withdrawals", "Free, except £15 for bank wires to an international bank account"]
+    ]
+  },
+  "accounts": [
+    ["Razor (CFD)", "Raw spreads from 0.0 pips plus a fixed commission on forex and spot gold. Best for frequent traders. Available in GBP, USD, EUR and CHF."],
+    ["Standard (CFD)", "No commission on forex, indices or commodities; costs are in the spread (a 1-pip mark-up on forex)."],
+    ["Spread betting", "Trade in pounds per point with no commission. For most UK residents, spread betting profits are currently free from Capital Gains Tax and Stamp Duty, but tax treatment depends on your circumstances and can change."],
+    ["Demo account", "Free demo on all platforms to practise before trading real money."]
+  ],
+  "funding": {
+    "rows": [
+      ["Deposit methods", "Debit/credit card, Apple Pay, Google Pay, domestic and international bank transfer"],
+      ["Minimum deposit", "£10 by card, Apple Pay or Google Pay; no minimum by bank transfer"],
+      ["Deposit fees", "None"],
+      ["Deposit processing", "Cards and wallets immediate; bank transfers same day to up to 7 working days"],
+      ["Withdrawal processing", "Cards and wallets same day to 1 working day; bank transfers same day to 3 working days"],
+      ["Withdrawal fees", "None, except £15 for international bank wires"],
+      ["Account currencies", "GBP, USD, EUR, CHF"]
+    ]
+  },
+  "safety": [
+    "Authorised and regulated by the Financial Conduct Authority (FRN 684312) in the UK, and regulated in several other countries including by ASIC in Australia.",
+    "Client money is held in segregated accounts with top-tier banks, separate from Pepperstone's own money, and is not used for business operations or hedging.",
+    "If Pepperstone failed, eligible clients may be covered by the Financial Services Compensation Scheme (FSCS) for losses up to £85,000.",
+    "Retail accounts have negative balance protection, so you cannot lose more than your account balance.",
+    "Accounts are protected with encryption and two-factor authentication."
+  ],
+  "platforms": [
+    ["TradingView", "Trade straight from TradingView charts. Pepperstone says eligible clients can get free TradingView subscriptions."],
+    ["MetaTrader 4 & 5", "Both are available, with a suite of add-on tools for Expert Advisors and automated trading."],
+    ["cTrader", "Popular with scalpers and algorithmic traders for its depth-of-market view and cBots."],
+    ["Pepperstone platform & app", "Pepperstone's own web platform and mobile app, rated highly on the App Store and Google Play."],
+    ["24-hour US shares", "More than 100 key US share CFDs and spread bets can be traded around the clock."]
+  ],
+  "research": "Pepperstone publishes daily market analysis, trading guides, an economic calendar and regular webinars. The research is aimed at active traders; there are fewer structured beginner courses than at some rivals.",
+  "support": "Support is available 24/7 by phone on UK freephone 0800 046 5473 and by email at support@pepperstone.com, plus a contact form and online help centre.",
+  "faq": [
+    ["Is Pepperstone safe?", "Pepperstone's UK company is authorised and regulated by the FCA (FRN 684312). Client money is kept in segregated accounts, and eligible clients are covered by the FSCS for up to £85,000 if the firm fails. Retail clients also get negative balance protection."],
+    ["What is Pepperstone's minimum deposit?", "There is no minimum by bank transfer. Card, Apple Pay and Google Pay deposits start from £10."],
+    ["What is the difference between Razor and Standard?", "Razor has raw spreads from 0.0 pips plus a commission (£2.25 per lot per side on GBP MT4/MT5 accounts). Standard has no commission but wider spreads, from 1.0 pip on EUR/USD."],
+    ["Does Pepperstone offer spread betting?", "Yes. UK residents can open a spread betting account with no commission. Spread betting profits are currently free from UK Capital Gains Tax for most people, but tax rules depend on your circumstances."],
+    ["Does Pepperstone charge an inactivity fee?", "No. Pepperstone says it charges no account-keeping or inactivity fees, though very small, unused accounts may be archived."],
+    ["Which platforms does Pepperstone offer?", "TradingView, MT4, MT5, cTrader and its own Pepperstone web platform and mobile app."],
+    ["How long do Pepperstone withdrawals take?", "Pepperstone processes card, Apple Pay and Google Pay withdrawals within one working day and bank transfers within three working days. Your bank may take longer to credit the money."]
+  ],
+  "sources": [
+    "https://pepperstone.com/en-gb/trading/costs-and-fees",
+    "https://pepperstone.com/en-gb/trading/funding-methods",
+    "https://pepperstone.com/en-gb/trading/withdrawals",
+    "https://pepperstone.com/en-gb/about-us/how-we-protect-you",
+    "https://pepperstone.com/en-gb/markets/indices",
+    "https://pepperstone.com/en-gb/platforms",
+    "https://pepperstone.com/en-gb/about-us",
+    "https://pepperstone.com/en-gb/support/contact-us"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "_note": "Long-form review content for brokers/xtb.html. Facts checked on XTB's UK website on 30 September 2026; see sources.",
+  "checked": "2026-09-30",
+  "verdict": [
+    "XTB was founded in 2002, is listed on the Warsaw Stock Exchange and serves UK clients through XTB Limited, which is authorised by the FCA (FRN 522157). It has grown fast and now reports more than 2.9 million clients.",
+    "Costs are simple. There is no commission on CFDs (costs are in the spread, from 0.8 pips on major forex pairs), no minimum deposit, and deposits and withdrawals are free. For investors, XTB offers commission-free shares and ETFs up to €100,000 of monthly turnover, plus a Stocks and Shares ISA and a Cash ISA.",
+    "The main limitation is platform choice. XTB only offers its own xStation platform and app, with no MetaTrader, TradingView or spread betting. xStation is polished and beginner-friendly, but traders who rely on Expert Advisors will need to look elsewhere. An inactivity fee applies after 12 months without trading (ISAs excluded)."
+  ],
+  "whoFor": [
+    "Beginners who want a clean, easy-to-use app with strong education",
+    "UK investors who want commission-free shares and ETFs plus an ISA, alongside CFDs",
+    "Traders who want no minimum deposit and free, fast withdrawals",
+    "Anyone who values a broker listed on a stock exchange"
+  ],
+  "notFor": [
+    "Traders who need MT4, MT5, cTrader or TradingView",
+    "Algorithmic traders who use Expert Advisors",
+    "UK traders who want tax-free spread betting",
+    "Occasional traders who might not trade for a year (inactivity fee)"
+  ],
+  "fees": {
+    "intro": "XTB charges no commission on CFDs; the cost is built into the spread. XTB's forex page advertises spreads as low as 0.8 pips, and minimum spreads across all CFDs start from 0.3.",
+    "spreadsHead": ["Charge", "XTB (UK)"],
+    "spreads": [
+      ["Forex spreads", "As low as 0.8 pips"],
+      ["Lowest CFD minimum spread", "0.3"],
+      ["CFD commission", "0%"],
+      ["Minimum trade size", "0.01 lot"],
+      ["Maximum retail leverage", "1:30"]
+    ],
+    "spreadsNote": "From XTB's UK 'Account and fees' and forex pages. Full spreads for each instrument are in XTB's instrument specification.",
+    "other": [
+      ["Shares & ETFs (investing)", "0% commission up to €100,000 monthly turnover; then 0.2% (min £10)"],
+      ["Custody fee", "None up to €250,000; then 0.02% a year (min £10)"],
+      ["Currency conversion", "0.5% (both CFDs and investing)"],
+      ["Overnight swaps", "Charged or credited on CFD positions held overnight"],
+      ["Deposits & withdrawals", "Free"],
+      ["Inactivity fee", "£10 (€10 equivalent) a month after 12 months with no trading and no deposit in the last 90 days; ISAs are exempt"]
+    ]
+  },
+  "accounts": [
+    ["CFD account", "Trade forex (70+ pairs), indices, commodities, shares and ETFs as CFDs with leverage up to 1:30 for retail clients."],
+    ["Stocks & ETFs (investing)", "Buy and own shares and ETFs from £1, commission-free up to €100,000 monthly turnover."],
+    ["Stocks and Shares ISA", "Invest tax-free within your annual ISA allowance, with no inactivity fee."],
+    ["Cash ISA", "A flexible Cash ISA paying interest."],
+    ["Demo account", "Practise on xStation with virtual funds."]
+  ],
+  "funding": {
+    "rows": [
+      ["Deposit methods", "Debit card and bank transfer (GBP, EUR, USD), with instant options"],
+      ["Minimum deposit", "£0"],
+      ["Deposit fees", "None from XTB"],
+      ["Withdrawal fees", "None"],
+      ["Withdrawal processing", "Orders before 1pm sent the same business day, after 1pm the next business day; up to 3 business days to arrive"]
+    ]
+  },
+  "safety": [
+    "XTB Limited is authorised and regulated by the Financial Conduct Authority (FRN 522157).",
+    "Client funds are segregated from XTB's own money.",
+    "Retail accounts have negative balance protection.",
+    "Parent company XTB S.A. is listed on the Warsaw Stock Exchange and publishes its earnings and cash reserves every quarter.",
+    "Eligible UK clients may be covered by the FSCS (currently up to £85,000 for investments) if the UK firm fails."
+  ],
+  "platforms": [
+    ["xStation (web & desktop)", "XTB's own platform, with advanced charts, a trading calculator, market sentiment showing how XTB clients are positioned, and stop-loss, take-profit and pending orders."],
+    ["XTB mobile app", "Full trading and investing on iOS and Android."],
+    ["No third-party platforms", "XTB does not offer MetaTrader, cTrader or TradingView."]
+  ],
+  "research": "XTB publishes daily market analysis, a market calendar, eBooks and a large library of educational articles and videos aimed at newer traders.",
+  "support": "XTB provides customer support through its contact page and client office, plus an online help centre with answers to common questions.",
+  "faq": [
+    ["Is XTB safe?", "XTB Limited is authorised and regulated by the FCA (FRN 522157). Client money is segregated, retail accounts have negative balance protection, and the parent company is listed on the Warsaw Stock Exchange."],
+    ["What is XTB's minimum deposit?", "There is no minimum deposit. Deposits by card or bank transfer are free."],
+    ["Does XTB charge an inactivity fee?", "Yes. XTB charges £10 (or the €10 equivalent) a month if you have not traded for 12 months and have not deposited in the last 90 days. ISAs are exempt."],
+    ["Does XTB offer MT4 or TradingView?", "No. XTB only offers its own xStation platform and mobile app."],
+    ["Does XTB offer an ISA?", "Yes. XTB offers a Stocks and Shares ISA and a Cash ISA to UK clients."],
+    ["How fast are XTB withdrawals?", "Withdrawal requests made before 1pm are sent the same business day, and after 1pm the next business day. XTB says funds can take up to 3 business days to arrive."]
+  ],
+  "sources": [
+    "https://www.xtb.com/en/account-and-fees",
+    "https://www.xtb.com/en/forex",
+    "https://www.xtb.com/en/help-center/fees-and-payments/inactivity-fees",
+    "https://www.xtb.com/en/isa",
+    "https://www.xtb.com/en/platform"
+  ]
+}

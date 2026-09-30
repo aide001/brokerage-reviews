@@ -1,0 +1,85 @@
+{
+  "_note": "Long-form review content for brokers/oanda.html. Facts checked on OANDA's UK website and help centre on 30 September 2026; see sources.",
+  "checked": "2026-09-30",
+  "verdict": [
+    "OANDA has more than 25 years of experience and is best known as a forex specialist. UK clients are served by OANDA Europe Limited, which is authorised and regulated by the FCA (FRN 542574).",
+    "Pricing is straightforward: spreads start from 0.6 pips on EUR/USD, 1 point on the UK 100 and 1.2 points on the Germany 40, with no commission on the standard account. There is no minimum deposit, and OANDA charges no deposit or withdrawal fees. There is an inactivity fee (up to £20 a month) once an account has had no trades for 12 months.",
+    "OANDA has broadened its offer in recent years. A standard account now includes a spread betting sub-account, and you can trade on OANDA's own web and mobile platforms, MT4, MT5 or TradingView. The market range is still narrower than at IG or CMC, so OANDA suits forex-focused traders best."
+  ],
+  "whoFor": [
+    "Forex-focused traders who want a long-established, FCA-authorised broker",
+    "Beginners who want no minimum deposit and small trade sizes",
+    "UK traders who want spread betting and CFDs on MT4, MT5, TradingView or OANDA's own platforms",
+    "Algorithmic traders who want OANDA's well-known API"
+  ],
+  "notFor": [
+    "Traders who may leave the account unused for over a year (inactivity fee)",
+    "Investors who want to buy and own shares, or use an ISA or SIPP",
+    "Traders who want the lowest raw spreads with commission"
+  ],
+  "fees": {
+    "intro": "On the standard account, OANDA's charge is built into the spread; there is no separate commission. These are OANDA's published starting spreads.",
+    "spreadsHead": ["Market", "Spread from"],
+    "spreads": [
+      ["EUR/USD", "0.6 pips"],
+      ["USD/JPY", "1.3 pips"],
+      ["UK 100", "1 point"],
+      ["Germany 40", "1.2 points"]
+    ],
+    "spreadsNote": "From OANDA's UK 'Our pricing' page. Spreads are variable and depend on market volatility and liquidity.",
+    "other": [
+      ["Commission", "None on the standard account"],
+      ["Overnight financing", "A financing charge or credit on positions kept open overnight"],
+      ["Currency conversion", "1.0% mark-up or mark-down when profits or losses are converted to your account currency"],
+      ["Deposit fees", "None (your bank or card provider may charge)"],
+      ["Withdrawal fees", "None (your bank may charge to receive funds)"],
+      ["Inactivity fee", "After 12 months with no trades, up to £20 a month per client; never charged while a position is open"]
+    ]
+  },
+  "accounts": [
+    ["Standard account", "CFDs on forex (65+ pairs), indices, commodities, metals and bonds, with no minimum balance. It has two sub-account types: v20 (OANDA web, MT4, API, trade sizes from 1 unit) and OANDA One (MT5, share and ETF CFDs)."],
+    ["Spread betting sub-account", "Available inside the standard account. Spread betting profits are exempt from UK Capital Gains Tax and stamp duty for most people, but tax laws can change and individual circumstances vary."],
+    ["Professional account", "Higher leverage for clients who qualify as professional clients."],
+    ["Joint and corporate accounts", "Available on both sub-account types."],
+    ["Demo account", "Free demo to practise first."]
+  ],
+  "funding": {
+    "rows": [
+      ["Deposit methods", "Debit card, credit card, Faster Payments/BACS (GBP), CHAPS, SWIFT wire and SEPA transfer"],
+      ["Minimum deposit", "None, and no minimum balance"],
+      ["Deposit fees", "None from OANDA"],
+      ["Withdrawal fees", "None from OANDA"]
+    ]
+  },
+  "safety": [
+    "OANDA Europe Limited is authorised and regulated by the Financial Conduct Authority (FRN 542574) and follows the FCA's client money (CASS) rules.",
+    "Client money is ring-fenced in segregated bank accounts held under trust, and cannot be used for OANDA's business activities.",
+    "Retail clients have negative balance protection, so losses are limited to the funds in your account.",
+    "Eligible clients may be able to claim from the FSCS if OANDA Europe Limited fails (the FSCS investment limit is currently £85,000).",
+    "The OANDA group is also regulated in the US, Canada, Australia, Singapore and other countries."
+  ],
+  "platforms": [
+    ["OANDA web platform & mobile app", "OANDA's own platforms, with advanced charts, depth of market and a trading performance dashboard."],
+    ["MetaTrader 4 & 5", "MT4 on the v20 sub-account and MT5 on the OANDA One sub-account, with premium MetaTrader indicators."],
+    ["TradingView", "Listed among OANDA's UK platforms for charting and trading."],
+    ["API", "OANDA's REST API is popular with developers building automated strategies."]
+  ],
+  "research": "OANDA offers market analysis, technical analysis tools, advanced charts, day trading strategy guides and historical spread data.",
+  "support": "Support is available 24 hours a day while the markets are open (24/5), backed by a detailed online help centre.",
+  "faq": [
+    ["Is OANDA safe?", "OANDA Europe Limited is authorised and regulated by the FCA (FRN 542574). Client money is held in segregated trust accounts, and retail clients have negative balance protection."],
+    ["What is OANDA's minimum deposit?", "There is no minimum deposit or minimum balance to open or keep an OANDA account."],
+    ["Does OANDA charge an inactivity fee?", "Yes. After 12 months with no trading, OANDA charges up to £20 a month per client. No fee is taken while you have an open position, and you can ask for up to three months back if you start trading again."],
+    ["Does OANDA offer spread betting?", "Yes. UK clients can open a spread betting sub-account within the standard account."],
+    ["Which platforms does OANDA offer?", "OANDA's own web platform and mobile app, MT4, MT5 and TradingView, plus an API."],
+    ["What are OANDA's spreads?", "OANDA's spreads start from 0.6 pips on EUR/USD, 1.3 pips on USD/JPY, 1 point on the UK 100 and 1.2 points on the Germany 40."]
+  ],
+  "sources": [
+    "https://www.oanda.com/uk-en/trading/our-pricing/",
+    "https://www.oanda.com/uk-en/trading/our-charges/",
+    "https://www.oanda.com/uk-en/trading/standard-account/",
+    "https://www.oanda.com/uk-en/trading/spread-betting/",
+    "https://help.oanda.com/uk/en/faqs/hold-money-uk.htm",
+    "https://help.oanda.com/uk/en/faqs/minimum-deposit-requirement.htm"
+  ]
+}

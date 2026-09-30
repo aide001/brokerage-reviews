@@ -84,6 +84,7 @@ window.BROKERS = [
     "commission": 4.5,
     "leverage": 30,
     "platforms": [
+      "Pepperstone Platform",
       "MT4",
       "MT5",
       "cTrader",
@@ -99,14 +100,14 @@ window.BROKERS = [
       "education": 4.2
     },
     "pros": [
-      "Regulated by several tier-1 authorities",
-      "Razor account offers raw spreads",
-      "No minimum deposit"
+      "Razor account: raw spreads plus low fixed commission",
+      "Five platforms including TradingView and cTrader",
+      "No account or inactivity fees"
     ],
     "cons": [
-      "No proprietary platform",
-      "Product range narrower than multi-asset brokers",
-      "No guaranteed stop-loss in most regions"
+      "No share dealing, ISA or SIPP",
+      "£15 fee on international bank-wire withdrawals",
+      "Less beginner education than IG or CMC"
     ],
     "summary": "Pepperstone combines low trading costs with some of the broadest regulatory coverage in the industry, making it a well-rounded choice for most forex traders.",
     "ukStatus": "fca",
@@ -119,7 +120,7 @@ window.BROKERS = [
       "https://pepperstone.com/en-gb/markets/forex/pairs-and-spreads",
       "https://pepperstone.com/en-gb/help-and-support/opening-an-account/whats-the-minimum-deposit-for-a-live-account/"
     ],
-    "checked": "2026-09-29",
+    "checked": "2026-09-30",
     "dataNotes": "No minimum deposit for bank transfer (card minimum £10). Razor EUR/USD avg 0.1; commission £2.25/side.",
     "logoExt": "png"
   },
@@ -145,6 +146,7 @@ window.BROKERS = [
     "platforms": [
       "OANDA Trade",
       "MT4",
+      "MT5",
       "TradingView"
     ],
     "instruments": 120,
@@ -157,13 +159,14 @@ window.BROKERS = [
       "education": 4.4
     },
     "pros": [
-      "Long track record and strong regulation, including the US",
-      "No minimum deposit",
-      "Excellent historical FX data and research"
+      "No minimum deposit or withdrawal fees",
+      "Spread betting and CFDs on MT4, MT5 and TradingView",
+      "Long track record and strong regulation"
     ],
     "cons": [
+      "Inactivity fee after 12 months",
       "Standard spreads higher than ECN brokers",
-      "Smaller range of non-FX instruments"
+      "Smaller range of non-FX markets"
     ],
     "summary": "OANDA is one of the most established forex brokers, trusted for transparent pricing and available to US residents, with solid tools for newer traders.",
     "ukStatus": "fca",
@@ -176,7 +179,7 @@ window.BROKERS = [
       "https://www.oanda.com/uk-en/trading/spreads-margin/",
       "https://help.oanda.com/uk/en/faqs/minimum-deposit-requirement.htm"
     ],
-    "checked": "2026-09-29",
+    "checked": "2026-09-30",
     "dataNotes": "No minimum deposit. EUR/USD from 0.6 pips; core pricing option: 0.0 spread + USD 0.70 per 10k units per side.",
     "logoExt": "png"
   },
@@ -220,13 +223,13 @@ window.BROKERS = [
       "Good in-house research and platform"
     ],
     "cons": [
-      "Standard spreads not the lowest",
-      "Inactivity fee applies",
-      "Account types vary by region"
+      "£12 monthly inactivity fee after 12 months",
+      "No share dealing or ISA",
+      "Fewer non-forex markets than multi-asset brokers"
     ],
     "summary": "FOREX.com offers one of the widest selections of FX pairs, US availability and strong corporate backing, with a capable proprietary platform.",
     "ukStatus": "fca",
-    "fcaFrn": "190864",
+    "fcaFrn": "446717",
     "lossPct": 74,
     "spreadType": "from",
     "verified": true,
@@ -234,8 +237,8 @@ window.BROKERS = [
       "https://www.forex.com/en-uk/trading-accounts/standard-trading-account/",
       "https://www.forex.com/en-uk/help-and-support/faqs/accounts/"
     ],
-    "checked": "2026-09-29",
-    "dataNotes": "forex.com blocks automated fetches (403); figures taken from forex.com pages as indexed by search: EUR/USD from 0.7 pts, min initial deposit £100, 74% retail lose. FCA FRN not confirmed from page.",
+    "checked": "2026-09-30",
+    "dataNotes": "forex.com blocks automated fetches (403); figures from forex.com pages as indexed by search: EUR/USD from 0.7 pts, min initial deposit £100, 74% retail lose. UK entity is StoneX Financial Ltd (FRN 446717); Gain Capital UK (FRN 190864) applied to cancel 23 Sep 2026.",
     "logoExt": "png"
   },
   {
@@ -335,9 +338,9 @@ window.BROKERS = [
       "Publicly listed on the Warsaw Stock Exchange"
     ],
     "cons": [
-      "No MT4/MT5 support",
-      "Limited automated trading options",
-      "Not available in the US"
+      "No MT4, MT5 or TradingView",
+      "No spread betting",
+      "Inactivity fee after 12 months (not ISAs)"
     ],
     "summary": "XTB is a user-friendly broker built around its excellent xStation platform, with commission-free standard pricing and very good educational content.",
     "ukStatus": "fca",
@@ -349,7 +352,7 @@ window.BROKERS = [
       "https://www.xtb.com/en/account-and-fees",
       "https://www.xtb.com/en/forex"
     ],
-    "checked": "2026-09-29",
+    "checked": "2026-09-30",
     "dataNotes": "No minimum deposit; 0% CFD commission; EURUSD minimum spread 0.8 (XTB comparison table dated 13 Jan 2026); 60+ FX pairs.",
     "logoExt": "png"
   },
@@ -385,13 +388,13 @@ window.BROKERS = [
     },
     "pros": [
       "Industry-leading copy trading",
-      "Very easy to use",
-      "Stocks, ETFs and crypto in one account"
+      "Very easy to use, with ISA and GBP account",
+      "No inactivity, account or custody fees"
     ],
     "cons": [
-      "Wider forex spreads",
-      "Withdrawal and conversion fees",
-      "No MetaTrader support"
+      "Spreads quoted as % can be wider for forex",
+      "No MetaTrader or spread betting",
+      "USD account: US$5 withdrawals and conversion costs"
     ],
     "summary": "eToro is the go-to platform for social and copy trading, trading off slightly higher FX costs for simplicity and community features.",
     "ukStatus": "fca",
@@ -406,7 +409,7 @@ window.BROKERS = [
       "https://www.etoro.com/trading/fees/cfd-spreads/",
       "https://help.etoro.com/s/article/What-s-the-deposit-minimum?language=en_GB"
     ],
-    "checked": "2026-09-29",
+    "checked": "2026-09-30",
     "dataNotes": "EUR/USD spread 0.005% per trade (~0.57 pips at EURUSD 1.1355). UK first deposit US$10.",
     "logoExt": "png"
   },
@@ -445,14 +448,14 @@ window.BROKERS = [
       "education": 4.3
     },
     "pros": [
-      "Interbank-style FX pricing",
-      "Access to global exchanges",
-      "Exceptional financial strength"
+      "Near-interbank forex pricing with low commission",
+      "Access to 170 market centres worldwide",
+      "No minimum deposit, inactivity or custody fees"
     ],
     "cons": [
       "Steep learning curve",
-      "Complex fee schedule",
-      "Customer support can be slow"
+      "No spread betting",
+      "US$2 minimum commission per forex order"
     ],
     "summary": "Interactive Brokers delivers institutional-grade pricing and market access, best suited to experienced traders comfortable with advanced tools.",
     "ukStatus": "fca",
@@ -468,7 +471,7 @@ window.BROKERS = [
       "https://www.interactivebrokers.co.uk/en/pricing/commissions-cfd-forex.php",
       "https://www.interactivebrokers.co.uk/en/trading/products-spot-currencies.php"
     ],
-    "checked": "2026-09-29",
+    "checked": "2026-09-30",
     "dataNotes": "Commission 0.2 bps x trade value, min USD 2 per order (Tier I). No account minimum.",
     "logoExt": "png"
   },
@@ -511,9 +514,9 @@ window.BROKERS = [
       "Licensed bank in Denmark"
     ],
     "cons": [
-      "Better pricing needs higher account tiers",
-      "No MetaTrader",
-      "Custody fees on some holdings"
+      "Best prices need Platinum or VIP tiers",
+      "No MetaTrader or spread betting",
+      "US$3 commission on forex trades under 50,000 units"
     ],
     "summary": "Saxo is a Danish bank offering premium trading platforms and one of the largest product line-ups available to retail traders.",
     "ukStatus": "fca",
@@ -526,7 +529,7 @@ window.BROKERS = [
       "https://www.home.saxo/en-gb/accounts",
       "https://www.home.saxo/en-gb/rates-and-conditions/forex/spreads-and-commissions"
     ],
-    "checked": "2026-09-29",
+    "checked": "2026-09-30",
     "dataNotes": "No minimum funding. EURUSD minimum spread 0.7 pips (Classic); fixed USD 3 commission on trades under 50,000 units. 185+ FX pairs.",
     "logoExt": "png"
   },
@@ -564,14 +567,14 @@ window.BROKERS = [
       "education": 4.4
     },
     "pros": [
-      "Excellent charting tools",
-      "Competitive standard spreads",
-      "Listed on the London Stock Exchange"
+      "Advanced charting with pattern recognition",
+      "21,000+ instruments including ~300 FX pairs",
+      "FTSE 250 group, trading since 1989"
     ],
     "cons": [
+      "£10 monthly inactivity fee after a year",
       "Many features can overwhelm new traders",
-      "MT4 has fewer instruments",
-      "Not available in the US"
+      "No MT5 or cTrader"
     ],
     "summary": "CMC Markets pairs competitive pricing with a feature-rich Next Generation platform that technical traders will appreciate.",
     "ukStatus": "fca",
@@ -584,7 +587,7 @@ window.BROKERS = [
       "https://www.cmcmarkets.com/en-gb/compare-trading-accounts",
       "https://www.cmcmarkets.com/en-gb/forex/how-much-do-you-need-to-start-trading-forex"
     ],
-    "checked": "2026-09-29",
+    "checked": "2026-09-30",
     "dataNotes": "No minimum deposit. EUR/USD min spread 0.6 (indicative table). FX Active account: 0.0 spread + 0.0025% commission per transaction.",
     "logoExt": "png"
   },
@@ -1025,9 +1028,9 @@ window.BROKERS = [
       "Fast execution, EA-friendly"
     ],
     "cons": [
-      "Smaller product range",
-      "No proprietary platform",
-      "Research is fairly basic"
+      "No spread betting or ISA",
+      "No proprietary trading platform for CFDs",
+      "Classic account spreads from 1.6 pips"
     ],
     "summary": "Tickmill is built for cost-sensitive active traders, with low raw-account commissions and fast execution under solid regulation.",
     "ukStatus": "fca",
@@ -1043,7 +1046,7 @@ window.BROKERS = [
       "https://www.tickmill.com/uk/conditions/trading-costs-fees",
       "https://www.tickmill.com/uk/about/faq/what-is-the-minimum-deposit"
     ],
-    "checked": "2026-09-29",
+    "checked": "2026-09-30",
     "dataNotes": "Raw: from 0.0 pips, $3 per lot per side; EURUSD 0.2 pips used in Tickmill's own worked example. Starting deposit $100 (varies by base currency).",
     "logoExt": "png"
   },

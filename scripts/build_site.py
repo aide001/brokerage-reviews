@@ -364,7 +364,7 @@ def long_review(b, r):
          % ("".join("<li>%s</li>" % e(x) for x in r["whoFor"]), "".join("<li>%s</li>" % e(x) for x in r["notFor"]))),
         ("fees", "%s fees and spreads" % b["name"],
          "<p>%s</p>%s<p class=\"muted small\">%s</p><h3>Other costs</h3>%s%s"
-         % (e(fees["intro"]), table(["Market", fees.get("spreadsLabel", "Spread")], fees["spreads"]),
+         % (e(fees["intro"]), table(fees.get("spreadsHead") or ["Market", fees.get("spreadsLabel", "Spread")], fees["spreads"]),
             e(fees.get("spreadsNote", "")), table(["Charge", "%s" % b["name"]], fees["other"]),
             "<p>%s</p>" % e(fees["investing"]) if fees.get("investing") else "")),
         ("accounts", "Account types", '<dl class="prose-list">%s</dl>'

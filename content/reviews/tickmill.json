@@ -1,0 +1,85 @@
+{
+  "_note": "Long-form review content for brokers/tickmill.html. Facts checked on Tickmill's UK website on 30 September 2026; see sources.",
+  "checked": "2026-09-30",
+  "verdict": [
+    "Tickmill UK Ltd is part of Tickmill Group and is authorised and regulated by the FCA (FRN 717270). It is a lean, low-cost broker aimed squarely at active forex and CFD traders.",
+    "The Raw account is the main attraction: spreads from 0.0 pips plus a commission of US$3 per lot per side, one of the lowest commission rates among UK brokers. In Tickmill's own worked example, EUR/USD trades at a 0.2-pip spread. If you prefer no commission, the Classic account has spreads from 1.6 pips. Both accounts start from a 100 (GBP/USD/EUR) deposit, and Tickmill charges no deposit or withdrawal fees.",
+    "Tickmill is focused rather than broad. CFDs run on MT4, MT5 and TradingView, and there is no proprietary platform, spread betting or ISA. But Tickmill UK also offers futures and options, and an Interactive Brokers-powered multi-asset account, for traders who want more."
+  ],
+  "whoFor": [
+    "Scalpers and high-volume forex traders who want raw spreads and a low commission",
+    "MetaTrader users, including Expert Advisor and VPS users",
+    "Traders who also want exchange-traded futures and options"
+  ],
+  "notFor": [
+    "UK traders who want spread betting",
+    "Beginners who want a simple proprietary app and lots of hand-holding",
+    "Investors looking for an ISA or SIPP"
+  ],
+  "fees": {
+    "intro": "Tickmill has two CFD accounts. The Classic account builds costs into the spread. The Raw account offers raw spreads plus a fixed commission on forex and precious metals.",
+    "spreadsHead": ["", "Raw account", "Classic account"],
+    "spreads": [
+      ["Spreads from", "0.0 pips", "1.6 pips"],
+      ["Commission (forex & metals)", "US$3 per lot per side", "None"],
+      ["EUR/USD example", "0.2 pips + US$6 round turn", "From 1.6 pips"],
+      ["Starting deposit", "100 (USD/EUR/GBP)", "100 (USD/EUR/GBP)"],
+      ["Max retail leverage", "1:30", "1:30"],
+      ["Platforms", "MT4, MT5, TradingView", "MT4, MT5, TradingView"]
+    ],
+    "spreadsNote": "From Tickmill UK's accounts overview and trading costs pages. The 0.2-pip EUR/USD spread comes from Tickmill's worked example; live spreads vary.",
+    "other": [
+      ["Overnight swaps", "Applied at 00:00 platform time; triple on Wednesday nights"],
+      ["Deposits", "No fee; Tickmill refunds bank fees up to US$100 on single bank-wire deposits of US$5,000+"],
+      ["Withdrawals", "No fee from Tickmill; minimum withdrawal 25"],
+      ["Inactivity", "Tickmill reserves the right to charge an inactivity fee under its terms"]
+    ]
+  },
+  "accounts": [
+    ["Raw account", "Spreads from 0.0 pips plus US$3 per lot per side. Base currencies: USD, EUR, GBP, PLN, CHF."],
+    ["Classic account", "Spreads from 1.6 pips with no commission."],
+    ["Futures and options", "Exchange-traded futures and options on CME, NYMEX, COMEX, CBOT and EUREX via CQG or Trading Technologies (US$1,000 minimum)."],
+    ["IBKR multi-asset", "Access to global stocks, ETFs, options, bonds and futures through Interactive Brokers' TWS platform."],
+    ["Islamic, professional and demo accounts", "Swap-free, professional-client and practice accounts are also available."]
+  ],
+  "funding": {
+    "rows": [
+      ["Deposit methods", "Bank wire and other instant methods (options vary by country of residence)"],
+      ["Minimum deposit", "100 in your account currency"],
+      ["Minimum withdrawal", "25"],
+      ["Fees", "None from Tickmill on deposits or withdrawals"],
+      ["Processing", "Within 1 working day; bank wires can take 2–7 working days to arrive"],
+      ["Currencies", "USD, EUR, GBP, PLN, CHF"]
+    ]
+  },
+  "safety": [
+    "Tickmill UK Ltd is authorised and regulated by the Financial Conduct Authority (FRN 717270).",
+    "Client funds are held in segregated bank accounts, separate from Tickmill's operating money, with regulated banking partners.",
+    "Tickmill UK is a member of the FSCS; Tickmill states eligible clients may be compensated up to £120,000 if it becomes insolvent.",
+    "Negative balance protection: if your account goes negative, Tickmill resets it to zero and takes the loss."
+  ],
+  "platforms": [
+    ["MetaTrader 4 & 5", "Desktop, web and Mac versions, plus Tickmill VPS for running Expert Advisors around the clock."],
+    ["TradingView", "Trade Tickmill CFDs directly from TradingView."],
+    ["Tickmill mobile app", "Manage your account and trade on the go."],
+    ["Advanced tools", "Acuity Trading, a signal centre, forex calculators and an earnings calendar."]
+  ],
+  "research": "Tickmill offers webinars, seminars, video tutorials, eBooks, an economic calendar, the Bright Minds podcast and 'The T-Show' market programme.",
+  "support": "Tickmill's support team is available 24/5. Phone support on +44 789 703 6806 runs Monday to Friday, 7:00–16:00 UK time; email support@tickmill.co.uk (reply within 24 hours on business days); and an AI chat assistant is available 24/7.",
+  "faq": [
+    ["Is Tickmill safe?", "Tickmill UK Ltd is authorised and regulated by the FCA (FRN 717270). Client funds are segregated, retail clients have negative balance protection, and Tickmill UK is a member of the FSCS."],
+    ["What is Tickmill's minimum deposit?", "The starting deposit is 100 in your account currency (USD, EUR or GBP)."],
+    ["What is Tickmill's commission?", "On the Raw account, Tickmill charges US$3 per lot per side (US$6 round turn) on forex and precious metals. The Classic account has no commission."],
+    ["Does Tickmill offer TradingView?", "Yes. Tickmill CFDs can be traded on MT4, MT5 and TradingView."],
+    ["Does Tickmill offer spread betting?", "No. Tickmill UK offers CFDs, futures and options, but not spread betting."],
+    ["Does Tickmill charge withdrawal fees?", "No. Tickmill doesn't charge for deposits or withdrawals; the minimum withdrawal is 25 in your account currency."]
+  ],
+  "sources": [
+    "https://www.tickmill.com/uk/conditions/trading-costs-fees",
+    "https://www.tickmill.com/uk/trading/accounts-overview",
+    "https://www.tickmill.com/uk/conditions/deposit-and-withdrawal",
+    "https://www.tickmill.com/uk/safety-of-funds",
+    "https://www.tickmill.com/uk/about/contact-us",
+    "https://www.tickmill.com/uk/about/why-tickmill"
+  ]
+}

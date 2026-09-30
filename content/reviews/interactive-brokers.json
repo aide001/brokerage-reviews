@@ -1,0 +1,90 @@
+{
+  "_note": "Long-form review content for brokers/interactive-brokers.html. Facts checked on interactivebrokers.co.uk on 30 September 2026; see sources.",
+  "checked": "2026-09-30",
+  "verdict": [
+    "Interactive Brokers (IBKR) is one of the largest brokers in the world. Its founder and chairman, Thomas Peterffy, started the business 49 years ago; the group now has equity capital of US$22.3 billion and more than 5 million client accounts. UK clients are served by Interactive Brokers (U.K.) Limited, which is authorised by the FCA (FRN 208159).",
+    "For forex, IBKR works differently from spread-betting brokers: you trade close to interbank prices and pay a separate commission of 0.20 basis points of the trade value (minimum US$2 per order) at the standard tier. For larger trades that is extremely cheap; for very small trades the US$2 minimum makes it less attractive. There is no minimum deposit and no inactivity fee.",
+    "Where IBKR really stands out is breadth: access to 170 market centres, 29 currencies, shares, ETFs, options, futures, bonds and funds, plus ISA accounts for UK investors. The flip side is complexity. Trader Workstation is powerful but has a steep learning curve, and IBKR does not offer spread betting."
+  ],
+  "whoFor": [
+    "Experienced traders and investors who want access to global exchanges from one account",
+    "Larger forex traders who benefit from commission-based, near-interbank pricing",
+    "UK investors who want low-cost share dealing and an ISA alongside trading",
+    "Algorithmic traders who want professional APIs"
+  ],
+  "notFor": [
+    "Beginners who want a simple app and hand-holding",
+    "UK traders who want tax-free spread betting (IBKR offers CFDs, not spread bets)",
+    "Traders placing lots of very small forex trades (US$2 minimum commission per order)"
+  ],
+  "fees": {
+    "intro": "IBKR charges a separate commission on top of tight, near-interbank prices rather than widening its spreads. Spot forex and forex CFDs share the same volume-tiered schedule.",
+    "spreadsHead": ["Charge", "IBKR (UK)"],
+    "spreads": [
+      ["Forex commission (up to US$1bn a month)", "0.20 basis points × trade value"],
+      ["Minimum forex commission", "US$2.00 per order (Tier I)"],
+      ["UK shares (tiered)", "0.05% of trade value, minimum £1"],
+      ["UK shares (fixed)", "0.05% of trade value, minimum £3"],
+      ["US shares (fixed)", "US$0.005 per share, minimum US$1"],
+      ["US shares (tiered)", "From US$0.0035 per share, minimum US$0.35"]
+    ],
+    "spreadsNote": "From IBKR UK's commission pages. Exchange and regulatory fees are included in forex commissions. 0.20 basis points on a £100,000-equivalent trade is about US$2.70.",
+    "other": [
+      ["Account minimum", "None"],
+      ["Inactivity & custody fees", "None on standard accounts; no fees to transfer an account in"],
+      ["Withdrawals", "Two free withdrawal requests a month; after that, £1 by BACS or £7 by bank wire"],
+      ["Deposits", "Free by bank transfer; cash is not accepted"],
+      ["Market data", "Some real-time data feeds carry a monthly fee"],
+      ["Overnight financing", "Margin interest on borrowed funds and financing on CFD positions, at published benchmark-linked rates"]
+    ]
+  },
+  "accounts": [
+    ["Individual and joint accounts", "Trade shares, ETFs, options, futures, forex, bonds, funds and CFDs across 170 market centres."],
+    ["Stocks and Shares ISA", "A tax-efficient ISA with no custody fees."],
+    ["SIPP", "Available through approved third-party SIPP administrators."],
+    ["Forex CFDs and spot forex", "Commission-based forex with prices drawn from 17 of the world's largest forex dealers."],
+    ["Paper trading account", "A free simulated account to practise with."]
+  ],
+  "funding": {
+    "rows": [
+      ["Deposit methods", "Bank transfer (BACS/Faster Payments, SEPA or wire); cash is not accepted"],
+      ["Minimum deposit", "None (US$0 minimum to open an account)"],
+      ["Account currencies", "29 currencies supported"],
+      ["Free withdrawals", "Two per calendar month"],
+      ["Later withdrawals", "£1 by BACS, £7 by bank wire (GBP)"]
+    ]
+  },
+  "safety": [
+    "Interactive Brokers (U.K.) Limited is authorised and regulated by the Financial Conduct Authority (FRN 208159).",
+    "Eligible UK clients are covered by the FSCS for up to £85,000 if the firm fails (FSCS does not cover investment losses).",
+    "The group reports equity capital of US$22.3 billion and US$13.9 billion of excess regulatory capital (Q2 2026 fact sheet).",
+    "Parent company Interactive Brokers Group is listed in the US and ranked in the Fortune 500 in 2025.",
+    "Retail CFD accounts have negative balance protection under FCA rules."
+  ],
+  "platforms": [
+    ["Trader Workstation (TWS)", "IBKR's flagship desktop platform, with advanced order types, options analytics and risk tools. Very powerful, but it takes time to learn."],
+    ["IBKR Desktop & Client Portal", "Simpler desktop and web interfaces for everyday trading and account management."],
+    ["IBKR Mobile & GlobalTrader", "Mobile apps, with GlobalTrader designed as a simpler way to trade global shares."],
+    ["APIs", "Professional-grade APIs for automated and algorithmic trading."]
+  ],
+  "research": "IBKR offers a large research and news library (much of it free, some via paid subscriptions), screeners, fundamentals and the IBKR Campus education site with courses and webinars.",
+  "support": "Support is available by phone, online chat and a secure message centre, with a large online knowledge base. Some customers find support slower than at smaller brokers.",
+  "faq": [
+    ["Is Interactive Brokers safe?", "Interactive Brokers (U.K.) Limited is authorised and regulated by the FCA (FRN 208159), and eligible clients are covered by the FSCS up to £85,000. The group is one of the largest brokers in the world, with US$22.3 billion of equity capital."],
+    ["What is the minimum deposit at Interactive Brokers?", "There is no minimum deposit to open an IBKR account."],
+    ["Does Interactive Brokers charge an inactivity fee?", "No. IBKR does not charge inactivity or custody fees on standard accounts."],
+    ["How much does forex cost at Interactive Brokers?", "At the standard tier, forex costs 0.20 basis points of the trade value, with a US$2 minimum per order, on top of tight near-interbank prices."],
+    ["Does Interactive Brokers offer spread betting?", "No. IBKR UK offers forex, CFDs and a wide range of exchange-traded products, but not spread betting."],
+    ["Can I open an ISA with Interactive Brokers?", "Yes. IBKR UK offers a Stocks and Shares ISA, and SIPPs through approved SIPP administrators."],
+    ["How many free withdrawals does Interactive Brokers allow?", "Two free withdrawal requests per calendar month. After that, GBP withdrawals cost £1 by BACS or £7 by wire."]
+  ],
+  "sources": [
+    "https://www.interactivebrokers.co.uk/en/pricing/commissions-spot-currencies.php",
+    "https://www.interactivebrokers.co.uk/en/pricing/commissions-cfd-forex.php",
+    "https://www.interactivebrokers.co.uk/en/pricing/commissions-stocks-europe.php",
+    "https://www.interactivebrokers.co.uk/en/pricing/other-fees.php",
+    "https://www.interactivebrokers.co.uk/en/accounts/isa-accounts.php",
+    "https://www.interactivebrokers.co.uk/en/general/about/ibkr-fact-sheet.php",
+    "https://www.interactivebrokers.co.uk/en/support/fund-my-account.php"
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "_note": "Long-form review content for brokers/forex-com.html. forex.com blocks automated page reads, so facts were taken from forex.com pages as indexed by search on 30 September 2026; see sources.",
+  "checked": "2026-09-30",
+  "verdict": [
+    "FOREX.com is part of StoneX Group, a NASDAQ-listed financial services company with a history going back more than 100 years. In the UK, FOREX.com is now a trading name of StoneX Financial Ltd, which is authorised and regulated by the FCA (FRN 446717). In September 2026 StoneX moved its UK retail business onto this single company, and the former UK entity, Gain Capital UK, applied to cancel its licence.",
+    "As the name suggests, FOREX.com is a currency specialist, with 80+ forex pairs and spreads on EUR/USD and GBP/USD from 0.7 points on the standard account. The minimum first deposit is £100, and card and bank deposits and standard withdrawals are free.",
+    "Platform choice is good: FOREX.com's own web platform and app, MetaTrader 4, MetaTrader 5 and TradingView. The main costs to watch are a £12 monthly inactivity fee after 12 months without trading, and a charge on same-day CHAPS withdrawals."
+  ],
+  "whoFor": [
+    "Forex traders who want a wide choice of currency pairs",
+    "Traders who want MT4, MT5 or TradingView with a large, listed group behind the broker",
+    "Traders who want a standard, commission-free account with a modest £100 first deposit"
+  ],
+  "notFor": [
+    "Occasional traders (£12 monthly inactivity fee after 12 months)",
+    "Investors who want to buy and hold shares or use an ISA",
+    "Beginners who want the widest range of non-forex markets"
+  ],
+  "fees": {
+    "intro": "On the standard account, FOREX.com's cost is built into the spread, with no separate commission on forex.",
+    "spreadsHead": ["Charge", "FOREX.com (UK)"],
+    "spreads": [
+      ["EUR/USD spread", "From 0.7 points"],
+      ["GBP/USD spread", "From 0.7 points"],
+      ["Commission (standard account)", "None"],
+      ["Forex pairs", "80+"]
+    ],
+    "spreadsNote": "From FOREX.com's UK standard account page. Spreads are variable.",
+    "other": [
+      ["Deposits", "Free by debit/credit card and bank transfer"],
+      ["Withdrawals", "Free to card or bank by BACS or SWIFT; a charge applies to same-day CHAPS transfers"],
+      ["Inactivity fee", "£12 a month after 12 months with no trading, until you trade again or the balance is zero"],
+      ["Overnight financing", "Charged or credited on positions held overnight"]
+    ]
+  },
+  "accounts": [
+    ["Standard account", "Spread-only pricing with no commission on forex, and access to FOREX.com's platform, MT4, MT5 and TradingView."],
+    ["MT5 account", "Trade 500+ markets, including CFDs on shares, indices, forex and commodities, on MetaTrader 5."],
+    ["Demo account", "Practise with virtual funds before trading real money."]
+  ],
+  "funding": {
+    "rows": [
+      ["Deposit methods", "Debit/credit card and bank transfer"],
+      ["Minimum first deposit", "£100 (FOREX.com suggests £2,500 for more flexibility)"],
+      ["Deposit fees", "None"],
+      ["Withdrawal fees", "None by BACS, SWIFT or to card; a charge applies to same-day CHAPS"]
+    ]
+  },
+  "safety": [
+    "FOREX.com is a trading name of StoneX Financial Ltd, authorised and regulated by the Financial Conduct Authority (FRN 446717).",
+    "Retail client money is segregated from FOREX.com's own funds and held with top-tier banks.",
+    "Eligible clients may be protected by the FSCS if the firm fails (the investment limit is currently £85,000).",
+    "Parent company StoneX Group Inc. is listed on NASDAQ.",
+    "Retail accounts have negative balance protection."
+  ],
+  "platforms": [
+    ["FOREX.com web platform & app", "FOREX.com's own platforms with charting and trade management."],
+    ["MetaTrader 4 & 5", "Both are available; MT5 offers 500+ markets."],
+    ["TradingView", "Log in to your FOREX.com account on TradingView to trade from its charts."]
+  ],
+  "research": "FOREX.com publishes regular news and analysis, including market commentary and trading guides.",
+  "support": "FOREX.com has an online help and support centre with FAQs on accounts, funding and pricing.",
+  "faq": [
+    ["Is FOREX.com safe?", "In the UK, FOREX.com is a trading name of StoneX Financial Ltd, authorised by the FCA (FRN 446717). Retail client money is segregated, and the parent company StoneX Group is listed on NASDAQ."],
+    ["What is FOREX.com's minimum deposit?", "The minimum first deposit in the UK is £100."],
+    ["Does FOREX.com charge an inactivity fee?", "Yes. After 12 months with no trading, FOREX.com charges £12 a month until you trade again or the account has no funds."],
+    ["What are FOREX.com's spreads?", "On the UK standard account, EUR/USD and GBP/USD spreads start from 0.7 points, with no commission."],
+    ["Does FOREX.com offer MT4, MT5 and TradingView?", "Yes. FOREX.com offers its own platform plus MetaTrader 4, MetaTrader 5 and TradingView."],
+    ["Why has FOREX.com's UK company changed?", "In 2026 StoneX moved its UK retail forex and CFD business onto StoneX Financial Ltd. Gain Capital UK Limited, the previous UK entity, applied to cancel its FCA licence on 23 September 2026."]
+  ],
+  "sources": [
+    "https://www.forex.com/en-uk/trading-accounts/standard-trading-account/",
+    "https://www.forex.com/en-uk/about-us/financial-transparency/trading-costs-charges/",
+    "https://www.forex.com/en-uk/about-us/strength-and-security/",
+    "https://www.forex.com/en-uk/trading-platforms/overview/",
+    "https://www.forex.com/en-uk/help-and-support/faqs/accounts/",
+    "https://www.stonex.com/en/business/compliance-library/"
+  ]
+}
