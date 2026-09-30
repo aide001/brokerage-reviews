@@ -1,0 +1,102 @@
+{
+  "_note": "Long-form review content for brokers/ig.html. Facts checked on IG's UK website on 30 September 2026; see sources.",
+  "checked": "2026-09-30",
+  "verdict": [
+    "IG is the UK's longest-running spread betting and CFD provider. It was founded in 1974, is authorised by the FCA, and its parent company, IG Group, is listed on the London Stock Exchange. For UK traders that track record, combined with segregated client money and FSCS cover, is hard to beat.",
+    "Costs are competitive rather than rock-bottom. EUR/USD starts from 0.6 pips with no commission, there are no account, platform or inactivity fees, and deposits and withdrawals are free. Overnight funding costs more on spread bets than on CFDs, so check which account suits how long you hold trades.",
+    "Where IG really stands out is choice. One login gives you spread betting, CFDs, share dealing, ISAs and a SIPP, and you can trade on IG's own platform, MT4, MT5, ProRealTime, L2 Dealer or TradingView. That breadth can feel busy for a complete beginner, but the education, daily IG TV shows and 24-hour support go a long way to help."
+  ],
+  "whoFor": [
+    "UK traders who want spread betting and CFDs from a long-established, FCA-authorised firm",
+    "Traders who want a choice of platforms (IG, MT4, MT5, ProRealTime, TradingView) on one account",
+    "People who also want to invest through a Stocks and Shares ISA or SIPP with the same provider",
+    "Beginners who value education, a demo account and support that is open almost 24/7"
+  ],
+  "notFor": [
+    "Scalpers chasing the very lowest raw spreads plus commission: ECN-style accounts elsewhere can be cheaper",
+    "Traders who hold spread bets for weeks, as the overnight funding admin fee adds up",
+    "Anyone who wants a very simple, stripped-back app with only a handful of markets"
+  ],
+  "fees": {
+    "intro": "IG builds its charge for forex, indices and commodities into the spread, so there is no separate commission on those markets. Spreads are variable; the figures below are the minimum spreads IG publishes for its spread betting and CFD accounts.",
+    "spreadsLabel": "Minimum spread",
+    "spreads": [
+      ["EUR/USD", "0.6"],
+      ["GBP/USD", "0.9"],
+      ["EUR/GBP", "0.9"],
+      ["USD/JPY", "0.7"],
+      ["FTSE 100", "1"],
+      ["S&P 500", "0.4"],
+      ["US Tech 100", "1"],
+      ["Germany 40", "1.4"],
+      ["Spot Gold", "0.3"],
+      ["Brent Crude", "2.8"]
+    ],
+    "spreadsNote": "Pips for forex, points for indices and commodities, as listed on IG's charges page.",
+    "other": [
+      ["Share CFD commission", "0.10% on UK and European shares; 2¢ per share on US shares"],
+      ["Overnight funding (spread bets)", "Interbank rate plus an IG admin fee of 1.5% for forex and 3.4% for other markets"],
+      ["Overnight funding (CFDs)", "Interbank rate plus an IG admin fee of 1% for forex and 3% for other markets"],
+      ["Currency conversion (trading)", "0.8% when you trade in a currency other than your account's base currency"],
+      ["Guaranteed stops", "Optional; a premium is charged only if the stop is triggered"],
+      ["Account, platform & inactivity fees", "None"],
+      ["Deposits & withdrawals", "Free by bank transfer, debit card and credit card"]
+    ],
+    "investing": "For investing (share dealing, ISA and SIPP), IG charges no commission on shares when it converts currency automatically, with a 0.7% FX fee on foreign trades, and no custody or inactivity fee. IG's SIPP is administered by Options Pensions, which charges £205 a year."
+  },
+  "accounts": [
+    ["Spread betting", "Trade forex, indices, commodities and shares by the pound per point. For most UK residents, spread betting profits are currently free from Capital Gains Tax and Stamp Duty, but tax treatment depends on your circumstances and can change. Provided by IG Index Ltd."],
+    ["CFD trading", "Contracts for difference on the same markets, with share CFDs charged by commission. Losses can be offset against gains for tax. Provided by IG Markets Ltd."],
+    ["Share dealing, ISA and Junior ISA", "Buy UK and international shares, ETFs and investment trusts to own outright, including in a tax-free Stocks and Shares ISA. Provided by IG Trading and Investments Ltd."],
+    ["SIPP", "A self-invested personal pension, administered by Options Pensions."],
+    ["Demo account", "Practise with virtual funds on IG's platform before trading real money."]
+  ],
+  "funding": {
+    "rows": [
+      ["Deposit methods", "Bank transfer, debit card, credit card"],
+      ["Minimum deposit", "No minimum by bank transfer; IG's help centre lists a £1 minimum for card deposits"],
+      ["Card deposit limits", "Up to £99,999 a day by debit card and £30,000 a day by credit card"],
+      ["Bank transfer timing", "Can take three to five business days to reach your account"],
+      ["Withdrawal methods", "Card or Apple Pay (up to £20,000 a day) and bank transfer (no maximum)"],
+      ["Minimum withdrawal", "£100"],
+      ["Fees", "None for deposits or withdrawals"]
+    ]
+  },
+  "safety": [
+    "Authorised and regulated by the Financial Conduct Authority (FRN 195355 for IG Markets Ltd).",
+    "Client money is held in segregated trust accounts at high-street banks such as Barclays and Lloyds, never mixed with IG's own money, and not used for IG's hedging.",
+    "Shares you buy are held by approved custodians in segregated nominee accounts under the FCA's client asset (CASS) rules.",
+    "If IG failed, any shortfall of up to £85,000 may be covered by the Financial Services Compensation Scheme (FSCS).",
+    "Retail accounts have negative balance protection, so you cannot lose more than the money in your account.",
+    "Parent company IG Group is listed on the London Stock Exchange and publishes audited accounts."
+  ],
+  "platforms": [
+    ["IG web platform & app", "IG's own browser platform and mobile apps, with dealing from charts, price alerts, built-in news and free integrated ProRealTime charting."],
+    ["MetaTrader 4 & MetaTrader 5", "Both MetaTrader platforms are available. IG adds extra indicators and Expert Advisors on MT5 at no cost, with free VPS hosting for qualifying accounts."],
+    ["ProRealTime", "Advanced charting and automated trading, integrated into IG's platform."],
+    ["TradingView", "Link your IG account to a free TradingView account and trade straight from TradingView charts."],
+    ["L2 Dealer & APIs", "Direct market access for shares and forex, plus APIs for building your own tools."]
+  ],
+  "research": "IG's in-house IG TV channel runs live shows three times a day, Monday to Friday: a pre-European open bulletin at 7:30am, 'Charting the markets' at 10:30am and a trading look-ahead at 4pm (UK time). You also get news and analysis built into the platform, trading signals, an economic calendar, a stock screener and the IG Academy for structured lessons.",
+  "support": "Support is available 24 hours a day except from 10pm Friday to 8am Saturday (UK time), through web chat and WhatsApp. There is also a UK freephone number, 0800 195 3100, and a detailed online help centre.",
+  "faq": [
+    ["Is IG safe?", "IG is authorised and regulated by the FCA (FRN 195355), has been in business since 1974 and its parent company is listed on the London Stock Exchange. Client money is kept in segregated trust accounts, and eligible clients are covered by the FSCS for up to £85,000 if IG were to fail. As with any leveraged product, you can still lose the money you trade with."],
+    ["What is IG's minimum deposit?", "There is no minimum deposit by bank transfer. IG's help centre lists a £1 minimum for card deposits. You will still need enough funds to cover the margin on any trade you open."],
+    ["Does IG charge an inactivity fee?", "No. IG's charges page lists account opening, closing and maintenance, and inactivity, as free."],
+    ["What are IG's spreads?", "IG's published minimum spreads include 0.6 pips on EUR/USD, 0.9 on GBP/USD, 1 point on the FTSE 100 and 0.4 on the S&P 500. Spreads are variable and can widen outside market hours and during volatile periods."],
+    ["Does IG offer MT4, MT5 and TradingView?", "Yes. As well as its own web platform and apps, IG offers MetaTrader 4, MetaTrader 5, ProRealTime, L2 Dealer and TradingView integration."],
+    ["Is spread betting with IG tax-free?", "For most UK residents, spread betting profits are currently free from Capital Gains Tax and Stamp Duty. Tax treatment depends on your individual circumstances and can change, so check with HMRC or a tax adviser if you are unsure."],
+    ["What is IG's minimum withdrawal?", "IG's help centre lists a £100 minimum for withdrawals by card, Apple Pay or bank transfer. Card and Apple Pay withdrawals are limited to £20,000 a day; bank transfers have no maximum."],
+    ["Does IG have a demo account?", "Yes. You can open a free demo account to practise on IG's platform with virtual funds."]
+  ],
+  "sources": [
+    "https://www.ig.com/uk/our-charges",
+    "https://www.ig.com/uk/client-funds",
+    "https://www.ig.com/uk/help-and-support/articles/685866-what-s-the-minimum-and-maximum-amount-i-can-deposit",
+    "https://www.ig.com/uk/help-and-support/articles/685944-what-is-the-minimum-and-maximum-amount-i-can-withdraw",
+    "https://www.ig.com/uk/trading-platforms",
+    "https://www.ig.com/uk/trading-platforms/metatrader-5",
+    "https://www.ig.com/uk/trading-platforms/tradingview",
+    "https://www.ig.com/uk/contact-us"
+  ]
+}

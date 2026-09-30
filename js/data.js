@@ -261,10 +261,11 @@ window.BROKERS = [
     "platforms": [
       "IG Platform",
       "MT4",
+      "MT5",
       "ProRealTime",
       "TradingView"
     ],
-    "instruments": 17000,
+    "instruments": 15000,
     "bestFor": "Overall best all-rounder",
     "ratings": {
       "fees": 4.3,
@@ -274,14 +275,14 @@ window.BROKERS = [
       "education": 4.8
     },
     "pros": [
-      "Huge range of markets",
-      "Decades-long history, listed on the LSE",
-      "Top-class education and research"
+      "No account, platform or inactivity fees",
+      "Decades-long history, parent listed on the LSE",
+      "Choice of IG, MT4, MT5, ProRealTime and TradingView"
     ],
     "cons": [
-      "Complex fee structure for some products",
+      "Overnight funding on spread bets costs more than on CFDs",
       "Platform can feel overwhelming to beginners",
-      "Inactivity fee after two years"
+      "Minimum spreads are not the lowest for high-volume forex traders"
     ],
     "summary": "IG is a global heavyweight offering an enormous range of markets, excellent tools and research, and exceptional regulatory standing.",
     "ukStatus": "fca",
@@ -294,8 +295,8 @@ window.BROKERS = [
       "https://www.ig.com/uk/forex/markets-forex",
       "https://www.ig.com/uk/help-and-support/articles/685866-what-s-the-minimum-and-maximum-amount-i-can-deposit"
     ],
-    "checked": "2026-09-29",
-    "dataNotes": "No minimum by bank transfer; card minimum £250. EUR/USD minimum spread 0.6, no commission on FX.",
+    "checked": "2026-09-30",
+    "dataNotes": "No minimum by bank transfer; help centre lists £1 card minimum. EUR/USD minimum spread 0.6, no commission on FX. No inactivity fee (charges page, 30 Sep 2026). 15,000+ markets per ig.com/uk.",
     "logoExt": "png"
   },
   {

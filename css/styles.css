@@ -724,3 +724,36 @@ body.has-tray .toast { bottom: 100px; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* Long-form broker reviews */
+.review-updated { margin: 4px 0 0; }
+.review-toc { margin: 0 0 24px; padding: 14px 18px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); font-size: .9rem; }
+.review-toc ol { margin: 8px 0 0; padding-left: 1.3em; columns: 2; column-gap: 28px; }
+.review-toc li { margin-bottom: 4px; break-inside: avoid; }
+.review-section { margin: 0 0 32px; }
+.review-section h2 { font-size: 1.35rem; margin: 0 0 12px; }
+.review-section h3 { font-size: 1rem; margin: 18px 0 10px; }
+.review-section .review-grid h3 { margin-top: 0; }
+.review-section p { line-height: 1.7; margin: 0 0 12px; }
+.table-wrap { overflow-x: auto; margin: 0 0 8px; border: 1px solid var(--border); border-radius: var(--radius); }
+.data-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.data-table th, .data-table td { padding: 9px 14px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+.data-table th { background: var(--surface); font-weight: 600; }
+.data-table tr:last-child td { border-bottom: 0; }
+.data-table td:first-child { font-weight: 600; white-space: nowrap; }
+.kv-table thead { display: none; }
+.kv-table td:first-child { width: 38%; white-space: normal; }
+.prose-list { margin: 0; }
+.prose-list dt { font-weight: 700; margin-top: 12px; }
+.prose-list dt:first-child { margin-top: 0; }
+.prose-list dd { margin: 4px 0 0; line-height: 1.65; }
+.check-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.check-list li { position: relative; padding-left: 26px; line-height: 1.6; }
+.check-list li::before { content: "✓"; position: absolute; left: 4px; color: var(--success, #16a34a); font-weight: 700; }
+.faq-list details { border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 16px; margin-bottom: 8px; background: var(--surface); }
+.faq-list summary { cursor: pointer; font-weight: 600; }
+.faq-list details p { margin: 10px 0 0; }
+@media (max-width: 640px) {
+  .review-toc ol { columns: 1; }
+  .data-table td:first-child { white-space: normal; }
+}

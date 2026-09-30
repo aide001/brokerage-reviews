@@ -341,6 +341,54 @@ def guides_featuring(b):
     return sorted(out, key=lambda x: x[1])
 
 
+def load_review(b):
+    """Long-form review content from content/reviews/<id>.json, or None."""
+    path = os.path.join(ROOT, "content", "reviews", "%s.json" % b["id"])
+    return json.load(open(path, encoding="utf-8")) if os.path.exists(path) else None
+
+
+def table(head, rows, cls="data-table"):
+    return ('<div class="table-wrap"><table class="%s"><thead><tr>%s</tr></thead><tbody>%s</tbody></table></div>'
+            % (cls, "".join("<th>%s</th>" % e(h) for h in head),
+               "".join("<tr>%s</tr>" % "".join("<td>%s</td>" % e(c) for c in r) for r in rows)))
+
+
+def long_review(b, r):
+    """(table of contents, verdict block, detailed sections, FAQ JSON-LD) for a broker with a long review."""
+    name = e(b["name"])
+    fees = r["fees"]
+    sections = [
+        ("who-for", "Who %s is for" % b["name"],
+         '<div class="review-grid"><section><h3>Good fit</h3><ul class="pros">%s</ul></section>'
+         '<section><h3>Look elsewhere if</h3><ul class="cons">%s</ul></section></div>'
+         % ("".join("<li>%s</li>" % e(x) for x in r["whoFor"]), "".join("<li>%s</li>" % e(x) for x in r["notFor"]))),
+        ("fees", "%s fees and spreads" % b["name"],
+         "<p>%s</p>%s<p class=\"muted small\">%s</p><h3>Other costs</h3>%s%s"
+         % (e(fees["intro"]), table(["Market", fees.get("spreadsLabel", "Spread")], fees["spreads"]),
+            e(fees.get("spreadsNote", "")), table(["Charge", "%s" % b["name"]], fees["other"]),
+            "<p>%s</p>" % e(fees["investing"]) if fees.get("investing") else "")),
+        ("accounts", "Account types", '<dl class="prose-list">%s</dl>'
+         % "".join("<dt>%s</dt><dd>%s</dd>" % (e(k), e(v)) for k, v in r["accounts"])),
+        ("funding", "Deposits and withdrawals", table(["", ""], r["funding"]["rows"], "data-table kv-table")),
+        ("safety", "Is %s safe?" % b["name"], '<ul class="check-list">%s</ul>' % "".join("<li>%s</li>" % e(x) for x in r["safety"])),
+        ("platforms", "Platforms and tools", '<dl class="prose-list">%s</dl>'
+         % "".join("<dt>%s</dt><dd>%s</dd>" % (e(k), e(v)) for k, v in r["platforms"])),
+        ("research", "Research and education", "<p>%s</p>" % e(r["research"])),
+        ("support", "Customer support", "<p>%s</p>" % e(r["support"])),
+        ("faq", "%s FAQs" % b["name"], '<div class="faq-list">%s</div>'
+         % "".join("<details><summary>%s</summary><p>%s</p></details>" % (e(q), e(a)) for q, a in r["faq"])),
+    ]
+    toc = ('<nav class="review-toc" aria-label="On this page"><strong>On this page</strong><ol>%s</ol></nav>'
+           % "".join('<li><a href="#%s">%s</a></li>' % (i, e(t)) for i, t in [("verdict", "Our verdict")] + [(i, t) for i, t, _ in sections]))
+    verdict = ('<section class="review-section" id="verdict"><h2>Our verdict on %s</h2>%s</section>'
+               % (name, "".join("<p>%s</p>" % e(x) for x in r["verdict"])))
+    body = "".join('<section class="review-section" id="%s"><h2>%s</h2>%s</section>' % (i, e(t), h) for i, t, h in sections)
+    faq_ld = {"@context": "https://schema.org", "@type": "FAQPage",
+              "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
+                             for q, a in r["faq"]]}
+    return toc, verdict, body, faq_ld
+
+
 def build_review(b):
     path = "brokers/%s.html" % b["id"]
     title = "%s Review %d: Fees, Spreads & Regulation" % (b["name"], YEAR)
@@ -365,12 +413,17 @@ def build_review(b):
     others = [o for o in BY_RATING[max(0, idx - 3):idx + 4] if o is not b][:5]
     others_html = "".join('<li><a href="%s.html">%s review</a> <span class="muted">%.1f</span></li>'
                           % (e(o["id"]), e(o["name"]), o["overall"]) for o in others)
+    r = load_review(b)
+    toc, verdict, details, faq_ld = long_review(b, r) if r else ("", "", "", None)
+    sources = b.get("sources", []) + [u for u in (r or {}).get("sources", []) if u not in b.get("sources", [])]
+    checked = max(b.get("checked") or "", (r or {}).get("checked") or "")
     body = """    <article class="section review-page">
       <div class="container narrow">
         <p class="breadcrumb"><a href="../index.html">Home</a> / <a href="../best/index.html">Broker reviews</a></p>
         <header class="review-head">{logo}
           <div><h1 class="post-title">{name} Review</h1>
-          <p class="muted">{best_for} · Founded {founded} · {hq}</p><p class="rank-uk">{uk}</p></div>
+          <p class="muted">{best_for} · Founded {founded} · {hq}</p><p class="rank-uk">{uk}</p>
+          <p class="muted small review-updated">Updated {checked}</p></div>
           <div class="review-score"><strong>{score:.1f}</strong>{stars}<small>Overall</small></div>
         </header>
         {notices}
@@ -379,6 +432,7 @@ def build_review(b):
           <div class="cta-box-action">{cta}{note}</div>
         </div>
         <p class="lead-text">{summary}</p>
+        {toc}{verdict}
         <div class="review-grid">
           <section><h2>Ratings breakdown</h2><ul class="bars">{bars}</ul>
             <p class="muted small"><a href="../index.html#methodology">How we rate brokers</a></p></section>
@@ -393,6 +447,7 @@ def build_review(b):
             the entity you open an account with.</p></section>
           <section><h2>Platforms</h2>{plats}</section>
         </div>
+        {details}
         {featured_block}
         <section class="data-sources" aria-labelledby="sources-title">
           <h2 id="sources-title">Where these figures come from</h2>
@@ -423,12 +478,12 @@ def build_review(b):
                          featured_block=('<section class="more-guides"><h2>Featured in our guides</h2><ul>%s</ul></section>'
                                          % featured_html) if featured else "",
                          disclosure=DISCLOSURE, others=others_html,
-                         checked=nice_date(b.get("checked")), uk_site=" (UK site where available)" if b.get("fcaFrn") else "",
+                         checked=nice_date(checked), toc=toc, verdict=verdict, details=details, uk_site=" (UK site where available)" if b.get("fcaFrn") else "",
                          fx_note=("Figures marked ~ are converted from US$ at £1 = $%.4f (ECB reference rate, %s). "
                                   % (FX["GBPUSD"], nice_date(FX["date"]))) if b.get("approx") else "",
                          source_links="".join('<li><a href="%s" rel="nofollow noopener" target="_blank">%s</a></li>'
                                               % (e(u), e(re.sub(r"^https?://(www\.)?", "", u).rstrip("/")))
-                                              for u in b.get("sources", [])))
+                                              for u in sources))
     desc = ("%s review: %s. EUR/USD %s, minimum deposit %s, regulated by %s. Overall score %.1f/5."
             % (b["name"], b["bestFor"].rstrip("."), spread_text(b), approx(b, "minDeposit", money(b["minDeposit"])),
                ", ".join(b["regulators"][:3]), b["overall"]))
@@ -436,7 +491,7 @@ def build_review(b):
     logo_file = next((p for p in ("assets/logos/%s.svg" % b["id"], "assets/logos/%s.png" % b["id"])
                       if os.path.exists(os.path.join(ROOT, p))), None)
     return path, page("%s — %s" % (title, SITE), desc, body, path, current="best",
-                      jsonld=[x for x in [crumbs] if x], noindex=not DATA_VERIFIED or not b.get("verified", True),
+                      jsonld=[x for x in [crumbs, faq_ld] if x], noindex=not DATA_VERIFIED or not b.get("verified", True),
                       image=logo_file)
 
 
