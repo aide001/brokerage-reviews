@@ -1,0 +1,71 @@
+{
+  "_note": "Long-form review content for brokers/xm.html. xm.com blocks automated page reads, so facts were checked via search of XM's official domain on 30 September 2026; UK onboarding could not be confirmed. See sources.",
+  "checked": "2026-09-30",
+  "verdict": [
+    "XM, founded in 2009, is a large international broker best known for its very low minimum deposit and free education. Its global offering is provided by XM Global Limited, licensed by the Financial Services Commission of Belize (licence 8557558); its European company is regulated by CySEC (licence 120/10).",
+    "For UK readers the picture is unclear. XM's group includes an FCA-authorised UK company, Trading Point of Financial Instruments UK Ltd (FRN 705428), but independent reviews report that XM no longer accepts UK retail clients, and we could not confirm otherwise from XM's website, which blocks automated checks. If you are in the UK, check which XM company your account agreement names before depositing. Only the UK company gives you FCA and FSCS protection.",
+    "XM's accounts are aimed at beginners: Micro and Standard accounts, plus Ultra Low versions with tighter spreads. All include negative balance protection. XM has stopped offering its commission-based Zero account."
+  ],
+  "whoFor": [
+    "Non-UK beginners who want a very small first deposit",
+    "Traders who value free webinars and education",
+    "MetaTrader 4 and 5 users"
+  ],
+  "notFor": [
+    "UK residents who want certainty of FCA protection (XM's UK onboarding is unclear)",
+    "Traders who want raw spreads plus commission (the Zero account has been discontinued)",
+    "Anyone wanting spread betting or an ISA"
+  ],
+  "fees": {
+    "intro": "XM's global accounts are commission-free, with costs built into the spread. The Ultra Low accounts offer tighter spreads than the Micro and Standard accounts.",
+    "spreadsHead": ["Account", "Pricing", "Commission"],
+    "spreads": [
+      ["Micro", "Spread-only", "None"],
+      ["Standard", "Spread-only", "None"],
+      ["Ultra Low Micro / Standard", "Tighter spreads", "None"],
+      ["Zero (discontinued)", "Raw spreads", "Was US$7 per US$100,000"]
+    ],
+    "spreadsNote": "From XM's account types and help pages as indexed by search. Live spreads are shown in the trading platform.",
+    "other": [
+      ["Minimum deposit", "From about US$5"],
+      ["Overnight swaps", "Charged or credited on positions held overnight; Islamic (swap-free) option available"],
+      ["Negative balance protection", "Included on all accounts"]
+    ]
+  },
+  "accounts": [
+    ["Micro", "Trade in micro lots, suited to very small balances."],
+    ["Standard", "Standard lot sizes with commission-free pricing."],
+    ["Ultra Low Micro and Standard", "Lower spreads than the Micro and Standard accounts."],
+    ["Islamic and demo accounts", "Swap-free option and free demos."]
+  ],
+  "funding": {
+    "rows": [
+      ["Minimum deposit", "From about US$5 (equivalent in other currencies)"],
+      ["UK residents", "Unclear: check which XM company your account would be with"]
+    ]
+  },
+  "safety": [
+    "XM Global Limited is licensed by the Financial Services Commission of Belize (licence 8557558). This offshore company is not FCA-authorised.",
+    "XM's European company is regulated by CySEC (licence 120/10), and the group has an FCA-authorised UK company (Trading Point of Financial Instruments UK Ltd, FRN 705428).",
+    "XM says client funds are held in segregated client bank accounts that don't contain XM's own money.",
+    "FSCS protection (up to £85,000) applies only to clients of the FCA-authorised UK company."
+  ],
+  "platforms": [
+    ["MetaTrader 4 & 5", "XM's main trading platforms."],
+    ["XM app", "XM's mobile app for trading and account management."]
+  ],
+  "research": "XM is known for free education: regular webinars, seminars, video tutorials and daily market analysis.",
+  "support": "XM offers multilingual customer support and an online help centre.",
+  "faq": [
+    ["Does XM accept UK clients?", "It's unclear. XM's group has an FCA-authorised UK company (FRN 705428), but independent reviews report XM no longer accepts UK retail clients, and we couldn't confirm otherwise from XM's website. Check which company your account would be with before depositing."],
+    ["What is XM's minimum deposit?", "XM's global accounts can be opened from about US$5."],
+    ["Does XM still offer the Zero account?", "No. XM has stopped offering its commission-based Zero account."],
+    ["Is XM regulated?", "Yes, by several regulators, including CySEC in Cyprus and the FSC in Belize. Its UK company is FCA-authorised, but the global company most international clients use is regulated offshore."]
+  ],
+  "sources": [
+    "https://www.xm.com/account-types",
+    "https://www.xm.com/regulation",
+    "https://www.xm.com/help-center/trading_accounts/do-you-charge-commission-on-xm-zero-ultra-low-accounts",
+    "https://www.xm.com/help-center/deposits-withdrawals/faq-what-is-the-minimum-i-can-deposit-or-withdraw"
+  ]
+}

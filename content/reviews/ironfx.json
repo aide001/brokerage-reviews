@@ -1,0 +1,65 @@
+{
+  "_note": "Long-form review content for brokers/ironfx.html. ironfx.com could not be reached from our checking environment; facts checked via search of IronFX's official domain on 30 September 2026; see sources.",
+  "checked": "2026-09-30",
+  "verdict": [
+    "Important for UK readers: IronFX says its website is not directed at UK residents, and that its services fall outside the rules, guidance and protections of the UK Financial Conduct Authority Handbook. Its international services are provided by Notesco (BVI) Limited, regulated by the Financial Services Commission of the British Virgin Islands.",
+    "IronFX offers six account types (three standard live accounts and three STP/ECN accounts) with fixed, floating and zero-spread options. It says spreads start from zero pips on selected pairs, and its own guidance suggests a starting balance of US$50–100, with around US$500 recommended to trade comfortably.",
+    "IronFX has also had a mixed reputation over past client complaints. Combined with the lack of FCA protection for UK residents, we don't recommend it for UK traders. FCA-authorised brokers such as IG, Pepperstone or CMC Markets are the relevant alternatives."
+  ],
+  "whoFor": [
+    "Not suitable for UK residents: IronFX's website is not directed at the UK",
+    "Outside the UK: traders comfortable with offshore regulation who want a choice of fixed and floating spreads"
+  ],
+  "notFor": [
+    "UK residents who want FCA protection, FSCS cover or access to the Financial Ombudsman Service",
+    "Beginners attracted by high offshore leverage"
+  ],
+  "fees": {
+    "intro": "IronFX's international accounts offer fixed, floating and zero-spread pricing. IronFX says all spreads are indicative; live values are shown in the trading terminal.",
+    "spreadsHead": ["Charge", "IronFX (international)"],
+    "spreads": [
+      ["Account range", "3 standard live accounts + 3 STP/ECN accounts"],
+      ["Spreads from", "0 pips on selected pairs (STP/ECN)"],
+      ["Suggested starting balance", "US$50–100 (US$500 recommended)"]
+    ],
+    "spreadsNote": "From IronFX's account types, spreads and minimum deposit pages as indexed by search.",
+    "other": [
+      ["Regulator for international clients", "Financial Services Commission of the British Virgin Islands (Notesco (BVI) Limited)"],
+      ["UK status", "Website not directed at UK residents; outside FCA rules and protections"]
+    ]
+  },
+  "accounts": [
+    ["Standard live accounts", "Three account types with fixed or floating spreads."],
+    ["STP/ECN accounts", "Three accounts with the lowest spreads, from zero pips on selected pairs."],
+    ["Demo account", "Free demo on MetaTrader."]
+  ],
+  "funding": {
+    "rows": [
+      ["UK residents", "Website not directed at UK residents"],
+      ["Suggested starting deposit", "US$50–100; US$500 recommended"]
+    ]
+  },
+  "safety": [
+    "IronFX's international services are provided by Notesco (BVI) Limited, regulated by the Financial Services Commission of the British Virgin Islands.",
+    "IronFX states that its website is not directed at UK residents and falls outside the protections of the FCA Handbook, so UK residents would not have FSCS or Financial Ombudsman protection.",
+    "IronFX has had a mixed reputation over past client complaints; research carefully before using any offshore broker."
+  ],
+  "platforms": [
+    ["MetaTrader 4 & 5", "IronFX's main trading platforms."],
+    ["WebTrader", "Browser-based trading."]
+  ],
+  "research": "IronFX publishes educational articles and FAQs on forex trading.",
+  "support": "IronFX provides support through its website FAQ and contact channels for clients in the regions it serves.",
+  "faq": [
+    ["Is IronFX available in the UK?", "IronFX says its website is not directed at UK residents and falls outside the FCA's rules and protections."],
+    ["Who regulates IronFX?", "Its international services are provided by Notesco (BVI) Limited, regulated by the Financial Services Commission of the British Virgin Islands. It is not FCA-authorised."],
+    ["What is IronFX's minimum deposit?", "IronFX suggests you can start with US$50–100, but recommends around US$500."],
+    ["What are UK alternatives to IronFX?", "FCA-authorised brokers such as IG, Pepperstone and CMC Markets."]
+  ],
+  "sources": [
+    "https://www.ironfx.com/en/trading/account-types/",
+    "https://www.ironfx.com/en/trading/spreads/",
+    "https://www.ironfx.com/en/what-is-the-minimum-deposit-for-forex-trading/",
+    "https://www.ironfx.com/en/faq-page/"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "_note": "Long-form review content for brokers/exness.html. exness.com blocks automated reads; facts checked via search of Exness's official domain on 30 September 2026; see sources.",
+  "checked": "2026-09-30",
+  "verdict": [
+    "Important for UK readers: Exness does not serve UK residents, so you cannot open an account from the UK. We include this review because Exness is one of the largest retail brokers worldwide and UK readers often search for it.",
+    "Outside the UK, Exness is known for low entry costs and fast withdrawals, and says over 98% of withdrawals are processed automatically. The Standard account has no commission and, according to Exness, no minimum deposit. The professional accounts (Pro, Zero and Raw Spread) offer tighter pricing: Raw Spread starts from 0.0 pips with US$3.50 per lot per side, with minimum deposits of US$200 to US$3,000 depending on region.",
+    "Exness's international accounts are provided by offshore companies such as Exness (SC) Ltd, regulated in Seychelles, with extremely high leverage available. For UK residents, FCA-authorised brokers such as Pepperstone, IG or Tickmill are the relevant choices."
+  ],
+  "whoFor": [
+    "Non-UK traders in regions Exness serves who want low entry costs",
+    "MetaTrader 4 and 5 users who value fast, automated withdrawals"
+  ],
+  "notFor": [
+    "UK residents: Exness does not accept clients from the UK",
+    "Traders who want FCA protection or FSCS cover",
+    "Beginners attracted by very high offshore leverage"
+  ],
+  "fees": {
+    "intro": "Exness's international accounts (not available in the UK) range from commission-free Standard and Pro accounts to commission-based Zero and Raw Spread accounts.",
+    "spreadsHead": ["Account", "Pricing", "Commission", "Minimum deposit"],
+    "spreads": [
+      ["Standard", "Spread-only", "None", "None stated by Exness"],
+      ["Pro", "From 0.1 pips", "None", "Varies by region"],
+      ["Zero", "Zero spreads on many instruments", "Yes (low)", "US$200–3,000 by region"],
+      ["Raw Spread", "From 0.0 pips", "US$3.50 per lot per side", "US$200–3,000 by region"]
+    ],
+    "spreadsNote": "From Exness's account pages as indexed by search. Not available to UK residents.",
+    "other": [
+      ["Withdrawals", "Exness says over 98% are processed automatically"],
+      ["Leverage", "Very high on offshore accounts, far above the UK's 1:30 retail limit"]
+    ]
+  },
+  "accounts": [
+    ["Standard", "Commission-free account for all levels of trader."],
+    ["Pro", "Commission-free with spreads from 0.1 pips."],
+    ["Zero", "Zero spreads on many instruments, with a commission."],
+    ["Raw Spread", "Raw spreads from 0.0 pips plus a fixed US$3.50 per lot per side."]
+  ],
+  "funding": {
+    "rows": [
+      ["UK residents", "Not accepted"],
+      ["Withdrawals", "Over 98% processed automatically (Exness)"],
+      ["Professional account minimums", "US$200 to US$3,000 depending on region"]
+    ]
+  },
+  "safety": [
+    "Exness (SC) Ltd is regulated by the Financial Services Authority of Seychelles (licence SD025) and authorised in South Africa by the FSCA.",
+    "Exness (Cy) Ltd is regulated by CySEC in Cyprus (licence 178/12).",
+    "Exness says client funds are held segregated from its own funds.",
+    "Exness does not serve UK residents, so FCA protections, including the FSCS, do not apply."
+  ],
+  "platforms": [
+    ["MetaTrader 4 & 5", "Exness's main third-party platforms."],
+    ["Exness Terminal", "Exness's own web trading terminal."]
+  ],
+  "research": "Exness publishes trading guides, market news and calculators, but its research and education are lighter than at the big UK brokers.",
+  "support": "Exness offers multilingual support to clients in the regions it serves. UK residents cannot open an account.",
+  "faq": [
+    ["Can UK residents trade with Exness?", "No. Exness does not serve UK residents. UK traders should choose an FCA-authorised broker."],
+    ["Is Exness regulated?", "Yes, outside the UK: by the Seychelles FSA, CySEC and South Africa's FSCA, among others. It is not authorised by the FCA."],
+    ["What is Exness's Raw Spread commission?", "US$3.50 per lot per side, with spreads from 0.0 pips (not available in the UK)."],
+    ["What are good UK alternatives to Exness?", "For low costs with FCA protection, consider Pepperstone, Tickmill or Vantage."]
+  ],
+  "sources": [
+    "https://www.exness.com/standard-accounts/",
+    "https://www.exness.com/pro-accounts/",
+    "https://www.exness.com/regulation/",
+    "https://www.exness.com/client-protection/"
+  ]
+}

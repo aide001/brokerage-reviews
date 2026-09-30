@@ -58,11 +58,11 @@
         "CySEC",
         "FSA (SC)"
       ],
-      "minDeposit": 151,
+      "minDeposit": 0,
       "account": "Raw Spread",
       "spread": 0.1,
       "commission": 5.28,
-      "leverage": 500,
+      "leverage": 5000,
       "platforms": [
         "MT4",
         "MT5",
@@ -84,24 +84,23 @@
         "Fast execution suited to scalping and EAs"
       ],
       "cons": [
-        "Limited proprietary research",
-        "Higher leverage only via offshore entity",
-        "Education section is basic"
+        "No FCA-authorised company for UK clients",
+        "Very high offshore leverage (up to 1:5000)",
+        "Limited proprietary research"
       ],
       "summary": "IC Markets is a popular choice for active and algorithmic traders thanks to raw pricing, deep liquidity and a strong line-up of third-party platforms.",
       "ukStatus": "not-fca",
       "spreadType": "average",
       "verified": true,
       "approx": [
-        "minDeposit",
         "commission"
       ],
       "sources": [
         "https://www.icmarkets.com/global/en/trading-accounts/overview",
         "https://www.icmarkets.com/global/en/trading-accounts/raw-spread-account"
       ],
-      "checked": "2026-09-29",
-      "dataNotes": "Raw Spread: average EUR/USD 0.1 pips, $3.50 per lot per side. Min deposit US$200. No FCA-authorised entity; UK not on its restricted list."
+      "checked": "2026-09-30",
+      "dataNotes": "Raw Spread: average EUR/USD 0.1 pips, $3.50 per lot per side, min deposit $0 (overview page 30 Sep 2026). Global entity regulated by FSA Seychelles; no FCA entity."
     },
     {
       "id": "pepperstone",
@@ -718,9 +717,9 @@
         "Regulated across several continents"
       ],
       "cons": [
-        "Inactivity and administration fees",
-        "No raw-spread account",
-        "Research is fairly basic"
+        "Not available to UK residents",
+        "Inactivity fee after 3 months, admin fee after 12",
+        "No raw-spread account"
       ],
       "summary": "AvaTrade offers predictable fixed spreads and useful risk-management features, backed by regulation across multiple jurisdictions.",
       "ukStatus": "not-available",
@@ -730,7 +729,7 @@
         "https://www.avatrade.com/trading-info/financial-instruments-index/forex",
         "https://support.avatrade.com/hc/en-us/articles/360017588538-Does-AvaTrade-accept-traders-worldwide"
       ],
-      "checked": "2026-09-29",
+      "checked": "2026-09-30",
       "dataNotes": "Does not accept UK residents. EUR/USD from 0.9 pips; min deposit 100 in account currency."
     },
     {
@@ -741,8 +740,8 @@
       "founded": 2010,
       "hq": "Limassol, Cyprus",
       "regulators": [
+        "FSC (BVI)",
         "CySEC",
-        "ASIC",
         "FSCA"
       ],
       "minDeposit": 38,
@@ -765,13 +764,13 @@
         "education": 4
       },
       "pros": [
-        "Licensed by FCA, CySEC and ASIC",
-        "Wide choice of fixed, floating and zero-spread accounts",
-        "Low minimum deposit"
+        "Choice of fixed, floating and zero-spread accounts",
+        "Low suggested starting deposit",
+        "MT4 and MT5 available"
       ],
       "cons": [
+        "Website not directed at UK residents",
         "Mixed reputation from past client complaints",
-        "Standard spreads wider than raw-pricing brokers",
         "High leverage only through offshore entities"
       ],
       "summary": "IronFX offers a broad menu of account types and MetaTrader platforms under several regulators, but its standard pricing is not the cheapest and its reputation is mixed.",
@@ -785,7 +784,7 @@
       "sources": [
         "https://www.ironfx.com/en/faq-page/"
       ],
-      "checked": "2026-09-29",
+      "checked": "2026-09-30",
       "dataNotes": "IronFX states its site is not directed at UK residents. ironfx.com could not be read from this environment (connection refused at proxy); spread/deposit figures not verified."
     },
     {
@@ -883,9 +882,9 @@
         "Multilingual 24/5 support"
       ],
       "cons": [
-        "Standard account spreads are wide",
-        "High leverage only via Belize entity",
-        "Not available in the US"
+        "UK retail onboarding unclear; global entity is offshore",
+        "Zero (raw-spread) account discontinued",
+        "Standard account spreads are wide"
       ],
       "summary": "XM is a beginner-friendly broker with a tiny minimum deposit and excellent educational content, offset by relatively wide spreads on its standard account.",
       "ukStatus": "not-fca",
@@ -897,8 +896,8 @@
       "sources": [
         "https://www.xm.com/account-types"
       ],
-      "checked": "2026-09-29",
-      "dataNotes": "Min deposit US$5 (Standard). EUR/USD Standard spread not confirmed (site blocks automated reads). No FCA-authorised entity."
+      "checked": "2026-09-30",
+      "dataNotes": "xm.com blocks automated reads. Group has FCA entity Trading Point of Financial Instruments UK Ltd (FRN 705428) but third-party reviews report XM no longer accepts UK clients; could not confirm (30 Sep 2026). Global: XM Global Ltd, FSC Belize 8557558. Zero account ceased."
     },
     {
       "id": "vantage",
@@ -934,14 +933,14 @@
         "education": 4
       },
       "pros": [
-        "Raw spreads with a £2 round-turn commission on GBP accounts",
-        "TradingView and copy trading integration",
-        "Low £50 minimum deposit"
+        "£1 per side RAW ECN commission on GBP accounts",
+        "Lloyd's excess-of-FSCS insurance up to £1m",
+        "Spread betting plus MT4, MT5 and TradingView"
       ],
       "cons": [
-        "Most clients served by offshore entities",
         "Limited research output",
-        "Product range varies by region"
+        "No share dealing or ISA",
+        "Premium pricing needs a £25,000 deposit"
       ],
       "summary": "Vantage combines tight raw pricing and modern platform choices with a low entry point, making it a solid option for cost-conscious traders.",
       "ukStatus": "fca",
@@ -953,7 +952,7 @@
         "https://www.vantagemarkets.co.uk/trading/fees/commission/",
         "https://helpcenter.vantagemarkets.co.uk/hc/en-gb/articles/11933274655247-What-is-a-RAW-ECN-account"
       ],
-      "checked": "2026-09-29",
+      "checked": "2026-09-30",
       "dataNotes": "RAW ECN GBP account: £1 per lot per side (£2 round turn) from UK commission page. Min deposit 50 units of account currency and EURUSD min 0.1 pip from Vantage help centre (page blocks automated reads)."
     },
     {
@@ -995,9 +994,9 @@
         "Large range including share CFDs"
       ],
       "cons": [
-        "Share CFD range limited on MT4",
+        "No FCA-authorised company for UK clients",
         "No proprietary platform",
-        "Higher leverage via offshore entity only"
+        "Higher leverage only via offshore entity"
       ],
       "summary": "FP Markets is a long-running Australian broker offering some of the lowest raw trading costs across all the popular third-party platforms.",
       "ukStatus": "not-fca",
@@ -1011,7 +1010,7 @@
         "https://www.fpmarkets.com/account-types/forex-account-types/",
         "https://www.fpmarkets.com/mt4-5-fees-charges/"
       ],
-      "checked": "2026-09-29",
+      "checked": "2026-09-30",
       "dataNotes": "From fpmarkets.com pages as indexed by search (site blocks automated reads): Raw from 0.0 pips, US$3 per lot per side, min deposit ~US$100. Regulated by ASIC/CySEC; no FCA entity found."
     },
     {
@@ -1114,9 +1113,9 @@
         "Good education and market analysis"
       ],
       "cons": [
-        "Premium spreads are wide",
-        "Very high leverage only offshore",
-        "Website and account types can be confusing"
+        "High leverage advertised internationally is not available to UK retail clients",
+        "No spread betting, TradingView or ISA",
+        "Premium account spreads are wide"
       ],
       "summary": "HFM (formerly HotForex) offers lots of account options and trading tools across many jurisdictions, though its standard pricing is on the high side.",
       "ukStatus": "fca",
@@ -1132,7 +1131,7 @@
         "https://hfmarkets.co.uk/uk/en/account-types/zero-spread-account.html",
         "https://www.hfmarkets.co.uk/en/help/faqs"
       ],
-      "checked": "2026-09-29",
+      "checked": "2026-09-30",
       "dataNotes": "From hfmarkets.co.uk pages as indexed by search (site blocks automated reads): Zero account min deposit $25, commission from $3 per lot (per side assumed), 71.46% of retail lose money."
     },
     {
@@ -1143,16 +1142,15 @@
       "founded": 2011,
       "hq": "Limassol, Cyprus",
       "regulators": [
-        "CySEC",
-        "FCA",
         "FSC (MU)",
+        "FSCA",
         "CMA"
       ],
       "minDeposit": 500,
       "account": "Advantage",
       "spread": 0.0,
       "commission": 5.28,
-      "leverage": 30,
+      "leverage": 1000,
       "platforms": [
         "MT4",
         "MT5",
@@ -1173,24 +1171,22 @@
         "Good educational resources"
       ],
       "cons": [
-        "Commission higher than the cheapest ECN brokers",
-        "Most clients served by Mauritius entity",
-        "Limited non-FX range"
+        "Not available to UK residents",
+        "Advantage account needs a 500 minimum deposit",
+        "Very high offshore leverage adds risk"
       ],
       "summary": "FXTM (ForexTime) has a strong following in emerging markets, pairing raw-spread accounts with helpful education and local support.",
-      "ukStatus": "fca",
-      "fcaFrn": "777911",
+      "ukStatus": "not-available",
       "spreadType": "from",
       "verified": true,
       "approx": [
         "commission"
       ],
       "sources": [
-        "https://www.forextime.com/uk/trading-accounts/account-types",
-        "https://www.forextime.com/uk/trading-accounts/commissions"
+        "https://www.fxtm.com/en/trading/accounts/"
       ],
-      "checked": "2026-09-29",
-      "dataNotes": "UK Advantage account: spreads from 0.0, min deposit 500 USD/EUR/GBP; commission $3.5 per lot per side (FXTM commissions page via search). Loss % not captured."
+      "checked": "2026-09-30",
+      "dataNotes": "forextime.com/uk now redirects to fxtm.com/en; Exinity Limited (FSC Mauritius) states it does not provide services to UK residents (checked 30 Sep 2026). Advantage: spreads from 0, $3.5 per lot per side, min deposit 500 USD/EUR/GBP."
     },
     {
       "id": "axi",
@@ -1211,7 +1207,9 @@
       "commission": 3.4,
       "leverage": 30,
       "platforms": [
+        "Axi Platform",
         "MT4",
+        "MT5",
         "Axi Copy"
       ],
       "instruments": 140,
@@ -1224,14 +1222,14 @@
         "education": 4.1
       },
       "pros": [
-        "No minimum deposit",
+        "No required minimum deposit; free card, PayPal and bank deposits",
         "Raw-spread Pro account",
-        "Regulated in the UK, Australia and New Zealand"
+        "24/7 support by live chat and WhatsApp"
       ],
       "cons": [
-        "MT4 only, no MT5",
-        "Smaller instrument range",
-        "Limited research"
+        "No TradingView",
+        "Limited in-house research",
+        "No share dealing or ISA"
       ],
       "summary": "Axi is a well-regulated, no-frills MetaTrader 4 broker with competitive raw pricing and no minimum deposit.",
       "ukStatus": "fca",
@@ -1246,7 +1244,7 @@
         "https://www.axi.com/uk/trading-accounts",
         "https://www.axi.com/uk/faqs/deposit-and-withdrawal/what-is-the-minimum-i-can-deposit"
       ],
-      "checked": "2026-09-29",
+      "checked": "2026-09-30",
       "dataNotes": "Pro: EURUSD from 0 pips, commission $4.5 round trip (charged in account currency equivalent); Standard: from 0.68 pips, no commission. No minimum deposit (recommended $100)."
     }
   ],

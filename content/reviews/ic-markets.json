@@ -1,0 +1,79 @@
+{
+  "_note": "Long-form review content for brokers/ic-markets.html. Facts checked on icmarkets.com on 30 September 2026; see sources.",
+  "checked": "2026-09-30",
+  "verdict": [
+    "IC Markets was founded in Sydney in 2007 and is one of the world's biggest forex brokers by volume, popular with scalpers and algorithmic traders. Important for UK readers: IC Markets has no FCA-authorised company. The global website that UK residents reach is operated under a licence from the Financial Services Authority of Seychelles (FSA).",
+    "On price, IC Markets is excellent. The Raw Spread account has an average EUR/USD spread of 0.1 pips with a commission of US$3.50 per lot per side (US$7 round turn), and now has no minimum deposit. Newer Raw Pro accounts cut commission to US$1.50 or US$1.00 per side for larger deposits (US$5,000 and US$100,000).",
+    "The trade-off is protection. Without FCA authorisation, UK clients don't get FSCS cover, FCA leverage limits or the Financial Ombudsman Service. IC Markets offers leverage up to 1:5000 on MetaTrader, which can wipe out an account very quickly, though it does hold client-money insurance up to US$1 million. For UK residents, we suggest comparing FCA-authorised raw-spread brokers such as Pepperstone, Tickmill or Vantage first."
+  ],
+  "whoFor": [
+    "Experienced scalpers and algorithmic traders focused on raw-spread costs",
+    "Traders who want MT4, MT5, cTrader and TradingView in one place",
+    "Non-UK traders in regions served by IC Markets' licensed companies"
+  ],
+  "notFor": [
+    "UK traders who want FCA protection, FSCS cover and FCA leverage limits",
+    "Beginners: very high offshore leverage greatly increases the risk of losses",
+    "Anyone wanting spread betting, share dealing or an ISA"
+  ],
+  "fees": {
+    "intro": "All IC Markets accounts use the same raw pricing from up to 25 institutional sources. You choose between commission-free Standard pricing and raw spreads plus commission.",
+    "spreadsHead": ["Account", "Spreads from", "Commission per lot per side", "Minimum deposit"],
+    "spreads": [
+      ["Standard (MetaTrader)", "0.8 pips", "None", "US$0"],
+      ["Raw Spread (MetaTrader)", "0.0 pips (EUR/USD avg 0.1)", "US$3.50", "US$0"],
+      ["Raw Spread (cTrader/TradingView)", "0.0 pips", "US$3.00 per US$100k", "US$0"],
+      ["Raw Pro (early access)", "0.0 pips", "US$1.50", "US$5,000"],
+      ["Raw Pro+ (early access)", "0.0 pips", "US$1.00", "US$100,000"]
+    ],
+    "spreadsNote": "From IC Markets' global account overview. These accounts are offered through IC Markets' offshore (Seychelles-regulated) company, not an FCA-authorised firm.",
+    "other": [
+      ["Maximum leverage", "Up to 1:5000 on MetaTrader and 1:1000 on cTrader (far above the UK's 1:30 retail limit)"],
+      ["Deposits", "Card, PayPal, Neteller, Skrill, bank wire, crypto and more"],
+      ["Overnight swaps", "Charged or credited on positions held overnight; swap-free accounts available"]
+    ]
+  },
+  "accounts": [
+    ["Raw Spread", "Raw spreads from 0.0 pips with US$3.50 per lot per side on MetaTrader. Built for day traders, scalpers and Expert Advisors."],
+    ["Raw Spread (cTrader)", "Raw spreads on cTrader and TradingView with US$3 commission per US$100,000 traded."],
+    ["Standard", "No commission, spreads from 0.8 pips."],
+    ["Raw Pro and Raw Pro+", "New lower-commission accounts for larger balances (early access)."],
+    ["Swap-free and demo accounts", "Islamic swap-free accounts and free demos."]
+  ],
+  "funding": {
+    "rows": [
+      ["Instant methods", "Credit/debit card, PayPal, Neteller, Skrill, crypto (BTC, ETH, USDC, USDT)"],
+      ["Bank wire", "2–5 business days (GBP accepted)"],
+      ["Minimum deposit", "US$0 on Raw Spread and Standard"],
+      ["Account currencies", "AUD, USD, JPY, EUR, NZD, SGD, GBP, CAD, HKD, CHF"]
+    ]
+  },
+  "safety": [
+    "IC Markets' global company is authorised and regulated by the Financial Services Authority of Seychelles (FSA). It is not authorised by the FCA.",
+    "UK clients of the offshore company are not covered by the FSCS or the Financial Ombudsman Service.",
+    "IC Markets holds client-money insurance covering funds up to US$1,000,000 (policy TT2602110), with no opt-in needed.",
+    "Client funds are kept in accounts separate from IC Markets' operating capital.",
+    "Leverage of up to 1:5000 is far above FCA limits; losses can exceed what you intended to risk very quickly."
+  ],
+  "platforms": [
+    ["MetaTrader 4 & 5", "Including WebTrader, mobile and Mac versions, with advanced trading tools and VPS hosting."],
+    ["cTrader", "Web, desktop, mobile, cTrader Algo and cTrader Copy Trading."],
+    ["TradingView", "Trade IC Markets' cTrader-based Raw account from TradingView."],
+    ["Tools", "IC Insights, Trading Central and a trading API."]
+  ],
+  "research": "IC Markets offers Web TV, webinars, a podcast, tutorial videos, Trading Central analysis and an economic calendar.",
+  "support": "Support is available through IC Markets' contact page and help centre.",
+  "faq": [
+    ["Is IC Markets regulated in the UK?", "No. IC Markets has no FCA-authorised company. UK residents deal with its Seychelles-regulated company, so FSCS and Financial Ombudsman protections do not apply."],
+    ["What is IC Markets' minimum deposit?", "The Raw Spread and Standard accounts now have no minimum deposit. Raw Pro needs US$5,000 and Raw Pro+ US$100,000."],
+    ["What are IC Markets' spreads and commission?", "On the Raw Spread account, EUR/USD averages 0.1 pips with US$3.50 per lot per side on MetaTrader. The Standard account has no commission and spreads from 0.8 pips."],
+    ["Does IC Markets offer TradingView?", "Yes, along with MT4, MT5 and cTrader."],
+    ["What are FCA-regulated alternatives to IC Markets?", "For similar raw-spread pricing with FCA protection, compare Pepperstone, Tickmill and Vantage in our Best Low Spread Brokers guide."]
+  ],
+  "sources": [
+    "https://www.icmarkets.com/global/en/trading-accounts/overview",
+    "https://www.icmarkets.com/en/trading-accounts/funding",
+    "https://www.icmarkets.com/global/en/company/regulation",
+    "https://www.icmarkets.com/global/en/company/insurance"
+  ]
+}

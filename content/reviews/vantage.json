@@ -1,0 +1,79 @@
+{
+  "_note": "Long-form review content for brokers/vantage.html. Facts checked on vantagemarkets.co.uk and its help centre on 30 September 2026 (some pages block automated reads, so those were checked via search of the official domain); see sources.",
+  "checked": "2026-09-30",
+  "verdict": [
+    "Vantage serves UK clients through Vantage Global Prime LLP, which is authorised and regulated by the FCA (FRN 590299). The group is celebrating 15 years in business.",
+    "Vantage's big selling point is price. On the RAW ECN account, UK clients with a GBP account pay just £1 per lot per side (£2 round turn) on top of raw spreads from 0.0 pips, among the lowest commissions of any FCA-authorised broker. Larger traders can cut that to £0.75 per side on the Premium ECN account (£25,000 minimum). The minimum deposit on the Standard STP and RAW ECN accounts is just 50 in your account currency.",
+    "Vantage also stands out on protection: on top of FSCS cover, it has Lloyd's of London 'excess of FSCS' insurance covering client funds up to £1 million. The trade-offs are a smaller research offering than the big UK names, and no share dealing or ISA."
+  ],
+  "whoFor": [
+    "Cost-conscious forex traders who want raw spreads with a very low commission",
+    "MT4, MT5 and TradingView users",
+    "UK traders who want spread betting as well as CFDs",
+    "Traders who value extra protection above the FSCS limit"
+  ],
+  "notFor": [
+    "Investors who want share dealing, ISAs or pensions",
+    "Beginners who want extensive in-house research and courses",
+    "Traders who want a large proprietary platform ecosystem"
+  ],
+  "fees": {
+    "intro": "Vantage UK offers commission-free and commission-based accounts. On the Standard STP account, Vantage's charge is a mark-up in the spread. On the RAW ECN and Premium ECN accounts you get raw spreads plus a small fixed commission.",
+    "spreadsHead": ["Account", "Spreads from", "Commission per lot per side (GBP account)", "Minimum deposit"],
+    "spreads": [
+      ["Standard STP", "Spread includes mark-up", "None", "50"],
+      ["RAW ECN", "0.0 pips", "£1 (£2 round turn)", "50"],
+      ["Premium ECN", "0.0 pips", "£0.75 (£1.50 round turn)", "25,000"]
+    ],
+    "spreadsNote": "From Vantage UK's commission page and help centre. Commission is also available in USD ($1 per side) and EUR (€1 per side) on RAW ECN.",
+    "other": [
+      ["Overnight swaps", "Charged or credited on positions held overnight; rates published on Vantage's swap page"],
+      ["Spread betting", "Available as a separate account type with no commission"],
+      ["Deposit methods", "An extensive choice of deposit methods (see Vantage's funding page)"]
+    ]
+  },
+  "accounts": [
+    ["Standard STP", "No commission; costs are in the spread. From a 50 minimum deposit, with 1,000+ CFD instruments."],
+    ["RAW ECN", "Raw spreads from 0.0 pips plus £1 per lot per side on GBP accounts."],
+    ["Premium ECN", "Raw spreads plus £0.75 per lot per side, for deposits of 25,000 (GBP/USD/EUR)."],
+    ["Spread betting", "Trade in pounds per point. For most UK residents, spread betting profits are currently free from Capital Gains Tax and Stamp Duty, but tax treatment depends on your circumstances."],
+    ["Professional and demo accounts", "Professional accounts for eligible clients, and free demo accounts to practise."]
+  ],
+  "funding": {
+    "rows": [
+      ["Minimum deposit", "50 in account currency (Standard STP, RAW ECN); 25,000 for Premium ECN"],
+      ["Account currencies", "GBP, USD, EUR (HKD on some accounts)"],
+      ["Client money bank", "Segregated trust accounts at NatWest"]
+    ]
+  },
+  "safety": [
+    "Vantage Global Prime LLP is authorised and regulated by the Financial Conduct Authority (FRN 590299).",
+    "Client funds are kept in segregated trust accounts with NatWest, so they are identifiable as client money and protected from Vantage's creditors.",
+    "Funds lost in a liquidation can be compensated up to £85,000 under the FSCS.",
+    "Vantage also has 'excess of FSCS' insurance with Lloyd's of London, covering client funds up to £1,000,000 in total.",
+    "Retail accounts have negative balance protection under FCA rules."
+  ],
+  "platforms": [
+    ["MetaTrader 4 & 5", "The industry-standard platforms, with support for Expert Advisors."],
+    ["TradingView", "Trade Vantage accounts directly from TradingView charts."],
+    ["Vantage app & web trading", "Vantage's own mobile app and web platform."],
+    ["ProTrader", "Vantage's advanced web trading platform."]
+  ],
+  "research": "Vantage publishes market analysis and runs an academy with guides for newer traders. Its research is lighter than the big UK providers such as IG or CMC.",
+  "support": "Vantage offers live chat and email support at support@vantagemarkets.co.uk, plus a UK help centre.",
+  "faq": [
+    ["Is Vantage safe for UK traders?", "Vantage Global Prime LLP is authorised by the FCA (FRN 590299). Client money is held in segregated trust accounts at NatWest, covered by the FSCS up to £85,000, with additional Lloyd's of London insurance up to £1 million."],
+    ["What is Vantage's minimum deposit?", "The Standard STP and RAW ECN accounts need a minimum of 50 in your account currency. The Premium ECN account needs 25,000."],
+    ["What is Vantage's commission?", "On the RAW ECN account, GBP accounts pay £1 per lot per side (£2 round turn). Premium ECN is £0.75 per side. The Standard STP account has no commission."],
+    ["Does Vantage offer spread betting?", "Yes. Vantage UK offers a spread betting account alongside its CFD accounts."],
+    ["Does Vantage support TradingView?", "Yes. Vantage supports TradingView, MT4, MT5, its own app and the ProTrader web platform."]
+  ],
+  "sources": [
+    "https://www.vantagemarkets.co.uk/trading/fees/commission/",
+    "https://www.vantagemarkets.co.uk/about/fund-insurance/",
+    "https://helpcenter.vantagemarkets.co.uk/hc/en-gb/articles/11933290566927-What-are-the-types-of-live-accounts-on-Vantage",
+    "https://helpcenter.vantagemarkets.co.uk/hc/en-gb/articles/11933274655247-What-is-a-RAW-ECN-account",
+    "https://helpcenter.vantagemarkets.co.uk/hc/en-gb/articles/11933246513039-What-is-a-Premium-ECN-account",
+    "https://www.vantagemarkets.co.uk/trading/accounts/"
+  ]
+}

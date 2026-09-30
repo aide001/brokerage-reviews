@@ -1,0 +1,73 @@
+{
+  "_note": "Long-form review content for brokers/hfm.html. hfmarkets.co.uk blocks automated page reads, so facts were checked via search of HFM's official domains on 30 September 2026; see sources.",
+  "checked": "2026-09-30",
+  "verdict": [
+    "HFM (formerly HotForex) is a global broker that serves UK clients through HF Markets (UK) Ltd, which is authorised and regulated by the FCA (FRN 801701) and based in Holborn, London.",
+    "HFM's appeal is flexibility and low entry costs. The Premium account has no minimum deposit and no commission, with costs in the spread. The Zero account offers raw spreads plus a commission from US$3 per lot, with a US$25 minimum deposit. HFM doesn't charge deposit fees, and trading runs on MT4, MT5 and the HFM app.",
+    "The main thing to understand is that HFM's international website advertises features, such as leverage up to 1:2000, that are not available to UK retail clients. UK accounts follow FCA rules: leverage is capped at 1:30 on major forex pairs and you get negative balance protection. HFM's research and education are solid, but the product range and brand are less established in the UK than IG, CMC or Pepperstone."
+  ],
+  "whoFor": [
+    "MetaTrader traders who want a low minimum deposit",
+    "Traders who want a choice of commission-free or raw-spread accounts",
+    "Traders who value regular market analysis and education"
+  ],
+  "notFor": [
+    "Anyone expecting the very high leverage advertised on HFM's international site (UK retail is capped at 1:30)",
+    "Investors who want share dealing or ISAs",
+    "Traders who want spread betting or TradingView"
+  ],
+  "fees": {
+    "intro": "HFM UK's two main retail accounts take different approaches. The Premium account builds costs into the spread. The Zero account has raw spreads plus a commission.",
+    "spreadsHead": ["Account", "Pricing", "Commission", "Minimum deposit"],
+    "spreads": [
+      ["Premium", "Spread-only", "None", "None"],
+      ["Zero", "Raw spreads", "From US$3 per lot", "US$25"]
+    ],
+    "spreadsNote": "From HFM's UK account pages as indexed by search. Premium spreads are wider than the Zero account's raw spreads.",
+    "other": [
+      ["Deposit fees", "None from HFM"],
+      ["Overnight swaps", "Charged or credited on positions held overnight"],
+      ["UK retail leverage", "Up to 1:30 on major forex pairs (FCA limit)"]
+    ]
+  },
+  "accounts": [
+    ["Premium account", "No minimum deposit and no commission; costs are built into the spread."],
+    ["Zero account", "Raw spreads plus a commission from US$3 per lot; US$25 minimum deposit."],
+    ["Professional account", "Higher leverage for clients who qualify as professional clients."],
+    ["Demo account", "Practise on MT4 or MT5 with virtual funds."]
+  ],
+  "funding": {
+    "rows": [
+      ["Minimum deposit", "None on Premium; US$25 on Zero"],
+      ["Deposit fees", "None from HFM"],
+      ["Client portal", "Deposits and withdrawals are managed in the myHF client area"]
+    ]
+  },
+  "safety": [
+    "HF Markets (UK) Ltd is authorised and regulated by the Financial Conduct Authority (FRN 801701), registered office in London.",
+    "Client money is held in segregated bank accounts with highly rated banks, separate from HFM's own funds, and reconciled daily under FCA rules.",
+    "The FSCS can pay compensation of up to £85,000 per eligible client if HFM UK cannot meet its obligations.",
+    "Retail clients have negative balance protection and FCA leverage limits."
+  ],
+  "platforms": [
+    ["MetaTrader 4 & 5", "HFM's main trading platforms, supporting Expert Advisors and custom indicators."],
+    ["HFM app", "HFM's mobile app for trading and account management."],
+    ["myHF client area", "Web portal for funding, withdrawals and account settings."]
+  ],
+  "research": "HFM publishes daily market analysis, an economic calendar and educational material, including webinars and trading guides.",
+  "support": "HFM provides support through its UK help centre and FAQs, with contact options listed in the myHF client area.",
+  "faq": [
+    ["Is HFM regulated in the UK?", "Yes. HF Markets (UK) Ltd is authorised and regulated by the FCA (FRN 801701). Client money is segregated and eligible clients are covered by the FSCS up to £85,000."],
+    ["What is HFM's minimum deposit?", "The Premium account has no minimum deposit. The Zero account has a US$25 minimum."],
+    ["Can UK clients get 1:2000 leverage at HFM?", "No. High leverage is only offered by HFM's non-UK companies. UK retail clients are limited to 1:30 on major forex pairs under FCA rules."],
+    ["What platforms does HFM offer?", "MetaTrader 4, MetaTrader 5 and the HFM mobile app."],
+    ["Does HFM charge deposit fees?", "No. HFM does not charge deposit fees, although your bank or payment provider might."]
+  ],
+  "sources": [
+    "https://www.hfmarkets.co.uk/en/trading-accounts",
+    "https://www.hfmarkets.co.uk/en/trading-accounts/premium-account",
+    "https://hfmarkets.co.uk/uk/en/account-types/zero-spread-account.html",
+    "https://www.hfmarkets.co.uk/en/help/faqs",
+    "https://static.hfmarkets.co.uk/assets/docs/trading-products/KID-ETF-HFUK-en.pdf?v=68"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "_note": "Long-form review content for brokers/fxtm.html. Checked on fxtm.com on 30 September 2026 (forextime.com/uk now redirects there); see sources.",
+  "checked": "2026-09-30",
+  "verdict": [
+    "Important for UK readers: FXTM is no longer available to UK residents. Its former UK web pages now redirect to the global FXTM site, whose operating company, Exinity Limited (regulated by the Financial Services Commission of Mauritius), states that it does not provide services to residents of the United Kingdom.",
+    "Outside the UK, FXTM (ForexTime) is known for its strong following in emerging markets. It offers a range of MetaTrader accounts, from the Micro account (30 USD/EUR minimum) to the raw-spread Advantage account, which has spreads from 0 pips and a forex commission of US$3.50 per lot per side.",
+    "Because FXTM does not serve UK residents, we don't rank it in our UK guides. If you live in the UK, look at FCA-authorised alternatives with similar raw-spread pricing, such as Pepperstone, Tickmill or Vantage."
+  ],
+  "whoFor": [
+    "Non-UK traders in the regions FXTM serves, particularly emerging markets",
+    "MetaTrader 4 and 5 users who want a choice of commission-free and raw-spread accounts"
+  ],
+  "notFor": [
+    "UK residents: FXTM does not accept clients from the United Kingdom",
+    "Traders who want FCA protection, including the FSCS and FCA leverage limits"
+  ],
+  "fees": {
+    "intro": "FXTM's global accounts (not available in the UK) range from commission-free accounts with wider spreads to the Advantage account with raw spreads plus commission.",
+    "spreadsHead": ["Account", "Spreads from", "Commission", "Minimum deposit"],
+    "spreads": [
+      ["Micro", "1.7 pips", "None", "30 USD/EUR"],
+      ["Rewards Plus", "1.5 pips", "None", "100 USD/EUR/GBP"],
+      ["Rewards", "0.9 pips", "None", "200 USD/EUR/GBP"],
+      ["Advantage", "0 pips", "Forex US$3.50 per lot per side", "500 USD/EUR/GBP"]
+    ],
+    "spreadsNote": "From FXTM's global accounts page. These accounts are offered by non-UK FXTM companies and are not available to UK residents.",
+    "other": [
+      ["Advantage: metals", "US$25 per million notional"],
+      ["Advantage: indices & commodities", "US$35 per million notional"],
+      ["Leverage", "Up to 1:1000 (floating) on the global accounts, far above the UK's 1:30 retail limit"]
+    ]
+  },
+  "accounts": [
+    ["Micro", "Cent-denominated account on MT4 for small trades and strategy testing."],
+    ["Rewards and Rewards Plus", "Commission-free accounts that earn FXTM reward points."],
+    ["Advantage", "Raw spreads from 0 pips with commission, on MT4 and MT5."],
+    ["Advantage Stocks", "Commission-free stock trading on MT5 (US$200 minimum)."]
+  ],
+  "funding": {
+    "rows": [
+      ["UK residents", "Not accepted"],
+      ["Minimum deposit (global)", "From 30 USD/EUR (Micro) to 500 USD/EUR/GBP (Advantage)"],
+      ["Account currencies", "USD, EUR, GBP (plus local currencies in some regions)"]
+    ]
+  },
+  "safety": [
+    "FXTM's global company, Exinity Limited, is regulated by the Financial Services Commission of Mauritius and licensed by South Africa's FSCA.",
+    "FXTM says it keeps client money separate from company capital with top-tier banks.",
+    "UK residents are not accepted, so FCA protections, including the FSCS, do not apply to FXTM's current offering.",
+    "Offshore leverage of up to 1:1000 greatly increases the risk of rapid losses."
+  ],
+  "platforms": [
+    ["MetaTrader 4 & 5", "FXTM's main platforms across its account range."],
+    ["FXTM Trader app", "FXTM's own mobile app for trading and account management."]
+  ],
+  "research": "FXTM publishes market analysis, an economic calendar, trading calculators, webinars and beginner guides.",
+  "support": "FXTM offers support to clients in the regions it serves. UK residents cannot open an account.",
+  "faq": [
+    ["Can UK residents open an FXTM account?", "No. FXTM's global company, Exinity Limited, states that it does not provide services to residents of the United Kingdom, and FXTM's UK pages now redirect to its global website."],
+    ["Is FXTM regulated by the FCA?", "FXTM's current offering is provided by Exinity Limited, regulated in Mauritius, not by the FCA. UK readers should choose an FCA-authorised broker."],
+    ["What are good UK alternatives to FXTM?", "For similar raw-spread pricing with FCA protection, consider Pepperstone, Tickmill or Vantage. See our Best Low Spread Brokers guide."],
+    ["What is FXTM's Advantage account?", "A raw-spread account with spreads from 0 pips and a forex commission of US$3.50 per lot per side, with a 500 USD/EUR/GBP minimum deposit (not available in the UK)."]
+  ],
+  "sources": [
+    "https://www.fxtm.com/en/trading/accounts/"
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "_note": "Long-form review content for brokers/avatrade.html. avatrade.com blocks automated reads; facts checked via search of AvaTrade's official domain on 30 September 2026; see sources.",
+  "checked": "2026-09-30",
+  "verdict": [
+    "Important for UK readers: AvaTrade's help centre states that it does not accept clients from the United Kingdom. We include this review because AvaTrade is a well-known global broker that UK readers often search for.",
+    "Outside the UK, AvaTrade is regulated by the Central Bank of Ireland (AvaTrade EU Ltd), ASIC in Australia and South Africa's FSCA, among others. It is known for spread-only pricing, the AvaProtect risk-management feature and a wide platform choice including MT4, MT5 and its AvaTradeGO app.",
+    "Watch the non-trading fees: AvaTrade charges an inactivity fee of £50/$50/€50 after three consecutive months without use, and an administration fee of £100/$100/€100 after 12 months. For UK residents, FCA-authorised brokers such as IG, CMC Markets or Pepperstone are the relevant alternatives."
+  ],
+  "whoFor": [
+    "Non-UK traders in regions AvaTrade serves who want spread-only pricing",
+    "Traders who like the AvaProtect feature and the AvaTradeGO app"
+  ],
+  "notFor": [
+    "UK residents: AvaTrade does not accept clients from the UK",
+    "Occasional traders (inactivity fee after 3 months, administration fee after 12)",
+    "Scalpers wanting raw spreads plus commission (AvaTrade has no raw-spread account)"
+  ],
+  "fees": {
+    "intro": "AvaTrade is paid through the spread built into its quoted prices; there's no separate commission on standard CFD trading.",
+    "spreadsHead": ["Charge", "AvaTrade (outside the UK)"],
+    "spreads": [
+      ["Pricing model", "Spread-only; no commission"],
+      ["EUR/USD", "From 0.9 pips"],
+      ["Minimum first deposit", "100 in account currency"],
+      ["Recommended starting balance", "1,000–2,000 in account currency"]
+    ],
+    "spreadsNote": "From AvaTrade's fees and help-centre pages as indexed by search.",
+    "other": [
+      ["Inactivity fee", "£50 / $50 / €50 after 3 consecutive months of non-use"],
+      ["Administration fee", "£100 / $100 / €100 after 12 consecutive months of non-use"],
+      ["Overnight fees", "Charged on positions held overnight"],
+      ["Withdrawals", "Must go back to the funding method first (e.g. up to 100% of card deposits back to the card)"]
+    ]
+  },
+  "accounts": [
+    ["Retail account", "Spread-only CFD trading on forex, indices, commodities, shares and more."],
+    ["Professional account", "For clients who qualify as professional traders."],
+    ["Demo account", "Free demo to practise first."]
+  ],
+  "funding": {
+    "rows": [
+      ["UK residents", "Not accepted"],
+      ["Deposit methods", "Bank wire, credit/debit card and e-wallets (varies by region)"],
+      ["Minimum deposit", "100 in account currency"],
+      ["Withdrawals", "Returned to the original funding method first, under anti-money-laundering rules"]
+    ]
+  },
+  "safety": [
+    "AvaTrade EU Ltd is regulated by the Central Bank of Ireland; other AvaTrade companies are licensed by ASIC (Australia, licence 406684) and the FSCA (South Africa, FSP 45984), among others.",
+    "AvaTrade does not accept UK clients, so FCA protections, including the FSCS, do not apply.",
+    "Retail clients of EU-regulated AvaTrade companies get negative balance protection under EU rules."
+  ],
+  "platforms": [
+    ["MetaTrader 4 & 5", "Industry-standard platforms with Expert Advisor support."],
+    ["AvaTradeGO", "AvaTrade's mobile app, including the AvaProtect feature."],
+    ["WebTrader", "AvaTrade's browser-based platform."]
+  ],
+  "research": "AvaTrade publishes trading guides and education for beginners, plus market analysis.",
+  "support": "AvaTrade offers support through its online help centre to clients in the regions it serves.",
+  "faq": [
+    ["Does AvaTrade accept UK clients?", "No. AvaTrade's help centre lists the United Kingdom among the countries it does not accept clients from."],
+    ["Does AvaTrade charge an inactivity fee?", "Yes: £50/$50/€50 after three consecutive months of non-use, and an administration fee of £100/$100/€100 after 12 months."],
+    ["What is AvaTrade's minimum deposit?", "100 in your account currency, though AvaTrade recommends 1,000–2,000."],
+    ["What are UK alternatives to AvaTrade?", "FCA-authorised brokers such as IG, CMC Markets and Pepperstone."]
+  ],
+  "sources": [
+    "https://support.avatrade.com/hc/en-us/articles/360017588538-Does-AvaTrade-accept-traders-worldwide",
+    "https://www.avatrade.com/trading-info/our-fees-charges",
+    "https://support.avatrade.com/hc/en-us/articles/360007032511-What-is-inactivity-fee",
+    "https://support.avatrade.com/hc/en-us/articles/360006739452-What-is-administration-Fee",
+    "https://www.avatrade.com/about-avatrade/why-avatrade/regulation",
+    "https://www.avatrade.com/about-avatrade/avatrade-withdrawals-deposits"
+  ]
+}

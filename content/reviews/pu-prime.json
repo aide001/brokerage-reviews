@@ -1,0 +1,70 @@
+{
+  "_note": "Long-form review content for brokers/pu-prime.html. puprime.com blocks automated reads; facts checked via search of PU Prime's official domain and directly on fca.org.uk on 30 September 2026; see sources.",
+  "checked": "2026-09-30",
+  "verdict": [
+    "Warning for UK readers: the FCA has put 'PU prime / Pacific Union (Seychelles) Limited' on its warning list of unauthorised firms (first published May 2023, last updated April 2026). The FCA says the firm may be providing or promoting financial services without its permission, and advises consumers to avoid dealing with it. If you deal with it, you have no access to the Financial Ombudsman Service or the FSCS.",
+    "PU Prime is regulated offshore: PU Prime Ltd holds a securities dealer licence from the Financial Services Authority of Seychelles (SD050) and an investment dealer licence from the Financial Services Commission of Mauritius. It is not authorised by the FCA.",
+    "Its accounts range from a Cent account (US$20 minimum) and a commission-free Standard account (US$50, EUR/USD from 1.3 pips) to Prime (US$1,000, raw spreads plus US$3.50 per lot per side) and ECN (US$10,000, US$1.50 per side). But because of the FCA warning, we do not recommend PU Prime to UK residents. Choose an FCA-authorised broker instead."
+  ],
+  "whoFor": [
+    "Not recommended for UK residents because of the FCA warning",
+    "Outside the UK: traders comfortable with offshore regulation who want low minimum deposits"
+  ],
+  "notFor": [
+    "UK residents: the FCA warns against dealing with this firm",
+    "Anyone who wants FSCS protection or access to the Financial Ombudsman Service",
+    "Beginners attracted by very high offshore leverage"
+  ],
+  "fees": {
+    "intro": "PU Prime's offshore accounts (not recommended for UK residents) are priced either through the spread or with raw spreads plus commission.",
+    "spreadsHead": ["Account", "EUR/USD spread from", "Commission per lot per side", "Minimum deposit"],
+    "spreads": [
+      ["Cent", "n/a", "None", "US$20"],
+      ["Standard", "1.3 pips", "None", "US$50"],
+      ["Prime", "0.0 pips", "US$3.50", "US$1,000"],
+      ["ECN", "0.0 pips", "US$1.50", "US$10,000"]
+    ],
+    "spreadsNote": "From PU Prime's account types and help-centre pages as indexed by search.",
+    "other": [
+      ["Regulation", "Offshore (Seychelles FSA, Mauritius FSC); not FCA-authorised"],
+      ["FCA status", "On the FCA warning list of unauthorised firms"],
+      ["Overnight swaps", "Charged or credited on positions held overnight"]
+    ]
+  },
+  "accounts": [
+    ["Cent", "Trade in cent units from a US$20 deposit."],
+    ["Standard", "No commission, spreads from 1.3 pips, US$50 minimum."],
+    ["Prime", "Raw spreads plus US$3.50 per lot per side, US$1,000 minimum."],
+    ["ECN", "Raw spreads plus US$1.50 per lot per side, US$10,000 minimum."]
+  ],
+  "funding": {
+    "rows": [
+      ["Minimum deposit", "US$20 (Cent) to US$10,000 (ECN)"],
+      ["UK residents", "Not recommended: FCA warning list"]
+    ]
+  },
+  "safety": [
+    "PU Prime is not authorised by the FCA, and 'PU prime / Pacific Union (Seychelles) Limited' is on the FCA warning list of unauthorised firms.",
+    "The FCA says that if you deal with this firm you won't have access to the Financial Ombudsman Service or FSCS protection.",
+    "PU Prime Ltd is licensed by the Seychelles FSA (SD050) and the Mauritius FSC.",
+    "Offshore leverage can be far higher than the UK's 1:30 retail limit, which sharply increases risk."
+  ],
+  "platforms": [
+    ["MetaTrader 4 & 5", "PU Prime's main trading platforms."],
+    ["PU Prime app & WebTrader", "Mobile app with copy trading, and a web platform."]
+  ],
+  "research": "PU Prime publishes market news, trading guides and educational articles.",
+  "support": "PU Prime provides support through its online help centre.",
+  "faq": [
+    ["Is PU Prime safe for UK traders?", "The FCA has PU Prime (Pacific Union (Seychelles) Limited) on its warning list of unauthorised firms and advises consumers to avoid dealing with it. UK residents would have no FSCS or Financial Ombudsman protection."],
+    ["Is PU Prime regulated?", "Only offshore: PU Prime Ltd is licensed by the Financial Services Authority of Seychelles and the Financial Services Commission of Mauritius. It is not authorised by the FCA."],
+    ["What is PU Prime's minimum deposit?", "From US$20 on the Cent account and US$50 on the Standard account, up to US$10,000 on the ECN account."],
+    ["What are FCA-regulated alternatives to PU Prime?", "For low minimum deposits with FCA protection, consider Pepperstone, Vantage or Axi."]
+  ],
+  "sources": [
+    "https://www.fca.org.uk/news/warnings/pu-prime-pacific-union-seychelles-limited",
+    "https://www.puprime.com/account-types/",
+    "https://helpcenter.puprime.com/hc/en-001/articles/360004364635-What-is-the-difference-between-Standard-and-Prime-account",
+    "https://helpcenter.puprime.com/hc/en-001/articles/10013124349583-What-are-the-commission-fees-for-trading-with-PU-Prime"
+  ]
+}

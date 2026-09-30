@@ -1,0 +1,77 @@
+{
+  "_note": "Long-form review content for brokers/fp-markets.html. fpmarkets.com blocks automated page reads, so facts were checked via search of FP Markets' official domain on 30 September 2026; see sources.",
+  "checked": "2026-09-30",
+  "verdict": [
+    "FP Markets was founded in Australia in 2005 and is regulated by ASIC in Australia, CySEC in Europe and the FSA in Seychelles, among others. It has no FCA-authorised company, so UK residents are not covered by UK protections such as the FSCS or the Financial Ombudsman Service.",
+    "Costs are very competitive. The Raw account has spreads from 0.0 pips plus US$3 per lot per side, and the Standard account has no commission with spreads from 1.0 pip. Both need only AUD 100 (or equivalent) to open, and FP Markets doesn't charge deposit fees or bank-wire withdrawal fees.",
+    "Platform choice is strong, with MT4, MT5, cTrader and TradingView, and FP Markets offers a large range of share CFDs on some platforms. For UK residents, though, the lack of FCA authorisation is the deciding factor. We suggest comparing FCA-authorised low-cost brokers such as Pepperstone, Tickmill or Vantage first."
+  ],
+  "whoFor": [
+    "Experienced non-UK traders who want raw spreads and a wide platform choice",
+    "cTrader and TradingView users",
+    "Algorithmic traders using Expert Advisors"
+  ],
+  "notFor": [
+    "UK traders who want FCA protection, FSCS cover and FCA leverage limits",
+    "Beginners attracted by high offshore leverage",
+    "Anyone who wants spread betting or an ISA"
+  ],
+  "fees": {
+    "intro": "FP Markets offers two main forex account types on MT4 and MT5: Standard, with costs in the spread, and Raw, with raw spreads plus commission.",
+    "spreadsHead": ["", "Raw", "Standard"],
+    "spreads": [
+      ["Spreads from", "0.0 pips", "1.0 pip"],
+      ["Commission", "US$3 per lot per side", "None"],
+      ["Minimum deposit", "AUD 100 or equivalent", "AUD 100 or equivalent"]
+    ],
+    "spreadsNote": "From FP Markets' account types pages as indexed by search.",
+    "other": [
+      ["Deposit fees", "None; FP Markets covers internal bank fees on international deposits"],
+      ["Bank wire withdrawals", "No FP Markets fee"],
+      ["E-wallet withdrawals", "Skrill and Neteller withdrawals completed within one business day"],
+      ["Overnight swaps", "Charged or credited on positions held overnight"]
+    ]
+  },
+  "accounts": [
+    ["Raw", "Spreads from 0.0 pips plus US$3 per lot per side. Suited to scalpers and high-frequency traders."],
+    ["Standard", "Commission-free, with spreads from 1.0 pip."],
+    ["IRESS accounts", "Share CFD trading via the IRESS platform in some regions."],
+    ["Demo account", "Free demo on MT4 and MT5."]
+  ],
+  "funding": {
+    "rows": [
+      ["Deposit methods", "Credit/debit card, bank transfer, Neteller, Skrill, crypto and broker-to-broker transfer (options vary by region)"],
+      ["Minimum deposit", "AUD 100 or equivalent"],
+      ["Deposit fees", "None"],
+      ["Withdrawal fees", "None for bank wire; e-wallet withdrawals within one business day"]
+    ]
+  },
+  "safety": [
+    "FP Markets is regulated by ASIC (Australia), CySEC (Cyprus) and the FSA (Seychelles), among others. It is not authorised by the FCA.",
+    "UK residents are not covered by the FSCS or the Financial Ombudsman Service.",
+    "FP Markets says retail client funds are kept in segregated accounts with leading banks, separate from company capital.",
+    "Offshore accounts can offer leverage far above the UK's 1:30 retail limit, which greatly increases risk."
+  ],
+  "platforms": [
+    ["MetaTrader 4 & 5", "Full MetaTrader support, including Expert Advisors."],
+    ["cTrader", "For traders who want depth of market and cBots."],
+    ["TradingView", "Trade FP Markets accounts from TradingView charts."],
+    ["IRESS", "Share CFD platform in some regions."]
+  ],
+  "research": "FP Markets publishes market analysis, trading guides, platform tutorials and an FAQ library.",
+  "support": "Support is available through FP Markets' help and FAQ pages and its client portal.",
+  "faq": [
+    ["Is FP Markets regulated in the UK?", "No. FP Markets is regulated by ASIC, CySEC and the Seychelles FSA, among others, but has no FCA-authorised company. UK residents don't get FSCS or Financial Ombudsman protection."],
+    ["What is FP Markets' minimum deposit?", "AUD 100 or the equivalent in your account currency, on both the Standard and Raw accounts."],
+    ["What is FP Markets' commission?", "The Raw account charges US$3 per lot per side (US$6 round turn). The Standard account has no commission."],
+    ["Which platforms does FP Markets offer?", "MT4, MT5, cTrader and TradingView, plus IRESS for share CFDs in some regions."],
+    ["What are FCA-regulated alternatives to FP Markets?", "Pepperstone, Tickmill and Vantage offer similar raw-spread pricing with FCA authorisation."]
+  ],
+  "sources": [
+    "https://www.fpmarkets.com/account-types/",
+    "https://www.fpmarkets.com/funding/",
+    "https://www.fpmarkets.com/funding/withdraw-funds/",
+    "https://www.fpmarkets.com/regulation/",
+    "https://www.fpmarkets.com/fees-charges/"
+  ]
+}
