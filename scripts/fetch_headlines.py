@@ -49,7 +49,7 @@ SOURCES = [
              r"|wage growth|earnings|profits?|IPO|takeover|merger|banks?|banking|lenders?|mortgage rates"
              r"|Treasury|IMF|OPEC)\b",
      "skip": r"^(I|My|We|We're|Would|Should|How much|What's the smallest|Could an?)\b|\byou\b|\byour\b"
-             r"|here's (why|how)|Business Daily"},
+             r"|here's (why|how)|Business Daily|bank of mum and dad"},
     {"name": "European Central Bank", "url": "https://www.ecb.europa.eu/rss/press.html"},
     {"name": "Reserve Bank of Australia", "url": "https://www.rba.gov.au/rss/rss-cb-media-releases.xml"},
     {"name": "Federal Reserve", "url": "https://www.federalreserve.gov/feeds/press_all.xml",
