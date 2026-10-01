@@ -1,5 +1,17 @@
 [
   {
+    "title": "Fed's Waller: The Data Version of Godzilla versus Kong: FRED Takes on AI",
+    "url": "https://www.federalreserve.gov/newsevents/speech/waller20261001a.htm",
+    "source": "Federal Reserve",
+    "date": "2026-10-01T14:00:00Z"
+  },
+  {
+    "title": "Christine Lagarde: Where AI risks meet",
+    "url": "https://www.ecb.europa.eu/press/key/date/2026/html/ecb.sp261001~cf3c630379.en.html",
+    "source": "European Central Bank",
+    "date": "2026-10-01T13:30:00Z"
+  },
+  {
     "title": "AI boom could trigger market shocks, Bank of England boss warns",
     "url": "https://www.bbc.co.uk/news/articles/cv8e30enrkxyo",
     "source": "BBC News",
@@ -226,17 +238,5 @@
     "url": "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260916~7bc58ebef4.en.html",
     "source": "European Central Bank",
     "date": "2026-09-16T08:00:00Z"
-  },
-  {
-    "title": "Christine Lagarde: A new age of capital: growth, sovereignty and AI",
-    "url": "https://www.ecb.europa.eu/press/key/date/2026/html/ecb.sp260914_2~a3f0efbee4.en.html",
-    "source": "European Central Bank",
-    "date": "2026-09-14T15:15:00Z"
-  },
-  {
-    "title": "Agencies seek comment on proposed third-party risk management guidance and issue statement on community bank engagement with core service providers",
-    "url": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260911a.htm",
-    "source": "Federal Reserve",
-    "date": "2026-09-11T14:00:00Z"
   }
 ]
