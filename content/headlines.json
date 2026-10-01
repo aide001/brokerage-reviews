@@ -1,5 +1,11 @@
 [
   {
+    "title": "Release of Financial Stability Review – October 2026",
+    "url": "https://www.rba.gov.au/media-releases/2026/mr-26-28.html",
+    "source": "Reserve Bank of Australia",
+    "date": "2026-10-01T01:30:00Z"
+  },
+  {
     "title": "Fed's Cook: The Dual Mandate in Rural America",
     "url": "https://www.federalreserve.gov/newsevents/speech/cook20260930a.htm",
     "source": "Federal Reserve",
@@ -232,11 +238,5 @@
     "url": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260911a.htm",
     "source": "Federal Reserve",
     "date": "2026-09-11T14:00:00Z"
-  },
-  {
-    "title": "Agencies reduce regulatory burden for community banks, increase eligibility for 18-month exam cycle",
-    "url": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260910a.htm",
-    "source": "Federal Reserve",
-    "date": "2026-09-10T20:00:00Z"
   }
 ]
