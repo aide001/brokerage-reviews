@@ -1,5 +1,11 @@
 [
   {
+    "title": "Isabel Schnabel: Central banks on-chain",
+    "url": "https://www.ecb.europa.eu/press/key/date/2026/html/ecb.sp261001_1~a0be67193b.en.pdf",
+    "source": "European Central Bank",
+    "date": "2026-10-01T15:30:00Z"
+  },
+  {
     "title": "Fed's Waller: The Data Version of Godzilla versus Kong: FRED Takes on AI",
     "url": "https://www.federalreserve.gov/newsevents/speech/waller20261001a.htm",
     "source": "Federal Reserve",
@@ -232,11 +238,5 @@
     "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916b.htm",
     "source": "Federal Reserve",
     "date": "2026-09-16T18:00:00Z"
-  },
-  {
-    "title": "ECB wage tracker at 2.7% in H1 2027, pointing to a modest uptick in negotiated wage growth",
-    "url": "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260916~7bc58ebef4.en.html",
-    "source": "European Central Bank",
-    "date": "2026-09-16T08:00:00Z"
   }
 ]
