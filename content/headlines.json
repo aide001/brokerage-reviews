@@ -1,5 +1,11 @@
 [
   {
+    "title": "US says Europe should ready fuel supplies as Trump threatens diesel ban",
+    "url": "https://www.bbc.co.uk/news/articles/c5zjzjgdeneeo",
+    "source": "BBC News",
+    "date": "2026-10-01T22:21:16Z"
+  },
+  {
     "title": "Fed's Bowman: Modernizing Financial Regulation: Initial Observations from eSLR",
     "url": "https://www.federalreserve.gov/newsevents/speech/bowman20261001a.htm",
     "source": "Federal Reserve",
@@ -232,11 +238,5 @@
     "url": "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260918~295b3ab978.en.html",
     "source": "European Central Bank",
     "date": "2026-09-18T08:00:00Z"
-  },
-  {
-    "title": "Federal Reserve issues FOMC statement",
-    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm",
-    "source": "Federal Reserve",
-    "date": "2026-09-16T18:00:00Z"
   }
 ]
