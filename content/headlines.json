@@ -1,5 +1,29 @@
 [
   {
+    "title": "US jobs market sees sharp slowdown in September",
+    "url": "https://www.bbc.co.uk/news/articles/cm2d6gg0642yo",
+    "source": "BBC News",
+    "date": "2026-10-02T13:56:36Z"
+  },
+  {
+    "title": "Why UK diesel prices have breached the £2 per litre mark",
+    "url": "https://www.bbc.co.uk/news/articles/c20zgjzz0e4o",
+    "source": "BBC News",
+    "date": "2026-10-02T13:38:22Z"
+  },
+  {
+    "title": "Decisions taken by the Governing Council of the ECB (in addition to decisions setting interest rates)",
+    "url": "https://www.ecb.europa.eu/press/govcdec/otherdec/2026/html/ecb.gc261002~54c6b5672b.en.html",
+    "source": "European Central Bank",
+    "date": "2026-10-02T13:00:00Z"
+  },
+  {
+    "title": "Diesel prices in NI at highest level since Iran war began",
+    "url": "https://www.bbc.co.uk/news/articles/c64g7gn4v99go",
+    "source": "BBC News",
+    "date": "2026-10-02T12:29:47Z"
+  },
+  {
     "title": "Sky-high fuel prices push costs up on customers and charities",
     "url": "https://www.bbc.co.uk/news/videos/cmwyv44wvre9o",
     "source": "BBC News",
@@ -16,12 +40,6 @@
     "url": "https://www.bbc.co.uk/news/articles/crn8e86y5n0zo",
     "source": "BBC News",
     "date": "2026-10-02T11:17:31Z"
-  },
-  {
-    "title": "Diesel prices in NI at highest level since Iran war began",
-    "url": "https://www.bbc.co.uk/news/articles/c64g7gn4v99go",
-    "source": "BBC News",
-    "date": "2026-10-02T09:02:21Z"
   },
   {
     "title": "US pressures Europe to release diesel reserves as Trump threatens export ban",
@@ -156,18 +174,6 @@
     "date": "2026-09-29T04:30:00Z"
   },
   {
-    "title": "Why UK diesel prices have hit an all-time high",
-    "url": "https://www.bbc.co.uk/news/articles/c20zgjzz0e4o",
-    "source": "BBC News",
-    "date": "2026-09-28T20:43:52Z"
-  },
-  {
-    "title": "UK diesel price hits all-time high, the RAC says",
-    "url": "https://www.bbc.co.uk/news/articles/c6n4k987k981o",
-    "source": "BBC News",
-    "date": "2026-09-28T20:42:56Z"
-  },
-  {
     "title": "Fed's Cook: An Update on AI and the Economy",
     "url": "https://www.federalreserve.gov/newsevents/speech/cook20260928a.htm",
     "source": "Federal Reserve",
@@ -232,11 +238,5 @@
     "url": "https://www.ecb.europa.eu/press/inter/date/2026/html/ecb.in260922~5f89d300ee.en.html",
     "source": "European Central Bank",
     "date": "2026-09-22T05:00:00Z"
-  },
-  {
-    "title": "ECB to invest part of own funds in tokenised securities, with settlement via Pontes",
-    "url": "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260921_1~5a011ecbea.en.html",
-    "source": "European Central Bank",
-    "date": "2026-09-21T10:00:00Z"
   }
 ]
