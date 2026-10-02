@@ -49,7 +49,7 @@ SOURCES = [
              r"|wage growth|earnings|profits?|IPO|takeover|merger|banks?|banking|lenders?|mortgage rates"
              r"|Treasury|IMF|OPEC)\b",
      "skip": r"^(I|My|We|We're|Would|Should|How much|What's the smallest|Could an?)\b|\byou\b|\byour\b"
-             r"|here's (why|how)|Business Daily|bank of mum and dad|leave people|what can we do|charity|^Is it time to|premium bonds|says charity|must keep going|West Bank|thieves|robbery|murder|attack(ed)? man"},
+             r"|here's (why|how)|Business Daily|bank of mum and dad|leave people|what can we do|charity|^Is it time to|premium bonds|says charity|must keep going|West Bank|thieves|robbery|murder|attack(ed)? man|lorry|riding out"},
     {"name": "European Central Bank", "url": "https://www.ecb.europa.eu/rss/press.html"},
     {"name": "Reserve Bank of Australia", "url": "https://www.rba.gov.au/rss/rss-cb-media-releases.xml"},
     {"name": "Federal Reserve", "url": "https://www.federalreserve.gov/feeds/press_all.xml",
