@@ -30,7 +30,7 @@ from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from site_common import (DATA_VERIFIED, FCA_ONLY, ROOT, SITE, SITE_URL, YEAR, abs_url, breadcrumbs, e, load_json,  # noqa: E402
-                         page)
+                         page, SETTINGS)
 
 FX = load_json("content", "brokers.json")["fx"]
 # One pip on a standard lot of EUR/USD is US$10; costs are shown for a GBP account.
@@ -171,6 +171,39 @@ DISCLOSURE = ('<p class="affiliate-disclosure"><strong>How we make money:</stron
               'methodology</a>.</p>')
 
 
+# ---------- Featured partner ----------
+
+def featured_partner():
+    """The broker named in site.json "featuredPartner", if it may be linked to; else None."""
+    b = BY_ID.get((SETTINGS.get("featuredPartner") or "").strip())
+    return b if b is not None and linkable(b) else None
+
+
+def featured_box(prefix="../"):
+    """Clearly labelled commercial placement. It sits outside the rankings and never changes a score."""
+    b = featured_partner()
+    if b is None:
+        return ""
+    rank = [x["id"] for x in BY_RATING if rankable(x)].index(b["id"]) + 1 if rankable(b) else None
+    ranked = (" In our independent ranking it scores %.1f out of 5 (#%d of %d)."
+              % (b["overall"], rank, len([x for x in BROKERS if rankable(x)])) if rank else "")
+    return """<aside class="featured-partner" aria-label="Featured partner">
+          <p class="featured-label"><span class="featured-tag">Featured partner</span> <span class="muted">Sponsored placement</span></p>
+          <div class="featured-body">
+            <div class="featured-head">{logo}<div><h2 class="featured-name">{name}</h2><p class="muted">{best_for}</p></div>
+              <div class="featured-score"><strong>{score:.1f}</strong>{stars}</div></div>
+            <ul class="pros featured-pros">{pros}</ul>
+            <div class="featured-actions"><a class="btn btn-ghost" href="{prefix}brokers/{id}.html">Read {name} review</a>{cta}</div>
+            {note}
+          </div>
+          <p class="featured-disclosure">{name} is our featured partner, and we may earn a commission if you open an
+            account. Featured placements don't affect our scores or rankings.{ranked}</p>
+        </aside>""".format(logo=logo(b, "lg", prefix=prefix), name=e(b["name"]), best_for=e(b["bestFor"]),
+                           score=b["overall"], stars=stars(b["overall"]), id=e(b["id"]), prefix=prefix,
+                           pros="".join("<li>%s</li>" % e(x) for x in b["pros"][:3]), cta=cta(b, prefix=prefix),
+                           note=cta_note(b), ranked=ranked)
+
+
 # ---------- "Best" guides ----------
 
 def with_platform(name):
@@ -304,6 +337,7 @@ def build_guide(g):
         {notices}
         <p class="lead-text">{intro}</p>
         <div class="how-box"><strong>How we ranked them:</strong> {fca}{how} <a href="../index.html#methodology">Our methodology</a>.</div>
+        {featured}
         <nav class="toc" aria-label="Ranking"><h2>The list</h2><ol>{toc}</ol></nav>
 {cards}
         {disclosure}
@@ -314,7 +348,7 @@ def build_guide(g):
       </div>
     </article>""".format(fca="We only rank brokers authorised by the UK's Financial Conduct Authority (FCA). " if FCA_ONLY else "",
                          title=e(title), month=MONTH, count=len(ranked), notices=notices(), intro=e(g["intro"]),
-                         how=e(g["how"]), toc=toc, cards="\n".join(cards), disclosure=DISCLOSURE, others=others)
+                         how=e(g["how"]), toc=toc, featured=featured_box(), cards="\n".join(cards), disclosure=DISCLOSURE, others=others)
     item_list = {"@context": "https://schema.org", "@type": "ItemList", "name": title,
                  "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": b["name"],
                                       **({"url": abs_url("brokers/%s.html" % b["id"])} if SITE_URL else {})}
@@ -616,6 +650,7 @@ def update_home():
     text = open(path, encoding="utf-8").read()
     new = replace_between(text, "seo", home_seo())
     new = replace_between(new, "top-picks", home_top_picks())
+    new = replace_between(new, "featured", featured_box(prefix=""))
     new = replace_between(new, "guides", home_hub())
     if new != text:
         open(path, "w", encoding="utf-8").write(new)

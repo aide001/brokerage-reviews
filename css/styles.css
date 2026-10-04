@@ -760,3 +760,28 @@ body.has-tray .toast { bottom: 100px; }
   .data-table th, .data-table td { padding: 8px 8px; overflow-wrap: anywhere; }
   .data-table td:first-child { white-space: normal; }
 }
+
+/* Featured partner: a labelled commercial placement, kept visually separate from the rankings */
+.featured-partner {
+  margin: 0 0 28px; padding: 18px 20px; border: 2px solid var(--star); border-radius: var(--radius);
+  background: var(--surface); box-shadow: var(--shadow);
+}
+.featured-label { margin: 0 0 12px; font-size: .8rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.featured-tag {
+  display: inline-block; padding: 3px 10px; border-radius: 999px; background: var(--warn-bg); color: var(--warn-text);
+  font-weight: 700; letter-spacing: .02em; text-transform: uppercase; font-size: .72rem;
+}
+.featured-head { display: flex; align-items: center; gap: 14px; }
+.featured-head > div:nth-child(2) { flex: 1; min-width: 0; }
+.featured-name { margin: 0; font-size: 1.25rem; }
+.featured-head p { margin: 2px 0 0; font-size: .875rem; }
+.featured-score { margin-left: auto; display: grid; justify-items: center; gap: 2px; }
+.featured-score strong { font-size: 1.6rem; font-weight: 800; line-height: 1; }
+.featured-pros { margin: 12px 0; }
+.featured-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
+.featured-disclosure { margin: 12px 0 0; padding-top: 10px; border-top: 1px solid var(--border); font-size: .78rem; color: var(--muted); line-height: 1.5; }
+@media (max-width: 640px) {
+  .featured-partner { padding: 16px; }
+  .featured-head { flex-wrap: wrap; }
+  .featured-actions .btn { flex: 1 1 100%; text-align: center; }
+}
