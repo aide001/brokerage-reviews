@@ -1,0 +1,15 @@
+// Cloudflare Workers deploy settings (Workers & Pages project "brokerage-reviews").
+// The build copies only the public site into dist/ (see scripts/make_dist.py),
+// so blog-inbox/, content/ and scripts/ are never published.
+{
+  "name": "brokerage-reviews",
+  "compatibility_date": "2025-09-01",
+  "build": {
+    "command": "python3 scripts/make_dist.py"
+  },
+  "assets": {
+    "directory": "./dist",
+    // Serve /brokers/ig.html as-is: the sitemap and canonical links use .html URLs.
+    "html_handling": "none"
+  }
+}
