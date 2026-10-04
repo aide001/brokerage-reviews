@@ -1,8 +1,7 @@
-# Heathland Aesthetics website
+# Lumière Clinic website
 
-"Heathland Aesthetics" is a working name, after the purple heathland of the New Forest
-(the site's main colour). Check it is free at Companies House and as a
-domain before using it.
+Lumière Clinic is the clinic of Dr Lynn Morris, GP. Lumière is French for "light". Check the name is
+free at Companies House and as a domain before using it.
 
 A one-page website for a doctor-led aesthetics clinic. The content follows the
 South Hampshire market and feasibility plan:
@@ -21,7 +20,7 @@ South Hampshire market and feasibility plan:
 
 ## Before going live
 
-1. Replace every `[placeholder]`: doctor's name, GMC number, qualifications, clinic
+1. Replace every `[placeholder]`: GMC number, qualifications, clinic
    address and postcode, phone, email, opening days.
 2. `doctor.jpg` is cropped from a selfie, leaving out the NHS lanyard (NHS branding must not
    appear in private-practice marketing). A professional headshot would look better.
