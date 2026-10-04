@@ -173,32 +173,85 @@ section{padding-block:clamp(56px,8vw,96px);scroll-margin-top:70px}
 /* Booking band */
 .book{background:radial-gradient(60% 90% at 100% 0%,color-mix(in srgb,var(--blush) 28%,transparent),transparent 70%),var(--band);color:var(--band-ink)}
 .book .head p,.book .label{color:var(--band-muted)}
-.book-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(28px,5vw,64px)}
-.contact-list{list-style:none;margin:0;padding:0;display:grid;gap:16px}
-.contact-list li{display:grid;gap:2px}
-.contact-list li{border-left:3px solid var(--blush);padding-left:14px}
-.contact-list b{font-weight:500;font-size:17px;user-select:all}
-form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.book-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(24px,4vw,48px);align-items:start}
+.bk-step{display:grid;gap:14px;padding-bottom:28px;margin-bottom:28px;border-bottom:1px solid color-mix(in srgb,var(--band-ink) 14%,transparent)}
+.bk-step:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.bk-step h3{font-size:24px;display:flex;align-items:baseline;gap:12px}
+.bk-step h3 .n{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--blush)}
+.bk-note{margin:0;font-size:14px;color:var(--band-muted)}
+.chip-set{border:0;margin:0;padding:0;display:grid;gap:8px;min-width:0}
+.chip-set legend{font:500 12px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--band-muted);margin-bottom:8px;padding:0}
+.svc-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.svc{position:relative;display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:12px 14px;border:1px solid color-mix(in srgb,var(--band-ink) 22%,transparent);border-radius:10px;cursor:pointer;background:color-mix(in srgb,var(--band-ink) 4%,transparent)}
+.svc:hover{border-color:var(--blush)}
+.svc input{position:absolute;opacity:0;pointer-events:none}
+.svc b{font-weight:600;font-size:15px}
+.svc .p{font:500 14px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.svc small{grid-column:1/-1;font:400 12px/1.4 var(--mono);color:var(--band-muted)}
+.svc:has(input:checked){border-color:var(--blush);background:color-mix(in srgb,var(--blush) 18%,transparent);box-shadow:inset 0 0 0 1px var(--blush)}
+.svc:has(input:focus-visible){outline:2px solid var(--blush);outline-offset:2px}
+.when{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:start}
+.cal{background:color-mix(in srgb,var(--band-ink) 5%,transparent);border:1px solid color-mix(in srgb,var(--band-ink) 14%,transparent);border-radius:12px;padding:14px}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.cal-head b{font:400 19px/1 var(--display)}
+.cal-nav{display:flex;gap:6px}
+.cal-nav button{width:34px;height:34px;border-radius:50%;border:1px solid color-mix(in srgb,var(--band-ink) 25%,transparent);background:transparent;color:var(--band-ink);font-size:16px;cursor:pointer}
+.cal-nav button:disabled{opacity:.3;cursor:default}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cal-grid .dow{font:500 11px/2 var(--mono);color:var(--band-muted);text-transform:uppercase}
+.day{aspect-ratio:1;max-width:100%;border:0;border-radius:8px;background:transparent;color:color-mix(in srgb,var(--band-ink) 35%,transparent);font:500 14px/1 var(--body);font-variant-numeric:tabular-nums;position:relative}
+.day.open{color:var(--band-ink);background:color-mix(in srgb,var(--band-ink) 9%,transparent);cursor:pointer}
+.day.open::after{content:"";position:absolute;left:50%;bottom:5px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--sage)}
+.day.open.few::after{background:var(--honey)}
+.day.open:hover{background:color-mix(in srgb,var(--blush) 30%,transparent)}
+.day.sel{background:var(--blush);color:var(--band)}
+.day.sel::after{background:var(--band)}
+.cal-key{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font:400 11.5px/1.4 var(--mono);color:var(--band-muted)}
+.cal-key i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:1px}
+.times{display:grid;align-content:start;gap:10px;min-width:0}
+.times-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:6px}
+.slot{border:1px solid color-mix(in srgb,var(--band-ink) 28%,transparent);background:transparent;color:var(--band-ink);border-radius:8px;padding:9px 4px;font:500 14px/1 var(--mono);font-variant-numeric:tabular-nums;cursor:pointer}
+.slot:hover{border-color:var(--blush)}
+.slot.sel{background:var(--blush);border-color:var(--blush);color:var(--band)}
+.slot:disabled{opacity:.3;text-decoration:line-through;cursor:default}
+.details{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .field{display:grid;gap:6px;min-width:0}
-.field.full{grid-column:1/-1}
+.field.full,.check.full{grid-column:1/-1}
 .field label{font:500 12px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--band-muted)}
-input,select,textarea{font:inherit;font-size:16px;color:var(--band-ink);background:transparent;border:1px solid color-mix(in srgb,var(--band-ink) 30%,transparent);border-radius:2px;padding:11px 12px;width:100%}
-select option{color:#17242b}
-textarea{min-height:110px;resize:vertical}
+input,select,textarea{font:inherit;font-size:16px;color:var(--band-ink);background:transparent;border:1px solid color-mix(in srgb,var(--band-ink) 30%,transparent);border-radius:8px;padding:11px 12px;width:100%}
+textarea{min-height:80px;resize:vertical}
 .check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--band-muted)}
-.check input{width:auto;margin-top:4px}
-.book .btn{background:var(--band-ink);color:var(--band);border-color:var(--band-ink)}
-.book .btn:hover{background:var(--blush);border-color:var(--blush);color:var(--band)}
-.form-msg{grid-column:1/-1;border:1px solid var(--heather);padding:18px;font-size:15px}
-.form-msg pre{white-space:pre-wrap;font:13px/1.5 var(--mono);color:var(--band-muted);margin:12px 0}
-.form-err{grid-column:1/-1;color:var(--heather);font-size:14px;margin:0}
+.check input{width:auto;margin-top:4px;accent-color:var(--blush)}
+.summary{position:sticky;top:84px;background:var(--surface);color:var(--ink);border-radius:16px;padding:22px;display:grid;gap:14px;box-shadow:0 30px 60px -30px #000}
+.summary h3{font-size:24px}
+.sum-rows{display:grid;gap:0;margin:0}
+.sum-rows div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.sum-rows dt{color:var(--muted)}
+.sum-rows dd{margin:0;text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.due{display:flex;justify-content:space-between;align-items:baseline;gap:12px;background:var(--heather-soft);border-radius:10px;padding:14px}
+.due span{font-size:14px;color:var(--heather);font-weight:600}
+.due b{font:500 28px/1 var(--mono);color:var(--heather);font-variant-numeric:tabular-nums}
+.book .summary .btn{width:100%;padding:14px 20px;font-size:16px;background:var(--heather);border-color:var(--heather);color:var(--surface)}
+.book .summary .btn:hover{background:var(--blush);border-color:var(--blush)}
+.summary .btn[aria-disabled="true"]{opacity:.45;pointer-events:none}
+.pay-note{margin:0;font-size:12.5px;color:var(--muted)}
+.pay-marks{display:flex;gap:6px;flex-wrap:wrap}
+.pay-marks span{font:500 11px/1 var(--mono);border:1px solid var(--line);border-radius:4px;padding:5px 7px;color:var(--muted)}
+.form-err{color:var(--blush);font-size:14px;margin:0}
+.form-msg{border:1px solid var(--sage);background:var(--sage-soft);color:var(--ink);border-radius:10px;padding:14px;font-size:14px}
+.form-msg b{display:block;margin-bottom:4px}
+.contact-list{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:12px}
+.contact-list li{display:grid;gap:2px;border-left:3px solid var(--blush);padding-left:14px}
+.contact-list b{font-weight:500;font-size:16px;user-select:all}
+@media (max-width:960px){.book-grid{grid-template-columns:1fr}.summary{position:static}}
+@media (max-width:600px){.svc-list,.when,.details{grid-template-columns:1fr}}
 
 footer{padding-block:36px;font-size:13px;color:var(--muted)}
 footer .wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 footer p{margin:0 0 8px;max-width:70ch}
 
 @media (max-width:960px){
-  .hero-grid,.head,.doctor,.book-grid{grid-template-columns:1fr}
+  .hero-grid,.head,.doctor{grid-template-columns:1fr}
   .principles,.steps{grid-template-columns:1fr 1fr}
   .clinics{grid-template-columns:1fr}
   .standards{grid-template-columns:1fr 1fr}
@@ -209,7 +262,7 @@ footer p{margin:0 0 8px;max-width:70ch}
 }
 @media (max-width:600px){
   body{font-size:16px}
-  .principles,.steps,.standards,form,.creds,footer .wrap{grid-template-columns:1fr}
+  .principles,.steps,.standards,.creds,footer .wrap{grid-template-columns:1fr}
   .creds div:nth-child(even){padding-left:0;border-left:0}
   .brand span{display:none}
   .facts li{grid-template-columns:1fr;gap:2px}
@@ -408,7 +461,7 @@ footer p{margin:0 0 8px;max-width:70ch}
     <div class="wrap">
       <div class="head">
         <div><div class="label">Questions</div><h2>Before you book.</h2></div>
-        <p>If your question isn't here, send it with the form below and the doctor will reply.</p>
+        <p>If your question isn't here, call or email the clinic and the doctor will reply.</p>
       </div>
       <div class="faq">
         <details><summary>Do I have to have treatment after my consultation?</summary><p>No. Many people go home with a written plan and decide later, and some decide not to go ahead. The consultation fee is taken off your treatment if you do book.</p></details>
@@ -424,43 +477,78 @@ footer p{margin:0 0 8px;max-width:70ch}
   <section class="book" id="book">
     <div class="wrap">
       <div class="head">
-        <div><div class="label">Book</div><h2>Book a consultation.</h2></div>
-        <p>Tell us a little about what you'd like to discuss and when suits you. We'll reply within one working day to confirm a time.</p>
+        <div><div class="label">Book online</div><h2>Choose a time and book.</h2></div>
+        <p>Pick a treatment, then a day and time that suits you. A 10% deposit secures your appointment and comes off your bill on the day.</p>
       </div>
       <div class="book-grid">
-        <ul class="contact-list">
-          <li><span class="label">Phone</span><b>[01234 567890]</b></li>
-          <li><span class="label">Email</span><b>[hello@yourclinic.co.uk]</b></li>
-          <li><span class="label">Main clinic</span><b>Chandler's Ford, Eastleigh</b></li>
-          <li><span class="label">Clinic days</span><b>Wednesday &amp; Saturday</b></li>
-        </ul>
         <form id="bookForm" novalidate>
-          <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name" required></div>
-          <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required></div>
-          <div class="field full"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
-          <div class="field"><label for="f-interest">I'd like to talk about</label>
-            <select id="f-interest" name="interest">
-              <option>Lines &amp; wrinkles</option>
-              <option>Lips</option>
-              <option>Cheeks, chin or jawline</option>
-              <option>Skin quality or skin boosters</option>
-              <option>Chemical peels or a skin plan</option>
-              <option>Reviewing filler from elsewhere</option>
-              <option>Not sure yet</option>
-            </select></div>
-          <div class="field"><label for="f-clinic">Most convenient clinic</label>
-            <select id="f-clinic" name="clinic">
-              <option>Chandler's Ford</option>
-              <option>New Forest (register interest)</option>
-              <option>Poole &amp; Sandbanks (register interest)</option>
-            </select></div>
-          <div class="field full"><label for="f-msg">Anything else (optional)</label><textarea id="f-msg" name="message" placeholder="Preferred days or times, or a question for the doctor"></textarea></div>
-          <label class="check full" for="f-age"><input id="f-age" type="checkbox" required> I am 18 or over.</label>
-          <label class="check full" for="f-mkt"><input id="f-mkt" type="checkbox"> Send me occasional clinic news. You can unsubscribe at any time.</label>
-          <p class="form-err" id="formErr" hidden></p>
-          <div class="field full"><button class="btn" type="submit">Request a consultation</button></div>
-          <div class="form-msg" id="formMsg" hidden></div>
+          <div class="bk-step">
+            <h3><span class="n">Step 1</span>What would you like to book?</h3>
+            <fieldset class="chip-set">
+              <legend>New to the clinic</legend>
+              <div class="svc-list" id="svcNew"></div>
+            </fieldset>
+            <fieldset class="chip-set">
+              <legend>Already had your consultation</legend>
+              <div class="svc-list" id="svcTx"></div>
+            </fieldset>
+            <p class="bk-note">Treatments for lines and wrinkles are planned at your consultation. Book a consultation to discuss them.</p>
+          </div>
+
+          <div class="bk-step">
+            <h3><span class="n">Step 2</span>Pick a day and time</h3>
+            <div class="when">
+              <div class="cal" aria-label="Choose a date">
+                <div class="cal-head"><b id="calTitle"></b><div class="cal-nav"><button type="button" id="calPrev" aria-label="Previous month">‹</button><button type="button" id="calNext" aria-label="Next month">›</button></div></div>
+                <div class="cal-grid" id="calGrid"></div>
+                <div class="cal-key"><span><i style="background:var(--sage)"></i>Available</span><span><i style="background:var(--honey)"></i>Few times left</span></div>
+              </div>
+              <div class="times">
+                <div class="label" id="timesTitle">Choose a day to see times</div>
+                <div class="times-grid" id="timesGrid"></div>
+                <p class="bk-note" id="timesNote">Chandler's Ford clinic: Wednesdays 10:00–19:00, Saturdays 09:00–14:00.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bk-step">
+            <h3><span class="n">Step 3</span>Your details</h3>
+            <div class="details">
+              <div class="field"><label for="f-name">Full name</label><input id="f-name" autocomplete="name"></div>
+              <div class="field"><label for="f-phone">Mobile</label><input id="f-phone" type="tel" autocomplete="tel"></div>
+              <div class="field full"><label for="f-email">Email</label><input id="f-email" type="email" autocomplete="email"></div>
+              <div class="field full"><label for="f-msg">Anything the doctor should know? (optional)</label><textarea id="f-msg"></textarea></div>
+              <label class="check full" for="f-age"><input id="f-age" type="checkbox"> I am 18 or over.</label>
+              <label class="check full" for="f-consulted" id="consultedRow" hidden><input id="f-consulted" type="checkbox"> I've had a consultation with Dr Morris and this treatment is in my plan.</label>
+              <label class="check full" for="f-policy"><input id="f-policy" type="checkbox"> I accept the deposit terms: refundable if I cancel or move my appointment at least 48 hours before; kept if I cancel later or don't attend.</label>
+              <label class="check full" for="f-mkt"><input id="f-mkt" type="checkbox"> Send me occasional clinic news. You can unsubscribe at any time.</label>
+            </div>
+          </div>
         </form>
+
+        <aside>
+          <div class="summary" aria-live="polite">
+            <h3>Your booking</h3>
+            <dl class="sum-rows">
+              <div><dt>Treatment</dt><dd id="sTx">Not chosen</dd></div>
+              <div><dt>Date</dt><dd id="sDate">Not chosen</dd></div>
+              <div><dt>Time</dt><dd id="sTime">Not chosen</dd></div>
+              <div><dt>Clinic</dt><dd>Chandler's Ford</dd></div>
+              <div><dt>Treatment fee</dt><dd id="sFee">–</dd></div>
+              <div><dt>Pay on the day</dt><dd id="sBal">–</dd></div>
+            </dl>
+            <div class="due"><span>Deposit due now (10%)</span><b id="sDep">£0.00</b></div>
+            <p class="form-err" id="formErr" hidden></p>
+            <a class="btn" id="payBtn" href="#book" role="button" aria-disabled="true">Pay deposit and book</a>
+            <div class="form-msg" id="formMsg" hidden></div>
+            <div class="pay-marks" aria-label="Accepted payments"><span>Visa</span><span>Mastercard</span><span>Amex</span><span>Apple Pay</span><span>Google Pay</span></div>
+            <p class="pay-note">Secure card payment by Stripe. We never see or store your card details. Fees from the price list are a guide; your final fee is confirmed at your appointment.</p>
+          </div>
+          <ul class="contact-list">
+            <li><span class="label">Prefer to call?</span><b>[01234 567890]</b></li>
+            <li><span class="label">Email</span><b>[hello@yourclinic.co.uk]</b></li>
+          </ul>
+        </aside>
       </div>
     </div>
   </section>
@@ -481,32 +569,152 @@ footer p{margin:0 0 8px;max-width:70ch}
 
 <script>
 (function(){
-  var form=document.getElementById('bookForm'),err=document.getElementById('formErr'),msg=document.getElementById('formMsg');
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    var v=function(id){return document.getElementById(id).value.trim()};
-    var problems=[];
-    if(!v('f-name'))problems.push('your name');
-    if(!v('f-phone'))problems.push('a phone number');
-    if(!/^\S+@\S+\.\S+$/.test(v('f-email')))problems.push('a valid email address');
-    if(!document.getElementById('f-age').checked)problems.push('confirmation that you are 18 or over');
-    if(problems.length){err.textContent='Please add '+problems.join(', ')+'.';err.hidden=false;msg.hidden=true;return}
-    err.hidden=true;
-    var summary='Name: '+v('f-name')+'\nPhone: '+v('f-phone')+'\nEmail: '+v('f-email')+'\nInterested in: '+v('f-interest')+'\nClinic: '+v('f-clinic')+(v('f-msg')?'\nMessage: '+v('f-msg'):'')+'\nMarketing opt-in: '+(document.getElementById('f-mkt').checked?'yes':'no');
-    // Online requests are not connected yet. Until a booking system or form service is added, show the
-    // request so the visitor can send it by email or phone.
-    msg.innerHTML='';
-    var p=document.createElement('p');p.style.margin='0';
-    p.textContent='Thank you. Online requests are being set up, so please send these details to [hello@yourclinic.co.uk] or call [01234 567890] and we\'ll confirm a time.';
-    var pre=document.createElement('pre');pre.textContent=summary;
-    var b=document.createElement('button');b.type='button';b.className='btn';b.textContent='Copy details';
-    b.addEventListener('click',function(){
-      var done=function(){b.textContent='Copied'};
-      try{navigator.clipboard.writeText(summary).then(done,function(){selectPre()})}catch(_){selectPre()}
+  /* ---------- Clinic settings: edit these ---------- */
+  var DEPOSIT_RATE = 0.10;
+  var SERVICES = [
+    // id, name, minutes, fee (£), group: "new" = anyone, "tx" = existing patients after a consultation.
+    // stripeLink: paste the Stripe Payment Link for this treatment's deposit (see README).
+    {id:'consult', name:'Medical aesthetic consultation', mins:30, fee:45,  group:'new', stripeLink:''},
+    {id:'review',  name:'Filler review & assessment',     mins:30, fee:45,  group:'new', stripeLink:''},
+    {id:'lips',    name:'Lip enhancement (0.5 ml)',       mins:45, fee:210, group:'tx',  stripeLink:''},
+    {id:'filler',  name:'Cheek, chin or jaw filler (1 ml)',mins:60, fee:280, group:'tx',  stripeLink:''},
+    {id:'booster', name:'Skin booster session',           mins:45, fee:220, group:'tx',  stripeLink:''},
+    {id:'peel',    name:'Medical-grade chemical peel',    mins:45, fee:95,  group:'tx',  stripeLink:''},
+    {id:'plan',    name:'Skin health plan',               mins:45, fee:150, group:'tx',  stripeLink:''}
+  ];
+  // Opening hours by weekday (0 = Sunday … 6 = Saturday). Times are 24-hour "HH:MM".
+  var HOURS = {3:['10:00','19:00'], 6:['09:00','14:00']};
+  var SLOT_STEP = 15;          // minutes between start times
+  var MIN_NOTICE_HOURS = 24;   // earliest bookable time from now
+  var WEEKS_AHEAD = 8;         // how far ahead people can book
+  var CLOSED_DATES = [];       // holidays, e.g. ['2026-12-23','2026-12-26']
+  // Times already taken: 'YYYY-MM-DD HH:MM' start + minutes. Replace with your real diary
+  // (or connect a booking system); a static page can't see bookings made elsewhere.
+  var BOOKED = [];
+  /* -------------------------------------------------- */
+
+  var $=function(id){return document.getElementById(id)};
+  var gbp=function(n){return '£'+n.toFixed(2)};
+  var pad=function(n){return (n<10?'0':'')+n};
+  var key=function(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())};
+  var toMin=function(t){var p=t.split(':');return +p[0]*60+ +p[1]};
+  var fmtT=function(m){return pad(Math.floor(m/60))+':'+pad(m%60)};
+  var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+  var state={svc:null,date:null,time:null};
+  var now=new Date();
+  var today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  var lastDay=new Date(today);lastDay.setDate(lastDay.getDate()+WEEKS_AHEAD*7);
+  var view=new Date(today.getFullYear(),today.getMonth(),1);
+
+  var busy={};
+  BOOKED.forEach(function(b){var p=b.split(' ');(busy[p[0]]=busy[p[0]]||[]).push([toMin(p[1]),toMin(p[1])+(+p[2]||30)])});
+
+  function slotsFor(d){
+    var h=HOURS[d.getDay()];
+    if(!h||d<today||d>lastDay||CLOSED_DATES.indexOf(key(d))>-1)return [];
+    var mins=state.svc?state.svc.mins:30, open=toMin(h[0]), close=toMin(h[1]), taken=busy[key(d)]||[], out=[];
+    var earliest=now.getTime()+MIN_NOTICE_HOURS*3600e3;
+    for(var t=open;t+mins<=close;t+=SLOT_STEP){
+      var start=new Date(d);start.setHours(0,t,0,0);
+      var clash=taken.some(function(r){return t<r[1]&&t+mins>r[0]});
+      out.push({t:t,ok:!clash&&start.getTime()>=earliest});
+    }
+    return out;
+  }
+
+  function renderServices(){
+    ['new','tx'].forEach(function(g){
+      var box=$(g==='new'?'svcNew':'svcTx');
+      SERVICES.filter(function(s){return s.group===g}).forEach(function(s){
+        var l=document.createElement('label');l.className='svc';
+        l.innerHTML='<input type="radio" name="svc" id="svc-'+s.id+'" value="'+s.id+'"><b></b><span class="p">'+gbp(s.fee).replace('.00','')+'</span><small>'+s.mins+' min · deposit '+gbp(s.fee*DEPOSIT_RATE)+'</small>';
+        l.querySelector('b').textContent=s.name;
+        l.querySelector('input').addEventListener('change',function(){
+          state.svc=s; state.time=null;
+          $('consultedRow').hidden=s.group!=='tx';
+          renderCal(); renderTimes(); update();
+        });
+        box.appendChild(l);
+      });
     });
-    function selectPre(){var r=document.createRange();r.selectNodeContents(pre);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected, press Ctrl+C or Cmd+C to copy'}
-    msg.append(p,pre,b);msg.hidden=false;
+  }
+
+  function renderCal(){
+    $('calTitle').textContent=MONTHS[view.getMonth()]+' '+view.getFullYear();
+    $('calPrev').disabled=view<=new Date(today.getFullYear(),today.getMonth(),1);
+    $('calNext').disabled=new Date(view.getFullYear(),view.getMonth()+1,1)>lastDay;
+    var g=$('calGrid');g.innerHTML='';
+    ['Mo','Tu','We','Th','Fr','Sa','Su'].forEach(function(n){var e=document.createElement('div');e.className='dow';e.textContent=n;g.appendChild(e)});
+    var first=(view.getDay()+6)%7, dim=new Date(view.getFullYear(),view.getMonth()+1,0).getDate();
+    for(var i=0;i<first;i++)g.appendChild(document.createElement('div'));
+    for(var day=1;day<=dim;day++){
+      var d=new Date(view.getFullYear(),view.getMonth(),day), sl=slotsFor(d), free=sl.filter(function(x){return x.ok}).length;
+      var b=document.createElement('button');b.type='button';b.className='day';b.textContent=day;
+      b.setAttribute('aria-label',DAYS[d.getDay()]+' '+day+' '+MONTHS[d.getMonth()]+(free?', '+free+' times available':', unavailable'));
+      if(free){b.classList.add('open');if(free<=4)b.classList.add('few');
+        (function(d){b.addEventListener('click',function(){state.date=d;state.time=null;renderCal();renderTimes();update()})})(d);
+      }else b.disabled=true;
+      if(state.date&&key(state.date)===key(d))b.classList.add('sel');
+      g.appendChild(b);
+    }
+  }
+
+  function renderTimes(){
+    var g=$('timesGrid');g.innerHTML='';
+    if(!state.date){$('timesTitle').textContent='Choose a day to see times';return}
+    $('timesTitle').textContent=DAYS[state.date.getDay()]+' '+state.date.getDate()+' '+MONTHS[state.date.getMonth()];
+    var sl=slotsFor(state.date);
+    if(!sl.some(function(x){return x.ok})){state.date=null;renderTimes();return}
+    sl.forEach(function(x){
+      var b=document.createElement('button');b.type='button';b.className='slot';b.textContent=fmtT(x.t);
+      if(!x.ok)b.disabled=true;
+      if(state.time===x.t)b.classList.add('sel');
+      b.addEventListener('click',function(){state.time=x.t;renderTimes();update()});
+      g.appendChild(b);
+    });
+  }
+
+  function update(){
+    var s=state.svc;
+    $('sTx').textContent=s?s.name:'Not chosen';
+    $('sDate').textContent=state.date?DAYS[state.date.getDay()].slice(0,3)+' '+state.date.getDate()+' '+MONTHS[state.date.getMonth()].slice(0,3):'Not chosen';
+    $('sTime').textContent=state.time!=null&&s?fmtT(state.time)+'–'+fmtT(state.time+s.mins):'Not chosen';
+    $('sFee').textContent=s?gbp(s.fee):'–';
+    $('sDep').textContent=gbp(s?s.fee*DEPOSIT_RATE:0);
+    $('sBal').textContent=s?gbp(s.fee*(1-DEPOSIT_RATE)):'–';
+    $('payBtn').setAttribute('aria-disabled',String(!(s&&state.date&&state.time!=null)));
+    $('formErr').hidden=true;$('formMsg').hidden=true;
+  }
+
+  $('calPrev').addEventListener('click',function(){view.setMonth(view.getMonth()-1);renderCal()});
+  $('calNext').addEventListener('click',function(){view.setMonth(view.getMonth()+1);renderCal()});
+
+  $('payBtn').addEventListener('click',function(e){
+    var v=function(id){return $(id).value.trim()}, s=state.svc, problems=[];
+    if(!v('f-name'))problems.push('your name');
+    if(!v('f-phone'))problems.push('a mobile number');
+    if(!/^\S+@\S+\.\S+$/.test(v('f-email')))problems.push('a valid email address');
+    if(!$('f-age').checked)problems.push('confirmation that you are 18 or over');
+    if(s.group==='tx'&&!$('f-consulted').checked)problems.push('confirmation that you have had your consultation');
+    if(!$('f-policy').checked)problems.push('agreement to the deposit terms');
+    if(problems.length){e.preventDefault();$('formErr').textContent='Please add '+problems.join(', ')+'.';$('formErr').hidden=false;return}
+    $('formErr').hidden=true;
+    var ref=s.id+'_'+key(state.date).replace(/-/g,'')+'_'+fmtT(state.time).replace(':','');
+    if(s.stripeLink){
+      // Stripe Payment Links accept a prefilled email and a reference that shows on the payment.
+      this.href=s.stripeLink+'?prefilled_email='+encodeURIComponent(v('f-email'))+'&client_reference_id='+encodeURIComponent(ref);
+      this.target='_blank';this.rel='noopener';
+      return;
+    }
+    e.preventDefault();
+    var m=$('formMsg');m.innerHTML='<b>Online payment isn\'t switched on yet.</b>';
+    m.appendChild(document.createTextNode('Your choice: '+s.name+', '+$('sDate').textContent+' at '+fmtT(state.time)+'. Please call or email the clinic to book this time and pay your '+gbp(s.fee*DEPOSIT_RATE)+' deposit.'));
+    m.hidden=false;
   });
+
+  renderServices();renderCal();renderTimes();update();
 })();
 </script>
 </body>
