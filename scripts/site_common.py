@@ -31,7 +31,6 @@ NAV = [
     ("index.html#calculator", "Cost Calculator", None),
     ("index.html#methodology", "How We Rate", None),
     ("blog/index.html", "Market News", "news"),
-    ("blog/headlines.html", "Headlines", "headlines"),
     ("index.html#faq", "FAQ", None),
 ]
 

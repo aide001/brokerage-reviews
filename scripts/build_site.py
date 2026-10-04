@@ -699,7 +699,7 @@ def write_sitemap():
         urls.append(("", None))
         urls += [(os.path.relpath(p, ROOT), None) for p in sorted(glob.glob(os.path.join(ROOT, "best", "*.html")))]
         urls += [(os.path.relpath(p, ROOT), None) for p in sorted(glob.glob(os.path.join(ROOT, "brokers", "*.html")))]
-    urls += [("blog/index.html", None), ("blog/headlines.html", None)]
+    urls += [("blog/index.html", None)]
     for p in sorted(glob.glob(os.path.join(ROOT, "content", "posts", "*.json"))):
         post = json.load(open(p, encoding="utf-8"))
         urls.append(("blog/%s.html" % post["slug"], post["date"][:10]))

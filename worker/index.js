@@ -1,6 +1,6 @@
 // Static assets are matched first; this only runs for paths with no exact file.
 // Folder URLs ("/", "/blog/") serve their index.html. Short URLs without ".html"
-// ("/blog", "/blog/headlines") redirect to the real page; anything else 404s.
+// ("/blog", "/brokers/ig") redirect to the real page; anything else 404s.
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);

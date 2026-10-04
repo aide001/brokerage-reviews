@@ -17,7 +17,6 @@ from site_common import SITE, abs_url, breadcrumbs, page
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS = os.path.join(ROOT, "content", "posts")
-HEADLINES = os.path.join(ROOT, "content", "headlines.json")
 OUT = os.path.join(ROOT, "blog")
 e = html.escape
 
@@ -95,79 +94,7 @@ def related_card(p, prefix=""):
                                date=e(p["date"]), nice=nice_date(p["date"]), title=e(p["title"]), prefix=prefix)
 
 
-def load_headlines():
-    return json.load(open(HEADLINES, encoding="utf-8")) if os.path.exists(HEADLINES) else []
-
-
-def headline_time(iso):
-    d = datetime.fromisoformat(iso.replace("Z", "+00:00"))
-    return "%d %s, %s UTC" % (d.day, d.strftime("%b"), d.strftime("%H:%M"))
-
-
-def headline_item(h):
-    # Links open the publisher's own page in a new tab (never framed).
-    return """          <li class="headline">
-            <a href="{url}" target="_blank" rel="noopener nofollow">{title}</a>
-            <span class="headline-meta">{source} · <time datetime="{date}">{when}</time></span>
-          </li>""".format(url=e(h["url"]), title=e(h["title"]), source=e(h["source"]),
-                          date=e(h["date"]), when=headline_time(h["date"]))
-
-
-HEADLINE_CREDITS = ("Finance headlines and links from BBC News, the European Central Bank, the Federal Reserve, "
-                    "the Bank of Canada and the Reserve Bank of Australia (CC BY 4.0). Articles open on the "
-                    "publisher's website; we don't copy their content.")
-
-
-def headlines_panel(headlines, href="headlines.html", count=6):
-    if not headlines:
-        return ""
-    return """        <section class="headlines-panel" aria-labelledby="headlines-title">
-          <div class="headlines-panel-head">
-            <h2 id="headlines-title">Latest headlines</h2>
-            <a href="{href}">More headlines</a>
-          </div>
-          <ul class="headline-list">
-{items}
-          </ul>
-        </section>
-""".format(href=href, items="\n".join(headline_item(h) for h in headlines[:count]))
-
-
-def build_headlines(headlines):
-    days, groups = [], {}
-    for h in headlines:
-        day = nice_date(h["date"])
-        if day not in groups:
-            days.append(day)
-            groups[day] = []
-        groups[day].append(h)
-    if headlines:
-        listing = "\n".join("""        <h2 class="headline-day">{day}</h2>
-        <ul class="headline-list">
-{items}
-        </ul>""".format(day=day, items="\n".join(headline_item(h) for h in groups[day])) for day in days)
-    else:
-        listing = '        <p class="empty">No headlines yet. Check back soon.</p>'
-    body = """    <section class="section blog-hero">
-      <div class="container narrow">
-        <div class="section-head">
-          <p class="eyebrow">Market News</p>
-          <h1>Latest headlines</h1>
-          <p>Finance and central bank headlines from around the web, updated through the day. Each link opens the full story on the publisher's site.</p>
-        </div>
-{notice}{listing}
-        <p class="headline-credits">{credits}</p>
-        <p class="related-all"><a class="btn btn-ghost" href="index.html">Back to market news</a></p>
-      </div>
-    </section>""".format(listing=listing, credits=e(HEADLINE_CREDITS), notice=advice_notice())
-    return page("Latest finance headlines — " + SITE,
-                "Finance and central bank headlines from BBC News, the ECB, the Federal Reserve, the Bank of Canada and the RBA.",
-                body, "blog/headlines.html", current="headlines",
-                jsonld=[x for x in [breadcrumbs([("Home", ""), ("Market News", "blog/index.html"),
-                                                  ("Headlines", "blog/headlines.html")])] if x])
-
-
-def build_index(posts, headlines=()):
+def build_index(posts):
     if posts:
         items = "\n".join(post_card(p) for p in posts)
         filters = """        <div class="news-filters" role="group" aria-label="Show">
@@ -186,9 +113,9 @@ def build_index(posts, headlines=()):
           <h1>Market news and analysis</h1>
           <p>Commentary on currencies, commodities and crypto from professional market analysts, plus the latest official US economic data, published as it arrives.</p>
         </div>
-{notice}{panel}{listing}
+{notice}{listing}
       </div>
-    </section>""".format(listing=listing, panel=headlines_panel(list(headlines)), notice=advice_notice())
+    </section>""".format(listing=listing, notice=advice_notice())
     return page("Forex market news and analysis — " + SITE,
                 "Forex, commodities and crypto market commentary and official US economic data.",
                 body, "blog/index.html", current="news",
@@ -227,43 +154,30 @@ HOME = os.path.join(ROOT, "index.html")
 HOME_START, HOME_END = "<!-- latest-news:start -->", "<!-- latest-news:end -->"
 
 
-def update_home(posts, headlines=()):
-    """Refresh the "Latest market news" strip between the markers in index.html."""
+def update_home(posts):
+    """Refresh the "Market news" strip between the markers in index.html."""
     if not os.path.exists(HOME):
         return
     page_html = open(HOME, encoding="utf-8").read()
     if HOME_START not in page_html or HOME_END not in page_html:
         return
-    def row(href, title, meta):
-        return ('            <li><a href="%s">%s</a><span>%s</span></li>' % (e(href), e(title), meta))
-
-    news = "\n".join(row("blog/%s.html" % p["slug"], p["title"], "%s · %s" % (e(p["type"]), nice_date(p["date"])))
-                     for p in posts[:3])
-    heads = "\n".join('            <li><a href="%s" target="_blank" rel="noopener nofollow">%s</a><span>%s · %s</span></li>'
-                      % (e(h["url"]), e(h["title"]), e(h["source"]), headline_time(h["date"])) for h in list(headlines)[:3])
-    heads_col = """
-        <div class="news-compact-col">
-          <h3>Headlines <a href="blog/headlines.html">More</a></h3>
-          <ul>
-{heads}
-          </ul>
-        </div>""".format(heads=heads) if heads else ""
+    news = "\n".join('            <li><a href="%s">%s</a><span>%s · %s</span></li>'
+                     % (e("blog/%s.html" % p["slug"]), e(p["title"]), e(p["type"]), nice_date(p["date"]))
+                     for p in posts[:5])
     section = """{start}
     <section id="latest-news" class="news-compact" aria-labelledby="latest-news-title">
       <div class="container">
         <h2 id="latest-news-title">Market news</h2>
-        <div class="news-compact-cols">
         <div class="news-compact-col">
           <h3>Latest posts <a href="blog/index.html">All</a></h3>
           <ul>
 {news}
           </ul>
-        </div>{heads_col}
         </div>
         <p class="news-compact-note">For general information only; not financial, investment or trading advice.</p>
       </div>
     </section>
-    {end}""".format(start=HOME_START, end=HOME_END, news=news, heads_col=heads_col)
+    {end}""".format(start=HOME_START, end=HOME_END, news=news)
     before, rest = page_html.split(HOME_START, 1)
     after = rest.split(HOME_END, 1)[1]
     new = before + section + after
@@ -316,23 +230,20 @@ def build_post(p, related):
 
 def main():
     posts = load_posts()
-    headlines = load_headlines()
     os.makedirs(OUT, exist_ok=True)
     # Remove pages for posts that no longer exist.
-    keep = {p["slug"] + ".html" for p in posts} | {"index.html", "headlines.html"}
+    keep = {p["slug"] + ".html" for p in posts} | {"index.html"}
     for f in os.listdir(OUT):
         if f.endswith(".html") and f not in keep:
             os.remove(os.path.join(OUT, f))
     with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as fh:
-        fh.write(build_index(posts, headlines))
-    with open(os.path.join(OUT, "headlines.html"), "w", encoding="utf-8") as fh:
-        fh.write(build_headlines(headlines))
+        fh.write(build_index(posts))
     for p in posts:
         # The three most recent other posts, newest first.
         related = [r for r in posts if r["slug"] != p["slug"]][:3]
         with open(os.path.join(OUT, p["slug"] + ".html"), "w", encoding="utf-8") as fh:
             fh.write(build_post(p, related))
-    update_home(posts, headlines)
+    update_home(posts)
     print("Built blog: %d post(s)." % len(posts))
     import build_site  # the sitemap lists news posts too
     build_site.write_sitemap()
