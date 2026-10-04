@@ -30,7 +30,8 @@ from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from site_common import (DATA_VERIFIED, FCA_ONLY, ROOT, SITE, SITE_URL, YEAR, abs_url, breadcrumbs, e, load_json,  # noqa: E402
-                         page, SETTINGS, is_published, organization, size_images, CONTACT_EMAIL)
+                         page, SETTINGS, is_published, organization, size_images, CONTACT_EMAIL,
+                         AUTHOR, author_person, byline)
 
 FX = load_json("content", "brokers.json")["fx"]
 # One pip on a standard lot of EUR/USD is US$10; costs are shown for a GBP account.
@@ -333,7 +334,7 @@ def build_guide(g):
       <div class="container narrow">
         <p class="breadcrumb"><a href="../index.html">Home</a> / <a href="index.html">Best brokers</a></p>
         <h1 class="post-title">{title}</h1>
-        <p class="post-meta">Updated {month} · {count} brokers ranked</p>
+        {byline}
         {notices}
         <p class="lead-text">{intro}</p>
         <div class="how-box"><strong>How we ranked them:</strong> {fca}{how} <a href="../index.html#methodology">Our methodology</a>.</div>
@@ -347,7 +348,7 @@ def build_guide(g):
         </section>
       </div>
     </article>""".format(fca="We only rank brokers authorised by the UK's Financial Conduct Authority (FCA). " if FCA_ONLY else "",
-                         title=e(title), month=MONTH, count=len(ranked), notices=notices(), intro=e(g["intro"]),
+                         title=e(title), month=MONTH, count=len(ranked), byline=byline(verb="By", date="%s · %d brokers ranked" % (MONTH, len(ranked))), notices=notices(), intro=e(g["intro"]),
                          how=e(g["how"]), toc=toc, featured=featured_box(), cards="\n".join(cards), disclosure=DISCLOSURE, others=others)
     item_list = {"@context": "https://schema.org", "@type": "ItemList", "name": title,
                  "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": b["name"],
@@ -458,7 +459,7 @@ def build_review(b):
         <header class="review-head">{logo}
           <div><h1 class="post-title">{name} Review</h1>
           <p class="muted">{best_for} · Founded {founded} · {hq}</p><p class="rank-uk">{uk}</p>
-          <p class="muted small review-updated">Updated {checked}</p></div>
+          {byline}</div>
           <div class="review-score"><strong>{score:.1f}</strong>{stars}<small>Overall</small></div>
         </header>
         {notices}
@@ -513,7 +514,7 @@ def build_review(b):
                          featured_block=('<section class="more-guides"><h2>Featured in our guides</h2><ul>%s</ul></section>'
                                          % featured_html) if featured else "",
                          disclosure=DISCLOSURE, others=others_html,
-                         checked=nice_date(checked), toc=toc, verdict=verdict, details=details, uk_site=" (UK site where available)" if b.get("fcaFrn") else "",
+                         checked=nice_date(checked), byline=byline(date=nice_date(checked)), toc=toc, verdict=verdict, details=details, uk_site=" (UK site where available)" if b.get("fcaFrn") else "",
                          fx_note=("Figures marked ~ are converted from US$ at £1 = $%.4f (ECB reference rate, %s). "
                                   % (FX["GBPUSD"], nice_date(FX["date"]))) if b.get("approx") else "",
                          source_links="".join('<li><a href="%s" rel="nofollow noopener" target="_blank">%s</a></li>'
@@ -528,7 +529,8 @@ def build_review(b):
     review_ld = {"@context": "https://schema.org", "@type": "Review", "name": title,
                  "itemReviewed": {"@type": "Organization", "name": b["name"], "url": "https://%s" % b["domain"]},
                  "reviewRating": {"@type": "Rating", "ratingValue": b["overall"], "bestRating": 5, "worstRating": 1},
-                 "author": {"@type": "Organization", "name": SITE, **({"url": SITE_URL + "/"} if SITE_URL else {})},
+                 "author": author_person() or {"@type": "Organization", "name": SITE,
+                                                **({"url": SITE_URL + "/"} if SITE_URL else {})},
                  "publisher": {"@type": "Organization", "name": SITE},
                  "datePublished": checked, "reviewBody": b["summary"]}
     if abs_url(path):
@@ -723,6 +725,20 @@ def write_sitemap():
 
 # ---------- About & editorial policy ----------
 
+def author_section():
+    if not AUTHOR.get("name"):
+        return ""
+    photo = ('<img class="author-photo" src="../%s" alt="%s" />' % (e(AUTHOR["photo"]), e(AUTHOR["name"]))
+             if AUTHOR.get("photo") else "")
+    return """        <section class="review-section author-card" id="author"><h2>Who's behind the site</h2>
+          <div class="author-body">{photo}<div>
+            <p class="author-name"><strong>{name}</strong><span class="muted">{role}</span></p>
+            {bio}
+          </div></div>
+        </section>""".format(photo=photo, name=e(AUTHOR["name"]), role=e(AUTHOR.get("role", "")),
+                             bio="".join("<p>%s</p>" % e(x) for x in AUTHOR.get("bio", [])))
+
+
 def build_about():
     path = "about/index.html"
     partner = featured_partner()
@@ -743,6 +759,7 @@ def build_about():
         <p class="lead-text">{site} compares forex and CFD brokers for UK traders. We review {count} brokers, explain their costs, regulation and platforms in plain English, and rank them against a published methodology.</p>
         {not_advice}
         <nav class="review-toc" aria-label="On this page"><h2>On this page</h2><ol>
+{author_toc}
           <li><a href="#independence">Editorial independence</a></li>
           <li><a href="#money">How we make money</a></li>
           <li><a href="#partners">Partners and partner content</a></li>
@@ -753,6 +770,7 @@ def build_about():
           <li><a href="#risk">Risk warning</a></li>
         </ol></nav>
 
+{author_section}
         <section class="review-section" id="independence"><h2>Editorial independence</h2>
         <p>Our reviews, scores and rankings are our own. Brokers can't pay to be reviewed, to change a score or to move up a ranking, and we don't let brokers or partners edit our reviews.</p>
         <ul class="prose-list">
@@ -793,7 +811,8 @@ def build_about():
         <section class="review-section" id="risk"><h2>Risk warning</h2>
         <p>CFDs, spread bets and leveraged forex are complex instruments and carry a high risk of losing money rapidly because of leverage. Most retail investor accounts lose money when trading CFDs. Consider whether you understand how these products work and whether you can afford to take the high risk of losing your money. Nothing on this site is financial, investment or trading advice. If you're unsure, speak to an independent financial adviser.</p></section>
       </div>
-    </article>""".format(contact=("""        <section class="review-section" id="contact"><h2>Contact us and corrections</h2>
+    </article>""".format(author_toc='          <li><a href="#author">Who\'s behind the site</a></li>' if AUTHOR.get("name") else "",
+                         author_section=author_section(), contact=("""        <section class="review-section" id="contact"><h2>Contact us and corrections</h2>
         <p>Email us at <a href="mailto:{email}">{email}</a>.</p>
         <p>We work hard to keep every figure accurate, but brokers change their prices and terms often. If you spot something that's wrong or out of date, please email us with a link to the page and we'll check it and correct it. Brokers can contact us to point out factual errors in their review; we'll verify any correction against the broker's own website, but we don't change scores or rankings on request.</p>
         <p>We can't give personal financial advice or help with individual accounts at a broker; please contact the broker directly for that.</p></section>
@@ -806,7 +825,9 @@ def build_about():
                 **({"url": abs_url(path)} if SITE_URL else {})}
     return path, page("About us and our editorial policy — %s" % SITE,
                       "Who we are, how we make money, how we stay independent and how we research and rate forex brokers.",
-                      body, path, jsonld=[x for x in [about_ld, organization(), crumbs] if x])
+                      body, path, jsonld=[x for x in [about_ld, organization(),
+                                                      dict({"@context": "https://schema.org"}, **author_person()) if author_person() else None,
+                                                      crumbs] if x])
 
 
 # ---------- Main ----------

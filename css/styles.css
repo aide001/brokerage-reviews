@@ -826,3 +826,18 @@ body.has-tray .toast { bottom: 100px; }
   background: var(--warn-bg); color: var(--warn-text); border-left: 3px solid var(--star);
 }
 .partner-notice strong { color: inherit; }
+
+/* Author byline and About page profile */
+.byline { display: flex; align-items: center; gap: 10px; margin: 8px 0 0; font-size: .85rem; color: var(--muted); }
+.byline a { color: var(--text); font-weight: 600; }
+.byline-photo { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; flex: none; }
+.author-body { display: flex; gap: 24px; align-items: flex-start; }
+.author-photo { width: 200px; height: auto; border-radius: var(--radius); flex: none; }
+.author-name { display: flex; flex-direction: column; gap: 2px; margin: 0 0 8px; }
+.author-name strong { font-size: 1.15rem; }
+@media (max-width: 640px) {
+  .author-body { flex-direction: column; gap: 16px; }
+  .author-photo { width: 160px; }
+}
+.guide .byline, .review-page .byline { margin-bottom: 4px; }
+.guide .byline { margin-bottom: 20px; }

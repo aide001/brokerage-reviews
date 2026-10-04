@@ -1,10 +1,20 @@
 {
-  "_note": "siteUrl: the live address, e.g. https://www.example.com (used for the sitemap and canonical links; leave empty until the domain is live). dataVerified: true once broker figures in content/brokers.json have been checked against each broker's website (they were on 2026-09-29; see each broker's sources). Brokers whose own 'verified' flag is false still get a notice and noindex on their review page. guidesFcaOnly: when true, the 'best' guides and homepage top picks only rank FCA-authorised brokers (right for a UK audience); set false to rank every broker. featuredPartner: the broker id shown in a clearly labelled 'Featured partner' box at the top of the homepage and every guide (it must be FCA-authorised when guidesFcaOnly is true). Leave empty to turn the box off. It never changes scores or rankings. partnerOpinionPosts: false keeps partner (FxPro) opinion pieces such as 'Market Comment' off the site (they are still imported and kept in content/posts); set true once the partner has approved them for publication here. Factual partner posts (Weekly Performance) and official US data are always published. contactEmail: public contact address shown on the About page and in the site's structured data.",
+  "_note": "siteUrl: the live address, e.g. https://www.example.com (used for the sitemap and canonical links; leave empty until the domain is live). dataVerified: true once broker figures in content/brokers.json have been checked against each broker's website (they were on 2026-09-29; see each broker's sources). Brokers whose own 'verified' flag is false still get a notice and noindex on their review page. guidesFcaOnly: when true, the 'best' guides and homepage top picks only rank FCA-authorised brokers (right for a UK audience); set false to rank every broker. featuredPartner: the broker id shown in a clearly labelled 'Featured partner' box at the top of the homepage and every guide (it must be FCA-authorised when guidesFcaOnly is true). Leave empty to turn the box off. It never changes scores or rankings. partnerOpinionPosts: false keeps partner (FxPro) opinion pieces such as 'Market Comment' off the site (they are still imported and kept in content/posts); set true once the partner has approved them for publication here. Factual partner posts (Weekly Performance) and official US data are always published. contactEmail: public contact address shown on the About page and in the site's structured data. author: the person named as reviewer on every broker review and guide, with a bio and photo on the About page.",
   "siteName": "Brokerage Reviews",
   "siteUrl": "https://brokeragereviews.net",
   "dataVerified": true,
   "guidesFcaOnly": true,
   "featuredPartner": "fxpro",
   "partnerOpinionPosts": true,
-  "contactEmail": "support@brokeragereviews.net"
+  "contactEmail": "support@brokeragereviews.net",
+  "author": {
+    "name": "Adrian Rochester",
+    "role": "Founder and editor",
+    "photo": "assets/people/adrian-rochester.jpg",
+    "avatar": "assets/people/adrian-rochester-160.jpg",
+    "bio": [
+      "Adrian Rochester is the founder and editor of Brokerage Reviews.",
+      "Adrian researches and writes every broker review and guide on the site, checking each broker's costs, regulation, platforms and account terms against the broker's own website and the FCA register, and re-checking them regularly as brokers change their prices and terms."
+    ]
+  }
 }

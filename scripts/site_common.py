@@ -24,6 +24,7 @@ SITE_URL = (SETTINGS.get("siteUrl") or "").rstrip("/")
 DATA_VERIFIED = bool(SETTINGS.get("dataVerified"))
 FCA_ONLY = bool(SETTINGS.get("guidesFcaOnly"))
 CONTACT_EMAIL = (SETTINGS.get("contactEmail") or "").strip()
+AUTHOR = SETTINGS.get("author") or {}
 YEAR = datetime.now(timezone.utc).year
 PARTNER_OPINION = bool(SETTINGS.get("partnerOpinionPosts"))
 
@@ -122,6 +123,29 @@ def size_images(markup, page_dir):
 def abs_url(path):
     """Absolute URL for a root-relative path, or "" until siteUrl is set."""
     return "%s/%s" % (SITE_URL, path) if SITE_URL else ""
+
+
+def author_person():
+    """schema.org Person for the site's reviewer, or None if no author is set."""
+    if not AUTHOR.get("name"):
+        return None
+    person = {"@type": "Person", "name": AUTHOR["name"], "jobTitle": AUTHOR.get("role", "")}
+    if SITE_URL:
+        person["url"] = abs_url("about/index.html#author")
+        if AUTHOR.get("photo"):
+            person["image"] = abs_url(AUTHOR["photo"])
+    return person
+
+
+def byline(prefix="../", verb="Reviewed by", date=None):
+    """Author line with a small photo, linking to the bio on the About page."""
+    if not AUTHOR.get("name"):
+        return '<p class="muted small review-updated">Updated %s</p>' % date if date else ""
+    photo = ('<img class="byline-photo" src="%s%s" alt="" loading="lazy" />' % (prefix, e(AUTHOR["avatar"]))
+             if AUTHOR.get("avatar") else "")
+    when = ' <span class="byline-sep">·</span> Updated %s' % date if date else ""
+    return ('<p class="byline">%s<span>%s <a href="%sabout/index.html#author">%s</a>%s</span></p>'
+            % (photo, verb, prefix, e(AUTHOR["name"]), when))
 
 
 def organization():
