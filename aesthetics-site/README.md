@@ -1,7 +1,7 @@
-# Heather & Hale website
+# Heathland Aesthetics website
 
-"Heather & Hale" is a working name: heather for the New Forest heathland (and the site's
-main colour), "hale" meaning healthy. Check it is free at Companies House and as a
+"Heathland Aesthetics" is a working name, after the purple heathland of the New Forest
+(the site's main colour). Check it is free at Companies House and as a
 domain before using it.
 
 A one-page website for a doctor-led aesthetics clinic. The content follows the
