@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>South Hampshire Aesthetics</title>
+<meta name="description" content="Doctor-led aesthetics in Chandler's Ford, Hampshire. A GP-led medical consultation, natural-looking results and follow-up with the same doctor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a calm clinic letterhead. Narrow reading column, a treatment list set out like a price card, and one dark slate band for booking. */
+:root{
+  --bg:#f2f4f3;        /* chalk, leaning slightly green */
+  --surface:#fbfcfb;
+  --ink:#17242b;       /* slate */
+  --muted:#58666b;
+  --line:#d5dcda;
+  --heather:#76567f;   /* New Forest heather, the single accent */
+  --heather-soft:#ece5ee;
+  --moss:#3d5a4c;
+  --band:#17242b;
+  --band-ink:#e9eeec;
+  --band-muted:#a9b6b5;
+  --display:'Marcellus','Trajan Pro',Georgia,serif;
+  --body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  --gutter:clamp(16px,4vw,40px);
+  --max:1120px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f161a;--surface:#151e23;--ink:#e6ece9;--muted:#9aa8a8;--line:#28353a;
+  --heather:#c6a5d0;--heather-soft:#2a2230;--moss:#9cc0ad;--band:#1b262c;--band-ink:#e9eeec;--band-muted:#9fadad;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f161a;--surface:#151e23;--ink:#e6ece9;--muted:#9aa8a8;--line:#28353a;
+  --heather:#c6a5d0;--heather-soft:#2a2230;--moss:#9cc0ad;--band:#1b262c;--band-ink:#e9eeec;--band-muted:#9fadad;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--body)}
+img{max-width:100%}
+a{color:var(--heather);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--heather);outline-offset:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gutter)}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+.label{font:500 12px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* Header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--ink)}
+.brand b{font:400 21px/1 var(--display);letter-spacing:.02em}
+.brand span{font:500 11px/1 var(--mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.top nav{display:flex;gap:22px;flex-wrap:wrap}
+.top nav a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500}
+.top nav a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);padding:11px 20px;border-radius:2px;font:600 15px/1 var(--body);text-decoration:none;cursor:pointer}
+.btn:hover{background:var(--heather);border-color:var(--heather);color:var(--bg)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{border-color:var(--heather);color:var(--heather);background:transparent}
+.top .btn{padding:9px 16px;font-size:14px}
+
+/* Hero */
+.hero{padding-block:clamp(48px,9vw,104px) clamp(40px,6vw,72px)}
+.hero-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(28px,5vw,72px);align-items:end}
+.hero h1{font-size:clamp(40px,6.4vw,76px);line-height:1.04;letter-spacing:-.01em;margin-block:18px 22px}
+.hero h1 em{font-style:normal;color:var(--heather)}
+.hero p.lead{font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:56ch;margin:0 0 28px}
+.hero .actions{display:flex;gap:12px;flex-wrap:wrap}
+.card-note{border-top:2px solid var(--heather);background:var(--surface);padding:24px 24px 20px}
+.card-note h2{font-size:24px;margin-bottom:14px}
+.facts{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.facts li{display:grid;grid-template-columns:96px 1fr;gap:12px;font-size:15px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.facts li:last-child{border-bottom:0;padding-bottom:0}
+.facts .label{padding-top:3px}
+
+/* Sections */
+section{padding-block:clamp(56px,8vw,96px);scroll-margin-top:70px}
+section.alt{background:var(--surface);border-block:1px solid var(--line)}
+.head{display:grid;grid-template-columns:1fr 2fr;gap:24px 56px;margin-bottom:40px}
+.head h2{font-size:clamp(32px,4.2vw,48px);line-height:1.08}
+.head p{margin:0;color:var(--muted);max-width:62ch}
+.head .label{margin-bottom:12px}
+
+/* Approach */
+.principles{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--ink)}
+.principles article{padding:22px 22px 4px 0}
+.principles article+article{padding-left:22px;border-left:1px solid var(--line)}
+.principles h3{font-size:22px;line-height:1.2;margin-bottom:10px}
+.principles p{margin:0;font-size:15px;color:var(--muted)}
+.quote{margin:44px 0 0;font:400 clamp(24px,3vw,34px)/1.3 var(--display);max-width:30ch;color:var(--moss)}
+
+/* Treatments: price card */
+.menu{border-top:1px solid var(--ink)}
+.item{display:grid;grid-template-columns:1.1fr 1.6fr .9fr;gap:12px 32px;padding-block:24px;border-bottom:1px solid var(--line);align-items:start}
+.item h3{font-size:24px;line-height:1.2}
+.item p{margin:0;color:var(--muted);font-size:15px;min-width:0}
+.item .spec{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font:400 12.5px/1.4 var(--mono);color:var(--muted)}
+.price{text-align:right;font:500 15px/1.5 var(--mono);font-variant-numeric:tabular-nums}
+.price small{display:block;color:var(--muted);font-weight:400;font-size:12px}
+.item.consult{background:var(--heather-soft);margin-inline:calc(var(--gutter) * -0.5);padding-inline:calc(var(--gutter) * .5);border-bottom-color:transparent}
+.menu-note{font-size:14px;color:var(--muted);margin-top:18px;max-width:80ch}
+
+/* Visit steps (a real sequence) */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:28px;counter-reset:s}
+.steps li{counter-increment:s;border-top:1px solid var(--line);padding-top:16px}
+.steps li::before{content:"Step " counter(s);display:block;font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--heather);margin-bottom:12px}
+.steps h3{font-size:21px;margin-bottom:8px}
+.steps p{margin:0;font-size:15px;color:var(--muted)}
+
+/* Doctor */
+.doctor{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(28px,5vw,64px);align-items:start}
+.portrait{aspect-ratio:4/5;max-width:100%;background:
+  radial-gradient(120% 80% at 30% 20%,var(--heather-soft),transparent 60%),
+  linear-gradient(160deg,var(--surface),var(--bg));border:1px solid var(--line);display:grid;place-items:end start;padding:20px}
+.portrait span{font:500 12px/1.4 var(--mono);color:var(--muted)}
+.doctor h2{font-size:clamp(32px,4.2vw,48px);margin-block:10px 18px}
+.doctor p{color:var(--muted);max-width:60ch}
+.creds{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-top:26px;border-top:1px solid var(--line)}
+.creds div{padding:14px 14px 14px 0;border-bottom:1px solid var(--line)}
+.creds div:nth-child(even){padding-left:14px;border-left:1px solid var(--line)}
+.creds b{display:block;font-weight:600;font-size:15px}
+.creds span{font-size:14px;color:var(--muted)}
+
+/* Clinics */
+.clinics{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:20px}
+.clinic{border:1px solid var(--line);background:var(--bg);padding:24px;display:flex;flex-direction:column;gap:10px}
+.clinic.main{border-color:var(--ink);background:var(--surface)}
+.clinic h3{font-size:26px}
+.clinic p{margin:0;color:var(--muted);font-size:15px}
+.status{align-self:flex-start;font:500 11.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:6px 9px;border:1px solid currentColor}
+.status.open{color:var(--moss)}
+.status.soon{color:var(--heather)}
+.hours{font:400 14px/1.7 var(--mono);font-variant-numeric:tabular-nums;margin-top:auto;padding-top:12px;border-top:1px solid var(--line)}
+
+/* Standards */
+.standards{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 40px}
+.standards h3{font-size:20px;margin-bottom:6px}
+.standards p{margin:0;font-size:15px;color:var(--muted)}
+
+/* FAQ */
+.faq{border-top:1px solid var(--ink);max-width:860px}
+.faq details{border-bottom:1px solid var(--line);padding-block:18px}
+.faq summary{cursor:pointer;font:400 21px/1.3 var(--display);list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--heather)}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin:12px 0 0;color:var(--muted);max-width:70ch}
+
+/* Booking band */
+.book{background:var(--band);color:var(--band-ink)}
+.book .head p,.book .label{color:var(--band-muted)}
+.book-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(28px,5vw,64px)}
+.contact-list{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.contact-list li{display:grid;gap:2px}
+.contact-list b{font-weight:500;font-size:17px;user-select:all}
+form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:grid;gap:6px;min-width:0}
+.field.full{grid-column:1/-1}
+.field label{font:500 12px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--band-muted)}
+input,select,textarea{font:inherit;font-size:16px;color:var(--band-ink);background:transparent;border:1px solid color-mix(in srgb,var(--band-ink) 30%,transparent);border-radius:2px;padding:11px 12px;width:100%}
+select option{color:#17242b}
+textarea{min-height:110px;resize:vertical}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--band-muted)}
+.check input{width:auto;margin-top:4px}
+.book .btn{background:var(--band-ink);color:var(--band);border-color:var(--band-ink)}
+.book .btn:hover{background:var(--heather);border-color:var(--heather);color:var(--band)}
+.form-msg{grid-column:1/-1;border:1px solid var(--heather);padding:18px;font-size:15px}
+.form-msg pre{white-space:pre-wrap;font:13px/1.5 var(--mono);color:var(--band-muted);margin:12px 0}
+.form-err{grid-column:1/-1;color:var(--heather);font-size:14px;margin:0}
+
+footer{padding-block:36px;font-size:13px;color:var(--muted)}
+footer .wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+footer p{margin:0 0 8px;max-width:70ch}
+
+@media (max-width:960px){
+  .hero-grid,.head,.doctor,.book-grid{grid-template-columns:1fr}
+  .principles,.steps{grid-template-columns:1fr 1fr}
+  .principles article:nth-child(3){padding-left:0;border-left:0}
+  .clinics{grid-template-columns:1fr}
+  .standards{grid-template-columns:1fr 1fr}
+  .item{grid-template-columns:1fr auto}
+  .item p{grid-column:1/-1;grid-row:2}
+  .top nav{display:none}
+  .portrait{aspect-ratio:16/9}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .principles,.steps,.standards,form,.creds,footer .wrap{grid-template-columns:1fr}
+  .principles article,.principles article+article{padding-left:0;border-left:0;border-bottom:1px solid var(--line);padding-bottom:18px}
+  .creds div:nth-child(even){padding-left:0;border-left:0}
+  .brand span{display:none}
+  .facts li{grid-template-columns:1fr;gap:2px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><b>South Hampshire Aesthetics</b><span>Doctor-led · Chandler's Ford</span></a>
+    <nav aria-label="Main">
+      <a href="#approach">Approach</a>
+      <a href="#treatments">Treatments &amp; prices</a>
+      <a href="#doctor">Your doctor</a>
+      <a href="#clinics">Clinics</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn" href="#book">Book a consultation</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <div class="label">GP-led medical aesthetics · Hampshire</div>
+        <h1>Natural results, planned by <em>one doctor</em> from start to finish.</h1>
+        <p class="lead">A medical consultation first, an honest plan that still looks like you, and a review with the same doctor afterwards. Clinics in Chandler's Ford, with New Forest and Poole days to follow.</p>
+        <div class="actions">
+          <a class="btn" href="#book">Book a consultation</a>
+          <a class="btn ghost" href="#treatments">See treatments &amp; prices</a>
+        </div>
+      </div>
+      <aside class="card-note" aria-label="At a glance">
+        <h2>At a glance</h2>
+        <ul class="facts">
+          <li><span class="label">Clinician</span><span>Dr [Name], GMC-registered GP with advanced aesthetics training</span></li>
+          <li><span class="label">Consultation</span><span>30 minutes, £45, taken off the cost of any treatment you go ahead with</span></li>
+          <li><span class="label">Aftercare</span><span>Review appointment included with every injectable treatment</span></li>
+          <li><span class="label">Where</span><span>Chandler's Ford, near Eastleigh. Free on-site parking</span></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+
+  <section class="alt" id="approach">
+    <div class="wrap">
+      <div class="head">
+        <div><div class="label">How we work</div><h2>Medicine first, treatment second.</h2></div>
+        <p>Lots of clinics nearby are doctor-led. What makes the difference is what happens in the room: a proper assessment, a doctor who takes responsibility for your care from the first visit to the last, and advice you can trust when the answer is "this isn't right for you".</p>
+      </div>
+      <div class="principles">
+        <article><h3>A real medical assessment</h3><p>Your medical history, medicines and goals are reviewed before anything is recommended. Some people are better suited to skincare or no treatment at all.</p></article>
+        <article><h3>The same doctor every time</h3><p>Dr [Name] assesses you, plans your care, treats you and reviews the result. No hand-offs between a prescriber and a separate injector.</p></article>
+        <article><h3>We'll tell you "not today"</h3><p>If a treatment won't give you the result you want, or isn't safe for you right now, we'll say so and explain why.</p></article>
+        <article><h3>Care that continues</h3><p>A review after treatment, a direct line for aftercare questions, and a clear plan if anything doesn't settle as expected.</p></article>
+      </div>
+      <p class="quote">"A careful medical assessment, a plan that still looks like you, and the same doctor there for your follow-up."</p>
+    </div>
+  </section>
+
+  <section id="treatments">
+    <div class="wrap">
+      <div class="head">
+        <div><div class="label">Treatments &amp; prices</div><h2>Clear prices, set out before you commit.</h2></div>
+        <p>Every treatment starts with a consultation. The prices below are a guide; your exact cost depends on your plan and is confirmed in writing before you decide. We don't run flash sales or time-limited deals.</p>
+      </div>
+      <div class="menu">
+        <article class="item consult">
+          <div><h3>Medical aesthetic consultation</h3><div class="spec"><span>30 min</span><span>face to face</span></div></div>
+          <p>The starting point for everything, including lines and wrinkles. We talk through what bothers you, check your medical history and examine your skin and facial structure. You leave with a written plan and prices, and time to think it over.</p>
+          <div class="price">£45<small>taken off your treatment</small></div>
+        </article>
+        <article class="item">
+          <div><h3>Lines &amp; wrinkles</h3><div class="spec"><span>forehead</span><span>frown lines</span><span>crow's feet</span></div></div>
+          <p>Several medical options can soften expression lines. Which one suits you, and whether treatment is right at all, can only be decided after your face-to-face consultation with the doctor.</p>
+          <div class="price">Consultation<small>options and prices discussed in clinic</small></div>
+        </article>
+        <article class="item">
+          <div><h3>Lip enhancement</h3><div class="spec"><span>0.5–1 ml</span><span>hyaluronic acid</span><span>review at 2 weeks</span></div></div>
+          <p>Subtle shape, definition and hydration that suits your face. We stay in proportion and build gradually.</p>
+          <div class="price">from £210<small>0.5 ml</small></div>
+        </article>
+        <article class="item">
+          <div><h3>Cheek, chin &amp; jawline filler</h3><div class="spec"><span>per 1 ml</span><span>hyaluronic acid</span><span>review at 2 weeks</span></div></div>
+          <p>Restores lost volume and supports facial structure. Planned around your anatomy to look natural at rest and when you move.</p>
+          <div class="price">from £280<small>per 1 ml</small></div>
+        </article>
+        <article class="item">
+          <div><h3>Skin boosters</h3><div class="spec"><span>course of 2–3</span><span>4 weeks apart</span></div></div>
+          <p>Fine injectable treatments that improve hydration, texture and fine crepey lines on the face, neck and hands.</p>
+          <div class="price">from £220<small>per session</small></div>
+        </article>
+        <article class="item">
+          <div><h3>Medical-grade chemical peels</h3><div class="spec"><span>45 min</span><span>little or no downtime</span></div></div>
+          <p>For dullness, uneven tone, congestion and early sun damage. Usually part of a wider skin plan.</p>
+          <div class="price">from £95<small>per peel</small></div>
+        </article>
+        <article class="item">
+          <div><h3>Skin health plan</h3><div class="spec"><span>3-month plan</span><span>reviewed at 6 and 12 weeks</span></div></div>
+          <p>A tailored programme for acne-prone skin, pigmentation, redness or ageing, combining clinic treatments with a home routine.</p>
+          <div class="price">from £150<small>includes 2 reviews</small></div>
+        </article>
+        <article class="item">
+          <div><h3>Filler review &amp; correction</h3><div class="spec"><span>assessment first</span></div></div>
+          <p>Unhappy with filler from elsewhere, or worried something isn't right? We assess it medically and talk you through your options.</p>
+          <div class="price">from £45<small>assessment</small></div>
+        </article>
+      </div>
+      <p class="menu-note">Treatments are for adults aged 18 and over. Results vary from person to person, and some people need more than one session. All injectable treatments include a review appointment.</p>
+    </div>
+  </section>
+
+  <section class="alt" id="visit">
+    <div class="wrap">
+      <div class="head">
+        <div><div class="label">Your visit</div><h2>What happens, in order.</h2></div>
+        <p>You're never treated on impulse. Most people have their consultation and treatment on different days, so you have time to think it over.</p>
+      </div>
+      <ol class="steps">
+        <li><h3>Consultation</h3><p>Medical history, examination, photographs with your consent, and an honest talk about what's realistic.</p></li>
+        <li><h3>Written plan</h3><p>Your options, expected results, risks and exact prices, sent to you to read at home.</p></li>
+        <li><h3>Treatment</h3><p>When you're ready, Dr [Name] treats you and goes through aftercare before you leave.</p></li>
+        <li><h3>Review</h3><p>A follow-up at about two weeks to check the result, fine-tune if needed and plan any next steps.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="doctor">
+    <div class="wrap doctor">
+      <div class="portrait" role="img" aria-label="Photo of Dr [Name] to be added"><span>Photo: Dr [Name]</span></div>
+      <div>
+        <div class="label">Your doctor</div>
+        <h2>Dr [Name], GP</h2>
+        <p>Dr [Name] is a GMC-registered GP who has completed advanced (Level 7) training in medical aesthetics. Years of general practice mean thorough assessment, careful consent and calm management of the unexpected are part of everyday work.</p>
+        <p>Dr [Name] started South Hampshire Aesthetics to offer the kind of care a GP would want for their own family: unhurried, honest about what treatment can and can't do, and with the same doctor there from start to finish.</p>
+        <div class="creds">
+          <div><b>GMC registration</b><span>No. [0000000]</span></div>
+          <div><b>Qualification</b><span>MRCGP · Level 7 Aesthetic Medicine</span></div>
+          <div><b>Insurance</b><span>Medical indemnity for private aesthetic practice</span></div>
+          <div><b>Clinic standards</b><span>Infection control, emergency kit and complications plan</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="clinics">
+    <div class="wrap">
+      <div class="head">
+        <div><div class="label">Clinics</div><h2>Chandler's Ford, with more days on the way.</h2></div>
+        <p>Our main clinic is easy to reach from Southampton, Winchester, Romsey and Eastleigh. New Forest and Poole clinic days are planned. Register your interest and we'll let you know when they open.</p>
+      </div>
+      <div class="clinics">
+        <article class="clinic main">
+          <span class="status open">Now booking</span>
+          <h3>Chandler's Ford</h3>
+          <p>[Clinic name], [Street], Chandler's Ford, Eastleigh SO53 [xxx]. Private treatment room in an established medical clinic, with reception and free parking.</p>
+          <div class="hours">Wed&nbsp;&nbsp;10:00–19:00<br>Sat&nbsp;&nbsp;09:00–14:00</div>
+        </article>
+        <article class="clinic">
+          <span class="status soon">Register interest</span>
+          <h3>New Forest</h3>
+          <p>A monthly clinic day in Lymington or Ringwood for patients across the New Forest.</p>
+          <div class="hours">Dates to be confirmed</div>
+        </article>
+        <article class="clinic">
+          <span class="status soon">Register interest</span>
+          <h3>Poole &amp; Sandbanks</h3>
+          <p>A regular clinic day for patients in Poole, Lilliput, Canford Cliffs and Sandbanks.</p>
+          <div class="hours">Dates to be confirmed</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="standards">
+    <div class="wrap">
+      <div class="head">
+        <div><div class="label">Safety &amp; standards</div><h2>What you can expect from us.</h2></div>
+        <p>We follow the GMC's guidance for doctors who offer cosmetic interventions. In practice, that means:</p>
+      </div>
+      <div class="standards">
+        <div><h3>Time to decide</h3><p>No pressure, no same-day upsells, and no discounts that expire.</p></div>
+        <div><h3>Informed consent</h3><p>Risks, alternatives and realistic results explained by the doctor who will treat you.</p></div>
+        <div><h3>Adults only</h3><p>We don't offer cosmetic injectable treatments to anyone under 18.</p></div>
+        <div><h3>Aftercare line</h3><p>A direct way to reach the clinic with any concern after treatment.</p></div>
+        <div><h3>Complications plan</h3><p>Emergency medicines and equipment in clinic, and a clear pathway if a problem occurs.</p></div>
+        <div><h3>Your records are private</h3><p>Clinical records kept securely. Marketing only if you opt in, and you can opt out at any time.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="faq">
+    <div class="wrap">
+      <div class="head">
+        <div><div class="label">Questions</div><h2>Before you book.</h2></div>
+        <p>If your question isn't here, send it with the form below and the doctor will reply.</p>
+      </div>
+      <div class="faq">
+        <details><summary>Do I have to have treatment after my consultation?</summary><p>No. Many people go home with a written plan and decide later, and some decide not to go ahead. The consultation fee is taken off your treatment if you do book.</p></details>
+        <details><summary>Will I look "done"?</summary><p>Our aim is that people notice you look well rested, not that you've had something done. We start conservatively and build at your review if needed.</p></details>
+        <details><summary>Why don't you list prices for wrinkle treatments?</summary><p>Some treatments for lines and wrinkles use prescription-only medicines, which UK law doesn't allow clinics to advertise to the public. A doctor has to assess you in person first, and we'll give you full prices at your consultation.</p></details>
+        <details><summary>How long do results last?</summary><p>It depends on the treatment, the area and your own metabolism. Typical ranges are covered in your written plan so you know what to expect before you commit.</p></details>
+        <details><summary>Is there anyone you can't treat?</summary><p>Yes. We don't treat anyone under 18, or anyone who is pregnant or breastfeeding, and some medical conditions and medicines mean treatment isn't suitable. We'll check this at your consultation.</p></details>
+        <details><summary>What if I'm not happy, or something goes wrong?</summary><p>Contact the clinic straight away using the aftercare details you're given. Dr [Name] will review you and, if needed, arrange further treatment or referral. Complaints are handled by a written procedure.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="book" id="book">
+    <div class="wrap">
+      <div class="head">
+        <div><div class="label">Book</div><h2>Book a consultation.</h2></div>
+        <p>Tell us a little about what you'd like to discuss and when suits you. We'll reply within one working day to confirm a time.</p>
+      </div>
+      <div class="book-grid">
+        <ul class="contact-list">
+          <li><span class="label">Phone</span><b>[01234 567890]</b></li>
+          <li><span class="label">Email</span><b>[hello@yourclinic.co.uk]</b></li>
+          <li><span class="label">Main clinic</span><b>Chandler's Ford, Eastleigh</b></li>
+          <li><span class="label">Clinic days</span><b>Wednesday &amp; Saturday</b></li>
+        </ul>
+        <form id="bookForm" novalidate>
+          <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required></div>
+          <div class="field full"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+          <div class="field"><label for="f-interest">I'd like to talk about</label>
+            <select id="f-interest" name="interest">
+              <option>Lines &amp; wrinkles</option>
+              <option>Lips</option>
+              <option>Cheeks, chin or jawline</option>
+              <option>Skin quality or skin boosters</option>
+              <option>Chemical peels or a skin plan</option>
+              <option>Reviewing filler from elsewhere</option>
+              <option>Not sure yet</option>
+            </select></div>
+          <div class="field"><label for="f-clinic">Most convenient clinic</label>
+            <select id="f-clinic" name="clinic">
+              <option>Chandler's Ford</option>
+              <option>New Forest (register interest)</option>
+              <option>Poole &amp; Sandbanks (register interest)</option>
+            </select></div>
+          <div class="field full"><label for="f-msg">Anything else (optional)</label><textarea id="f-msg" name="message" placeholder="Preferred days or times, or a question for the doctor"></textarea></div>
+          <label class="check full" for="f-age"><input id="f-age" type="checkbox" required> I am 18 or over.</label>
+          <label class="check full" for="f-mkt"><input id="f-mkt" type="checkbox"> Send me occasional clinic news. You can unsubscribe at any time.</label>
+          <p class="form-err" id="formErr" hidden></p>
+          <div class="field full"><button class="btn" type="submit">Request a consultation</button></div>
+          <div class="form-msg" id="formMsg" hidden></div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <p><b>South Hampshire Aesthetics</b>, Chandler's Ford, Hampshire.</p>
+      <p>Medical aesthetic treatments provided by Dr [Name], GMC No. [0000000]. Treatments for adults aged 18+. Results vary between individuals.</p>
+    </div>
+    <div>
+      <p>Prescription-only medicines are prescribed only after a face-to-face consultation with the doctor, where clinically appropriate.</p>
+      <p><a href="#standards">Safety &amp; standards</a> · <a href="#faq">FAQ</a> · Privacy notice · Complaints procedure</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var form=document.getElementById('bookForm'),err=document.getElementById('formErr'),msg=document.getElementById('formMsg');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=function(id){return document.getElementById(id).value.trim()};
+    var problems=[];
+    if(!v('f-name'))problems.push('your name');
+    if(!v('f-phone'))problems.push('a phone number');
+    if(!/^\S+@\S+\.\S+$/.test(v('f-email')))problems.push('a valid email address');
+    if(!document.getElementById('f-age').checked)problems.push('confirmation that you are 18 or over');
+    if(problems.length){err.textContent='Please add '+problems.join(', ')+'.';err.hidden=false;msg.hidden=true;return}
+    err.hidden=true;
+    var summary='Name: '+v('f-name')+'\nPhone: '+v('f-phone')+'\nEmail: '+v('f-email')+'\nInterested in: '+v('f-interest')+'\nClinic: '+v('f-clinic')+(v('f-msg')?'\nMessage: '+v('f-msg'):'')+'\nMarketing opt-in: '+(document.getElementById('f-mkt').checked?'yes':'no');
+    // Online requests are not connected yet. Until a booking system or form service is added, show the
+    // request so the visitor can send it by email or phone.
+    msg.innerHTML='';
+    var p=document.createElement('p');p.style.margin='0';
+    p.textContent='Thank you. Online requests are being set up, so please send these details to [hello@yourclinic.co.uk] or call [01234 567890] and we\'ll confirm a time.';
+    var pre=document.createElement('pre');pre.textContent=summary;
+    var b=document.createElement('button');b.type='button';b.className='btn';b.textContent='Copy details';
+    b.addEventListener('click',function(){
+      var done=function(){b.textContent='Copied'};
+      try{navigator.clipboard.writeText(summary).then(done,function(){selectPre()})}catch(_){selectPre()}
+    });
+    function selectPre(){var r=document.createRange();r.selectNodeContents(pre);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected, press Ctrl+C or Cmd+C to copy'}
+    msg.append(p,pre,b);msg.hidden=false;
+  });
+})();
+</script>
+</body>
+</html>
