@@ -125,10 +125,15 @@ section{padding-block:clamp(56px,8vw,96px);scroll-margin-top:70px}
 .steps p{margin:0;font-size:15px;color:var(--muted)}
 
 /* Doctor */
-.doctor{display:grid;grid-template-columns:minmax(0,280px) 1fr;gap:clamp(28px,5vw,64px);align-items:start}
-.portrait{margin:0;display:grid;gap:10px}
-.portrait img{display:block;width:100%;height:auto;max-width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 30%;border-radius:50% 50% 6px 6px;border:4px solid var(--surface);box-shadow:0 0 0 2px var(--heather-soft),0 18px 40px -22px var(--heather);background:var(--surface)}
-.portrait figcaption{font:500 12px/1.4 var(--mono);color:var(--muted)}
+.doctor{display:grid;grid-template-columns:minmax(0,360px) 1fr;gap:clamp(28px,5vw,64px);align-items:start}
+.portrait{margin:0;position:relative;padding:0 18px 18px 0;max-width:100%}
+.portrait::before{content:"";position:absolute;inset:18px 0 0 18px;border-radius:20px;background:linear-gradient(140deg,color-mix(in srgb,var(--heather) 45%,var(--bg)),color-mix(in srgb,var(--blush) 40%,var(--bg)) 65%,color-mix(in srgb,var(--honey) 35%,var(--bg)))}
+.portrait .frame{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 28px 50px -28px color-mix(in srgb,var(--band) 70%,transparent)}
+.portrait img{display:block;width:100%;height:auto;max-width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%}
+.portrait .frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,color-mix(in srgb,var(--band) 55%,transparent));pointer-events:none}
+.portrait figcaption{position:absolute;left:18px;bottom:36px;z-index:1;display:grid;gap:2px;color:#fff}
+.portrait figcaption b{font:400 22px/1.1 var(--display)}
+.portrait figcaption span{font:500 11.5px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.88}
 .doctor h2{font-size:clamp(32px,4.2vw,48px);margin-block:10px 18px}
 .doctor p{color:var(--muted);max-width:60ch}
 .creds{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-top:26px;border-top:1px solid var(--line)}
@@ -200,7 +205,7 @@ footer p{margin:0 0 8px;max-width:70ch}
   .item{grid-template-columns:1fr auto}
   .item p{grid-column:1/-1;grid-row:2}
   .top nav{display:none}
-  .portrait{max-width:240px}
+  .portrait{max-width:320px}
 }
 @media (max-width:600px){
   body{font-size:16px}
@@ -337,7 +342,7 @@ footer p{margin:0 0 8px;max-width:70ch}
 
   <section id="doctor">
     <div class="wrap doctor">
-      <figure class="portrait"><img src="doctor.jpg" width="700" height="875" alt="Dr Lynn Morris, GP and founder of Lumière Clinic"><figcaption>Dr Lynn Morris · GP &amp; founder</figcaption></figure>
+      <figure class="portrait"><div class="frame"><img src="doctor.jpg" width="720" height="900" alt="Dr Lynn Morris, GP and founder of Lumière Clinic"></div><figcaption><b>Dr Lynn Morris</b><span>GP · Founder</span></figcaption></figure>
       <div>
         <div class="label">Your doctor</div>
         <h2>Dr Lynn Morris, GP</h2>
