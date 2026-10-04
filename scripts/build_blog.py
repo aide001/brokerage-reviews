@@ -41,10 +41,6 @@ TOPIC_ICONS = {
 }
 
 
-def kind(p):
-    return "official" if p.get("official") else "analysis"
-
-
 def thumb(p, from_root=False):
     """Card image: the post's first chart, or a topic panel for data releases.
     Image paths are stored relative to blog/; from_root adjusts them for the homepage."""
@@ -65,19 +61,19 @@ def byline(p):
 
 
 def post_card(p):
-    return """      <article class="post-card" data-kind="{kind}">
+    return """      <article class="post-card">
         <a class="post-card-link" href="{slug}.html">
           {thumb}
           <div class="post-card-body">
             <p class="post-meta"><span class="chip">{type}</span> <time datetime="{date}">{nice}</time></p>
-            <h2>{title}</h2>
+            <h3>{title}</h3>
             <p class="post-excerpt">{summary}</p>
             <p class="post-byline">{byline}</p>
           </div>
         </a>
       </article>""".format(slug=e(p["slug"]), thumb=thumb(p), type=e(p["type"]), date=e(p["date"]),
                           nice=nice_date(p["date"]), title=e(p["title"]), summary=e(p["summary"]),
-                          byline=byline(p), kind=kind(p))
+                          byline=byline(p))
 
 
 def related_card(p, prefix=""):
@@ -94,16 +90,91 @@ def related_card(p, prefix=""):
                                date=e(p["date"]), nice=nice_date(p["date"]), title=e(p["title"]), prefix=prefix)
 
 
+# Market News sections, in page order: (id, heading, intro, how many to show before "Show more").
+SECTIONS = [
+    ("analysis", "Market analysis",
+     "Commentary on currencies, crypto and commodities from FxPro's market analysts.", 7),
+    ("weekly", "Weekly market performance",
+     "FxPro's one-week snapshot of US sectors, major currency pairs, metals and energy.", 3),
+    ("data", "US economic data",
+     "Official releases from the Federal Reserve, the Bureau of Labor Statistics and the Bureau of "
+     "Economic Analysis: interest rates, jobs, inflation, growth and trade.", 8),
+]
+
+
+JUMP_LABELS = {"analysis": "Analysis", "weekly": "Weekly", "data": "US data"}
+
+
+def section_of(p):
+    if p.get("official"):
+        return "data"
+    return "weekly" if "weekly" in p["type"].lower() else "analysis"
+
+
+def feature_card(p):
+    """The newest analysis post, shown large at the top of its section."""
+    return """      <article class="post-card post-feature">
+        <a class="post-card-link" href="{slug}.html">
+          {thumb}
+          <div class="post-card-body">
+            <p class="post-meta"><span class="chip chip-new">Latest</span> <span class="chip">{type}</span> <time datetime="{date}">{nice}</time></p>
+            <h3>{title}</h3>
+            <p class="post-excerpt">{summary}</p>
+            <p class="post-byline">{byline}</p>
+          </div>
+        </a>
+      </article>""".format(slug=e(p["slug"]), thumb=thumb(p), type=e(p["type"]), date=e(p["date"]),
+                          nice=nice_date(p["date"]), title=e(p["title"]), summary=e(p["summary"]),
+                          byline=byline(p))
+
+
+def release_row(p, extra):
+    topic = p.get("topic") or "Growth"
+    return """        <li class="release{extra}">
+          <span class="release-icon topic-{cls}" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{icon}</svg></span>
+          <div class="release-body">
+            <p class="post-meta"><span class="chip">{topic}</span> <span>{agency}</span> <time datetime="{date}">{nice}</time></p>
+            <h3><a href="{slug}.html">{title}</a></h3>
+            <p class="release-summary">{summary}</p>
+          </div>
+        </li>""".format(extra=" is-extra" if extra else "", cls=e(re.sub(r"[^a-z]+", "-", topic.lower())),
+                       icon=TOPIC_ICONS.get(topic, TOPIC_ICONS["Growth"]), topic=e(topic), agency=e(p["provider"]),
+                       date=e(p["date"]), nice=nice_date(p["date"]), slug=e(p["slug"]), title=e(p["title"]),
+                       summary=e(p["summary"]))
+
+
+def news_section(key, title, intro, show, items):
+    if key == "data":
+        rows = "\n".join(release_row(p, i >= show) for i, p in enumerate(items))
+        content = '      <ol class="release-list">\n%s\n      </ol>' % rows
+    else:
+        first, rest = (items[0], items[1:]) if key == "analysis" else (None, items)
+        shown = show - 1 if first else show
+        cards = [post_card(p).replace('<article class="post-card"', '<article class="post-card is-extra"', 1)
+                 if i >= shown else post_card(p) for i, p in enumerate(rest)]
+        content = ((feature_card(first) + "\n") if first else "") + (
+            '      <div class="post-grid">\n%s\n      </div>' % "\n".join(cards) if cards else "")
+    more = ('\n      <button type="button" class="btn btn-ghost show-more" hidden>Show all %d</button>' % len(items)
+            if len(items) > show else "")
+    return """    <section class="news-section" id="{key}" aria-labelledby="{key}-title">
+      <div class="news-section-head">
+        <h2 id="{key}-title">{title} <span class="news-count">{n}</span></h2>
+        <p>{intro}</p>
+      </div>
+{content}{more}
+    </section>""".format(key=key, title=e(title), intro=e(intro), n=len(items), content=content, more=more)
+
+
 def build_index(posts):
-    if posts:
-        items = "\n".join(post_card(p) for p in posts)
-        filters = """        <div class="news-filters" role="group" aria-label="Show">
-          <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">All</button>
-          <button type="button" class="filter-btn" data-filter="analysis" aria-pressed="false">Analysis</button>
-          <button type="button" class="filter-btn" data-filter="official" aria-pressed="false">Official data</button>
-        </div>
-"""
-        listing = filters + '    <div class="post-grid" id="post-grid">\n%s\n    </div>' % items
+    groups = {key: [p for p in posts if section_of(p) == key] for key, _, _, _ in SECTIONS}
+    sections = [(key, title, intro, show) for key, title, intro, show in SECTIONS if groups[key]]
+    if sections:
+        jump = "\n".join('          <a href="#%s">%s <span>%d</span></a>' % (key, JUMP_LABELS[key], len(groups[key]))
+                         for key, _, _, _ in sections)
+        listing = """        <nav class="news-jump" aria-label="Market News sections">
+{jump}
+        </nav>
+{sections}""".format(jump=jump, sections="\n".join(news_section(k, t, i, s, groups[k]) for k, t, i, s in sections))
     else:
         listing = '    <p class="empty">No commentary has been published yet. Check back soon.</p>'
     body = """    <section class="section blog-hero">

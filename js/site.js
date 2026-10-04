@@ -28,17 +28,16 @@
     });
   }
 
-  // Market News filters: All / Analysis / Official data.
-  var filterBtns = document.querySelectorAll(".filter-btn");
-  Array.prototype.forEach.call(filterBtns, function (btn) {
+  // Market News: long sections show their newest posts first, with a "Show all" button.
+  // Everything stays in the HTML (and visible without JavaScript).
+  Array.prototype.forEach.call(document.querySelectorAll(".news-section"), function (section) {
+    var btn = section.querySelector(".show-more");
+    if (!btn) return;
+    section.classList.add("is-collapsed");
+    btn.hidden = false;
     btn.addEventListener("click", function () {
-      var want = btn.getAttribute("data-filter");
-      Array.prototype.forEach.call(filterBtns, function (b) {
-        b.setAttribute("aria-pressed", String(b === btn));
-      });
-      Array.prototype.forEach.call(document.querySelectorAll("#post-grid .post-card"), function (card) {
-        card.hidden = want !== "all" && card.getAttribute("data-kind") !== want;
-      });
+      section.classList.remove("is-collapsed");
+      btn.hidden = true;
     });
   });
 
