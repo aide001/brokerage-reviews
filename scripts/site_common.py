@@ -23,6 +23,16 @@ SITE_URL = (SETTINGS.get("siteUrl") or "").rstrip("/")
 DATA_VERIFIED = bool(SETTINGS.get("dataVerified"))
 FCA_ONLY = bool(SETTINGS.get("guidesFcaOnly"))
 YEAR = datetime.now(timezone.utc).year
+PARTNER_OPINION = bool(SETTINGS.get("partnerOpinionPosts"))
+
+
+def is_partner_opinion(post):
+    """Partner commentary that gives a view on markets (not official data, not a weekly performance recap)."""
+    return not post.get("official") and "weekly" not in post.get("type", "").lower()
+
+
+def is_published(post):
+    return PARTNER_OPINION or not is_partner_opinion(post)
 
 # Site menu, paths from the site root. "key" marks the page shown as current.
 NAV = [
@@ -145,7 +155,7 @@ def page(title, description, body, path, current=None, jsonld=(), noindex=False,
 </body>
 </html>
 """.format(title=e(title), description=e(description), head="\n  ".join(head), body=body, site=e(SITE),
-           nav=nav_links(current, " " * 8), footer_links=nav_links(None, " " * 8), disclaimer=DISCLAIMER)
+           nav=nav_links(current, " " * 8), footer_links=nav_links(None, " " * 8) + '\n        <a href="../about/index.html">About &amp; editorial policy</a>', disclaimer=DISCLAIMER)
 
 
 def breadcrumbs(items):

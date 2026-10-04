@@ -30,7 +30,7 @@ from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from site_common import (DATA_VERIFIED, FCA_ONLY, ROOT, SITE, SITE_URL, YEAR, abs_url, breadcrumbs, e, load_json,  # noqa: E402
-                         page, SETTINGS)
+                         page, SETTINGS, is_published)
 
 FX = load_json("content", "brokers.json")["fx"]
 # One pip on a standard lot of EUR/USD is US$10; costs are shown for a GBP account.
@@ -699,14 +699,98 @@ def write_sitemap():
         urls.append(("", None))
         urls += [(os.path.relpath(p, ROOT), None) for p in sorted(glob.glob(os.path.join(ROOT, "best", "*.html")))]
         urls += [(os.path.relpath(p, ROOT), None) for p in sorted(glob.glob(os.path.join(ROOT, "brokers", "*.html")))]
-    urls += [("blog/index.html", None)]
+    urls += [("about/index.html", None), ("blog/index.html", None)]
     for p in sorted(glob.glob(os.path.join(ROOT, "content", "posts", "*.json"))):
         post = json.load(open(p, encoding="utf-8"))
+        if not is_published(post):
+            continue
         urls.append(("blog/%s.html" % post["slug"], post["date"][:10]))
     rows = "".join("  <url><loc>%s</loc>%s</url>\n" % (e(abs_url(u)), "<lastmod>%s</lastmod>" % d if d else "")
                    for u, d in urls)
     open(sitemap, "w", encoding="utf-8").write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n%s</urlset>\n' % rows)
+
+
+# ---------- About & editorial policy ----------
+
+def build_about():
+    path = "about/index.html"
+    partner = featured_partner()
+    fca_count = len([b for b in BROKERS if b.get("ukStatus") == "fca"])
+    weights = "".join("<li><strong>%s (%d%%)</strong>: %s</li>" % (e(c["label"]), round(c["weight"] * 100), e(c["desc"]))
+                      for c in CATEGORIES)
+    partner_html = ("""        <p>We currently have a commercial relationship with <strong>{name}</strong>:</p>
+        <ul class="prose-list">
+          <li>{name} appears in a box labelled <strong>Featured partner</strong> at the top of our homepage and guides. That box sits outside our rankings and shows {name}'s real score and position.</li>
+          <li>Our Market News page includes <strong>partner content</strong> written by {name}. Every partner post is labelled as such, says it is not our view, and is not a recommendation to trade.</li>
+        </ul>
+        <p>{name} has no say over its review, its score or where it ranks. It is reviewed and scored in exactly the same way as every other broker.</p>""".format(name=e(partner["name"]))
+                    if partner else "        <p>We don't currently have any featured partners.</p>")
+    body = """    <article class="section post about">
+      <div class="container narrow">
+        <p class="breadcrumb"><a href="../index.html">Home</a> / About</p>
+        <h1 class="post-title">About us and our editorial policy</h1>
+        <p class="lead-text">{site} compares forex and CFD brokers for UK traders. We review {count} brokers, explain their costs, regulation and platforms in plain English, and rank them against a published methodology.</p>
+        {not_advice}
+        <nav class="review-toc" aria-label="On this page"><h2>On this page</h2><ol>
+          <li><a href="#independence">Editorial independence</a></li>
+          <li><a href="#money">How we make money</a></li>
+          <li><a href="#partners">Partners and partner content</a></li>
+          <li><a href="#research">How we research brokers</a></li>
+          <li><a href="#ratings">How we rate brokers</a></li>
+          <li><a href="#news">Market news</a></li>
+          <li><a href="#risk">Risk warning</a></li>
+        </ol></nav>
+
+        <section class="review-section" id="independence"><h2>Editorial independence</h2>
+        <p>Our reviews, scores and rankings are our own. Brokers can't pay to be reviewed, to change a score or to move up a ranking, and we don't let brokers or partners edit our reviews.</p>
+        <ul class="prose-list">
+          <li>Every broker is scored on the same five weighted categories, and the overall score is calculated from them. Rankings follow the scores.</li>
+          <li>{fca}</li>
+          <li>Where a broker publishes the percentage of retail accounts that lose money, we show it next to every link to that broker.</li>
+          <li>Anything commercial, such as a featured placement or partner content, is labelled where it appears.</li>
+        </ul></section>
+
+        <section class="review-section" id="money"><h2>How we make money</h2>
+        <p>The site is free to use. We earn money in two ways:</p>
+        <ul class="prose-list">
+          <li><strong>Affiliate commission.</strong> Some "Open account" and "Visit" links are affiliate links. If you open an account through one, the broker may pay us a commission. It costs you nothing extra and doesn't change our scores. Affiliate links are marked as sponsored in our page code.</li>
+          <li><strong>Featured partner placements.</strong> A broker can be shown in a labelled "Featured partner" box. The box is kept separate from our rankings and never changes a score.</li>
+        </ul>
+        <p>Brokers we don't earn anything from are reviewed, scored and ranked in the same way as those we do.</p></section>
+
+        <section class="review-section" id="partners"><h2>Partners and partner content</h2>
+{partner_html}</section>
+
+        <section class="review-section" id="research"><h2>How we research brokers</h2>
+        <ul class="prose-list">
+          <li>We check each broker's figures (spreads, commissions, minimum deposits, leverage, platforms and fees) on the broker's own website, and its UK authorisation on the <a href="https://register.fca.org.uk/" rel="noopener">FCA register</a>.</li>
+          <li>Every review lists its sources and the date the figures were checked.</li>
+          <li>Where a broker's website blocks automated checks, we use its official pages found through search, and say so in our notes.</li>
+          <li>Brokers change their prices and terms often, so always confirm the details on the broker's website before you open an account.</li>
+        </ul></section>
+
+        <section class="review-section" id="ratings"><h2>How we rate brokers</h2>
+        <p>Each broker gets a score from 1 to 5 in five categories. The overall score is a weighted average:</p>
+        <ul class="prose-list">{weights}</ul>
+        <p>See the <a href="../index.html#methodology">full methodology</a> on our homepage.</p></section>
+
+        <section class="review-section" id="news"><h2>Market news</h2>
+        <p>Our Market News page publishes official US economic data (from the Federal Reserve, the Bureau of Labor Statistics and the Bureau of Economic Analysis), with a link to each original release. It also includes clearly labelled partner content. We don't publish trading signals, price forecasts of our own, or recommendations to buy or sell anything.</p></section>
+
+        <section class="review-section" id="risk"><h2>Risk warning</h2>
+        <p>CFDs, spread bets and leveraged forex are complex instruments and carry a high risk of losing money rapidly because of leverage. Most retail investor accounts lose money when trading CFDs. Consider whether you understand how these products work and whether you can afford to take the high risk of losing your money. Nothing on this site is financial, investment or trading advice. If you're unsure, speak to an independent financial adviser.</p></section>
+      </div>
+    </article>""".format(site=e(SITE), count=len(BROKERS), not_advice=NOT_ADVICE, weights=weights, partner_html=partner_html,
+                         fca=("Our ranked guides and top picks only include brokers authorised by the UK's Financial Conduct Authority "
+                              "(%d of the brokers we cover). We still review others, and say clearly when a broker isn't FCA-authorised."
+                              % fca_count) if FCA_ONLY else "We say clearly when a broker isn't authorised by the UK's FCA.")
+    crumbs = breadcrumbs([("Home", ""), ("About", path)])
+    about_ld = {"@context": "https://schema.org", "@type": "AboutPage", "name": "About %s" % SITE,
+                **({"url": abs_url(path)} if SITE_URL else {})}
+    return path, page("About us and our editorial policy — %s" % SITE,
+                      "Who we are, how we make money, how we stay independent and how we research and rate forex brokers.",
+                      body, path, jsonld=[x for x in [about_ld, crumbs] if x])
 
 
 # ---------- Main ----------
@@ -733,6 +817,8 @@ def main():
         write(path, text)
         keep["best"].add(os.path.basename(path))
     path, text = build_hub()
+    write(path, text)
+    path, text = build_about()
     write(path, text)
     keep["best"].add("index.html")
     for folder, names in keep.items():  # remove pages for brokers/guides that no longer exist

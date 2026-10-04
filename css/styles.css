@@ -818,3 +818,11 @@ body.has-tray .toast { bottom: 100px; }
   .release { padding: 14px 14px; gap: 12px; }
   .release-icon { width: 34px; height: 34px; }
 }
+
+/* Partner content labels */
+.chip-partner { background: var(--warn-bg); color: var(--warn-text); font-weight: 700; }
+.partner-notice {
+  margin: 0 0 16px; padding: 12px 16px; border-radius: var(--radius-sm); font-size: .9rem; line-height: 1.5;
+  background: var(--warn-bg); color: var(--warn-text); border-left: 3px solid var(--star);
+}
+.partner-notice strong { color: inherit; }

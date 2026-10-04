@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DIST = ROOT / "dist"
-PUBLIC_DIRS = ["assets", "best", "blog", "brokers", "css", "js"]
+PUBLIC_DIRS = ["about", "assets", "best", "blog", "brokers", "css", "js"]
 PUBLIC_FILES = ["index.html", "robots.txt", "sitemap.xml"]
 
 

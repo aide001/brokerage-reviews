@@ -13,7 +13,7 @@ import os
 import re
 from datetime import datetime
 
-from site_common import SITE, abs_url, breadcrumbs, page
+from site_common import SITE, abs_url, breadcrumbs, is_partner_opinion, is_published, page
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS = os.path.join(ROOT, "content", "posts")
@@ -22,8 +22,19 @@ e = html.escape
 
 
 def load_posts():
+    """Posts to publish, newest first. Partner opinion pieces stay unpublished unless site.json allows them."""
     posts = [json.load(open(p, encoding="utf-8")) for p in glob.glob(os.path.join(POSTS, "*.json"))]
-    return sorted(posts, key=lambda p: p["date"], reverse=True)
+    return sorted((p for p in posts if is_published(p)), key=lambda p: p["date"], reverse=True)
+
+
+def is_partner(p):
+    return not p.get("official")
+
+
+def partner_notice(p):
+    return ('        <p class="partner-notice" role="note"><strong>Partner content.</strong> Written by %s\'s analysts '
+            'and published under our commercial relationship with %s. It is not our view and not a '
+            'recommendation to trade.</p>\n' % (e(p["provider"]), e(p["provider"])))
 
 
 def nice_date(iso):
@@ -65,7 +76,7 @@ def post_card(p):
         <a class="post-card-link" href="{slug}.html">
           {thumb}
           <div class="post-card-body">
-            <p class="post-meta"><span class="chip">{type}</span> <time datetime="{date}">{nice}</time></p>
+            <p class="post-meta">{partner}<span class="chip">{type}</span> <time datetime="{date}">{nice}</time></p>
             <h3>{title}</h3>
             <p class="post-excerpt">{summary}</p>
             <p class="post-byline">{byline}</p>
@@ -73,7 +84,8 @@ def post_card(p):
         </a>
       </article>""".format(slug=e(p["slug"]), thumb=thumb(p), type=e(p["type"]), date=e(p["date"]),
                           nice=nice_date(p["date"]), title=e(p["title"]), summary=e(p["summary"]),
-                          byline=byline(p))
+                          byline=byline(p),
+                          partner='<span class="chip chip-partner">Partner content</span> ' if is_partner(p) else "")
 
 
 def related_card(p, prefix=""):
@@ -90,42 +102,20 @@ def related_card(p, prefix=""):
                                date=e(p["date"]), nice=nice_date(p["date"]), title=e(p["title"]), prefix=prefix)
 
 
-# Market News sections, in page order: (id, heading, intro, how many to show before "Show more").
+# Market News sections, in page order: (id, heading, intro, how many to show before "Show all").
 SECTIONS = [
-    ("analysis", "Market analysis",
-     "Commentary on currencies, crypto and commodities from FxPro's market analysts.", 7),
-    ("weekly", "Weekly market performance",
-     "FxPro's one-week snapshot of US sectors, major currency pairs, metals and energy.", 3),
     ("data", "US economic data",
      "Official releases from the Federal Reserve, the Bureau of Labor Statistics and the Bureau of "
      "Economic Analysis: interest rates, jobs, inflation, growth and trade.", 8),
+    ("partner", "Partner insights from FxPro",
+     "Market snapshots written by FxPro, published under our commercial relationship with FxPro. "
+     "Partner content is labelled on every post, is not our view and is not a recommendation to trade.", 6),
 ]
-
-
-JUMP_LABELS = {"analysis": "Analysis", "weekly": "Weekly", "data": "US data"}
+JUMP_LABELS = {"data": "US economic data", "partner": "Partner insights"}
 
 
 def section_of(p):
-    if p.get("official"):
-        return "data"
-    return "weekly" if "weekly" in p["type"].lower() else "analysis"
-
-
-def feature_card(p):
-    """The newest analysis post, shown large at the top of its section."""
-    return """      <article class="post-card post-feature">
-        <a class="post-card-link" href="{slug}.html">
-          {thumb}
-          <div class="post-card-body">
-            <p class="post-meta"><span class="chip chip-new">Latest</span> <span class="chip">{type}</span> <time datetime="{date}">{nice}</time></p>
-            <h3>{title}</h3>
-            <p class="post-excerpt">{summary}</p>
-            <p class="post-byline">{byline}</p>
-          </div>
-        </a>
-      </article>""".format(slug=e(p["slug"]), thumb=thumb(p), type=e(p["type"]), date=e(p["date"]),
-                          nice=nice_date(p["date"]), title=e(p["title"]), summary=e(p["summary"]),
-                          byline=byline(p))
+    return "data" if p.get("official") else "partner"
 
 
 def release_row(p, extra):
@@ -148,12 +138,9 @@ def news_section(key, title, intro, show, items):
         rows = "\n".join(release_row(p, i >= show) for i, p in enumerate(items))
         content = '      <ol class="release-list">\n%s\n      </ol>' % rows
     else:
-        first, rest = (items[0], items[1:]) if key == "analysis" else (None, items)
-        shown = show - 1 if first else show
         cards = [post_card(p).replace('<article class="post-card"', '<article class="post-card is-extra"', 1)
-                 if i >= shown else post_card(p) for i, p in enumerate(rest)]
-        content = ((feature_card(first) + "\n") if first else "") + (
-            '      <div class="post-grid">\n%s\n      </div>' % "\n".join(cards) if cards else "")
+                 if i >= show else post_card(p) for i, p in enumerate(items)]
+        content = '      <div class="post-grid">\n%s\n      </div>' % "\n".join(cards)
     more = ('\n      <button type="button" class="btn btn-ghost show-more" hidden>Show all %d</button>' % len(items)
             if len(items) > show else "")
     return """    <section class="news-section" id="{key}" aria-labelledby="{key}-title">
@@ -181,14 +168,14 @@ def build_index(posts):
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">Market News</p>
-          <h1>Market news and analysis</h1>
-          <p>Commentary on currencies, commodities and crypto from professional market analysts, plus the latest official US economic data, published as it arrives.</p>
+          <h1>Market news and economic data</h1>
+          <p>The latest official US economic data as it's released, plus market snapshots from our partner FxPro, clearly labelled as partner content.</p>
         </div>
 {notice}{listing}
       </div>
     </section>""".format(listing=listing, notice=advice_notice())
-    return page("Forex market news and analysis — " + SITE,
-                "Forex, commodities and crypto market commentary and official US economic data.",
+    return page("Market news and US economic data — " + SITE,
+                "Official US economic data releases and labelled partner market snapshots.",
                 body, "blog/index.html", current="news",
                 jsonld=[x for x in [breadcrumbs([("Home", ""), ("Market News", "blog/index.html")])] if x])
 
@@ -206,9 +193,10 @@ def source_note(p):
         link = ' <a href="%s" rel="noopener">Read the full release on %s</a>.' % (e(url), e(host)) if url else ""
         return ("<strong>Source:</strong> Official release from the %s, a US government agency, republished "
                 "from its public website.%s It is for information only and is not investment advice.") % (e(p["provider"]), link)
-    return ("<strong>Source:</strong> This commentary was written by %s, %s at %s, and is republished with "
-            "permission. It is for information only and is not investment advice.") % (
-        e(p["author"]), e(p["authorRole"]), e(p["provider"]))
+    return ("<strong>Source:</strong> Partner content written by %s, %s at %s, and published with %s's permission "
+            "under our commercial relationship with %s. It is for information only and is not investment advice. "
+            '<a href="../about/index.html#money">How we make money</a>.') % (
+        e(p["author"]), e(p["authorRole"]), e(p["provider"]), e(p["provider"]), e(p["provider"]))
 
 
 NOT_ADVICE = ("<strong>Not financial advice.</strong> Market news, commentary and data on this site are for general "
@@ -233,7 +221,8 @@ def update_home(posts):
     if HOME_START not in page_html or HOME_END not in page_html:
         return
     news = "\n".join('            <li><a href="%s">%s</a><span>%s · %s</span></li>'
-                     % (e("blog/%s.html" % p["slug"]), e(p["title"]), e(p["type"]), nice_date(p["date"]))
+                     % (e("blog/%s.html" % p["slug"]), e(p["title"]),
+                        ("Partner content · %s" % e(p["provider"])) if is_partner(p) else e(p["type"]), nice_date(p["date"]))
                      for p in posts[:5])
     section = """{start}
     <section id="latest-news" class="news-compact" aria-labelledby="latest-news-title">
@@ -269,10 +258,10 @@ def build_post(p, related):
         </section>""" % "\n".join(related_card(r) for r in related)
     body = """    <article class="section post">
       <div class="container narrow">
-        <p class="breadcrumb"><a href="index.html">Market News</a> / {type}</p>
+        <p class="breadcrumb"><a href="index.html">Market News</a> / {crumb}</p>
         <h1 class="post-title">{title}</h1>
         <p class="post-meta"><time datetime="{date}">{nice}</time> <span class="post-meta-by">{byline}</span></p>
-{notice}        <div class="post-body">
+{partner}{notice}        <div class="post-body">
 {content}
         </div>
         <aside class="post-source">
@@ -283,7 +272,8 @@ def build_post(p, related):
       </div>
     </article>""".format(type=e(p["type"]), title=e(p["title"]), date=e(p["date"]), nice=nice_date(p["date"]),
                          byline=post_byline(p), source=source_note(p), content=p["bodyHtml"], more=more,
-                         notice=advice_notice())
+                         notice=advice_notice(), partner=partner_notice(p) if is_partner(p) else "",
+                         crumb='<a href="index.html#partner">Partner insights</a>' if is_partner(p) else e(p["type"]))
     path = "blog/%s.html" % p["slug"]
     article = {"@context": "https://schema.org", "@type": "NewsArticle" if p.get("official") else "Article",
                "headline": p["title"][:110], "datePublished": p["date"],
