@@ -110,10 +110,9 @@ section.alt{background:var(--surface);border-block:1px solid var(--line)}
 
 /* Doctor */
 .doctor{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(28px,5vw,64px);align-items:start}
-.portrait{aspect-ratio:4/5;max-width:100%;background:
-  radial-gradient(120% 80% at 30% 20%,var(--heather-soft),transparent 60%),
-  linear-gradient(160deg,var(--surface),var(--bg));border:1px solid var(--line);display:grid;place-items:end start;padding:20px}
-.portrait span{font:500 12px/1.4 var(--mono);color:var(--muted)}
+.portrait{margin:0;display:grid;gap:10px}
+.portrait img{display:block;width:100%;max-width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 30%;border:1px solid var(--line);background:var(--surface)}
+.portrait figcaption{font:500 12px/1.4 var(--mono);color:var(--muted)}
 .doctor h2{font-size:clamp(32px,4.2vw,48px);margin-block:10px 18px}
 .doctor p{color:var(--muted);max-width:60ch}
 .creds{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-top:26px;border-top:1px solid var(--line)}
@@ -182,7 +181,7 @@ footer p{margin:0 0 8px;max-width:70ch}
   .item{grid-template-columns:1fr auto}
   .item p{grid-column:1/-1;grid-row:2}
   .top nav{display:none}
-  .portrait{aspect-ratio:16/9}
+  .portrait{max-width:420px}
 }
 @media (max-width:600px){
   body{font-size:16px}
@@ -320,7 +319,7 @@ footer p{margin:0 0 8px;max-width:70ch}
 
   <section id="doctor">
     <div class="wrap doctor">
-      <div class="portrait" role="img" aria-label="Photo of Dr [Name] to be added"><span>Photo: Dr [Name]</span></div>
+      <figure class="portrait"><img src="doctor.jpg" width="700" height="820" alt="Dr [Name], GP and founder of South Hampshire Aesthetics" loading="lazy"><figcaption>Dr [Name] · GP &amp; founder</figcaption></figure>
       <div>
         <div class="label">Your doctor</div>
         <h2>Dr [Name], GP</h2>

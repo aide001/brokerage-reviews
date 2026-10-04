@@ -19,7 +19,8 @@ South Hampshire market and feasibility plan:
 
 1. Replace every `[placeholder]`: doctor's name, GMC number, qualifications, clinic
    address and postcode, phone, email, opening days.
-2. Add a real photo in the "Your doctor" section.
+2. `doctor.jpg` is cropped from a selfie, leaving out the NHS lanyard (NHS branding must not
+   appear in private-practice marketing). A professional headshot would look better.
 3. Connect the booking form. It currently checks the fields and shows the request for
    the visitor to email or phone in. Point it at a booking system (for example Fresha,
    Pabau or Cliniko) or a form service (for example Formspree).
