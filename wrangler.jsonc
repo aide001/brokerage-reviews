@@ -4,14 +4,17 @@
 {
   "name": "brokerage-reviews",
   "compatibility_date": "2025-09-01",
-  // Serves index.html for folder URLs such as "/".
+  // Redirects to one canonical address and serves index.html for folder URLs (see worker/index.js).
   "main": "worker/index.js",
+  "vars": { "CANONICAL_HOST": "brokeragereviews.net" },
   "build": {
     "command": "python3 scripts/make_dist.py"
   },
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
+    // Run worker/index.js for every request, so the http/www redirects apply to existing files too.
+    "run_worker_first": true,
     // Serve /brokers/ig.html as-is: the sitemap and canonical links use .html URLs.
     "html_handling": "none"
   }

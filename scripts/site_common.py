@@ -7,6 +7,7 @@ best/), so links to shared files are written as "../<path>". The homepage
 import html
 import json
 import os
+import re
 from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,6 +23,7 @@ SITE = SETTINGS.get("siteName") or "Brokerage Reviews"
 SITE_URL = (SETTINGS.get("siteUrl") or "").rstrip("/")
 DATA_VERIFIED = bool(SETTINGS.get("dataVerified"))
 FCA_ONLY = bool(SETTINGS.get("guidesFcaOnly"))
+CONTACT_EMAIL = (SETTINGS.get("contactEmail") or "").strip()
 YEAR = datetime.now(timezone.utc).year
 PARTNER_OPINION = bool(SETTINGS.get("partnerOpinionPosts"))
 
@@ -52,9 +54,87 @@ DISCLAIMER = ("<strong>Disclaimer:</strong> Information on this site, including 
               "carries a high level of risk and may not be suitable for all investors.")
 
 
+# ---------- SEO helpers ----------
+
+TITLE_MAX, DESC_MAX = 60, 158
+
+
+def seo_title(title):
+    """Search engines cut titles at about 60 characters: drop the " — site name" suffix when it doesn't fit."""
+    suffix = " — " + SITE
+    if len(title) > TITLE_MAX and title.endswith(suffix):
+        return title[: -len(suffix)]
+    return title
+
+
+def seo_description(text):
+    """Meta descriptions are cut at about 155-160 characters: shorten at a word boundary."""
+    text = " ".join(text.split())
+    if len(text) <= DESC_MAX:
+        return text
+    cut = text[: DESC_MAX - 1].rsplit(" ", 1)[0].rstrip(" ,;:.-—")
+    return cut + "…"
+
+
+def image_size(path):
+    """(width, height) of a PNG, GIF or JPEG file, or None."""
+    try:
+        with open(path, "rb") as fh:
+            head = fh.read(26)
+            if head[:8] == b"\x89PNG\r\n\x1a\n":
+                return int.from_bytes(head[16:20], "big"), int.from_bytes(head[20:24], "big")
+            if head[:6] in (b"GIF87a", b"GIF89a"):
+                return int.from_bytes(head[6:8], "little"), int.from_bytes(head[8:10], "little")
+            if head[:2] == b"\xff\xd8":
+                fh.seek(2)
+                while True:
+                    marker = fh.read(2)
+                    if len(marker) < 2 or marker[0] != 0xFF:
+                        return None
+                    seg_len = int.from_bytes(fh.read(2), "big")
+                    if 0xC0 <= marker[1] <= 0xCF and marker[1] not in (0xC4, 0xC8, 0xCC):
+                        data = fh.read(5)
+                        return int.from_bytes(data[3:5], "big"), int.from_bytes(data[1:3], "big")
+                    fh.seek(seg_len - 2, 1)
+    except OSError:
+        return None
+    return None
+
+
+IMG_TAG = re.compile(r"<img\b(?![^>]*\bwidth=)[^>]*>")
+
+
+def size_images(markup, page_dir):
+    """Add width/height to <img> tags that lack them, so the page doesn't jump as images load.
+    page_dir is the page's folder relative to the site root ("" for the homepage)."""
+    def fix(m):
+        tag = m.group(0)
+        src = re.search(r'\bsrc="([^"]+)"', tag)
+        if not src or "://" in src.group(1):
+            return tag
+        size = image_size(os.path.normpath(os.path.join(ROOT, page_dir, src.group(1))))
+        if not size:
+            return tag
+        return tag.replace("<img", '<img width="%d" height="%d"' % size, 1)
+    return IMG_TAG.sub(fix, markup)
+
+
 def abs_url(path):
     """Absolute URL for a root-relative path, or "" until siteUrl is set."""
     return "%s/%s" % (SITE_URL, path) if SITE_URL else ""
+
+
+def organization():
+    """schema.org Organization for the site itself (homepage and About page), or None until siteUrl is set."""
+    if not SITE_URL:
+        return None
+    org = {"@context": "https://schema.org", "@type": "Organization", "name": SITE, "url": SITE_URL + "/",
+           "logo": abs_url("assets/favicon.svg")}
+    if CONTACT_EMAIL:
+        org["email"] = CONTACT_EMAIL
+        org["contactPoint"] = {"@type": "ContactPoint", "contactType": "customer support", "email": CONTACT_EMAIL}
+    return org
+
 
 
 def nav_links(current, indent, prefix="../"):
@@ -66,6 +146,8 @@ def nav_links(current, indent, prefix="../"):
 def page(title, description, body, path, current=None, jsonld=(), noindex=False, og_type="website", image=None):
     """A full HTML page. path is the page's own root-relative path (e.g. "brokers/ig.html")."""
     url = abs_url(path)
+    title, description = seo_title(title), seo_description(description)
+    body = size_images(body, os.path.dirname(path))
     head = []
     if noindex:
         head.append('<meta name="robots" content="noindex, follow" />')

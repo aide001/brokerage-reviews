@@ -30,7 +30,7 @@ from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from site_common import (DATA_VERIFIED, FCA_ONLY, ROOT, SITE, SITE_URL, YEAR, abs_url, breadcrumbs, e, load_json,  # noqa: E402
-                         page, SETTINGS, is_published)
+                         page, SETTINGS, is_published, organization, size_images, CONTACT_EMAIL)
 
 FX = load_json("content", "brokers.json")["fx"]
 # One pip on a standard lot of EUR/USD is US$10; costs are shown for a GBP account.
@@ -355,7 +355,8 @@ def build_guide(g):
                                      for i, b in enumerate(ranked)]}
     desc = "%s %s" % (g["intro"], "Updated %s." % MONTH)
     crumbs = breadcrumbs([("Home", ""), ("Best brokers", "best/index.html"), (title, path)])
-    return path, page("%s — %s" % (title, SITE), desc[:300], body, path, current="best",
+    seo = re.sub(r" (?:for|in) (\d{4})$", r" UK \1", title)  # "Best MT4 Brokers for 2026" -> "... UK 2026"
+    return path, page("%s — %s" % (seo, SITE), desc, body, path, current="best",
                       jsonld=[x for x in [item_list, crumbs] if x], noindex=not DATA_VERIFIED)
 
 
@@ -524,8 +525,16 @@ def build_review(b):
     crumbs = breadcrumbs([("Home", ""), ("Broker reviews", "best/index.html"), ("%s review" % b["name"], path)])
     logo_file = next((p for p in ("assets/logos/%s.svg" % b["id"], "assets/logos/%s.png" % b["id"])
                       if os.path.exists(os.path.join(ROOT, p))), None)
+    review_ld = {"@context": "https://schema.org", "@type": "Review", "name": title,
+                 "itemReviewed": {"@type": "Organization", "name": b["name"], "url": "https://%s" % b["domain"]},
+                 "reviewRating": {"@type": "Rating", "ratingValue": b["overall"], "bestRating": 5, "worstRating": 1},
+                 "author": {"@type": "Organization", "name": SITE, **({"url": SITE_URL + "/"} if SITE_URL else {})},
+                 "publisher": {"@type": "Organization", "name": SITE},
+                 "datePublished": checked, "reviewBody": b["summary"]}
+    if abs_url(path):
+        review_ld["url"] = abs_url(path)
     return path, page("%s — %s" % (title, SITE), desc, body, path, current="best",
-                      jsonld=[x for x in [crumbs, faq_ld] if x], noindex=not DATA_VERIFIED or not b.get("verified", True),
+                      jsonld=[x for x in [crumbs, review_ld, faq_ld] if x], noindex=not DATA_VERIFIED or not b.get("verified", True),
                       image=logo_file)
 
 
@@ -567,7 +576,7 @@ def build_hub():
         </ul>
       </div>
     </section>""".format(year=YEAR, notices=notices(), guides=guides, reviews=reviews)
-    return path, page("Best Forex Brokers %d: Guides and Reviews — %s" % (YEAR, SITE),
+    return path, page("Best Forex Brokers UK %d: Guides and Reviews — %s" % (YEAR, SITE),
                       "Ranked guides to the best forex brokers for low spreads, beginners, MT4, MT5, TradingView and "
                       "more, plus in-depth reviews of %d brokers." % len(BROKERS), body, path, current="best",
                       jsonld=[x for x in [breadcrumbs([("Home", ""), ("Best brokers", path)])] if x],
@@ -642,6 +651,7 @@ def home_seo():
     if SITE_URL:
         site = {"@context": "https://schema.org", "@type": "WebSite", "name": SITE, "url": SITE_URL + "/"}
         tags.append('<script type="application/ld+json">%s</script>' % json.dumps(site))
+        tags.append('<script type="application/ld+json">%s</script>' % json.dumps(organization()))
     return "\n  " + "\n  ".join(tags) + "\n  "
 
 
@@ -649,9 +659,9 @@ def update_home():
     path = os.path.join(ROOT, "index.html")
     text = open(path, encoding="utf-8").read()
     new = replace_between(text, "seo", home_seo())
-    new = replace_between(new, "top-picks", home_top_picks())
-    new = replace_between(new, "featured", featured_box(prefix=""))
-    new = replace_between(new, "guides", home_hub())
+    new = replace_between(new, "top-picks", size_images(home_top_picks(), ""))
+    new = replace_between(new, "featured", size_images(featured_box(prefix=""), ""))
+    new = replace_between(new, "guides", size_images(home_hub(), ""))
     if new != text:
         open(path, "w", encoding="utf-8").write(new)
 
@@ -739,6 +749,7 @@ def build_about():
           <li><a href="#research">How we research brokers</a></li>
           <li><a href="#ratings">How we rate brokers</a></li>
           <li><a href="#news">Market news</a></li>
+          <li><a href="#contact">Contact us and corrections</a></li>
           <li><a href="#risk">Risk warning</a></li>
         </ol></nav>
 
@@ -778,10 +789,15 @@ def build_about():
         <section class="review-section" id="news"><h2>Market news</h2>
         <p>Our Market News page publishes official US economic data (from the Federal Reserve, the Bureau of Labor Statistics and the Bureau of Economic Analysis), with a link to each original release. It also includes clearly labelled partner content. We don't publish trading signals, price forecasts of our own, or recommendations to buy or sell anything.</p></section>
 
+{contact}
         <section class="review-section" id="risk"><h2>Risk warning</h2>
         <p>CFDs, spread bets and leveraged forex are complex instruments and carry a high risk of losing money rapidly because of leverage. Most retail investor accounts lose money when trading CFDs. Consider whether you understand how these products work and whether you can afford to take the high risk of losing your money. Nothing on this site is financial, investment or trading advice. If you're unsure, speak to an independent financial adviser.</p></section>
       </div>
-    </article>""".format(site=e(SITE), count=len(BROKERS), not_advice=NOT_ADVICE, weights=weights, partner_html=partner_html,
+    </article>""".format(contact=("""        <section class="review-section" id="contact"><h2>Contact us and corrections</h2>
+        <p>Email us at <a href="mailto:{email}">{email}</a>.</p>
+        <p>We work hard to keep every figure accurate, but brokers change their prices and terms often. If you spot something that's wrong or out of date, please email us with a link to the page and we'll check it and correct it. Brokers can contact us to point out factual errors in their review; we'll verify any correction against the broker's own website, but we don't change scores or rankings on request.</p>
+        <p>We can't give personal financial advice or help with individual accounts at a broker; please contact the broker directly for that.</p></section>
+""".format(email=e(CONTACT_EMAIL)) if CONTACT_EMAIL else ""), site=e(SITE), count=len(BROKERS), not_advice=NOT_ADVICE, weights=weights, partner_html=partner_html,
                          fca=("Our ranked guides and top picks only include brokers authorised by the UK's Financial Conduct Authority "
                               "(%d of the brokers we cover). We still review others, and say clearly when a broker isn't FCA-authorised."
                               % fca_count) if FCA_ONLY else "We say clearly when a broker isn't authorised by the UK's FCA.")
@@ -790,7 +806,7 @@ def build_about():
                 **({"url": abs_url(path)} if SITE_URL else {})}
     return path, page("About us and our editorial policy — %s" % SITE,
                       "Who we are, how we make money, how we stay independent and how we research and rate forex brokers.",
-                      body, path, jsonld=[x for x in [about_ld, crumbs] if x])
+                      body, path, jsonld=[x for x in [about_ld, organization(), crumbs] if x])
 
 
 # ---------- Main ----------
