@@ -4,11 +4,14 @@
 {
   "name": "brokerage-reviews",
   "compatibility_date": "2025-09-01",
+  // Serves index.html for folder URLs such as "/".
+  "main": "worker/index.js",
   "build": {
     "command": "python3 scripts/make_dist.py"
   },
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     // Serve /brokers/ig.html as-is: the sitemap and canonical links use .html URLs.
     "html_handling": "none"
   }
