@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>South Hampshire Aesthetics</title>
-<meta name="description" content="Doctor-led aesthetics in Chandler's Ford, Hampshire. A GP-led medical consultation, natural-looking results and follow-up with the same doctor.">
+<title>Heather &amp; Hale Aesthetics</title>
+<meta name="description" content="Heather &amp; Hale: doctor-led aesthetics in Chandler's Ford, Hampshire. A GP-led medical consultation, natural-looking results and follow-up with the same doctor.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -57,6 +57,7 @@ h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
 .brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--ink)}
 .brand b{font:400 21px/1 var(--display);letter-spacing:.02em;color:var(--heather)}
+.brand b i{font-style:normal;color:var(--blush)}
 .brand span{font:500 11px/1 var(--mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
 .top nav{display:flex;gap:22px;flex-wrap:wrap}
 .top nav a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500}
@@ -81,6 +82,10 @@ h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
 .hero .actions{display:flex;gap:12px;flex-wrap:wrap}
 .card-note{border-top:4px solid var(--heather);border-image:linear-gradient(90deg,var(--heather),var(--blush),var(--honey)) 1;background:var(--surface);padding:24px 24px 20px;box-shadow:0 14px 40px -24px var(--heather)}
 .card-note h2{font-size:24px;margin-bottom:14px}
+.meet{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.meet img{width:72px;height:72px;border-radius:50%;object-fit:cover;flex:none;border:3px solid var(--surface);box-shadow:0 0 0 2px var(--blush)}
+.meet h2{margin:0 0 2px}
+.meet span{font-size:14px;color:var(--muted)}
 .facts{list-style:none;margin:0;padding:0;display:grid;gap:12px}
 .facts li{display:grid;grid-template-columns:96px 1fr;gap:12px;font-size:15px;border-bottom:1px solid var(--line);padding-bottom:12px}
 .facts li:last-child{border-bottom:0;padding-bottom:0}
@@ -215,7 +220,7 @@ footer p{margin:0 0 8px;max-width:70ch}
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#top"><b>South Hampshire Aesthetics</b><span>Doctor-led · Chandler's Ford</span></a>
+    <a class="brand" href="#top"><b>Heather <i>&amp;</i> Hale</b><span>Doctor-led · Chandler's Ford</span></a>
     <nav aria-label="Main">
       <a href="#approach">Approach</a>
       <a href="#treatments">Treatments &amp; prices</a>
@@ -240,7 +245,7 @@ footer p{margin:0 0 8px;max-width:70ch}
         </div>
       </div>
       <aside class="card-note" aria-label="At a glance">
-        <h2>At a glance</h2>
+        <div class="meet"><img src="doctor-2.jpg" width="240" height="240" alt="Dr [Name]"><div><h2>At a glance</h2><span>Meet Dr [Name], your doctor</span></div></div>
         <ul class="facts">
           <li><span class="label">Clinician</span><span>Dr [Name], GMC-registered GP with advanced aesthetics training</span></li>
           <li><span class="label">Consultation</span><span>30 minutes, £45, taken off the cost of any treatment you go ahead with</span></li>
@@ -336,12 +341,12 @@ footer p{margin:0 0 8px;max-width:70ch}
 
   <section id="doctor">
     <div class="wrap doctor">
-      <figure class="portrait"><img src="doctor.jpg" width="700" height="820" alt="Dr [Name], GP and founder of South Hampshire Aesthetics"><figcaption>Dr [Name] · GP &amp; founder</figcaption></figure>
+      <figure class="portrait"><img src="doctor.jpg" width="700" height="820" alt="Dr [Name], GP and founder of Heather &amp; Hale"><figcaption>Dr [Name] · GP &amp; founder</figcaption></figure>
       <div>
         <div class="label">Your doctor</div>
         <h2>Dr [Name], GP</h2>
         <p>Dr [Name] is a GMC-registered GP who has completed advanced (Level 7) training in medical aesthetics. Years of general practice mean thorough assessment, careful consent and calm management of the unexpected are part of everyday work.</p>
-        <p>Dr [Name] started South Hampshire Aesthetics to offer the kind of care a GP would want for their own family: unhurried, honest about what treatment can and can't do, and with the same doctor there from start to finish.</p>
+        <p>Dr [Name] started Heather &amp; Hale to offer the kind of care a GP would want for their own family: unhurried, honest about what treatment can and can't do, and with the same doctor there from start to finish.</p>
         <div class="creds">
           <div><b>GMC registration</b><span>No. [0000000]</span></div>
           <div><b>Qualification</b><span>MRCGP · Level 7 Aesthetic Medicine</span></div>
@@ -463,7 +468,7 @@ footer p{margin:0 0 8px;max-width:70ch}
 <footer>
   <div class="wrap">
     <div>
-      <p><b>South Hampshire Aesthetics</b>, Chandler's Ford, Hampshire.</p>
+      <p><b>Heather &amp; Hale</b>, Chandler's Ford, Hampshire.</p>
       <p>Medical aesthetic treatments provided by Dr [Name], GMC No. [0000000]. Treatments for adults aged 18+. Results vary between individuals.</p>
     </div>
     <div>

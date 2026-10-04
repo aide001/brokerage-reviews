@@ -1,4 +1,8 @@
-# South Hampshire Aesthetics website
+# Heather & Hale website
+
+"Heather & Hale" is a working name: heather for the New Forest heathland (and the site's
+main colour), "hale" meaning healthy. Check it is free at Companies House and as a
+domain before using it.
 
 A one-page website for a doctor-led aesthetics clinic. The content follows the
 South Hampshire market and feasibility plan:
