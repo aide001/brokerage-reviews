@@ -1,0 +1,93 @@
+{
+  "_note": "Long-form review content for brokers/fxpro.html. fxpro.com and fxpro.co.uk block automated reads, so facts were checked on 4 October 2026 via search results restricted to FxPro's official domains, plus the FCA register; see sources.",
+  "checked": "2026-10-04",
+  "verdict": [
+    "FxPro UK Limited is authorised and regulated by the FCA (FRN 509956) and has been since 2010. The wider FxPro group was founded in 2006 and is also licensed by CySEC in Cyprus, the FSCA in South Africa and the Securities Commission of The Bahamas. FxPro says it has more than 11 million client accounts across 173 countries.",
+    "FxPro's biggest strength is choice. You can trade on MT4, MT5, cTrader, TradingView (via a cTrader account) or FxPro's own platform, and UK residents can also spread bet on the FxPro Edge platform. It offers more than 2,100 instruments across forex, shares, indices, futures, metals, energy and crypto CFDs.",
+    "On costs, FxPro sits in the middle of the pack. The Raw+ and cTrader accounts offer forex spreads from 0 plus a commission of US$3.50 per lot per side. The Standard account has no commission but spreads from 1.2 pips. FxPro doesn't charge for deposits or withdrawals and has no fixed minimum deposit, though it recommends starting with US$1,000."
+  ],
+  "whoFor": [
+    "Traders who want to choose between MT4, MT5, cTrader and TradingView with one broker",
+    "UK traders who want both CFDs and spread betting from an FCA-regulated firm",
+    "Algorithmic traders using Expert Advisors or cTrader automation"
+  ],
+  "notFor": [
+    "Traders who want the very lowest commission on raw-spread accounts",
+    "Investors looking to buy real shares, an ISA or a SIPP",
+    "People who trade only occasionally: live accounts are disabled after 3 months of inactivity"
+  ],
+  "fees": {
+    "intro": "FxPro has a commission-free Standard account with a mark-up built into the spread, and raw-spread accounts (Raw+ and cTrader) that charge a fixed commission instead.",
+    "spreadsHead": ["", "Raw+ / cTrader", "Standard"],
+    "spreads": [
+      ["Forex spreads from", "0 pips", "1.2 pips"],
+      ["Commission (forex & metals)", "US$3.50 per lot per side", "None"],
+      ["Round-turn commission", "US$7 per lot", "None"],
+      ["Minimum deposit", "No fixed minimum (US$1,000 recommended)", "No fixed minimum (US$1,000 recommended)"],
+      ["Max retail leverage", "1:30", "1:30"],
+      ["Platforms", "MT4, MT5 (Raw+); cTrader and TradingView (cTrader)", "MT4, MT5, FxPro platform"]
+    ],
+    "spreadsNote": "From FxPro's commissions and account pages. Spreads are minimums ('from'); live spreads vary with market conditions. An Elite account with commission rebates is offered to high-volume traders.",
+    "other": [
+      ["Overnight swaps", "Charged on positions held overnight; rates vary by instrument"],
+      ["Deposits", "No fee from FxPro; your bank or payment provider may charge"],
+      ["Withdrawals", "No fee from FxPro"],
+      ["Inactivity", "Live accounts are disabled after 3 months without activity; you can ask support to reactivate them"]
+    ]
+  },
+  "accounts": [
+    ["Standard", "Commission-free, with spreads from 1.2 pips on forex. Available on MT4, MT5 and the FxPro platform."],
+    ["Raw+", "Spreads from 0 on forex and metals plus US$3.50 per lot per side, on MT4 and MT5."],
+    ["cTrader", "Spreads from 0.2 pips plus a commission of US$35 per US$1 million traded. Can be connected to TradingView."],
+    ["Elite", "Raw-spread pricing with commission rebates for high-volume traders."],
+    ["Spread betting (UK only)", "Tax-free spread betting on forex, shares, indices, metals and energy via the FxPro Edge platform, for UK residents."],
+    ["Demo accounts", "Free practice accounts are available on each platform."]
+  ],
+  "funding": {
+    "rows": [
+      ["Deposit methods", "Bank transfer, debit and credit cards, PayPal, Neteller, Skrill and local options (vary by country)"],
+      ["Minimum deposit", "No fixed minimum; FxPro recommends US$1,000"],
+      ["Fees", "None from FxPro on deposits or withdrawals"],
+      ["Deposit speed", "Usually within 10 minutes; UK GBP bank transfers usually the same business day; international wires 3–5 business days"],
+      ["Withdrawal speed", "Processed within 1 working day; bank wires 3–5 working days, local transfers up to 2, cards around 10 working days"],
+      ["FxPro Wallet", "Funds sit in a central wallet and move instantly to and from your trading accounts"]
+    ]
+  },
+  "safety": [
+    "FxPro UK Limited is authorised and regulated by the Financial Conduct Authority (FRN 509956).",
+    "Client funds are fully segregated from FxPro's own money and held in separate bank accounts.",
+    "FxPro UK Limited is a member of the Financial Services Compensation Scheme (FSCS); eligibility depends on your status and the nature of the claim.",
+    "Negative balance protection applies to all clients, so you can't lose more than you deposit.",
+    "Beware of clones: the FCA has published a warning about a fake firm using the name 'Fx Pro'. Always check you are on FxPro's genuine website."
+  ],
+  "platforms": [
+    ["FxPro platform and app", "FxPro's own web and mobile platform, with TradingView-powered charts, account management and an economic calendar."],
+    ["MetaTrader 4 & 5", "Desktop, web and mobile versions, with support for Expert Advisors and a VPS service."],
+    ["cTrader", "ECN-style platform with depth of market and cTrader Automate for algorithmic trading."],
+    ["TradingView", "Connect an FxPro cTrader account to trade directly from TradingView charts; fully launched in November 2025."],
+    ["FxPro Edge", "FxPro's customisable spread betting platform for UK residents."]
+  ],
+  "research": "FxPro provides Trading Central technical analysis and trade ideas, an economic calendar, market news and analysis, and a two-level education section covering the basics, fundamental and technical analysis, trading psychology, quizzes and video tutorials, plus webinars.",
+  "support": "FxPro's multilingual support team works 24/5 via live chat, email and phone, and support can also be reached from inside the FxPro app.",
+  "faq": [
+    ["Is FxPro regulated in the UK?", "Yes. FxPro UK Limited is authorised and regulated by the FCA (FRN 509956) and has been since 2010. It is also a member of the FSCS."],
+    ["What is FxPro's minimum deposit?", "FxPro has no fixed minimum deposit, but it recommends an initial deposit of US$1,000."],
+    ["What commission does FxPro charge?", "On Raw+ accounts, US$3.50 per lot per side (US$7 round turn) on forex and metals. On cTrader, US$35 per US$1 million traded. The Standard account has no commission; costs are built into spreads from 1.2 pips."],
+    ["Does FxPro offer spread betting?", "Yes. Clients of FxPro UK Limited who live in the UK can spread bet on the FxPro Edge platform."],
+    ["Does FxPro work with TradingView?", "Yes. You can connect an FxPro cTrader account to TradingView and place trades directly from its charts."],
+    ["Does FxPro charge deposit or withdrawal fees?", "No. FxPro doesn't charge for deposits or withdrawals, although your bank or payment provider might."]
+  ],
+  "sources": [
+    "https://register.fca.org.uk/s/firm?id=001b000000NMTlsAAH",
+    "https://www.fxpro.com/about/licences",
+    "https://www.fxpro.com/about",
+    "https://www.fxpro.com/commissions-swap-charges",
+    "https://www.fxpro.com/pricing/deposit-methods",
+    "https://www.fxpro.com/trading-platforms/comparison",
+    "https://www.fxpro.com/help-section/faq/tradingview",
+    "https://www.fxpro.com/help-section/faq/accounts",
+    "https://www.fxpro.com/trading-tools",
+    "https://www.fxpro.com/contact-us",
+    "https://www.fca.org.uk/news/warnings/fx-pro-clone-authorised-firm"
+  ]
+}

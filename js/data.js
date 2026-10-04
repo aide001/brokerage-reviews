@@ -1225,6 +1225,70 @@ window.BROKERS = [
     "checked": "2026-09-30",
     "dataNotes": "Pro: EURUSD from 0 pips, commission $4.5 round trip (charged in account currency equivalent); Standard: from 0.68 pips, no commission. No minimum deposit (recommended $100).",
     "logoExt": "png"
+  },
+  {
+    "id": "fxpro",
+    "domain": "fxpro.com",
+    "name": "FxPro",
+    "color": "#d6001c",
+    "founded": 2006,
+    "hq": "London, UK",
+    "regulators": [
+      "FCA",
+      "CySEC",
+      "FSCA",
+      "SCB"
+    ],
+    "minDeposit": 0,
+    "account": "Raw+",
+    "spread": 0.0,
+    "commission": 5.28,
+    "leverage": 30,
+    "platforms": [
+      "FxPro Platform",
+      "MT4",
+      "MT5",
+      "cTrader",
+      "TradingView"
+    ],
+    "instruments": 2100,
+    "bestFor": "Platform choice under FCA regulation",
+    "ratings": {
+      "fees": 4.3,
+      "platforms": 4.8,
+      "trust": 4.7,
+      "support": 4.4,
+      "education": 4.3
+    },
+    "pros": [
+      "FCA-regulated since 2010, with FSCS membership and negative balance protection",
+      "Wide platform choice: MT4, MT5, cTrader, TradingView and its own FxPro platform",
+      "Spread betting for UK clients, with no FxPro deposit or withdrawal fees"
+    ],
+    "cons": [
+      "Standard account spreads include a mark-up (forex from 1.2 pips)",
+      "Raw+ commission of US$3.50 per lot per side is mid-range rather than lowest",
+      "Live accounts are disabled after 3 months of inactivity"
+    ],
+    "summary": "FxPro is a long-established, FCA-regulated broker that stands out for platform choice, offering MT4, MT5, cTrader, TradingView and its own platform, plus spread betting for UK clients.",
+    "ukStatus": "fca",
+    "fcaFrn": "509956",
+    "lossPct": 79,
+    "spreadType": "from",
+    "verified": true,
+    "approx": [
+      "commission"
+    ],
+    "sources": [
+      "https://www.fxpro.com/about/licences",
+      "https://www.fxpro.com/commissions-swap-charges",
+      "https://www.fxpro.com/pricing/deposit-methods",
+      "https://www.fxpro.com/trading-platforms/comparison",
+      "https://register.fca.org.uk/s/firm?id=001b000000NMTlsAAH"
+    ],
+    "checked": "2026-10-04",
+    "dataNotes": "Raw+: spreads from 0 on FX & metals plus US$3.50 per lot per side (US$7 round turn, shown converted to GBP). Standard: spreads from 1.2 pips, no commission. No fixed minimum deposit (FxPro recommends US$1,000). FxPro UK Ltd FRN 509956. Loss figure 79% from fxpro.co.uk risk warning. fxpro.com/fxpro.co.uk block automated reads, so facts were taken from search results restricted to FxPro's official domains on 4 Oct 2026.",
+    "logoExt": "png"
   }
 ];
 
