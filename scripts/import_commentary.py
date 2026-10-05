@@ -4,12 +4,14 @@
 Each email lives in its own folder, blog-inbox/<slug>/, holding:
   email.json   Details of the email (written by fetch_fxpro_emails.py or by hand)
   *.docx       The commentary itself (an "ENG" file is preferred if there are several)
+  *.pdf        Or a PDF newsletter, used when there is no .docx (needs pypdf)
   *.png/*.jpg  Charts sent with the email
 
 For every folder with its attachments present, this writes
 content/posts/<slug>.json and copies images to assets/blog/<slug>/, then
 rebuilds the blog pages. Folders already imported are skipped unless
---force is given. Standard library only.
+--force is given. Standard library only, except that PDF newsletters need
+the pypdf package (installed system-wide here).
 
     python3 scripts/import_commentary.py [--force]
 """
@@ -19,7 +21,9 @@ import os
 import re
 import shutil
 import sys
+import struct
 import zipfile
+import zlib
 import xml.etree.ElementTree as ET
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -184,6 +188,223 @@ class DocxConverter:
 
 # ---------- Import ----------
 
+# ---------- PDF -> HTML ----------
+
+class PdfConverter:
+    """Converts a text-based PDF newsletter: headings (bold lines), paragraphs
+    (by line spacing), bold lead-in labels, check-mark bullet lists and the
+    charts/tables on each page. The cover page, the running header/footer and
+    images repeated on several pages (logos) are left out. Each page's images
+    follow that page's text."""
+
+    def __init__(self, path, image_dir, image_url):
+        sys.modules.setdefault("cryptography", None)  # the system package is broken; pypdf then uses its own crypto
+        import pypdf
+        self.reader = pypdf.PdfReader(path)
+        self.image_dir = image_dir
+        self.image_url = image_url
+        self.images = []
+
+    # --- text ---
+    def _lines(self, page):
+        height = float(page.mediabox.height)
+        width = float(page.mediabox.width)
+        chunks = []
+
+        def text_width(text, font, size):
+            """Width of text in points, from the font's /Widths table (else ~0.5em a character)."""
+            font = font or {}
+            widths, first = font.get("/Widths"), int(font.get("/FirstChar", 0) or 0)
+            if hasattr(widths, "get_object"):
+                widths = widths.get_object()
+            total = 0.0
+            for ch in text:
+                i = ord(ch) - first
+                total += float(widths[i]) if widths is not None and 0 <= i < len(widths) else 500.0
+            return total * size / 1000.0
+
+        def visit(text, cm, tm, font, size):
+            if not text.strip() or text.count("\n") > 1:
+                return
+            y = tm[5] * cm[3] + cm[5]
+            x = tm[4] * cm[0] + cm[4]
+            if not (45 < y < height - 50) or not (0 <= x <= width):
+                return  # page-number footer, or text drawn off the page
+            name = str((font or {}).get("/BaseFont", ""))
+            eff = abs(size * tm[3]) or size
+            clean = text.replace("\n", "")
+            chunks.append((round(y, 1), x, "Bold" in name, eff, clean, x + text_width(clean, font, eff)))
+
+        page.extract_text(visitor_text=visit)
+        lines = []
+        used = set()
+        for y in sorted({c[0] for c in chunks}, reverse=True):
+            parts = sorted((c for c in chunks if abs(c[0] - y) < 1.5 and id(c) not in used), key=lambda c: c[1])
+            if not parts:
+                continue
+            used.update(id(c) for c in parts)
+            text = self._join(parts)
+            if text:
+                lines.append({"y": y, "parts": parts, "text": text, "size": max(c[3] for c in parts),
+                              "bold": all(c[2] for c in parts if c[4].strip())})
+        return lines
+
+    @staticmethod
+    def _join(parts):
+        """Join a line's text pieces. Words are sometimes placed with a gap instead of a
+        space character (justified text), so a gap of about a third of a space or more
+        becomes a space."""
+        if not parts:
+            return ""
+        pieces = [parts[0][4]]
+        for prev, cur in zip(parts, parts[1:]):
+            if cur[1] - prev[5] > 0.1 * cur[3] and not prev[4].endswith(" ") and not cur[4].startswith(" "):
+                pieces.append(" ")
+            pieces.append(cur[4])
+        return re.sub(r"\s+", " ", "".join(pieces)).strip()
+
+    def _page_blocks(self, lines):
+        blocks, para, items, heading = [], [], [], None
+        prev = None
+
+        def flush():
+            nonlocal para, items, heading
+            if heading:
+                blocks.append(heading)
+                heading = None
+            if para:
+                # A word broken at the end of a line ("stronger-than-" / "expected") is joined back up.
+                blocks.append("<p>%s</p>" % re.sub(r"(?<=[A-Za-z]-) (?=[a-z])", "", " ".join(para)))
+                para = []
+            if items:
+                blocks.append("<ul>%s</ul>" % "".join("<li>%s</li>" % i for i in items))
+                items = []
+
+        for line in lines:
+            text = html.escape(line["text"])
+            gap = (prev["y"] - line["y"]) if prev else 999
+            new_block = gap > line["size"] * 1.6
+            if items and not new_block and not text.startswith("✓"):
+                items[-1] += " " + text  # bullet text continues on the next line
+            elif line["bold"]:
+                tag = "h2" if line["size"] >= 15 else "h3"
+                if heading and heading.startswith("<" + tag) and not new_block:
+                    heading = heading[:-len("</%s>" % tag)] + " " + text + "</%s>" % tag  # heading over two lines
+                else:
+                    flush()
+                    heading = "<%s>%s</%s>" % (tag, text, tag)
+            elif text.startswith("✓"):
+                if heading or para:
+                    flush()
+                items.append(text.lstrip("✓ ").strip())
+            else:
+                parts = line["parts"]
+                n_lead = next((i for i, c in enumerate(parts) if not c[2] and c[4].strip()), len(parts))
+                if 0 < n_lead < len(parts):
+                    # "EUR/USD The euro edged higher...": bold label starting a paragraph.
+                    # A closing bracket set in the regular font still belongs to the label.
+                    while n_lead < len(parts) and parts[n_lead][4].strip() in (")", "]"):
+                        n_lead += 1
+                    label = html.escape(self._join(parts[:n_lead]))
+                    rest = html.escape(self._join(parts[n_lead:]))
+                    flush()
+                    para = ["<strong>%s</strong> %s" % (label, rest)]
+                else:
+                    if new_block or heading or items:
+                        flush()
+                    para.append(text)
+            prev = line
+        flush()
+        return blocks
+
+    # --- images ---
+    def _page_images(self, page):
+        found = []
+        xobjects = page["/Resources"].get("/XObject") or {}
+        for ref in xobjects.values():
+            obj = ref.get_object()
+            if obj.get("/Subtype") == "/Image":
+                found.append(obj)
+        return found
+
+    @staticmethod
+    def _key(obj):
+        return (obj.get("/Width"), obj.get("/Height"), len(obj.get_data()))
+
+    def _save(self, obj, name):
+        filters = obj.get("/Filter")
+        filters = [str(f) for f in (filters if isinstance(filters, list) else [filters])]
+        data = obj.get_data()
+        width, height = int(obj["/Width"]), int(obj["/Height"])
+        if "/DCTDecode" in filters:
+            fname, payload = name + ".jpg", data
+        else:
+            colorspace = obj.get("/ColorSpace")
+            space = colorspace.get_object() if hasattr(colorspace, "get_object") else colorspace
+            channels = {"/DeviceRGB": 3, "/DeviceGray": 1}.get(str(space))
+            if channels is None and isinstance(space, list) and str(space[0]) == "/ICCBased":
+                channels = int(space[1].get_object().get("/N", 3))
+            if channels not in (1, 3) or int(obj.get("/BitsPerComponent", 8)) != 8 or len(data) < width * height * channels:
+                return None
+            stride = width * channels
+            if min(data[::97]) > 245:  # a blank (all-white) panel
+                return None
+            rows = b"".join(b"\x00" + data[r * stride:(r + 1) * stride] for r in range(height))
+
+            def chunk(tag, body):
+                return struct.pack(">I", len(body)) + tag + body + struct.pack(">I", zlib.crc32(tag + body) & 0xFFFFFFFF)
+            payload = (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", width, height, 8, 2 if channels == 3 else 0, 0, 0, 0))
+                       + chunk(b"IDAT", zlib.compress(rows, 9)) + chunk(b"IEND", b""))
+            fname = name + ".png"
+        os.makedirs(self.image_dir, exist_ok=True)
+        with open(os.path.join(self.image_dir, fname), "wb") as fh:
+            fh.write(payload)
+        self.images.append(fname)
+        return fname
+
+    def convert(self):
+        pages = self.reader.pages
+        per_page = [self._page_images(p) for p in pages]
+        seen = {}
+        for imgs in per_page:
+            for k in {self._key(o) for o in imgs}:
+                seen[k] = seen.get(k, 0) + 1
+        page_lines = [self._lines(p) for p in pages]
+        counts = {}
+        for lines in page_lines:
+            for k in {re.sub(r"\W+", "", l["text"]).lower() for l in lines}:
+                counts[k] = counts.get(k, 0) + 1
+        blocks, last_text = [], None
+        for n, page in enumerate(pages):
+            lines = [l for l in page_lines[n] if counts[re.sub(r"\W+", "", l["text"]).lower()] < 3]  # running header
+            if n == 0 and len(pages) > 2 and sum(len(l["text"]) for l in lines) < 300:
+                continue  # cover page
+            page_blocks = self._page_blocks(lines)
+            # A paragraph that runs on from the previous page starts with a lower-case letter.
+            if page_blocks and last_text is not None and re.match(r"<p>[a-z]", page_blocks[0]):
+                blocks[last_text] = blocks[last_text][:-len("</p>")] + " " + page_blocks.pop(0)[len("<p>"):]
+            blocks += page_blocks
+            texts = [i for i, b in enumerate(blocks) if b.startswith("<p>")]
+            last_text = texts[-1] if texts and blocks[-1].startswith("<p>") else None
+            for i, obj in enumerate(per_page[n]):
+                if seen[self._key(obj)] > 1 or int(obj.get("/Width", 0)) < 300:
+                    continue  # logo repeated on every page, or a small icon
+                fname = self._save(obj, "page%d-%d" % (n + 1, i + 1))
+                if fname:
+                    blocks.append('<figure><img src="%s%s" alt="" loading="lazy"></figure>' % (self.image_url, fname))
+        # The publisher's sign-off ("FxPro Market Research & Education / Next edition: ... / fxpro.com").
+        for i, b in enumerate(blocks):
+            if re.match(r"<(h\d|p)>Next edition\b", b):
+                drop = {i}
+                if i > 0 and blocks[i - 1].startswith("<h") and len(strip_tags(blocks[i - 1])) < 60:
+                    drop.add(i - 1)
+                if i + 1 < len(blocks) and re.match(r"<p>[\w.-]+\.(com|net|org|co\.uk)</p>$", blocks[i + 1]):
+                    drop.add(i + 1)
+                blocks = [b for j, b in enumerate(blocks) if j not in drop]
+                break
+        return blocks
+
+
 def strip_tags(s):
     return html.unescape(re.sub(r"<[^>]+>", "", s))
 
@@ -285,10 +506,11 @@ def import_folder(folder, force=False):
 
     files = sorted(os.listdir(folder))
     docx = pick_docx(files)
+    pdf = None if docx else next((f for f in files if f.lower().endswith(".pdf")), None)
     attached_images = [f for f in files if f.lower().endswith(IMAGE_EXTS)]
     if meta.get("includeImages") is not None:
         attached_images = [f for f in meta["includeImages"] if f in attached_images]
-    if not docx and not attached_images:
+    if not docx and not pdf and not attached_images:
         expected = ", ".join(meta.get("expectedAttachments", [])) or "a .docx or images"
         return "wait", "waiting for attachments (" + expected + ")"
 
@@ -298,8 +520,8 @@ def import_folder(folder, force=False):
     image_url = "../assets/blog/%s/" % slug
 
     blocks, doc_images = [], []
-    if docx:
-        conv = DocxConverter(os.path.join(folder, docx), image_dir, image_url)
+    if docx or pdf:
+        conv = (DocxConverter if docx else PdfConverter)(os.path.join(folder, docx or pdf), image_dir, image_url)
         blocks = conv.convert()
         doc_images = conv.images
         # Drop a leading heading/paragraph that just repeats the title.
@@ -321,6 +543,8 @@ def import_folder(folder, force=False):
         labels = [by_number.get(i + 1, "") for i in range(len(doc_images))]
         order = match_captions(labels, captions)
         caption_for = {i: captions[n] for n, i in order.items()}
+        for i, name in enumerate(doc_images):
+            caption_for.setdefault(i, image_captions.get(name))
         body = "\n".join(blocks)
         for i, name in enumerate(doc_images):
             old_fig = '<figure><img src="%s%s" alt="" loading="lazy"></figure>' % (image_url, name)

@@ -473,7 +473,7 @@ body.has-tray .toast { bottom: 100px; }
 .post-body ul { padding-left: 1.3em; }
 .post-body li { margin-bottom: .4em; }
 .post-body figure { margin: 1.6em 0; }
-.post-body figure img { width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--border); background: #fff; }
+.post-body figure img { width: auto; max-width: 100%; margin: 0 auto; border-radius: var(--radius-sm); border: 1px solid var(--border); background: #fff; }
 .post-body figcaption { margin-top: .5em; font-size: .9rem; color: var(--muted); text-align: center; }
 .post-body .table-scroll { overflow-x: auto; }
 .post-body table { border-collapse: collapse; font-size: .92rem; font-variant-numeric: tabular-nums; }

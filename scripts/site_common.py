@@ -30,8 +30,9 @@ PARTNER_OPINION = bool(SETTINGS.get("partnerOpinionPosts"))
 
 
 def is_partner_opinion(post):
-    """Partner commentary that gives a view on markets (not official data, not a weekly performance recap)."""
-    return not post.get("official") and "weekly" not in post.get("type", "").lower()
+    """Partner commentary that gives a view on markets (not official data, not a Weekly Performance recap).
+    A weekly newsletter with technical levels and outlooks counts as opinion."""
+    return not post.get("official") and "weekly performance" not in post.get("type", "").lower()
 
 
 def is_published(post):

@@ -67,8 +67,20 @@ def thumb(p, from_root=False):
         e(re.sub(r"[^a-z]+", "-", topic.lower())), icon, e(topic), e(p["provider"]))
 
 
+def credit_parts(p):
+    """[author, role, provider] without empty parts, and without repeating the provider
+    when the author already names it ("FxPro Market Research and Education")."""
+    parts = [p.get("author", ""), p.get("authorRole", "")]
+    if p["provider"] not in p.get("author", ""):
+        parts.append(p["provider"])
+    return [e(x) for x in parts if x]
+
+
 def byline(p):
-    return e(p["provider"]) if p.get("official") else "%s · %s" % (e(p["author"]), e(p["provider"]))
+    if p.get("official"):
+        return e(p["provider"])
+    parts = credit_parts(p)
+    return " · ".join([parts[0], parts[-1]] if len(parts) > 2 else parts)
 
 
 def post_card(p):
@@ -183,7 +195,7 @@ def build_index(posts):
 def post_byline(p):
     if p.get("official"):
         return "Official release · %s" % e(p["provider"])
-    return "%s, %s, %s" % (e(p["author"]), e(p["authorRole"]), e(p["provider"]))
+    return ", ".join(credit_parts(p))
 
 
 def source_note(p):
@@ -193,10 +205,12 @@ def source_note(p):
         link = ' <a href="%s" rel="noopener">Read the full release on %s</a>.' % (e(url), e(host)) if url else ""
         return ("<strong>Source:</strong> Official release from the %s, a US government agency, republished "
                 "from its public website.%s It is for information only and is not investment advice.") % (e(p["provider"]), link)
-    return ("<strong>Source:</strong> Partner content written by %s, %s at %s, and published with %s's permission "
+    who = e(p["author"]) + (", %s" % e(p["authorRole"]) if p.get("authorRole") else "")
+    if p["provider"] not in p["author"]:
+        who += " at %s" % e(p["provider"])
+    return ("<strong>Source:</strong> Partner content written by %s, and published with %s's permission "
             "under our commercial relationship with %s. It is for information only and is not investment advice. "
-            '<a href="../about/index.html#money">How we make money</a>.') % (
-        e(p["author"]), e(p["authorRole"]), e(p["provider"]), e(p["provider"]), e(p["provider"]))
+            '<a href="../about/index.html#money">How we make money</a>.') % (who, e(p["provider"]), e(p["provider"]))
 
 
 NOT_ADVICE = ("<strong>Not financial advice.</strong> Market news, commentary and data on this site are for general "
