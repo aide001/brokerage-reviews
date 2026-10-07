@@ -1,0 +1,88 @@
+{
+  "_note": "Long-form review content for brokers/eightcap.html. eightcap.com serves non-UK entity pages to readers outside the UK, so UK-specific facts were checked on 7 October 2026 against Eightcap Group Ltd's own legal documents (client agreement, key information document), Eightcap's account and payments pages, and independent reviews for UK platform availability; see sources.",
+  "checked": "2026-10-07",
+  "verdict": [
+    "Eightcap Group Ltd is authorised and regulated by the FCA (FRN 921296). The wider Eightcap group was founded in Melbourne in 2009 and is also regulated by ASIC in Australia and CySEC in Cyprus, with offshore entities in The Bahamas, Seychelles and Mauritius. UK clients are served by the FCA-regulated entity, with segregated client money, negative balance protection and FSCS cover.",
+    "For UK traders, Eightcap is a specialist TradingView broker: you connect your Eightcap account to TradingView and trade directly from its charts. That suits people who already do their analysis on TradingView, but UK clients don't get MetaTrader 4, MetaTrader 5 or TradeLocker, which Eightcap offers through its non-UK entities, and there's no spread betting.",
+    "Costs are a strength. The Raw account offers spreads from 0.0 pips plus £2.25 per lot per side on GBP accounts (£4.50 round turn), which is towards the cheaper end for raw-spread pricing. The Standard account has no commission, with spreads from 1.0 pips. Research and education are thinner than at the largest brokers."
+  ],
+  "whoFor": [
+    "Traders who already chart and analyse on TradingView and want to trade from it",
+    "Cost-conscious forex traders who prefer a raw-spread account with a low commission",
+    "UK traders who want an FCA-regulated broker with FSCS cover"
+  ],
+  "notFor": [
+    "Traders who rely on MetaTrader 4 or 5 Expert Advisors (not available to UK clients)",
+    "Anyone who wants tax-free spread betting, real shares, an ISA or a SIPP",
+    "Beginners looking for structured courses and in-depth research"
+  ],
+  "fees": {
+    "intro": "Eightcap has a commission-free Standard account with the cost built into the spread, and a Raw account with spreads from 0.0 pips plus a fixed commission.",
+    "spreadsHead": ["", "Raw", "Standard"],
+    "spreads": [
+      ["Forex spreads from", "0.0 pips", "1.0 pips"],
+      ["Commission (GBP account)", "£2.25 per lot per side", "None"],
+      ["Round-turn commission", "£4.50 per lot", "None"],
+      ["Commission (other currencies)", "US$3.50 / €2.75 per lot per side", "None"],
+      ["Minimum deposit", "US$100 or equivalent", "US$100 or equivalent"],
+      ["Max retail leverage", "1:30", "1:30"],
+      ["Platform (UK clients)", "TradingView", "TradingView"]
+    ],
+    "spreadsNote": "From Eightcap's account comparison page. Spreads are minimums ('from'); live spreads vary with market conditions. Some share CFDs carry their own commission rates.",
+    "other": [
+      ["Overnight swaps", "Charged on positions held overnight; rates vary by instrument"],
+      ["Deposits", "No internal Eightcap fee; your bank or payment provider may charge"],
+      ["Withdrawals", "No internal Eightcap fee"],
+      ["Inactivity", "An inactivity fee of 10 units of account currency applies after three months without activity (per independent reviews); check Eightcap's current terms"]
+    ]
+  },
+  "accounts": [
+    ["Standard", "Commission-free, with spreads from 1.0 pips on forex. Trade sizes from 0.01 to 100 lots."],
+    ["Raw", "Spreads from 0.0 pips plus £2.25 per lot per side on GBP accounts (US$3.50 or €2.75 on USD and EUR accounts)."],
+    ["Base currencies", "GBP, USD, EUR, AUD, CAD, NZD and SGD."],
+    ["Professional accounts", "Available to eligible clients. Professional clients have fewer FCA protections than retail clients, including negative balance protection."],
+    ["Demo accounts", "Free practice accounts are available."]
+  ],
+  "funding": {
+    "rows": [
+      ["Deposit methods", "Debit and credit cards, bank transfer, PayPal, Skrill and Neteller (availability varies by country)"],
+      ["Minimum deposit", "US$100 or the account-currency equivalent"],
+      ["Fees", "No internal Eightcap fees on deposits or withdrawals"],
+      ["Deposit speed", "Cards and e-wallets are usually instant; bank transfers take 1–5 business days"],
+      ["Withdrawal speed", "1–5 business days for cards, PayPal and bank transfers; about 1 business day for Skrill and Neteller"],
+      ["Withdrawals", "Paid back to the original funding method where possible"]
+    ]
+  },
+  "safety": [
+    "Eightcap Group Ltd is authorised and regulated by the Financial Conduct Authority (FRN 921296), and is registered in England and Wales.",
+    "Client money is held in segregated accounts, separate from Eightcap's own funds, under the FCA's client money rules.",
+    "Eightcap Group Ltd is covered by the Financial Services Compensation Scheme (FSCS); eligible retail clients may be able to claim up to £85,000 if the firm fails.",
+    "Negative balance protection applies to retail clients, so you can't lose more than the money in your account.",
+    "Beware of clones: the FCA has warned about a fake firm impersonating Eightcap. Only use eightcap.com and check FRN 921296 on the FCA register."
+  ],
+  "platforms": [
+    ["TradingView (UK clients)", "Connect your Eightcap account to TradingView's web, desktop and mobile apps and trade directly from its charts, with TradingView's drawing tools, indicators and alerts."],
+    ["MetaTrader 4 & 5 (non-UK entities)", "Available to clients of Eightcap's Australian, EU (MT5 only) and offshore entities, but not to UK clients of Eightcap Group Ltd."],
+    ["TradeLocker (non-UK entities)", "A browser-based platform offered by some of Eightcap's non-UK entities."],
+    ["Tools", "An AI-driven economic calendar and trading signals from Acuity, plus market news and analysis videos."]
+  ],
+  "research": "Eightcap offers an AI-driven economic calendar and daily trading signals from Acuity, in-platform news through TradingView, and its own market news and analysis videos. Education is limited compared with the biggest brokers: there are beginner videos and a knowledge hub, but no structured courses.",
+  "support": "Eightcap's multilingual support team works 24/5 via live chat, email and phone, and the website has a searchable help centre.",
+  "faq": [
+    ["Is Eightcap regulated in the UK?", "Yes. Eightcap Group Ltd is authorised and regulated by the FCA (FRN 921296) and is covered by the FSCS."],
+    ["What is Eightcap's minimum deposit?", "US$100, or the equivalent in your account currency, for both the Standard and Raw accounts."],
+    ["What commission does Eightcap charge?", "On the Raw account, £2.25 per lot per side on GBP accounts (£4.50 round turn), or US$3.50 per side on USD accounts. The Standard account has no commission; costs are built into spreads from 1.0 pips."],
+    ["Can UK clients use MetaTrader with Eightcap?", "No. UK clients of Eightcap Group Ltd trade through TradingView. MetaTrader 4 and 5 are offered by Eightcap's non-UK entities."],
+    ["Does Eightcap offer spread betting?", "No. Eightcap offers CFDs only to UK clients, so there's no spread betting account."],
+    ["Can I trade crypto with Eightcap in the UK?", "Not as a retail client. The FCA bans the sale of crypto CFDs to UK retail customers."]
+  ],
+  "sources": [
+    "https://www.eightcap.com/en/account-types/",
+    "https://www.eightcap.com/en/traders/about-us/",
+    "https://www.eightcap.com/en/traders/payments/",
+    "https://shared.assets.eightcap.com/files/agreements/eightcap-group-ltd-client-agreement.pdf",
+    "https://shared.assets.eightcap.com/files/agreements/eightcap-group-ltd-key-information-document-commodities.pdf",
+    "https://fxnewsgroup.com/forex-news/regulatory/fca-warns-against-clone-of-eightcap/",
+    "https://www.forexbrokers.com/reviews/eightcap"
+  ]
+}

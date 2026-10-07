@@ -1289,6 +1289,68 @@ window.BROKERS = [
     "checked": "2026-10-04",
     "dataNotes": "Raw+: spreads from 0 on FX & metals plus US$3.50 per lot per side (US$7 round turn, shown converted to GBP). Standard: spreads from 1.2 pips, no commission. No fixed minimum deposit (FxPro recommends US$1,000). FxPro UK Ltd FRN 509956. Loss figure 79% from fxpro.co.uk risk warning. fxpro.com/fxpro.co.uk block automated reads, so facts were taken from search results restricted to FxPro's official domains on 4 Oct 2026.",
     "logoExt": "png"
+  },
+  {
+    "id": "eightcap",
+    "domain": "eightcap.com",
+    "name": "Eightcap",
+    "color": "#2dba69",
+    "founded": 2009,
+    "hq": "Melbourne, Australia",
+    "regulators": [
+      "FCA",
+      "ASIC",
+      "CySEC",
+      "SCB",
+      "FSA (SC)",
+      "FSC (MU)"
+    ],
+    "minDeposit": 75,
+    "account": "Raw",
+    "spread": 0.0,
+    "commission": 4.5,
+    "leverage": 30,
+    "platforms": [
+      "TradingView"
+    ],
+    "instruments": 800,
+    "bestFor": "TradingView traders wanting low raw-spread costs",
+    "ratings": {
+      "fees": 4.6,
+      "platforms": 3.8,
+      "trust": 4.4,
+      "support": 4.1,
+      "education": 3.4
+    },
+    "pros": [
+      "FCA-regulated UK entity (FRN 921296) with FSCS cover, segregated client money and negative balance protection",
+      "Low raw-spread pricing: spreads from 0.0 pips plus £2.25 per lot per side for GBP accounts",
+      "Specialist TradingView broker for UK clients, trading directly from TradingView charts"
+    ],
+    "cons": [
+      "UK clients get TradingView only; MT4, MT5 and TradeLocker are offered by non-UK entities",
+      "No spread betting, and crypto CFDs aren't available to UK retail clients",
+      "Thin education and research compared with larger brokers; inactivity fee after three months"
+    ],
+    "summary": "Eightcap is an FCA-regulated broker built around TradingView for UK clients, with low raw-spread pricing and a Standard account with no commission.",
+    "ukStatus": "fca",
+    "fcaFrn": "921296",
+    "lossPct": null,
+    "spreadType": "from",
+    "verified": true,
+    "approx": [
+      "minDeposit"
+    ],
+    "sources": [
+      "https://www.eightcap.com/en/account-types/",
+      "https://www.eightcap.com/en/traders/about-us/",
+      "https://www.eightcap.com/en/traders/payments/",
+      "https://shared.assets.eightcap.com/files/agreements/eightcap-group-ltd-client-agreement.pdf",
+      "https://shared.assets.eightcap.com/files/agreements/eightcap-group-ltd-key-information-document-commodities.pdf"
+    ],
+    "checked": "2026-10-07",
+    "dataNotes": "Raw: spreads from 0.0 pips plus GBP 2.25 per standard lot per side on GBP accounts (GBP 4.50 round turn; US$3.50 per side on USD accounts). Standard: spreads from 1.0 pips, no commission. Minimum deposit US$100 or account-currency equivalent (shown converted to GBP). Eightcap Group Ltd FRN 921296. UK clients: TradingView only (per several independent reviews; eightcap.com serves non-UK entity pages to our checker, which is outside the UK). No UK loss-rate figure could be read from Eightcap's UK site, so none is shown.",
+    "logoExt": "png"
   }
 ];
 
