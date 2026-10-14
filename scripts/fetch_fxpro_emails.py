@@ -290,6 +290,10 @@ def fetch(limit, sender, new_only=False):
         if after and email["date"] <= after and msg_id not in known:
             print("skip   %s (older than the newest post)" % msg_id)
             continue
+        if not files and msg_id not in known:
+            # A reply in an earlier thread (e.g. to our link email), not new content.
+            print("skip   %s (no attachments)" % msg_id)
+            continue
         slug, saved = write_email(email, files, known.get(msg_id))
         print("saved  %s (%d attachment(s))" % (slug, len(saved)))
         new += 1
