@@ -1,0 +1,19 @@
+{
+  "slug": "2026-10-29-us-gdp-advance-estimate-q3-2026",
+  "title": "US GDP (advance estimate): Q3 2026",
+  "date": "2026-10-29T12:30:00Z",
+  "type": "Official Release",
+  "topic": "Growth",
+  "author": "US Bureau of Economic Analysis",
+  "authorRole": "",
+  "provider": "US Bureau of Economic Analysis",
+  "official": true,
+  "summary": "Real gross domestic product (GDP) increased at an annual rate of 3.4 percent in the third quarter of 2026 (July, August, and September), according to the advance estimate released today by the U.S. Bureau of Economic…",
+  "image": null,
+  "bodyHtml": "<p>Real gross domestic product (GDP) increased at an annual rate of 3.4 percent in the third quarter of 2026 (July, August, and September), according to the advance estimate released today by the U.S. Bureau of Economic Analysis (BEA). In the second quarter, real GDP increased 2.2 percent. The contributors to the increase in real GDP in the third quarter were increases in investment, consumer spending, and government spending that were partly offset by a decrease in exports. Imports, which are a subtraction in the calculation of GDP, increased.</p>",
+  "source": {
+    "agency": "US Bureau of Economic Analysis",
+    "url": "https://www.bea.gov/news/2026/gdp-advance-estimate-3rd-quarter-2026",
+    "feed": "https://apps.bea.gov/rss/rss.xml"
+  }
+}
