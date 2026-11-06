@@ -1,0 +1,19 @@
+{
+  "slug": "2026-11-06-payroll-employment-rises-by-165-000-in-october-unemployment-rate-chang",
+  "title": "Payroll employment rises by 165,000 in October; unemployment rate changes little at 4.1%",
+  "date": "2026-11-06T12:50:31Z",
+  "type": "Official Release",
+  "topic": "Jobs",
+  "author": "US Bureau of Labor Statistics",
+  "authorRole": "",
+  "provider": "US Bureau of Labor Statistics",
+  "official": true,
+  "summary": "Total nonfarm payroll employment rose by 165,000 in October, and the unemployment rate changed little at 4.1 percent. Employment increased in professional and business services, in health care, and in transportation…",
+  "image": null,
+  "bodyHtml": "<p>Total nonfarm payroll employment rose by 165,000 in October, and the unemployment rate changed little at 4.1 percent. Employment increased in professional and business services, in health care, and in transportation and warehousing.</p>",
+  "source": {
+    "agency": "US Bureau of Labor Statistics",
+    "url": "https://www.bls.gov/news.release/archives/empsit_11062026.htm",
+    "feed": "https://www.bls.gov/feed/empsit.rss"
+  }
+}
